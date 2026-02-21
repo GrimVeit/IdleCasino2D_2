@@ -1,0 +1,174 @@
+
+songstress.png
+size: 540,78
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sg01/L_arm
+  rotate: false
+  xy: 492, 45
+  size: 18, 31
+  orig: 18, 31
+  offset: 0, 0
+  index: -1
+sg02/L_arm
+  rotate: false
+  xy: 492, 45
+  size: 18, 31
+  orig: 18, 31
+  offset: 0, 0
+  index: -1
+sg03/L_arm
+  rotate: false
+  xy: 492, 45
+  size: 18, 31
+  orig: 18, 31
+  offset: 0, 0
+  index: -1
+sg04/L_arm
+  rotate: false
+  xy: 492, 45
+  size: 18, 31
+  orig: 18, 31
+  offset: 0, 0
+  index: -1
+sg01/L_foot
+  rotate: false
+  xy: 521, 31
+  size: 12, 13
+  orig: 12, 13
+  offset: 0, 0
+  index: -1
+sg01/R_arm
+  rotate: false
+  xy: 492, 5
+  size: 13, 38
+  orig: 13, 38
+  offset: 0, 0
+  index: -1
+sg02/R_arm
+  rotate: false
+  xy: 492, 5
+  size: 13, 38
+  orig: 13, 38
+  offset: 0, 0
+  index: -1
+sg03/R_arm
+  rotate: false
+  xy: 492, 5
+  size: 13, 38
+  orig: 13, 38
+  offset: 0, 0
+  index: -1
+sg04/R_arm
+  rotate: false
+  xy: 492, 5
+  size: 13, 38
+  orig: 13, 38
+  offset: 0, 0
+  index: -1
+sg01/R_foot
+  rotate: false
+  xy: 507, 29
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+sg01/body
+  rotate: true
+  xy: 330, 42
+  size: 34, 79
+  orig: 34, 79
+  offset: 0, 0
+  index: -1
+sg01/head
+  rotate: false
+  xy: 2, 2
+  size: 80, 74
+  orig: 80, 74
+  offset: 0, 0
+  index: -1
+sg02/L_foot
+  rotate: false
+  xy: 521, 16
+  size: 12, 13
+  orig: 12, 13
+  offset: 0, 0
+  index: -1
+sg02/R_foot
+  rotate: false
+  xy: 507, 13
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+sg02/body
+  rotate: true
+  xy: 330, 6
+  size: 34, 79
+  orig: 34, 79
+  offset: 0, 0
+  index: -1
+sg02/head
+  rotate: false
+  xy: 84, 2
+  size: 80, 74
+  orig: 80, 74
+  offset: 0, 0
+  index: -1
+sg03/L_foot
+  rotate: true
+  xy: 521, 2
+  size: 12, 13
+  orig: 12, 13
+  offset: 0, 0
+  index: -1
+sg03/R_foot
+  rotate: false
+  xy: 512, 62
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+sg03/body
+  rotate: true
+  xy: 411, 42
+  size: 34, 79
+  orig: 34, 79
+  offset: 0, 0
+  index: -1
+sg03/head
+  rotate: false
+  xy: 166, 2
+  size: 80, 74
+  orig: 80, 74
+  offset: 0, 0
+  index: -1
+sg04/L_foot
+  rotate: false
+  xy: 526, 63
+  size: 12, 13
+  orig: 12, 13
+  offset: 0, 0
+  index: -1
+sg04/R_foot
+  rotate: false
+  xy: 512, 46
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+sg04/body
+  rotate: true
+  xy: 411, 6
+  size: 34, 79
+  orig: 34, 79
+  offset: 0, 0
+  index: -1
+sg04/head
+  rotate: false
+  xy: 248, 2
+  size: 80, 74
+  orig: 80, 74
+  offset: 0, 0
+  index: -1

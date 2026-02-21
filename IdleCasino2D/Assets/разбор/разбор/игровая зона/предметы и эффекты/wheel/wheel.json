@@ -1,0 +1,242 @@
+{
+"skeleton": { "hash": "BjUNbG4KMXrDgBJzpGM2W8uUrTw", "spine": "3.8.0", "x": 8.41, "y": 6.44, "width": 76, "height": 172 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "length": 35.71, "rotation": 124.9, "x": 44.58, "y": 129.46 },
+	{ "name": "bone2", "parent": "root", "length": 5, "rotation": 90.94, "x": 37.32, "y": 83.38 },
+	{ "name": "bone3", "parent": "root", "length": 25.54, "x": 44.57, "y": 129.17 }
+],
+"slots": [
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "wheel", "bone": "bone", "attachment": "wheel" },
+	{ "name": "frame", "bone": "root", "attachment": "frame", "blend": "additive" },
+	{ "name": "frame2", "bone": "root", "attachment": "frame" },
+	{ "name": "button", "bone": "bone2", "attachment": "button" },
+	{ "name": "move", "bone": "bone3", "attachment": "move" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"move": {
+				"move": { "x": -0.21, "y": -0.36, "rotation": -91.36, "width": 58, "height": 58 }
+			},
+			"wheel": {
+				"wheel": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ -44.64, -2.79, -13.75, 41.5, 43.66, 1.45, 12.77, -42.84 ],
+					"hull": 4
+				}
+			},
+			"body": {
+				"body": { "x": 46.41, "y": 92.44, "width": 76, "height": 172 }
+			},
+			"frame2": {
+				"frame": { "x": 44.91, "y": 130.94, "width": 73, "height": 95 }
+			},
+			"frame": {
+				"frame": { "x": 44.91, "y": 130.94, "width": 73, "height": 95 }
+			},
+			"button": {
+				"button": { "x": -1.45, "y": -0.57, "rotation": -90.94, "width": 23, "height": 15 }
+			}
+		}
+	}
+],
+"animations": {
+	"game": {
+		"slots": {
+			"wheel": {
+				"attachment": [
+					{ "name": "wheel" },
+					{ "time": 0.6667, "name": "wheel" }
+				]
+			},
+			"move": {
+				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.6667, "color": "ffffff00" },
+					{ "time": 0.7, "color": "feea8bcb", "curve": "stepped" },
+					{ "time": 0.9667, "color": "feea8bcb" },
+					{ "time": 1, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "name": "move" },
+					{ "time": 0.7, "name": "move" }
+				]
+			}
+		},
+		"bones": {
+			"bone2": {
+				"translate": [
+					{ "y": -2.73, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333 }
+				]
+			},
+			"bone": {
+				"rotate": [
+					{ "time": 0.6667 },
+					{ "time": 0.8333, "angle": -179.94 },
+					{ "time": 1, "angle": 31.06 }
+				]
+			},
+			"bone3": {
+				"rotate": [
+					{ "time": 0.7, "angle": -31.48, "curve": "stepped" },
+					{ "time": 0.9667, "angle": -31.48 }
+				],
+				"shear": [
+					{ "time": 0.7, "y": 32.12, "curve": "stepped" },
+					{ "time": 0.9667, "y": 32.12 }
+				]
+			}
+		},
+		"deform": {
+			"default": {
+				"wheel": {
+					"wheel": [
+						{
+							"offset": 4,
+							"vertices": [ 0.99133, -0.02098 ],
+							"curve": "stepped"
+						},
+						{
+							"time": 0.6667,
+							"offset": 4,
+							"vertices": [ 0.99133, -0.02098 ]
+						},
+						{
+							"time": 0.7,
+							"vertices": [ 5.2312, -4.22785, 35.82358, 9.01954, -5.47757, 2.79453, -30.58257, -8.33294 ]
+						},
+						{
+							"time": 0.7333,
+							"vertices": [ 18.59955, 1.99972, 33.61461, 27.11624, -17.21065, -3.61458, -31.50397, -27.5945 ]
+						},
+						{
+							"time": 0.7667,
+							"vertices": [ 19.26473, 22.88447, 23.93648, 21.39056, -16.35696, -23.25029, -21.81825, -21.15671 ]
+						},
+						{
+							"time": 0.8,
+							"vertices": [ 7.40798, 25.52829, 24.2532, 2.15873, -5.23237, -23.8329, -18.75806, -2.6564 ]
+						},
+						{
+							"time": 0.8333,
+							"vertices": [ 1.90333, 11.95691, 27.3404, -1.89849, 2.40409, -9.60248, -31.41042, 4.34494 ]
+						},
+						{
+							"time": 0.8667,
+							"vertices": [ 5.93183, 2.6843, 38.04769, 6.22126, -3.55186, 0.82279, -39.68017, -4.66882 ]
+						},
+						{
+							"time": 0.9,
+							"vertices": [ 16.30896, 5.5023, 42.99799, 22.44297, -16.21474, -3.9771, -42.29468, -20.62994 ]
+						},
+						{
+							"time": 0.9333,
+							"vertices": [ 19.24319, 8.1413, 22.30793, 30.49413, -19.05834, -7.4709, -23.08097, -29.51616 ]
+						},
+						{
+							"time": 0.9667,
+							"vertices": [ 13.91846, 27.08391, 21.68552, 14.54332, -14.52183, -24.54754, -19.61405, -15.00148 ]
+						},
+						{
+							"time": 1,
+							"vertices": [ 4.61156, 23.3616, 21.73551, 0.69878, -4.90484, -22.99595, -21.19989, -0.44079 ]
+						}
+					]
+				}
+			}
+		}
+	},
+	"idle": {
+		"slots": {
+			"frame2": {
+				"color": [
+					{ "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333, "color": "e29811ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "name": "frame" },
+					{ "time": 0.3333, "name": "frame" },
+					{ "time": 1, "name": "frame" }
+				]
+			},
+			"wheel": {
+				"attachment": [
+					{ "name": "wheel" }
+				]
+			},
+			"move": {
+				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "name": "move" },
+					{ "time": 1, "name": "move" }
+				]
+			},
+			"frame": {
+				"color": [
+					{ "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333, "color": "bafc47ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "name": "frame" },
+					{ "time": 0.3333, "name": "frame" },
+					{ "time": 1, "name": "frame" }
+				]
+			}
+		}
+	},
+	"not open": {
+		"slots": {
+			"button": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"frame2": {
+				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			},
+			"wheel": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"move": {
+				"color": [
+					{ "color": "ffffff00" },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			},
+			"body": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"frame": {
+				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			}
+		}
+	}
+}
+}

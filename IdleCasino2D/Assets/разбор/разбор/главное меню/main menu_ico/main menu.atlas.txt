@@ -1,0 +1,132 @@
+
+main menu.png
+size: 2031,1131
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+G_body
+  rotate: true
+  xy: 1086, 20
+  size: 245, 312
+  orig: 245, 312
+  offset: 0, 0
+  index: -1
+G_face
+  rotate: true
+  xy: 1340, 505
+  size: 153, 194
+  orig: 153, 194
+  offset: 0, 0
+  index: -1
+G_hair1
+  rotate: false
+  xy: 1665, 32
+  size: 189, 233
+  orig: 189, 233
+  offset: 0, 0
+  index: -1
+G_hair2
+  rotate: false
+  xy: 1884, 177
+  size: 137, 230
+  orig: 137, 230
+  offset: 0, 0
+  index: -1
+G_hair3
+  rotate: true
+  xy: 1902, 588
+  size: 142, 106
+  orig: 142, 106
+  offset: 0, 0
+  index: -1
+M_body
+  rotate: true
+  xy: 1557, 438
+  size: 292, 343
+  orig: 292, 343
+  offset: 0, 0
+  index: -1
+M_face
+  rotate: true
+  xy: 1086, 472
+  size: 186, 252
+  orig: 186, 252
+  offset: 0, 0
+  index: -1
+M_hair1
+  rotate: true
+  xy: 1956, 957
+  size: 82, 73
+  orig: 82, 73
+  offset: 0, 0
+  index: -1
+M_hair2
+  rotate: false
+  xy: 1956, 876
+  size: 68, 79
+  orig: 68, 79
+  offset: 0, 0
+  index: -1
+chip1
+  rotate: true
+  xy: 1902, 409
+  size: 84, 85
+  orig: 84, 85
+  offset: 0, 0
+  index: -1
+chip2
+  rotate: true
+  xy: 1902, 495
+  size: 91, 95
+  orig: 91, 95
+  offset: 0, 0
+  index: -1
+chip3
+  rotate: true
+  xy: 1956, 1041
+  size: 88, 73
+  orig: 88, 73
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 1086, 267
+  size: 796, 169
+  orig: 796, 169
+  offset: 0, 0
+  index: -1
+glow
+  rotate: false
+  xy: 1856, 16
+  size: 159, 159
+  orig: 159, 159
+  offset: 0, 0
+  index: -1
+radiance background
+  rotate: false
+  xy: 2, 6
+  size: 1082, 1123
+  orig: 1082, 1123
+  offset: 0, 0
+  index: -1
+roulette 1
+  rotate: false
+  xy: 1086, 660
+  size: 469, 469
+  orig: 469, 469
+  offset: 0, 0
+  index: -1
+roulette 2
+  rotate: false
+  xy: 1557, 732
+  size: 397, 397
+  orig: 397, 397
+  offset: 0, 0
+  index: -1
+roulette 3
+  rotate: false
+  xy: 1400, 2
+  size: 263, 263
+  orig: 263, 263
+  offset: 0, 0
+  index: -1

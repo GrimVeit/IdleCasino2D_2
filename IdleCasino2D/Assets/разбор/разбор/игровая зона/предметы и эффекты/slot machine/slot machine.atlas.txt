@@ -1,0 +1,76 @@
+
+slot machine.png
+size: 293,101
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm
+  rotate: false
+  xy: 189, 5
+  size: 21, 47
+  orig: 21, 47
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 2, 2
+  size: 97, 185
+  orig: 97, 185
+  offset: 0, 0
+  index: -1
+button
+  rotate: true
+  xy: 267, 20
+  size: 23, 16
+  orig: 23, 16
+  offset: 0, 0
+  index: -1
+frame_not shining
+  rotate: true
+  xy: 189, 54
+  size: 45, 55
+  orig: 45, 55
+  offset: 0, 0
+  index: -1
+frame_shining
+  rotate: false
+  xy: 246, 45
+  size: 45, 54
+  orig: 45, 54
+  offset: 0, 0
+  index: -1
+move
+  rotate: true
+  xy: 244, 24
+  size: 19, 21
+  orig: 19, 21
+  offset: 0, 0
+  index: -1
+shin
+  rotate: false
+  xy: 212, 21
+  size: 30, 31
+  orig: 30, 31
+  offset: 0, 0
+  index: -1
+slot1
+  rotate: false
+  xy: 244, 6
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1
+slot2
+  rotate: false
+  xy: 244, 6
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1
+slot3
+  rotate: false
+  xy: 244, 6
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1

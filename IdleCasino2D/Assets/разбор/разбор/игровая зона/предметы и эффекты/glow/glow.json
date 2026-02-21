@@ -1,0 +1,80 @@
+{
+"skeleton": { "hash": "xmZ2pkuGKyL/zglPhS2QQoSagSo", "spine": "3.8.0", "x": -1.04, "y": -0.26, "width": 314, "height": 314 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "length": 96.06, "rotation": 90, "x": 154.54, "y": 158.53 },
+	{ "name": "bone2", "parent": "root", "length": 96.06, "rotation": 90, "x": 154.54, "y": 158.53 }
+],
+"slots": [
+	{ "name": "glow", "bone": "bone", "attachment": "glow" },
+	{ "name": "glow2", "bone": "bone2", "attachment": "glow2" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"glow2": {
+				"glow2": {
+					"type": "mesh",
+					"path": "glow",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ -93.94, -93.58, -93.94, 90.73, 90.37, 90.73, 90.37, -93.58 ],
+					"hull": 4
+				}
+			},
+			"glow": {
+				"glow": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ -158.79, -158.43, -158.79, 155.57, 155.21, 155.57, 155.21, -158.43 ],
+					"hull": 4
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"glow2": {
+				"color": [
+					{ "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			},
+			"glow": {
+				"color": [
+					{ "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"bone": {
+				"rotate": [
+					{},
+					{ "time": 1, "angle": -140.86 }
+				],
+				"scale": [
+					{ "time": 0.5 },
+					{ "time": 1, "x": 0.5, "y": 0.5 }
+				]
+			},
+			"bone2": {
+				"rotate": [
+					{ "angle": 53.4 },
+					{ "time": 1, "angle": 180 }
+				],
+				"scale": [
+					{},
+					{ "time": 1, "x": 1.5, "y": 1.5 }
+				]
+			}
+		}
+	}
+}
+}

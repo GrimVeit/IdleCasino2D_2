@@ -1,0 +1,187 @@
+using System;
+using System.Collections.Generic;
+using DG.Tweening;
+using Spine.Unity;
+using UnityEngine;
+
+public class VisitorView : View
+{
+    public Vector3 Position => transform.position;
+    public Node CurrentNode => _currentNode;
+
+    [SerializeField] private float speedMove;
+    [SerializeField] private VisitorAnimations animations;
+
+    private Node _currentNode;
+    private int currentPointPath = 0;
+
+    private Tween tweenMove;
+
+    public void MoveTo(Node node, bool isAbsolute)
+    {
+        currentPointPath = 0;
+
+        if (isAbsolute)
+        {
+            MovePath(new List<Node>() { node });
+        }
+        else
+        {
+            MovePath(Paths.FindPath(_currentNode, node));
+        }
+    }
+
+    public void ActivateAnimation(VisitorAnimationEnum visitorAnimation)
+    {
+        animations.ActivateAnimation(visitorAnimation);
+    }
+
+    public void SetOrder(int order)
+    {
+        animations.SetOrder(order);
+    }
+
+    private void MovePath(List<Node> nodes)
+    {
+        tweenMove?.Kill();
+
+        if (currentPointPath >= nodes.Count)
+        {
+            animations.ActivateAnimation(VisitorAnimationEnum.Idle);
+            OnPathCompleted?.Invoke(_currentNode);
+            return;
+        }
+
+        animations.ActivateAnimation(VisitorAnimationEnum.Walk);
+
+        _currentNode = nodes[currentPointPath];
+
+        Vector3 localTarget = _currentNode.transform.localPosition;
+
+        float distance = Vector3.Distance(transform.localPosition, localTarget);
+        float duration = distance / speedMove;
+
+        Vector3 direction = (localTarget - transform.localPosition).normalized;
+        UpdateSkeletonDirection(direction);
+
+        tweenMove = transform.DOLocalMove(localTarget, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                currentPointPath += 1;
+                MovePath(nodes);
+            });
+
+    }
+
+    public void Exit()
+    {
+        Destroy(gameObject);
+    }
+
+    private void UpdateSkeletonDirection(Vector3 dir)
+    {
+        if (dir.y >= 0)
+        {
+            if (dir.x < 0)
+                animations.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+            else
+                animations.ActivateNpcRotation(NpcRotationEnum.BackRight);
+        }
+        else
+        {
+            if (dir.x < 0)
+                animations.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+            else
+                animations.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+        }
+    }
+
+    public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum)
+    {
+        animations.ActivateNpcRotation(npcRotationEnum);
+    }
+
+    #region Output
+
+    public event Action<Node> OnPathCompleted;
+
+    #endregion
+}
+
+[Serializable]
+public class VisitorAnimations
+{
+    [SerializeField] private List<VisitorAnimation> visitorAnimations = new List<VisitorAnimation>();
+
+    public void ActivateAnimation(VisitorAnimationEnum animationEnum)
+    {
+        visitorAnimations.ForEach(data => data.ActivateAnimation(animationEnum));
+    }
+
+    public void SetOrder(int order)
+    {
+        visitorAnimations.ForEach(data => data.SetOrder(order));
+    }
+
+    public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum)
+    {
+        for (int i = 0; i < visitorAnimations.Count; i++)
+        {
+            if (visitorAnimations[i].NpcRotationEnum == npcRotationEnum)
+                visitorAnimations[i].Activate();
+            else
+                visitorAnimations[i].Deactivate();
+        }
+    }
+}
+
+[Serializable]
+public class VisitorAnimation
+{
+    public NpcRotationEnum NpcRotationEnum => npcRotationEnum;
+
+    [SerializeField] private NpcRotationEnum npcRotationEnum;
+    [SerializeField] private SkeletonAnimation skeletonAnimation;
+    [SerializeField] private List<SkeletonAnimationType> skeletonAnimationTypes = new List<SkeletonAnimationType>();
+
+    public void SetOrder(int order)
+    {
+        skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = order;
+    }
+
+    public void Activate()
+    {
+        skeletonAnimation.gameObject.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        skeletonAnimation.gameObject.SetActive(false);
+    }
+
+    public void ActivateAnimation(VisitorAnimationEnum animationEnum)
+    {
+        var skeletonAnimationType = GetSkeletonAnimationType(animationEnum);
+        if(skeletonAnimationType == null) return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, skeletonAnimationType.Key, skeletonAnimationType.IsLoop);
+    }
+
+    private SkeletonAnimationType GetSkeletonAnimationType(VisitorAnimationEnum animationEnum)
+    {
+        return skeletonAnimationTypes.Find(data => data.AnimationEnum == animationEnum);
+    }
+}
+
+[Serializable]
+public class SkeletonAnimationType
+{
+    [SerializeField] private string key;
+    [SerializeField] private VisitorAnimationEnum animationEnum;
+    [SerializeField] private bool isLoop;
+
+    public string Key => key;
+    public VisitorAnimationEnum AnimationEnum => animationEnum;
+    public bool IsLoop => isLoop;
+}

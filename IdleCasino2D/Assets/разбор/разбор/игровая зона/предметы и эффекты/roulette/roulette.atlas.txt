@@ -1,0 +1,69 @@
+
+roulette.png
+size: 348,235
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ball
+  rotate: false
+  xy: 270, 164
+  size: 69, 69
+  orig: 69, 69
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 22
+  size: 266, 211
+  orig: 266, 211
+  offset: 0, 0
+  index: -1
+chip1
+  rotate: false
+  xy: 2, 11
+  size: 11, 9
+  orig: 11, 9
+  offset: 0, 0
+  index: -1
+chip2
+  rotate: false
+  xy: 15, 11
+  size: 11, 9
+  orig: 11, 9
+  offset: 0, 0
+  index: -1
+chip3
+  rotate: false
+  xy: 28, 11
+  size: 11, 9
+  orig: 11, 9
+  offset: 0, 0
+  index: -1
+roulette
+  rotate: true
+  xy: 41, 13
+  size: 7, 20
+  orig: 7, 20
+  offset: 0, 0
+  index: -1
+shine1
+  rotate: false
+  xy: 270, 2
+  size: 76, 46
+  orig: 76, 46
+  offset: 0, 0
+  index: -1
+shine2
+  rotate: true
+  xy: 270, 50
+  size: 112, 68
+  orig: 112, 68
+  offset: 0, 0
+  index: -1
+shine3
+  rotate: false
+  xy: 340, 151
+  size: 2, 11
+  orig: 2, 11
+  offset: 0, 0
+  index: -1

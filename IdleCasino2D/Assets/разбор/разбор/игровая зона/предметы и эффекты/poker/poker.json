@@ -1,0 +1,338 @@
+{
+"skeleton": { "hash": "XKWHj2md8j5ZDFeBqqkikkTpMG4", "spine": "3.8.0", "x": 1, "width": 175, "height": 144 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "card4", "parent": "root", "x": 122.02, "y": 99.88 },
+	{ "name": "card3", "parent": "root", "x": 113.96, "y": 104.12 },
+	{ "name": "card2", "parent": "root", "x": 105.9, "y": 109.35 },
+	{ "name": "card1", "parent": "root", "x": 98.96, "y": 113.47 },
+	{ "name": "shine", "parent": "root", "x": 59.48, "y": 72.99 },
+	{ "name": "card5", "parent": "root", "x": 98.96, "y": 113.47 },
+	{ "name": "card6", "parent": "root", "x": 105.9, "y": 109.35 },
+	{ "name": "card7", "parent": "root", "x": 113.96, "y": 104.12 },
+	{ "name": "card8", "parent": "root", "x": 122.02, "y": 99.88 }
+],
+"slots": [
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "shine", "bone": "shine", "attachment": "shine" },
+	{ "name": "card1", "bone": "card1", "attachment": "card1" },
+	{ "name": "card5", "bone": "card5", "attachment": "card1" },
+	{ "name": "card2", "bone": "card2", "attachment": "card2" },
+	{ "name": "card6", "bone": "card6", "attachment": "card2" },
+	{ "name": "card3", "bone": "card3", "attachment": "card3" },
+	{ "name": "card7", "bone": "card7", "attachment": "card3" },
+	{ "name": "card4", "bone": "card4", "attachment": "card4" },
+	{ "name": "card8", "bone": "card8", "attachment": "card4" },
+	{ "name": "shine_move", "bone": "root", "attachment": "shine_move" },
+	{ "name": "card1_movi", "bone": "root", "attachment": "card1_movi" },
+	{ "name": "card2_movi", "bone": "root", "attachment": "card2_movi" },
+	{ "name": "card3_movi", "bone": "root", "attachment": "card3_movi" },
+	{ "name": "card4_movi", "bone": "root", "attachment": "card4_movi" }
+],
+"path": [
+	{
+		"name": "card1_movi",
+		"order": 1,
+		"bones": [ "card1" ],
+		"target": "card1_movi",
+		"rotateMix": 0
+	},
+	{
+		"name": "card2_movi",
+		"order": 2,
+		"bones": [ "card2" ],
+		"target": "card2_movi",
+		"rotateMix": 0
+	},
+	{
+		"name": "card3_movi",
+		"order": 3,
+		"bones": [ "card3" ],
+		"target": "card3_movi",
+		"rotateMix": 0
+	},
+	{
+		"name": "card4_movi",
+		"order": 4,
+		"bones": [ "card4" ],
+		"target": "card4_movi",
+		"rotateMix": 0
+	},
+	{
+		"name": "shine_move",
+		"bones": [ "shine" ],
+		"target": "shine_move",
+		"position": 1,
+		"rotateMix": 0
+	}
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"card2": {
+				"card2": { "x": 0.66, "y": -0.54, "width": 16, "height": 10 }
+			},
+			"card4_movi": {
+				"card4_movi": {
+					"type": "path",
+					"lengths": [ 23.04, 52.97 ],
+					"vertexCount": 6,
+					"vertices": [ 125.57, 105.53, 122.12, 99.51, 117.42, 91.3, 114.04, 87.29, 108.83, 80.73, 104.53, 75.32 ]
+				}
+			},
+			"card2_movi": {
+				"card2_movi": {
+					"type": "path",
+					"lengths": [ 28.41, 65.33 ],
+					"vertexCount": 6,
+					"vertices": [ 112.68, 113.64, 105.67, 108.8, 101.23, 105.74, 89, 99.2, 81.4, 94.03, 74.36, 89.23 ]
+				}
+			},
+			"card1": {
+				"card1": { "x": 0.04, "y": -0.47, "width": 16, "height": 10 }
+			},
+			"body": {
+				"body": { "x": 88.5, "y": 72, "width": 175, "height": 144 }
+			},
+			"card3": {
+				"card3": { "x": 0.04, "y": -1.12, "width": 16, "height": 10 }
+			},
+			"card4": {
+				"card4": { "x": -0.83, "y": -0.94, "width": 16, "height": 10 }
+			},
+			"card5": {
+				"card1": { "x": 0.04, "y": -0.47, "width": 16, "height": 10 }
+			},
+			"card6": {
+				"card2": { "x": 0.66, "y": -0.54, "width": 16, "height": 10 }
+			},
+			"card7": {
+				"card3": { "x": 0.04, "y": -1.12, "width": 16, "height": 10 }
+			},
+			"card8": {
+				"card4": { "x": -0.83, "y": -0.94, "width": 16, "height": 10 }
+			},
+			"shine": {
+				"shine": { "x": -0.48, "y": 0.01, "width": 30, "height": 22 }
+			},
+			"shine_move": {
+				"shine_move": {
+					"type": "path",
+					"closed": true,
+					"lengths": [ 48.07, 130.42, 173.2, 228.1, 289.83, 342.77 ],
+					"vertexCount": 18,
+					"vertices": [ 73.28, 65.32, 59.38, 72.96, 48.96, 78.7, 26.93, 90.09, 19.02, 98.82, 1.52, 118.1, 35.57, 142.87, 73.7, 134.9, 87.31, 132.06, 99.45, 124.31, 112.39, 117.04, 125.34, 109.78, 149.57, 97.64, 158.71, 87.84, 168, 77.87, 160.44, 54.94, 122.99, 51.01, 92.6, 47.82 ]
+				}
+			},
+			"card3_movi": {
+				"card3_movi": {
+					"type": "path",
+					"lengths": [ 25.57, 58.81 ],
+					"vertexCount": 6,
+					"vertices": [ 119.58, 109.54, 113.89, 104.36, 109.89, 100.71, 101.23, 93.33, 94.69, 87.48, 88.97, 82.37 ]
+				}
+			},
+			"card1_movi": {
+				"card1_movi": {
+					"type": "path",
+					"lengths": [ 28.51, 65.56 ],
+					"vertexCount": 6,
+					"vertices": [ 107.01, 116.33, 99.12, 113.02, 92.54, 110.25, 78.83, 105.4, 72.33, 103.31, 64.19, 100.69 ]
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"game": {
+		"slots": {
+			"shine": {
+				"color": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"path": {
+			"card4_movi": {
+				"position": [
+					{ "time": 1, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "position": 1 }
+				]
+			},
+			"card2_movi": {
+				"position": [
+					{ "time": 0.3333, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "position": 1 }
+				]
+			},
+			"card3_movi": {
+				"position": [
+					{ "time": 0.6667, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "position": 1 }
+				]
+			},
+			"card1_movi": {
+				"position": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333, "position": 1 }
+				]
+			}
+		}
+	},
+	"idle": {
+		"slots": {
+			"shine": {
+				"color": [
+					{ "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2333, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.4333, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.6, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.8333, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.1, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.4, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.6667, "color": "ffffffff" }
+				]
+			}
+		},
+		"bones": {
+			"shine": {
+				"rotate": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2333, "angle": -20.14, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.4333, "angle": -123.85, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6, "angle": -148.82, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "angle": -164.01, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.8333, "angle": -178.01, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "angle": 179.75, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.1333, "angle": 146.05, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.2, "angle": 84.68, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "angle": 32.19, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.6667 }
+				]
+			}
+		},
+		"path": {
+			"shine_move": {
+				"position": [
+					{},
+					{ "time": 0.8333, "position": 0.45 },
+					{ "time": 1.6667, "position": 1 }
+				],
+				"mix": [
+					{ "time": 0.8333, "rotateMix": 0 }
+				]
+			}
+		}
+	},
+	"not open": {
+		"slots": {
+			"card1": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"body": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "color": "654747ff" }
+				]
+			},
+			"card1_movi": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "color": "654747ff" }
+				]
+			},
+			"card4": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"card2_movi": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "color": "654747ff" }
+				]
+			},
+			"card3_movi": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "color": "654747ff" }
+				]
+			},
+			"card5": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"card2": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"card3": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"card4_movi": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "color": "654747ff" }
+				]
+			},
+			"card8": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"card6": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"shine_move": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.3333, "color": "654747ff" }
+				]
+			},
+			"card7": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			},
+			"shine": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.3333, "color": "4b3737ff" },
+					{ "time": 0.6667, "color": "654747ff" }
+				]
+			}
+		}
+	}
+}
+}

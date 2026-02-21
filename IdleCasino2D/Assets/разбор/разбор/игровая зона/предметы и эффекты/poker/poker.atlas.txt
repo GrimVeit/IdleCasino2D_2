@@ -1,0 +1,48 @@
+
+poker.png
+size: 203,148
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 2
+  size: 175, 144
+  orig: 175, 144
+  offset: 0, 0
+  index: -1
+card1
+  rotate: false
+  xy: 179, 104
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: -1
+card2
+  rotate: false
+  xy: 179, 92
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: -1
+card3
+  rotate: false
+  xy: 179, 80
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: -1
+card4
+  rotate: false
+  xy: 179, 68
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: -1
+shine
+  rotate: true
+  xy: 179, 116
+  size: 30, 22
+  orig: 30, 22
+  offset: 0, 0
+  index: -1

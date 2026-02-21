@@ -1,0 +1,118 @@
+
+bartender.png
+size: 372,93
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+br01/L_arm
+  rotate: false
+  xy: 351, 47
+  size: 16, 44
+  orig: 16, 44
+  offset: 0, 0
+  index: -1
+br02/L_arm
+  rotate: false
+  xy: 351, 47
+  size: 16, 44
+  orig: 16, 44
+  offset: 0, 0
+  index: -1
+br03/L_arm
+  rotate: false
+  xy: 351, 47
+  size: 16, 44
+  orig: 16, 44
+  offset: 0, 0
+  index: -1
+br04/L_arm
+  rotate: false
+  xy: 351, 47
+  size: 16, 44
+  orig: 16, 44
+  offset: 0, 0
+  index: -1
+br01/R_arm
+  rotate: false
+  xy: 351, 11
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+br02/R_arm
+  rotate: false
+  xy: 351, 11
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+br03/R_arm
+  rotate: false
+  xy: 351, 11
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+br04/R_arm
+  rotate: false
+  xy: 351, 11
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+br01/body
+  rotate: false
+  xy: 310, 16
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+br02/body
+  rotate: false
+  xy: 310, 16
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+br03/body
+  rotate: false
+  xy: 310, 16
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+br04/body
+  rotate: false
+  xy: 310, 16
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+br01/head
+  rotate: false
+  xy: 2, 2
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1
+br02/head
+  rotate: false
+  xy: 79, 2
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1
+br03/head
+  rotate: false
+  xy: 156, 2
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1
+br04/head
+  rotate: false
+  xy: 233, 2
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1

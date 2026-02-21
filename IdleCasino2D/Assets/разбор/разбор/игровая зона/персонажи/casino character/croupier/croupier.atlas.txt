@@ -1,0 +1,146 @@
+
+croupier.png
+size: 93,372
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cr01/L_arm01
+  rotate: true
+  xy: 26, 355
+  size: 15, 29
+  orig: 15, 29
+  offset: 0, 0
+  index: -1
+cr02/L_arm01
+  rotate: true
+  xy: 26, 355
+  size: 15, 29
+  orig: 15, 29
+  offset: 0, 0
+  index: -1
+cr03/L_arm01
+  rotate: true
+  xy: 26, 355
+  size: 15, 29
+  orig: 15, 29
+  offset: 0, 0
+  index: -1
+cr04/L_arm01
+  rotate: true
+  xy: 26, 355
+  size: 15, 29
+  orig: 15, 29
+  offset: 0, 0
+  index: -1
+cr01/L_arm02
+  rotate: true
+  xy: 2, 356
+  size: 14, 22
+  orig: 14, 22
+  offset: 0, 0
+  index: -1
+cr02/L_arm02
+  rotate: true
+  xy: 2, 356
+  size: 14, 22
+  orig: 14, 22
+  offset: 0, 0
+  index: -1
+cr03/L_arm02
+  rotate: true
+  xy: 2, 356
+  size: 14, 22
+  orig: 14, 22
+  offset: 0, 0
+  index: -1
+cr04/L_arm02
+  rotate: true
+  xy: 2, 356
+  size: 14, 22
+  orig: 14, 22
+  offset: 0, 0
+  index: -1
+cr01/R-arm
+  rotate: true
+  xy: 57, 351
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+cr02/R-arm
+  rotate: true
+  xy: 57, 351
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+cr03/R-arm
+  rotate: true
+  xy: 57, 351
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+cr04/R-arm
+  rotate: true
+  xy: 57, 351
+  size: 19, 34
+  orig: 19, 34
+  offset: 0, 0
+  index: -1
+cr01/body
+  rotate: true
+  xy: 2, 310
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+cr02/body
+  rotate: true
+  xy: 2, 310
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+cr03/body
+  rotate: true
+  xy: 2, 310
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+cr04/body
+  rotate: true
+  xy: 2, 310
+  size: 39, 75
+  orig: 39, 75
+  offset: 0, 0
+  index: -1
+cr01/head
+  rotate: true
+  xy: 2, 233
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1
+cr02/head
+  rotate: true
+  xy: 2, 156
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1
+cr03/head
+  rotate: true
+  xy: 2, 79
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1
+cr04/head
+  rotate: true
+  xy: 2, 2
+  size: 75, 89
+  orig: 75, 89
+  offset: 0, 0
+  index: -1

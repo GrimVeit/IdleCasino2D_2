@@ -1,0 +1,286 @@
+
+hostesses_front.png
+size: 262,261
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hs1/L_arm1
+  rotate: true
+  xy: 237, 36
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+hs2/L_arm1
+  rotate: true
+  xy: 237, 36
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+hs3/L_arm1
+  rotate: true
+  xy: 237, 36
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+hs4/L_arm1
+  rotate: true
+  xy: 237, 36
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+hs1/L_arm2
+  rotate: false
+  xy: 220, 25
+  size: 15, 24
+  orig: 15, 24
+  offset: 0, 0
+  index: -1
+hs2/L_arm2
+  rotate: false
+  xy: 220, 25
+  size: 15, 24
+  orig: 15, 24
+  offset: 0, 0
+  index: -1
+hs3/L_arm2
+  rotate: false
+  xy: 220, 25
+  size: 15, 24
+  orig: 15, 24
+  offset: 0, 0
+  index: -1
+hs4/L_arm2
+  rotate: false
+  xy: 220, 25
+  size: 15, 24
+  orig: 15, 24
+  offset: 0, 0
+  index: -1
+hs1/L_foot
+  rotate: true
+  xy: 220, 9
+  size: 14, 16
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+hs2/L_foot
+  rotate: true
+  xy: 220, 9
+  size: 14, 16
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+hs3/L_foot
+  rotate: true
+  xy: 220, 9
+  size: 14, 16
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+hs4/L_foot
+  rotate: true
+  xy: 220, 9
+  size: 14, 16
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+hs1/L_leg
+  rotate: true
+  xy: 211, 51
+  size: 15, 31
+  orig: 15, 31
+  offset: 0, 0
+  index: -1
+hs2/L_leg
+  rotate: true
+  xy: 211, 51
+  size: 15, 31
+  orig: 15, 31
+  offset: 0, 0
+  index: -1
+hs3/L_leg
+  rotate: true
+  xy: 211, 51
+  size: 15, 31
+  orig: 15, 31
+  offset: 0, 0
+  index: -1
+hs4/L_leg
+  rotate: true
+  xy: 211, 51
+  size: 15, 31
+  orig: 15, 31
+  offset: 0, 0
+  index: -1
+hs1/R_arm
+  rotate: true
+  xy: 176, 21
+  size: 18, 42
+  orig: 18, 42
+  offset: 0, 0
+  index: -1
+hs2/R_arm
+  rotate: true
+  xy: 176, 21
+  size: 18, 42
+  orig: 18, 42
+  offset: 0, 0
+  index: -1
+hs3/R_arm
+  rotate: true
+  xy: 176, 21
+  size: 18, 42
+  orig: 18, 42
+  offset: 0, 0
+  index: -1
+hs4/R_arm
+  rotate: true
+  xy: 176, 21
+  size: 18, 42
+  orig: 18, 42
+  offset: 0, 0
+  index: -1
+hs1/R_foot
+  rotate: true
+  xy: 244, 55
+  size: 11, 16
+  orig: 11, 16
+  offset: 0, 0
+  index: -1
+hs2/R_foot
+  rotate: true
+  xy: 244, 55
+  size: 11, 16
+  orig: 11, 16
+  offset: 0, 0
+  index: -1
+hs3/R_foot
+  rotate: true
+  xy: 244, 55
+  size: 11, 16
+  orig: 11, 16
+  offset: 0, 0
+  index: -1
+hs4/R_foot
+  rotate: true
+  xy: 244, 55
+  size: 11, 16
+  orig: 11, 16
+  offset: 0, 0
+  index: -1
+hs1/R_leg
+  rotate: true
+  xy: 211, 68
+  size: 17, 34
+  orig: 17, 34
+  offset: 0, 0
+  index: -1
+hs2/R_leg
+  rotate: true
+  xy: 211, 68
+  size: 17, 34
+  orig: 17, 34
+  offset: 0, 0
+  index: -1
+hs3/R_leg
+  rotate: true
+  xy: 211, 68
+  size: 17, 34
+  orig: 17, 34
+  offset: 0, 0
+  index: -1
+hs4/R_leg
+  rotate: true
+  xy: 211, 68
+  size: 17, 34
+  orig: 17, 34
+  offset: 0, 0
+  index: -1
+hs1/body
+  rotate: false
+  xy: 176, 41
+  size: 33, 44
+  orig: 33, 44
+  offset: 0, 0
+  index: -1
+hs2/body
+  rotate: false
+  xy: 176, 41
+  size: 33, 44
+  orig: 33, 44
+  offset: 0, 0
+  index: -1
+hs3/body
+  rotate: false
+  xy: 176, 41
+  size: 33, 44
+  orig: 33, 44
+  offset: 0, 0
+  index: -1
+hs4/body
+  rotate: false
+  xy: 176, 41
+  size: 33, 44
+  orig: 33, 44
+  offset: 0, 0
+  index: -1
+hs1/head
+  rotate: false
+  xy: 2, 172
+  size: 83, 87
+  orig: 83, 87
+  offset: 0, 0
+  index: -1
+hs1/head2
+  rotate: true
+  xy: 2, 2
+  size: 83, 85
+  orig: 83, 85
+  offset: 0, 0
+  index: -1
+hs2/head
+  rotate: true
+  xy: 2, 87
+  size: 83, 87
+  orig: 83, 87
+  offset: 0, 0
+  index: -1
+hs2/head2
+  rotate: true
+  xy: 89, 2
+  size: 83, 85
+  orig: 83, 85
+  offset: 0, 0
+  index: -1
+hs3/head
+  rotate: true
+  xy: 87, 176
+  size: 83, 87
+  orig: 83, 87
+  offset: 0, 0
+  index: -1
+hs3/head2
+  rotate: false
+  xy: 176, 174
+  size: 83, 85
+  orig: 83, 85
+  offset: 0, 0
+  index: -1
+hs4/head
+  rotate: false
+  xy: 91, 87
+  size: 83, 87
+  orig: 83, 87
+  offset: 0, 0
+  index: -1
+hs4/head2
+  rotate: false
+  xy: 176, 87
+  size: 83, 85
+  orig: 83, 85
+  offset: 0, 0
+  index: -1

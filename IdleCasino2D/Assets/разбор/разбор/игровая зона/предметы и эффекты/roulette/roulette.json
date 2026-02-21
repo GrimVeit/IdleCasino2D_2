@@ -1,0 +1,295 @@
+{
+"skeleton": { "hash": "MP5JC8QKqIDfdPTrzAyBHP3L0nY", "spine": "3.8.0", "width": 266, "height": 211 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "x": 131.01, "y": 136.43 },
+	{ "name": "chip3", "parent": "bone", "x": 37.63, "y": 9.95 },
+	{ "name": "chip2", "parent": "bone", "x": 59.15, "y": 2.87 },
+	{ "name": "chip1", "parent": "bone", "x": 71.62, "y": -8.13 },
+	{ "name": "ball", "parent": "bone", "x": -91.61, "y": 18.78 }
+],
+"slots": [
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "shine1", "bone": "root", "attachment": "shine1" },
+	{ "name": "shine2", "bone": "root", "attachment": "shine2" },
+	{ "name": "chip1", "bone": "chip1", "attachment": "chip1" },
+	{ "name": "chip2", "bone": "chip2", "attachment": "chip2" },
+	{ "name": "chip3", "bone": "chip3", "attachment": "chip3" },
+	{ "name": "ball", "bone": "ball", "attachment": "ball" },
+	{ "name": "roulette", "bone": "root", "attachment": "roulette" },
+	{ "name": "shine3", "bone": "root", "attachment": "shine3" },
+	{ "name": "ball_rotation", "bone": "root", "attachment": "ball_rotation" },
+	{ "name": "chip1_move", "bone": "root", "attachment": "chip1_move" },
+	{ "name": "chip2_move", "bone": "root", "attachment": "chip2_move" },
+	{ "name": "chip3_move", "bone": "root", "attachment": "chip3_move" }
+],
+"path": [
+	{
+		"name": "ball_rotation",
+		"bones": [ "ball" ],
+		"target": "ball_rotation",
+		"rotateMix": 0
+	},
+	{
+		"name": "chip1_move",
+		"order": 1,
+		"bones": [ "chip1" ],
+		"target": "chip1_move",
+		"rotateMix": 0
+	},
+	{
+		"name": "chip2_move",
+		"order": 2,
+		"bones": [ "chip2" ],
+		"target": "chip2_move",
+		"rotateMix": 0
+	},
+	{
+		"name": "chip3_move",
+		"order": 3,
+		"bones": [ "chip3" ],
+		"target": "chip3_move",
+		"rotateMix": 0
+	}
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"chip2_move": {
+				"chip2_move": {
+					"type": "path",
+					"lengths": [ 30, 60.14 ],
+					"vertexCount": 6,
+					"vertices": [ 189.84, 138.97, 189.84, 138.97, 189.84, 138.97, 174.48, 128.51, 166.89, 119.73, 160.96, 112.87 ]
+				}
+			},
+			"chip2": {
+				"chip2": { "x": -0.07, "y": 0.26, "width": 11, "height": 9 }
+			},
+			"body": {
+				"body": { "x": 133, "y": 105.5, "width": 266, "height": 211 }
+			},
+			"chip1": {
+				"chip1": { "x": 1.6, "y": 0.13, "width": 11, "height": 9 }
+			},
+			"shine1": {
+				"shine1": { "x": 221, "y": 75, "width": 76, "height": 46 }
+			},
+			"shine2": {
+				"shine2": { "x": 77, "y": 90, "width": 112, "height": 68 }
+			},
+			"shine3": {
+				"shine3": { "x": 56.42, "y": 154.74, "width": 2, "height": 11 }
+			},
+			"chip3_move": {
+				"chip3_move": {
+					"type": "path",
+					"lengths": [ 21.89, 46.77 ],
+					"vertexCount": 6,
+					"vertices": [ 171.63, 147.76, 168.58, 146.31, 165.78, 144.98, 152.24, 142.02, 150.3, 135.36, 149.35, 132.11 ]
+				}
+			},
+			"chip1_move": {
+				"chip1_move": {
+					"type": "path",
+					"lengths": [ 28.39, 64.58 ],
+					"vertexCount": 6,
+					"vertices": [ 203.43, 136.2, 202.64, 127.9, 202.19, 123.29, 198.33, 110.59, 189.11, 103.61, 182.46, 98.57 ]
+				}
+			},
+			"chip3": {
+				"chip3": { "x": 0.58, "y": -0.43, "width": 11, "height": 9 }
+			},
+			"roulette": {
+				"roulette": { "x": 55.77, "y": 157.59, "width": 7, "height": 20 }
+			},
+			"ball_rotation": {
+				"ball_rotation": {
+					"type": "path",
+					"closed": true,
+					"lengths": [ 26.65, 56.74, 87.85, 113.73 ],
+					"vertexCount": 12,
+					"vertices": [ 55.09, 160.86, 58.89, 160.83, 64.95, 160.77, 81.14, 156.08, 80.76, 148.58, 80.48, 142.96, 74.65, 134.73, 57.01, 134.45, 46.75, 134.29, 31.43, 141.65, 33.2, 150.07, 35.44, 160.76 ]
+				}
+			},
+			"ball": {
+				"ball": { "x": 0.06, "y": -0.1, "scaleX": 0.06, "scaleY": 0.06, "width": 69, "height": 69 }
+			}
+		}
+	}
+],
+"animations": {
+	"game": {
+		"slots": {
+			"shine2": {
+				"color": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"shine1": {
+				"color": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"shine3": {
+				"color": [
+					{ "color": "ffffff00" },
+					{ "time": 0.4, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "name": "shine3" }
+				]
+			}
+		},
+		"path": {
+			"chip2_move": {
+				"position": [
+					{ "time": 1.5 },
+					{ "time": 1.8333, "position": 1 }
+				]
+			},
+			"chip3_move": {
+				"position": [
+					{ "time": 1 },
+					{ "time": 1.3333, "position": 1.2531 }
+				]
+			},
+			"chip1_move": {
+				"position": [
+					{ "time": 2 },
+					{ "time": 2.3333, "position": 1 }
+				]
+			},
+			"ball_rotation": {
+				"position": [
+					{ "curve": 0.008, "c2": 1, "c4": 0.89 },
+					{ "time": 0.8333, "position": 1 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "ball_rotation", "offset": -2 }
+				]
+			}
+		]
+	},
+	"idle": {
+		"slots": {
+			"shine2": {
+				"color": [
+					{ "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			},
+			"shine1": {
+				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.3333, "color": "ffffff00", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			}
+		}
+	},
+	"not open": {
+		"slots": {
+			"shine2": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"chip2": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.5, "color": "4b3737ff" },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"chip3": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.5, "color": "4b3737ff" },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"chip3_move": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"ball": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.5, "color": "4b3737ff" },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"shine1": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"ball_rotation": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"roulette": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"chip1_move": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"body": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"shine3": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"chip2_move": {
+				"color": [
+					{ "color": "654747ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "color": "4b3737ff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "color": "654747ff" }
+				]
+			},
+			"chip1": {
+				"color": [
+					{ "color": "654747ff" },
+					{ "time": 0.5, "color": "4b3737ff" },
+					{ "time": 1, "color": "654747ff" }
+				]
+			}
+		}
+	}
+}
+}
