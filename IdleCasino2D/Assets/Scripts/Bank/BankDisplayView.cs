@@ -38,6 +38,6 @@ public class BankDisplayView : MonoBehaviour
 
     public void SendMoneyDisplay(float money)
     {
-        textMoney.text = money.ToString();
+        textMoney.text = $"{money}$";
     }
 }

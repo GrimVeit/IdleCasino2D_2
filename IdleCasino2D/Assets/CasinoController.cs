@@ -28,7 +28,8 @@ public class CasinoController : MonoBehaviour
 
 
 
-    [SerializeField] private ViewContainer viewContainer;
+    [SerializeField] private ViewContainer viewContainer_World;
+    [SerializeField] private ViewContainer viewContainer_UI;
 
     private MapOrderPresenter mapOrderPresenter;
 
@@ -42,13 +43,29 @@ public class CasinoController : MonoBehaviour
     private List<List<CasinoEntityType>> routesVisisitor = new()
     {
         //new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Wheel, CasinoEntityType.Exit },
-        //new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Slot, CasinoEntityType.Exit },
-        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Exit }
+        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Slot, CasinoEntityType.Exit },
+        //new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Exit }
     };
+
+    private BankPresenter bankPresenter;
+    private CoinSystemPresenter coinSystemPresenter;
+    private TouchCameraPresenter touchCameraPresenter;
 
     public void Awake()
     {
-        viewContainer.Initialize();
+        viewContainer_UI.Initialize();
+        viewContainer_World.Initialize();
+
+
+        bankPresenter = new BankPresenter(new BankModel(), viewContainer_UI.GetView<BankView>());
+        bankPresenter.Initialize();
+
+        touchCameraPresenter = new TouchCameraPresenter(viewContainer_UI.GetView<TouchCameraView>());
+        touchCameraPresenter.Initialize();
+        touchCameraPresenter.ActivateInteractive();
+
+        coinSystemPresenter = new CoinSystemPresenter(new CoinSystemModel(bankPresenter), viewContainer_UI.GetView<CoinSystemView>());
+        coinSystemPresenter.Initialize();
 
         var entityEnter = new EntranceQueueEntityPresenter(new EntranceQueueEntityModel(nodesEntranceQueue));
         entityEnter.Initialize();
@@ -62,10 +79,10 @@ public class CasinoController : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            var spot = new SlotSpotPresenter(new SlotSpotModel(), viewContainer.GetView<SlotSpotView>($"Slot_{i+1}"));
+            var spot = new SlotSpotPresenter(new SlotSpotModel(), viewContainer_World.GetView<SlotSpotView>($"Slot_{i+1}"));
             spot.Initialize();
 
-            var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(spot, nodesSlot[i]));
+            var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(spot, nodesSlot[i], coinSystemPresenter));
             entity.Initialize();
 
             casinoEntities.Add(entity);
@@ -73,7 +90,7 @@ public class CasinoController : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            var spot = new WheelSpotPresenter(new WheelSpotModel(), viewContainer.GetView<WheelSpotView>($"Wheel_{i + 1}"));
+            var spot = new WheelSpotPresenter(new WheelSpotModel(), viewContainer_World.GetView<WheelSpotView>($"Wheel_{i + 1}"));
             spot.Initialize();
 
             var entity = new WheelEntityPresenter(new WheelEntityModel(spot, nodesWheel[i]));
@@ -84,7 +101,7 @@ public class CasinoController : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            var spot = new PokerSpotPresenter(new PokerSpotModel(), viewContainer.GetView<PokerSpotView>($"Poker_{i + 1}"));
+            var spot = new PokerSpotPresenter(new PokerSpotModel(), viewContainer_World.GetView<PokerSpotView>($"Poker_{i + 1}"));
             spot.Initialize();
 
             var entity = new PokerEntityPresenter(new PokerEntityModel(spot, nodesPoker[i]));
