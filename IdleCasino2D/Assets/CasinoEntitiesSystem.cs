@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class CasinoController : MonoBehaviour
+public class CasinoEntitiesSystem : MonoBehaviour
 {
     [SerializeField] private VisitorView visitorPrefab;
     [SerializeField] private Transform transformParentVisitors;
@@ -42,9 +42,9 @@ public class CasinoController : MonoBehaviour
 
     private List<List<CasinoEntityType>> routesVisisitor = new()
     {
-        //new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Wheel, CasinoEntityType.Exit },
+        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Wheel, CasinoEntityType.Exit },
         new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Slot, CasinoEntityType.Exit },
-        //new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Exit }
+        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Exit }
     };
 
     private BankPresenter bankPresenter;
@@ -110,7 +110,7 @@ public class CasinoController : MonoBehaviour
             casinoEntities.Add(entity);
         }
 
-        mapOrderPresenter = new MapOrderPresenter(new MapOrderModel(rooms, _visitors.Cast<ISortable>().ToList()));
+        //mapOrderPresenter = new MapOrderPresenter(new MapOrderModel(rooms));
         mapOrderPresenter.Initialize();
     }
 
@@ -121,36 +121,36 @@ public class CasinoController : MonoBehaviour
         Coroutines.Start(SpawnRoutine());
     }
 
-    void LateUpdate()
-    {
-        foreach (var room in rooms)
-        {
-            List<ISortable> allObjects = new List<ISortable>();
+    //void LateUpdate()
+    //{
+    //    foreach (var room in rooms)
+    //    {
+    //        List<ISortable> allObjects = new List<ISortable>();
 
-            if (room.staticObjects != null)
-            {
-                foreach (var sr in room.staticObjects)
-                {
-                    allObjects.Add(sr);
-                }
-            }
+    //        if (room.staticObjects != null)
+    //        {
+    //            foreach (var sr in room.staticObjects)
+    //            {
+    //                allObjects.Add(sr);
+    //            }
+    //        }
 
-            foreach (var visitor in _visitors)
-            {
-                if (room.IsInside(visitor.Position))
-                    allObjects.Add(visitor);
-            }
+    //        foreach (var visitor in _visitors)
+    //        {
+    //            if (room.IsInside(visitor.Position))
+    //                allObjects.Add(visitor);
+    //        }
 
-            allObjects.Sort((a, b) => a.Position.y.CompareTo(b.Position.y));
-            int order = room.orderMax;
-            foreach (var obj in allObjects)
-            {
-                obj.SetOrder(order);
-                order--;
-                if (order < room.orderMin) order = room.orderMin;
-            }
-        }
-    }
+    //        allObjects.Sort((a, b) => a.Position.y.CompareTo(b.Position.y));
+    //        int order = room.orderMax;
+    //        foreach (var obj in allObjects)
+    //        {
+    //            obj.SetOrder(order);
+    //            order--;
+    //            if (order < room.orderMin) order = room.orderMin;
+    //        }
+    //    }
+    //}
 
     private void OnDestroy()
     {

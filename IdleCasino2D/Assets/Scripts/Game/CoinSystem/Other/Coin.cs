@@ -19,6 +19,7 @@ public class Coin : MonoBehaviour
 
     private int _countMondey;
     private IEnumerator timer;
+    private Tween tweenScale;
     private bool isRewarded = false;
 
     public void Initialize()
@@ -52,8 +53,17 @@ public class Coin : MonoBehaviour
         OnCollectCoin?.Invoke(this, _countMondey);
     }
 
+    private void OnDestroy()
+    {
+        tweenScale?.Kill();
+    }
+
     public void PlaySpawnAnimation()
     {
+        tweenScale?.Kill();
+
+        tweenScale = transform.DOScale(1, fadeDuration - 0.3f);
+
         Vector3 randomOffset = new(
             Random.Range(-spawnRadius, spawnRadius),
             Random.Range(-spawnRadius, spawnRadius),
@@ -72,6 +82,10 @@ public class Coin : MonoBehaviour
 
     public void PlayCollectDestroyAnimation()
     {
+        tweenScale?.Kill();
+
+        tweenScale = transform.DOScale(0.2f, 0.6f);
+
         if (timer != null) StopCoroutine(timer);
 
         skeletonAnimationCoin.AnimationState.SetAnimation(0, "coins_flying", false)

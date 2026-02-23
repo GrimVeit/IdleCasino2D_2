@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 
 public class MapOrderModel
 {
@@ -10,12 +8,16 @@ public class MapOrderModel
     private readonly List<ISortable> _visitors;
     private readonly List<ISortable> _staffs;
 
+    private readonly ISpawnerVisitorListener _spawnerVisitorListener;
     private IEnumerator cycle;
 
-    public MapOrderModel(Room[] rooms, List<ISortable> visitors)
+    public MapOrderModel(Room[] rooms, ISpawnerVisitorListener spawnerVisitorListener)
     {
         _rooms = rooms;
-        _visitors = visitors;
+        _spawnerVisitorListener = spawnerVisitorListener;
+
+        _spawnerVisitorListener.OnAddVisitor += AddVisitor;
+        _spawnerVisitorListener.OnRemoveVisitor += RemoveVisitor;
     }
 
     public void Initialize()
@@ -37,12 +39,17 @@ public class MapOrderModel
 
     public void Dispose()
     {
+        _spawnerVisitorListener.OnAddVisitor -= AddVisitor;
+        _spawnerVisitorListener.OnRemoveVisitor -= RemoveVisitor;
+
         if (cycle != null)
         {
             Coroutines.Stop(cycle);
             cycle = null;
         }
     }
+
+
 
     private IEnumerator CycleCoro()
     {
@@ -81,4 +88,18 @@ public class MapOrderModel
             }
         }
     }
+
+    #region EVENTS
+
+    private void AddVisitor(IVisitor visitor)
+    {
+        _visitors.Add(visitor);
+    }
+
+    private void RemoveVisitor(IVisitor visitor)
+    {
+        _visitors.Remove(visitor);
+    }
+
+    #endregion
 }
