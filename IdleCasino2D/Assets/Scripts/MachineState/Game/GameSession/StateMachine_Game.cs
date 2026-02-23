@@ -9,14 +9,19 @@ public class StateMachine_Game : IStateMachineProvider
 
     private IState _currentState;
 
-    public StateMachine_Game()
+    public StateMachine_Game
+        (
+        UIGameRoot sceneRoot,
+        IVisitorCounterTrafficProvider visitorCounterTrafficProvider
+        )
     {
-        
+        states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
+        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider);
     }
 
     public void Initialize()
     {
-
+        EnterState(GetState<StartState_Game>());
     }
 
     public void Dispose()

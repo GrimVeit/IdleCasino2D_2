@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class GameSceneEntryPoint : MonoBehaviour
 {
+    [SerializeField] private ViewContainer viewContainer_World;
+    [SerializeField] private List<Node> nodesEntranceQueue;
+    [SerializeField] private List<Node> nodesSlot;
+    [SerializeField] private List<Node> nodesWheel;
+    [SerializeField] private List<Node> nodesPoker;
+    [SerializeField] private List<Node> nodesExit;
     [SerializeField] private Sounds sounds;
     [SerializeField] private UIGameRoot menuRootPrefab;
 
@@ -15,10 +21,18 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
+    private SpawnerVisitorPresenter spawnerVisitorPresenter;
+    private VisitorCounterTrafficPresenter visitorCounterTrafficPresenter;
+    private VisitorPathTrafficPresenter visitorPathTrafficPresenter;
+
     private ClickDispatcherPresenter clickDispatcherPresenter;
-    //private TouchCameraPresenter touchCameraPresenter;
+    private TouchCameraPresenter touchCameraPresenter;
+    private MapOrderPresenter mapOrderPresenter;
+    private CoinSystemPresenter coinSystemPresenter;
 
     private StateMachine_Game stateMachine;
+
+    private List<ICasinoEntity> casinoEntities = new();
 
     public void Run(UIRootView uIRootView)
     {
@@ -26,40 +40,96 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
-        //viewContainer = sceneRoot.GetComponent<ViewContainer>();
-        //viewContainer.Initialize();
+        viewContainer = sceneRoot.GetComponent<ViewContainer>();
+        viewContainer.Initialize();
 
-        //soundPresenter = new SoundPresenter
-        //            (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC),
-        //            viewContainer.GetView<SoundView>());
+        soundPresenter = new SoundPresenter
+                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC),
+                    viewContainer.GetView<SoundView>());
 
-        //particleEffectPresenter = new ParticleEffectPresenter
-        //    (new ParticleEffectModel(),
-        //    viewContainer.GetView<ParticleEffectView>());
+        particleEffectPresenter = new ParticleEffectPresenter
+            (new ParticleEffectModel(),
+            viewContainer.GetView<ParticleEffectView>());
 
-        //bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+
+        CreateCasinoEntities();
+
+        spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(), viewContainer.GetView<SpawnerVisitorView>());
+        visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter));
+        visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
 
         clickDispatcherPresenter = new ClickDispatcherPresenter(new ClickDispatcherModel());
-        //touchCameraPresenter = new TouchCameraPresenter(viewContainer.GetView<TouchCameraView>());
-        
+        touchCameraPresenter = new TouchCameraPresenter(viewContainer.GetView<TouchCameraView>());
+        mapOrderPresenter = new MapOrderPresenter(new MapOrderModel(spawnerVisitorPresenter), viewContainer.GetView<MapOrderView>());
+        coinSystemPresenter = new CoinSystemPresenter(new CoinSystemModel(bankPresenter), viewContainer.GetView<CoinSystemView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
         ActivateEvents();
 
-        //soundPresenter.Initialize();
-        //particleEffectPresenter.Initialize();
-        //sceneRoot.Initialize();
-        //bankPresenter.Initialize();
-        
-        //stateMachine = new StateMachine_Game();
+        soundPresenter.Initialize();
+        particleEffectPresenter.Initialize();
+        sceneRoot.Initialize();
+        bankPresenter.Initialize();
 
-        //stateMachine.Initialize();
-        //touchCameraPresenter.Initialize();
+        spawnerVisitorPresenter.Initialize();
+        visitorCounterTrafficPresenter.Initialize();
+        visitorPathTrafficPresenter.Initialize();
 
-        Debug.Log("GameSceneEntryPoint Run");
+        stateMachine = new StateMachine_Game(sceneRoot, visitorCounterTrafficPresenter);
+
+        stateMachine.Initialize();
+        touchCameraPresenter.Initialize();
+        touchCameraPresenter.ActivateInteractive();
         clickDispatcherPresenter.Activate();
-        //touchCameraPresenter.ActivateInteractive();
+        mapOrderPresenter.Initialize();
+        coinSystemPresenter.Initialize();
+    }
+
+    private void CreateCasinoEntities()
+    {
+        var entityEnter = new EntranceQueueEntityPresenter(new EntranceQueueEntityModel(nodesEntranceQueue));
+        entityEnter.Initialize();
+        casinoEntities.Add(entityEnter);
+
+        var entityExit = new ExitEntityPresenter(new ExitEntityModel(nodesExit));
+        entityExit.Initialize();
+        casinoEntities.Add(entityExit);
+
+        for (int i = 0; i < 6; i++)
+        {
+            var spot = new SlotSpotPresenter(new SlotSpotModel(), viewContainer_World.GetView<SlotSpotView>($"Slot_{i + 1}"));
+            spot.Initialize();
+
+            var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(spot, nodesSlot[i]));
+            entity.Initialize();
+
+            casinoEntities.Add(entity);
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            var spot = new WheelSpotPresenter(new WheelSpotModel(), viewContainer_World.GetView<WheelSpotView>($"Wheel_{i + 1}"));
+            spot.Initialize();
+
+            var entity = new WheelEntityPresenter(new WheelEntityModel(spot, nodesWheel[i]));
+            entity.Initialize();
+
+            casinoEntities.Add(entity);
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            var spot = new PokerSpotPresenter(new PokerSpotModel(), viewContainer_World.GetView<PokerSpotView>($"Poker_{i + 1}"));
+            spot.Initialize();
+
+            var entity = new PokerEntityPresenter(new PokerEntityModel(spot, nodesPoker[i]));
+            entity.Initialize();
+
+            casinoEntities.Add(entity);
+        }
     }
 
     private void ActivateEvents()
@@ -80,6 +150,14 @@ public class GameSceneEntryPoint : MonoBehaviour
     private void DeactivateTransitions()
     {
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            spawnerVisitorPresenter.SpawnVisitor();
+        }
     }
 
     private void Deactivate()

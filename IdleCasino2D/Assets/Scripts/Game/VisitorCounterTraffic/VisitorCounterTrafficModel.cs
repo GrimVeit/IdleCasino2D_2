@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class VisitorTrafficModel
+public class VisitorCounterTrafficModel
 {
     private readonly ISpawnerVisitorProvider _spawnerProvider;
     private readonly ISpawnerVisitorInfoProvider _spawnerInfo;
@@ -11,7 +11,7 @@ public class VisitorTrafficModel
     private readonly float spawnInterval = 5f; // секунда между попытками спавна
     private readonly int maxVisitors = 10;
 
-    public VisitorTrafficModel(ISpawnerVisitorProvider spawner, ISpawnerVisitorInfoProvider info)
+    public VisitorCounterTrafficModel(ISpawnerVisitorProvider spawner, ISpawnerVisitorInfoProvider info)
     {
         _spawnerProvider = spawner;
         _spawnerInfo = info;

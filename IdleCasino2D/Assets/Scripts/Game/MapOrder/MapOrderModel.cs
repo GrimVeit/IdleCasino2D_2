@@ -1,28 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MapOrderModel
 {
-    private readonly Room[] _rooms;
+    private List<Room> _rooms = new();
 
-    private readonly List<ISortable> _visitors;
-    private readonly List<ISortable> _staffs;
+    private readonly List<ISortable> _visitors = new();
+    private readonly List<ISortable> _staffs = new();
 
     private readonly ISpawnerVisitorListener _spawnerVisitorListener;
     private IEnumerator cycle;
 
-    public MapOrderModel(Room[] rooms, ISpawnerVisitorListener spawnerVisitorListener)
+    public MapOrderModel(ISpawnerVisitorListener spawnerVisitorListener)
     {
-        _rooms = rooms;
         _spawnerVisitorListener = spawnerVisitorListener;
 
         _spawnerVisitorListener.OnAddVisitor += AddVisitor;
         _spawnerVisitorListener.OnRemoveVisitor += RemoveVisitor;
     }
 
+    public void SetRooms(List<Room> rooms)
+    {
+        _rooms = rooms;
+    }
+
     public void Initialize()
     {
-        for (int i = 0; i < _rooms.Length; i++)
+        for (int i = 0; i < _rooms.Count; i++)
         {
             _rooms[i].Initialize();
         }
@@ -53,9 +58,12 @@ public class MapOrderModel
 
     private IEnumerator CycleCoro()
     {
-        AllSorting();
+        while (true)
+        {
+            AllSorting();
 
-        yield return null;
+            yield return null;
+        }
     }
 
     private void AllSorting()
@@ -93,6 +101,8 @@ public class MapOrderModel
 
     private void AddVisitor(IVisitor visitor)
     {
+        Debug.Log("ADD ORDER VISITOR");
+
         _visitors.Add(visitor);
     }
 

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisitorTrafficPresenter
+public class VisitorCounterTrafficPresenter : IVisitorCounterTrafficProvider
 {
-    private readonly VisitorTrafficModel _model;
+    private readonly VisitorCounterTrafficModel _model;
 
-    public VisitorTrafficPresenter(VisitorTrafficModel model)
+    public VisitorCounterTrafficPresenter(VisitorCounterTrafficModel model)
     {
         _model = model;
     }
@@ -25,7 +25,7 @@ public class VisitorTrafficPresenter
     public void StopTraffic() => _model.StopTraffic();
 }
 
-public interface IVisitorTrafficProvider
+public interface IVisitorCounterTrafficProvider
 {
     public void PlayTraffic();
     public void StopTraffic();
