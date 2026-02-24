@@ -78,12 +78,10 @@ public class GameSceneEntryPoint : MonoBehaviour
         visitorCounterTrafficPresenter.Initialize();
         visitorPathTrafficPresenter.Initialize();
 
-        stateMachine = new StateMachine_Game(sceneRoot, visitorCounterTrafficPresenter);
+        stateMachine = new StateMachine_Game(sceneRoot, visitorCounterTrafficPresenter, touchCameraPresenter, clickDispatcherPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
-        touchCameraPresenter.ActivateInteractive();
-        clickDispatcherPresenter.Activate();
         mapOrderPresenter.Initialize();
         coinSystemPresenter.Initialize();
     }

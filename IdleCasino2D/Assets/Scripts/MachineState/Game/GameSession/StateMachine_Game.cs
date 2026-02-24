@@ -12,11 +12,15 @@ public class StateMachine_Game : IStateMachineProvider
     public StateMachine_Game
         (
         UIGameRoot sceneRoot,
-        IVisitorCounterTrafficProvider visitorCounterTrafficProvider
+        IVisitorCounterTrafficProvider visitorCounterTrafficProvider,
+        ITouchCameraProvider touchCameraProvider,
+        IClickDispatcherProvider clickDispatcherProvider
         )
     {
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
-        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider);
+        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider);
+        states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot);
+        states[typeof(UpgradeState_Game)] = new UpgradeState_Game(this, sceneRoot);
     }
 
     public void Initialize()
