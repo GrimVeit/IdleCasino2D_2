@@ -18,6 +18,8 @@ public class CoinSystemModel
 
     public void AddMoney(int amount)
     {
+        Debug.Log("ADD MONEY " + amount);
+
         _moneyProvider.SendMoney(amount);
     }
 

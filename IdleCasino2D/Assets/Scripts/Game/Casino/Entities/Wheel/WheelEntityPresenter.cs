@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WheelEntityPresenter : ICasinoEntity
+public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic, ICasinoEntityProfit
 {
     private readonly WheelEntityModel _model;
 
@@ -15,44 +15,25 @@ public class WheelEntityPresenter : ICasinoEntity
 
     public void Initialize()
     {
-        ActivateEvents();
-
         _model.Initialize();
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
-
         _model.Dispose();
     }
-
-    private void ActivateEvents()
-    {
-        _model.OnVisitorRealised += RealiseVisitor;
-    }
-
-    private void DeactivateEvents()
-    {
-        _model.OnVisitorRealised -= RealiseVisitor;
-    }
-
-
-    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
-
-    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
 
     public void Open() => _model.OpenEntity();
     public void Close() => _model.CloseEntity();
 
 
-    public void ActivateManualInteractive()
+    public void ActivateEntityInteractive()
     {
 
     }
 
-    public void DeactivateManualInteractive()
+    public void DeactivateEntityInteractive()
     {
 
     }
@@ -62,27 +43,36 @@ public class WheelEntityPresenter : ICasinoEntity
 
     }
 
-    #region Output
+    #region VISITOR TRAFFIC
 
-    public event Action<IVisitor, ICasinoEntity> OnVisitorRealised;
-
-    private void RealiseVisitor(IVisitor visitor)
+    public event Action<IVisitor> OnVisitorRealised
     {
-        OnVisitorRealised?.Invoke(visitor, this);
+        add => _model.OnVisitorRealised += value;
+        remove => _model.OnVisitorRealised -= value;
     }
+
+    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
+
+    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
     #endregion
 
-    #region Input
+    #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Wheel;
 
-    public int MaxSeats => _model.MaxSeats;
-
-    public int OccupiedSeats => _model.OccupiedSeats;
-
-    public bool HasFreeSeats => _model.HasFreeSeats;
-
     public bool CanJoin => _model.CanJoin;
+
+    public bool IsGameRunning => _model.IsGameRunning;
+
+    #endregion
+
+    #region PROFIT
+
+    public event Action<Vector3, int> OnAddCoins
+    {
+        add => _model.OnAddCoins += value;
+        remove => _model.OnAddCoins -= value;
+    }
 
     #endregion
 }

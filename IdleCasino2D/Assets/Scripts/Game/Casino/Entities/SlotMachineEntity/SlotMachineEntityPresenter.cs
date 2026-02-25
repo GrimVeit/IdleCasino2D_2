@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotMachineEntityPresenter : ICasinoEntity
+public class SlotMachineEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic, ICasinoEntityProfit
 {
     private readonly SlotMachineEntityModel _model;
 
@@ -14,31 +14,13 @@ public class SlotMachineEntityPresenter : ICasinoEntity
 
     public void Initialize()
     {
-        ActivateEvents();
-
         _model.Initialize();
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
-
         _model.Dispose();
     }
-
-    private void ActivateEvents()
-    {
-        _model.OnVisitorRealised += RealiseVisitor;
-    }
-
-    private void DeactivateEvents()
-    {
-        _model.OnVisitorRealised -= RealiseVisitor;
-    }
-
-    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
-
-    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
 
 
@@ -47,12 +29,12 @@ public class SlotMachineEntityPresenter : ICasinoEntity
 
 
 
-    public void ActivateManualInteractive()
+    public void ActivateEntityInteractive()
     {
 
     }
 
-    public void DeactivateManualInteractive()
+    public void DeactivateEntityInteractive()
     {
 
     }
@@ -64,25 +46,34 @@ public class SlotMachineEntityPresenter : ICasinoEntity
 
     #region Output
 
-    public event Action<IVisitor, ICasinoEntity> OnVisitorRealised;
-
-    private void RealiseVisitor(IVisitor visitor)
+    public event Action<IVisitor> OnVisitorRealised
     {
-        OnVisitorRealised?.Invoke(visitor, this);
+        add => _model.OnVisitorRealised += value;
+        remove => _model.OnVisitorRealised -= value;
     }
+
+    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
+
+    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
     #endregion
 
     #region Input
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Slot;
 
-    public int MaxSeats => _model.MaxSeats;
-
-    public int OccupiedSeats => _model.OccupiedSeats;
-
-    public bool HasFreeSeats => _model.HasFreeSeats;
-
     public bool CanJoin => _model.CanJoin;
+
+    public bool IsGameRunning => _model.IsGameRunning;
+
+    #endregion
+
+    #region PROFIT
+
+    public event Action<Vector3, int> OnAddCoins
+    {
+        add => _model.OnAddCoins += value;
+        remove => _model.OnAddCoins -= value;
+    }
 
     #endregion
 }

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisitorPathTrafficPresenter
+public class CasinoEntityFinancePresenter
 {
-    private readonly VisitorPathTrafficModel _model;
+    private readonly CasinoEntityFinanceModel _model;
 
-    public VisitorPathTrafficPresenter(VisitorPathTrafficModel model)
+    public CasinoEntityFinancePresenter(CasinoEntityFinanceModel model)
     {
         _model = model;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SlotMachineEntity : MonoBehaviour
 {
-    public event Action<IVisitor, ICasinoEntity> OnVisitorRealised;
+    public event Action<IVisitor, ICasinoEntityInfo> OnVisitorRealised;
     public int MaxSeats => 1;
     public int OccupiedSeats => visitors.Count;
     public bool HasFreeSeats => visitors.Count < 1;

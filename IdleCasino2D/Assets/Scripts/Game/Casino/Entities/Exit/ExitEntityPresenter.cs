@@ -1,6 +1,6 @@
 using System;
 
-public class ExitEntityPresenter : ICasinoEntity
+public class ExitEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic
 {
     private readonly ExitEntityModel _model;
 
@@ -11,34 +11,20 @@ public class ExitEntityPresenter : ICasinoEntity
 
     public void Initialize()
     {
-        ActivateEvents();
+
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
+
     }
 
-    private void ActivateEvents()
-    {
-        _model.OnVisitorRealised += RealiseVisitor;
-    }
-
-    private void DeactivateEvents()
-    {
-        _model.OnVisitorRealised -= RealiseVisitor;
-    }
-
-    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
-
-    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
-
-    public void ActivateManualInteractive()
+    public void ActivateEntityInteractive()
     {
 
     }
 
-    public void DeactivateManualInteractive()
+    public void DeactivateEntityInteractive()
     {
 
     }
@@ -48,27 +34,26 @@ public class ExitEntityPresenter : ICasinoEntity
 
     }
 
-    #region Output
+    #region VISITOR TRAFFIC
 
-    public event Action<IVisitor, ICasinoEntity> OnVisitorRealised;
-
-    private void RealiseVisitor(IVisitor visitor)
+    public event Action<IVisitor> OnVisitorRealised
     {
-        OnVisitorRealised?.Invoke(visitor, this);
+        add => _model.OnVisitorRealised += value;
+        remove => _model.OnVisitorRealised -= value;
     }
+
+    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
+
+    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
     #endregion
 
-    #region Input
+    #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Exit;
 
-    public int MaxSeats => _model.MaxSeats;
+    public bool CanJoin => true;
 
-    public int OccupiedSeats => _model.OccupiedSeats;
-
-    public bool HasFreeSeats => _model.HasFreeSeats;
-
-    public bool CanJoin => _model.CanJoin;
+    public bool IsGameRunning => false;
 
     #endregion
 }

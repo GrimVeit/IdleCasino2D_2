@@ -7,10 +7,8 @@ public class SlotMachineEntityModel
 {
     public event Action<IVisitor> OnVisitorRealised;
 
-    public int MaxSeats => 1;
-    public int OccupiedSeats => visitors.Count;
-    public bool HasFreeSeats => visitors.Count < MaxSeats;
-    public bool CanJoin => isOpen && HasFreeSeats;
+    public bool CanJoin => isOpen && visitors.Count < 1;
+    public bool IsGameRunning => isGameRunning;
 
     private readonly Node _nodePlace;
     private readonly List<IVisitor> visitors = new();
@@ -101,6 +99,7 @@ public class SlotMachineEntityModel
 
         _slotSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
+        OnAddCoins?.Invoke(visitor.Position, 10);
 
         yield return new WaitForSeconds(1f);
 
@@ -155,6 +154,12 @@ public class SlotMachineEntityModel
 
         isVisitorReady = false;
     }
+
+    #endregion
+
+    #region PROFIT
+
+    public event Action<Vector3, int> OnAddCoins;
 
     #endregion
 }

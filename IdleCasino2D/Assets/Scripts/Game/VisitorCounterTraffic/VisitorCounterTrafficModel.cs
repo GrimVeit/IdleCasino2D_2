@@ -1,20 +1,23 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VisitorCounterTrafficModel
 {
     private readonly ISpawnerVisitorProvider _spawnerProvider;
     private readonly ISpawnerVisitorInfoProvider _spawnerInfo;
+    private readonly ICasinoEntityInfo _casinoEntityInfo;
 
     private IEnumerator trafficRoutine;
 
     private readonly float spawnInterval = 5f; // секунда между попытками спавна
     private readonly int maxVisitors = 10;
 
-    public VisitorCounterTrafficModel(ISpawnerVisitorProvider spawner, ISpawnerVisitorInfoProvider info)
+    public VisitorCounterTrafficModel(ISpawnerVisitorProvider spawner, ISpawnerVisitorInfoProvider info, List<ICasinoEntityInfo> casinoEntityInfos)
     {
         _spawnerProvider = spawner;
         _spawnerInfo = info;
+        _casinoEntityInfo = casinoEntityInfos.Find(info => info.CasinoEntityType == CasinoEntityType.EntranceQueue);
     }
 
     public void Initialize()
@@ -51,7 +54,7 @@ public class VisitorCounterTrafficModel
     {
         while (true)
         {
-            if (_spawnerInfo.CountVisitors < maxVisitors)
+            if (_spawnerInfo.CountVisitors < maxVisitors && _casinoEntityInfo.CanJoin)
             {
                 _spawnerProvider.SpawnVisitor();
             }

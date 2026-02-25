@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntranceQueueEntityPresenter : ICasinoEntity
+public class EntranceQueueEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic
 {
     private readonly EntranceQueueEntityModel _model;
 
@@ -14,34 +14,20 @@ public class EntranceQueueEntityPresenter : ICasinoEntity
 
     public void Initialize()
     {
-        ActivateEvents();
+
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
+
     }
 
-    private void ActivateEvents()
-    {
-        _model.OnVisitorRealised += RealiseVisitor;
-    }
-
-    private void DeactivateEvents()
-    {
-        _model.OnVisitorRealised -= RealiseVisitor;
-    }
-
-    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
-
-    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
-
-    public void ActivateManualInteractive()
+    public void ActivateEntityInteractive()
     {
 
     }
 
-    public void DeactivateManualInteractive()
+    public void DeactivateEntityInteractive()
     {
 
     }
@@ -51,27 +37,26 @@ public class EntranceQueueEntityPresenter : ICasinoEntity
 
     }
 
-    #region Output
+    #region VISITOR TRAFFIC
 
-    public event Action<IVisitor, ICasinoEntity> OnVisitorRealised;
-
-    private void RealiseVisitor(IVisitor visitor)
+    public event Action<IVisitor> OnVisitorRealised
     {
-        OnVisitorRealised?.Invoke(visitor, this);
+        add => _model.OnVisitorRealised += value;
+        remove => _model.OnVisitorRealised -= value;
     }
+
+    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
+
+    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
     #endregion
 
     #region Input
     public CasinoEntityType CasinoEntityType => CasinoEntityType.EntranceQueue;
 
-    public int MaxSeats => _model.MaxSeats;
-
-    public int OccupiedSeats => _model.OccupiedSeats;
-
-    public bool HasFreeSeats => _model.HasFreeSeats;
-
     public bool CanJoin => _model.CanJoin;
+
+    public bool IsGameRunning => false;
 
     #endregion
 }

@@ -1,57 +1,64 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class VisitorPathTrafficModel
+public class VisitorPathTrafficModel : IDisposable
 {
-    private readonly ICasinoEntity _exitEntity;
-    private readonly List<ICasinoEntity> _casinoEntities = new();
+    private readonly CasinoEntityPathTrafficVisitorAdapter _exitEntity;
+    private readonly List<CasinoEntityPathTrafficVisitorAdapter> _casinoEntities = new();
+
     private readonly ISpawnerVisitorProvider _spawnerVisitorProvider;
     private readonly ISpawnerVisitorListener _spawnerVisitorListener;
 
-    public VisitorPathTrafficModel(List<ICasinoEntity> casinoEntities, ISpawnerVisitorProvider spawnerVisitorProvider, ISpawnerVisitorListener spawnerVisitorListener)
+    public VisitorPathTrafficModel(
+        List<ICasinoEntityInfo> casinoEntities,
+        ISpawnerVisitorProvider spawnerVisitorProvider,
+        ISpawnerVisitorListener spawnerVisitorListener)
     {
-        _casinoEntities = casinoEntities;
-        _exitEntity = _casinoEntities.FirstOrDefault(data => data.CasinoEntityType == CasinoEntityType.Exit);
+        foreach (var entity in casinoEntities)
+        {
+            if (entity is ICasinoEntityVisitorTraffic traffic)
+            {
+                var dto = new CasinoEntityPathTrafficVisitorAdapter(entity, traffic);
+                dto.OnVisitorRealised += OnEntityVisitorRealised;
+                dto.Initialize();
+
+                _casinoEntities.Add(dto);
+            }
+        }
+
+        _exitEntity = _casinoEntities
+            .FirstOrDefault(e => e.CasinoEntityType == CasinoEntityType.Exit)
+            ?? throw new Exception("Exit entity not found in traffic system.");
+
         _spawnerVisitorProvider = spawnerVisitorProvider;
         _spawnerVisitorListener = spawnerVisitorListener;
 
         _spawnerVisitorListener.OnAddVisitor += TryAssign;
     }
 
-    public void Initialize()
+    private void OnEntityVisitorRealised(
+        IVisitor visitor,
+        CasinoEntityPathTrafficVisitorAdapter dto)
     {
-        _casinoEntities.ForEach(e => e.OnVisitorRealised += EntityRelease);
-    }
+        dto.CasinoEntityVisitorTraffic.RemoveVisitor(visitor);
 
-    public void Dispose()
-    {
-        _casinoEntities.ForEach(e => e.OnVisitorRealised -= EntityRelease);
-
-        _spawnerVisitorListener.OnAddVisitor -= TryAssign;
-    }
-
-    private void EntityRelease(IVisitor visitor, ICasinoEntity entity)
-    {
-        entity.RemoveVisitor(visitor);
-
-        if (entity.CasinoEntityType == CasinoEntityType.Exit)
+        if (dto.CasinoEntityType == CasinoEntityType.Exit)
         {
-            Debug.Log("Удаление персонажа");
             _spawnerVisitorProvider.DestroyVisitor(visitor);
             return;
         }
 
         if (visitor.MoveNextStep())
         {
-            Debug.Log("Пытаемся дать новую цель");
             TryAssign(visitor);
         }
         else
         {
-            Debug.Log("Целей больше нет, отправляем на удаление");
-            _exitEntity.AddVisitor(visitor);
+            _exitEntity.CasinoEntityVisitorTraffic.AddVisitor(visitor);
         }
     }
 
@@ -59,22 +66,63 @@ public class VisitorPathTrafficModel
     {
         var targetType = visitor.CurrentTarget;
 
-        var entities = _casinoEntities
+        var candidates = _casinoEntities
             .Where(e => e.CasinoEntityType == targetType && e.CanJoin)
-            .OrderBy(e => e.OccupiedSeats).ToList();
+            .ToList();
 
-
-
-        if (entities.Count != 0)
+        if (candidates.Count > 0)
         {
-            var entity = entities[Random.Range(0, entities.Count)];
-            Debug.Log("Дали новую цель - " + targetType.ToString());
-            entity.AddVisitor(visitor);
+            var target = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+            target.CasinoEntityVisitorTraffic.AddVisitor(visitor);
         }
         else
         {
-            Debug.Log("Цель была занята, отправляем на удаление");
-            _exitEntity.AddVisitor(visitor);
+            _exitEntity.CasinoEntityVisitorTraffic.AddVisitor(visitor);
         }
+    }
+
+    public void Dispose()
+    {
+        foreach (var dto in _casinoEntities)
+        {
+            dto.OnVisitorRealised -= OnEntityVisitorRealised;
+            dto.Dispose();
+        }
+
+        _spawnerVisitorListener.OnAddVisitor -= TryAssign;
+    }
+}
+
+public class CasinoEntityPathTrafficVisitorAdapter
+{
+    public ICasinoEntityInfo CasinoEntityInfo { get; }
+    public ICasinoEntityVisitorTraffic CasinoEntityVisitorTraffic { get; }
+
+    public CasinoEntityType CasinoEntityType => CasinoEntityInfo.CasinoEntityType;
+    public bool CanJoin => CasinoEntityInfo.CanJoin;
+
+    public event Action<IVisitor, CasinoEntityPathTrafficVisitorAdapter> OnVisitorRealised;
+
+    public CasinoEntityPathTrafficVisitorAdapter(
+        ICasinoEntityInfo casinoEntityInfo,
+        ICasinoEntityVisitorTraffic casinoEntityVisitorTraffic)
+    {
+        CasinoEntityInfo = casinoEntityInfo;
+        CasinoEntityVisitorTraffic = casinoEntityVisitorTraffic;
+    }
+
+    private void HandleVisitorRealised(IVisitor visitor)
+    {
+        OnVisitorRealised?.Invoke(visitor, this);
+    }
+
+    public void Initialize()
+    {
+        CasinoEntityVisitorTraffic.OnVisitorRealised += HandleVisitorRealised;
+    }
+
+    public void Dispose()
+    {
+        CasinoEntityVisitorTraffic.OnVisitorRealised -= HandleVisitorRealised;
     }
 }

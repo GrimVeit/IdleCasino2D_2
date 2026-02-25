@@ -7,10 +7,7 @@ using Random = UnityEngine.Random;
 public class EntranceQueueEntityModel
 {
     public event Action<IVisitor> OnVisitorRealised;
-    public int MaxSeats => _queueNodes.Count;
-    public int OccupiedSeats => visitors.Count;
-    public bool HasFreeSeats => visitors.Count < _queueNodes.Count;
-    public bool CanJoin => HasFreeSeats;
+    public bool CanJoin => visitors.Count < _queueNodes.Count;
 
 
 

@@ -62,7 +62,7 @@ public class Coin : MonoBehaviour
     {
         tweenScale?.Kill();
 
-        tweenScale = transform.DOScale(1, fadeDuration - 0.3f);
+        tweenScale = transform.DOScale(1.4f, fadeDuration - 0.3f);
 
         Vector3 randomOffset = new(
             Random.Range(-spawnRadius, spawnRadius),

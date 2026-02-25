@@ -8,11 +8,6 @@ public class ExitEntityModel
 {
     public event Action<IVisitor> OnVisitorRealised;
 
-    public int MaxSeats => 1;
-    public int OccupiedSeats => visitors.Count;
-    public bool HasFreeSeats => visitors.Count < MaxSeats;
-    public bool CanJoin => true;
-
     private readonly List<Node> _nodesExit;
     private readonly List<IVisitor> visitors = new();
     public bool ContainsVisitor(IVisitor visitor) => visitors.Contains(visitor);

@@ -28,11 +28,13 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ClickDispatcherPresenter clickDispatcherPresenter;
     private TouchCameraPresenter touchCameraPresenter;
     private MapOrderPresenter mapOrderPresenter;
+
     private CoinSystemPresenter coinSystemPresenter;
+    private CasinoEntityFinancePresenter casinoEntityFinancePresenter;
 
     private StateMachine_Game stateMachine;
 
-    private List<ICasinoEntity> casinoEntities = new();
+    private List<ICasinoEntityInfo> casinoEntities = new();
 
     public void Run(UIRootView uIRootView)
     {
@@ -42,6 +44,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
+        viewContainer_World.Initialize();
 
         soundPresenter = new SoundPresenter
                     (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC),
@@ -56,13 +59,15 @@ public class GameSceneEntryPoint : MonoBehaviour
         CreateCasinoEntities();
 
         spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(), viewContainer.GetView<SpawnerVisitorView>());
-        visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter));
+        visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter, casinoEntities));
         visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
 
         clickDispatcherPresenter = new ClickDispatcherPresenter(new ClickDispatcherModel());
         touchCameraPresenter = new TouchCameraPresenter(viewContainer.GetView<TouchCameraView>());
         mapOrderPresenter = new MapOrderPresenter(new MapOrderModel(spawnerVisitorPresenter), viewContainer.GetView<MapOrderView>());
+
         coinSystemPresenter = new CoinSystemPresenter(new CoinSystemModel(bankPresenter), viewContainer.GetView<CoinSystemView>());
+        casinoEntityFinancePresenter = new CasinoEntityFinancePresenter(new CasinoEntityFinanceModel(casinoEntities, coinSystemPresenter));
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -84,6 +89,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         touchCameraPresenter.Initialize();
         mapOrderPresenter.Initialize();
         coinSystemPresenter.Initialize();
+        casinoEntityFinancePresenter.Initialize();
     }
 
     private void CreateCasinoEntities()
@@ -92,20 +98,32 @@ public class GameSceneEntryPoint : MonoBehaviour
         entityEnter.Initialize();
         casinoEntities.Add(entityEnter);
 
+        Debug.Log("1");
+
         var entityExit = new ExitEntityPresenter(new ExitEntityModel(nodesExit));
         entityExit.Initialize();
         casinoEntities.Add(entityExit);
 
+        Debug.Log("2");
+
         for (int i = 0; i < 6; i++)
         {
             var spot = new SlotSpotPresenter(new SlotSpotModel(), viewContainer_World.GetView<SlotSpotView>($"Slot_{i + 1}"));
+
+            Debug.Log("2.1");
             spot.Initialize();
+
+            Debug.Log("2.2");
 
             var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(spot, nodesSlot[i]));
             entity.Initialize();
 
+            Debug.Log("2.3");
+
             casinoEntities.Add(entity);
         }
+
+        Debug.Log("3");
 
         for (int i = 0; i < 6; i++)
         {
@@ -118,6 +136,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             casinoEntities.Add(entity);
         }
 
+        Debug.Log("4");
+
         for (int i = 0; i < 4; i++)
         {
             var spot = new PokerSpotPresenter(new PokerSpotModel(), viewContainer_World.GetView<PokerSpotView>($"Poker_{i + 1}"));
@@ -128,6 +148,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
             casinoEntities.Add(entity);
         }
+
+        Debug.Log("5");
     }
 
     private void ActivateEvents()

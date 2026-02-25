@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PokerEntityPresenter : ICasinoEntity
+public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic, ICasinoEntityProfit
 {
     private readonly PokerEntityModel _model;
 
@@ -15,34 +15,16 @@ public class PokerEntityPresenter : ICasinoEntity
 
     public void Initialize()
     {
-        ActivateEvents();
-
         _model.Initialize();
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
-
         _model.Dispose();
     }
 
-    private void ActivateEvents()
-    {
-        _model.OnVisitorRealised += RealiseVisitor;
-    }
-
-    private void DeactivateEvents()
-    {
-        _model.OnVisitorRealised -= RealiseVisitor;
-    }
-
-    public void ActivateManualInteractive() => _model.ActivateManualInteractive();
-    public void DeactivateManualInteractive() => _model.DeactivateManualInteractive();
-
-    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
-
-    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
+    public void ActivateEntityInteractive() => _model.ActivateManualInteractive();
+    public void DeactivateEntityInteractive() => _model.DeactivateManualInteractive();
 
 
 
@@ -50,27 +32,36 @@ public class PokerEntityPresenter : ICasinoEntity
     public void CloseEntity() => _model.CloseEntity();
     public void SetDealer(IDealer newDealer) => _model.SetDealer(newDealer);
 
-    #region Output
+    #region VISITOR TRAFFIC
 
-    public event Action<IVisitor, ICasinoEntity> OnVisitorRealised;
-
-    private void RealiseVisitor(IVisitor visitor)
+    public event Action<IVisitor> OnVisitorRealised
     {
-        OnVisitorRealised?.Invoke(visitor, this);
+        add => _model.OnVisitorRealised += value;
+        remove => _model.OnVisitorRealised -= value;
     }
+
+    public void AddVisitor(IVisitor visitor) => _model.AddVisitor(visitor);
+
+    public void RemoveVisitor(IVisitor visitor) => _model.RemoveVisitor(visitor);
 
     #endregion
 
-    #region Input
+    #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Poker;
 
-    public int MaxSeats => _model.MaxSeats;
-
-    public int OccupiedSeats => _model.OccupiedSeats;
-
-    public bool HasFreeSeats => _model.HasFreeSeats;
-
     public bool CanJoin => _model.CanJoin;
+
+    public bool IsGameRunning => _model.IsGameRunning;
+
+    #endregion
+
+    #region PROFIT
+
+    public event Action<Vector3, int> OnAddCoins
+    {
+        add => _model.OnAddCoins += value;
+        remove => _model.OnAddCoins -= value;
+    }
 
     #endregion
 }
