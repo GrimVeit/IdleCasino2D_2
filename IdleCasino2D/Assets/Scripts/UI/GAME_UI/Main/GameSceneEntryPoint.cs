@@ -7,6 +7,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private ViewContainer viewContainer_World;
     [SerializeField] private ShopCasinoEntityDatasSO shopCasinoEntityDatas;
+    [SerializeField] private ShopCasinoPersonalDatasSO shopCasinoPersonalDatas;
     [SerializeField] private List<Node> nodesEntranceQueue;
     [SerializeField] private List<Node> nodesSlot;
     [SerializeField] private List<Node> nodesWheel;
@@ -35,6 +36,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private CasinoEntityClickInteractionPresenter casinoEntityClickInteractionPresenter;
     private ShopCasinoSpotPresenter shopCasinoSpotPresenter;
+
+    private ShopCasinoPersonalPresenter shopCasinoPersonalPresenter;
 
     private StateMachine_Game stateMachine;
 
@@ -76,6 +79,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoEntityClickInteractionPresenter = new CasinoEntityClickInteractionPresenter(new CasinoEntityClickInteractionModel(casinoEntities));
         shopCasinoSpotPresenter = new ShopCasinoSpotPresenter(new ShopCasinoSpotModel(casinoEntityClickInteractionPresenter, bankPresenter, shopCasinoEntityDatas), viewContainer.GetView<ShopCasinoSpotView>());
 
+        shopCasinoPersonalPresenter = new ShopCasinoPersonalPresenter(new ShopCasinoPersonalModel(shopCasinoPersonalDatas, bankPresenter), viewContainer.GetView<ShopCasinoPersonalView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -96,7 +101,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             touchCameraPresenter, 
             clickDispatcherPresenter,
             shopCasinoSpotPresenter,
-            shopCasinoSpotPresenter);
+            shopCasinoSpotPresenter,
+            shopCasinoPersonalPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
@@ -106,6 +112,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         casinoEntityClickInteractionPresenter.Initialize();
         shopCasinoSpotPresenter.Initialize();
+
+        shopCasinoPersonalPresenter.Initialize();
     }
 
     private void CreateCasinoEntities()

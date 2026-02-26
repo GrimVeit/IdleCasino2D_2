@@ -10,7 +10,9 @@ public class UIGameRoot : UIRoot
     [SerializeField] private AvatarBalancePanel_Game avatarBalancePanel;
     [SerializeField] private BlackBackgroundPanel_Game blackBackgroundPanel;
     [SerializeField] private UpgradePanel_Game upgradePanel;
+
     [SerializeField] private HireStaffPanel_Game hireStaffPanel;
+    [SerializeField] private SelectStaffPanel_Game selectStaffPanel;
 
     [SerializeField] private ShopSpotPanel_Game shopSpotPanel;
 
@@ -28,7 +30,9 @@ public class UIGameRoot : UIRoot
         avatarBalancePanel.Initialize();
         blackBackgroundPanel.Initialize();
         upgradePanel.Initialize();
+
         hireStaffPanel.Initialize();
+        selectStaffPanel.Initialize();
 
         shopSpotPanel.Initialize();
     }
@@ -42,6 +46,7 @@ public class UIGameRoot : UIRoot
 
         upgradePanel.OnClickToBack += ClickToBack_UPGRADE;
         hireStaffPanel.OnClickToBack += ClickToBack_HIRE_STAFF;
+        selectStaffPanel.OnClickToBack += ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack += ClickToBack_SHOP_SPOT;
     }
 
@@ -54,6 +59,7 @@ public class UIGameRoot : UIRoot
 
         upgradePanel.OnClickToBack -= ClickToBack_UPGRADE;
         hireStaffPanel.OnClickToBack -= ClickToBack_HIRE_STAFF;
+        selectStaffPanel.OnClickToBack -= ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack -= ClickToBack_SHOP_SPOT;
 
         if (currentPanel != null)
@@ -67,7 +73,9 @@ public class UIGameRoot : UIRoot
         avatarBalancePanel.Dispose();
         blackBackgroundPanel.Dispose();
         upgradePanel.Dispose();
+
         hireStaffPanel.Dispose();
+        selectStaffPanel.Dispose();
 
         shopSpotPanel.Dispose();
     }
@@ -172,6 +180,22 @@ public class UIGameRoot : UIRoot
 
 
 
+    public void OpenSelectStaffPanel()
+    {
+        if (selectStaffPanel.IsActive) return;
+
+        OpenOtherPanel(selectStaffPanel);
+    }
+
+    public void CloseSelectStaffPanel()
+    {
+        if (!selectStaffPanel.IsActive) return;
+
+        CloseOtherPanel(selectStaffPanel);
+    }
+
+
+
 
 
 
@@ -240,6 +264,17 @@ public class UIGameRoot : UIRoot
     private void ClickToBack_HIRE_STAFF()
     {
         OnClickToBack_HIRE_STAFF?.Invoke();
+    }
+
+    #endregion
+
+    #region SELECT STAFF
+
+    public event Action OnClickToBack_SELECT_STAFF;
+
+    private void ClickToBack_SELECT_STAFF()
+    {
+        OnClickToBack_SELECT_STAFF?.Invoke();
     }
 
     #endregion
