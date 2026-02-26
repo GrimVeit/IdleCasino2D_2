@@ -18,7 +18,7 @@ public class PokerEntityModel
     private IDealer _dealer;
     private IEnumerator gameRoutine;
 
-    private bool isOpen = true;
+    private bool isOpen = false;
     private bool isGameRunning = false;
     private bool isVisitorReady;   // дошёл ли до стола
     private bool isManualInteractive = true;

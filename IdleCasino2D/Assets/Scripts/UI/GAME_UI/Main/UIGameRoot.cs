@@ -12,6 +12,8 @@ public class UIGameRoot : UIRoot
     [SerializeField] private UpgradePanel_Game upgradePanel;
     [SerializeField] private HireStaffPanel_Game hireStaffPanel;
 
+    [SerializeField] private ShopSpotPanel_Game shopSpotPanel;
+
     private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -27,6 +29,8 @@ public class UIGameRoot : UIRoot
         blackBackgroundPanel.Initialize();
         upgradePanel.Initialize();
         hireStaffPanel.Initialize();
+
+        shopSpotPanel.Initialize();
     }
 
     public void Activate()
@@ -38,6 +42,7 @@ public class UIGameRoot : UIRoot
 
         upgradePanel.OnClickToBack += ClickToBack_UPGRADE;
         hireStaffPanel.OnClickToBack += ClickToBack_HIRE_STAFF;
+        shopSpotPanel.OnClickToBack += ClickToBack_SHOP_SPOT;
     }
 
     public void Deactivate()
@@ -49,6 +54,7 @@ public class UIGameRoot : UIRoot
 
         upgradePanel.OnClickToBack -= ClickToBack_UPGRADE;
         hireStaffPanel.OnClickToBack -= ClickToBack_HIRE_STAFF;
+        shopSpotPanel.OnClickToBack -= ClickToBack_SHOP_SPOT;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -62,6 +68,8 @@ public class UIGameRoot : UIRoot
         blackBackgroundPanel.Dispose();
         upgradePanel.Dispose();
         hireStaffPanel.Dispose();
+
+        shopSpotPanel.Dispose();
     }
 
     #region Input
@@ -162,6 +170,25 @@ public class UIGameRoot : UIRoot
         CloseOtherPanel(hireStaffPanel);
     }
 
+
+
+
+
+
+    public void OpenShopSpotPanel()
+    {
+        if (shopSpotPanel.IsActive) return;
+
+        OpenOtherPanel(shopSpotPanel);
+    }
+
+    public void CloseShopSpotPanel()
+    {
+        if (!shopSpotPanel.IsActive) return;
+
+        CloseOtherPanel(shopSpotPanel);
+    }
+
     #endregion
 
 
@@ -213,6 +240,17 @@ public class UIGameRoot : UIRoot
     private void ClickToBack_HIRE_STAFF()
     {
         OnClickToBack_HIRE_STAFF?.Invoke();
+    }
+
+    #endregion
+
+    #region SHOP SPOT
+
+    public event Action OnClickToBack_SHOP_SPOT;
+
+    private void ClickToBack_SHOP_SPOT()
+    {
+        OnClickToBack_SHOP_SPOT?.Invoke();
     }
 
     #endregion

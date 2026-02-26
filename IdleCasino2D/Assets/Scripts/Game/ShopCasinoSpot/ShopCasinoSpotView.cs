@@ -62,6 +62,6 @@ public class ShopCasinoSpotSize
     [SerializeField] private CasinoEntityType entityType;
     [SerializeField] private Vector2 vectorSize;
 
-    public Vector2 Size;
+    public Vector2 Size => vectorSize;
     public CasinoEntityType EntityType => entityType;
 }

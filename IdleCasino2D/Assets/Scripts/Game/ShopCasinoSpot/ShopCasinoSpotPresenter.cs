@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopCasinoSpotPresenter
+public class ShopCasinoSpotPresenter : IShopCasinoEntitySpotListener, IShopCasinoEntitySpotProvider
 {
     private readonly ShopCasinoSpotModel _model;
     private readonly ShopCasinoSpotView _view;
@@ -61,4 +61,23 @@ public class ShopCasinoSpotPresenter
     }
 
     #endregion
+
+    #region Input
+
+    public void ActivateListener() => _model.ActivateListener();
+    public void DeactivateListener() => _model.DeactivateListener();
+
+    #endregion
+}
+
+public interface IShopCasinoEntitySpotListener
+{
+    public event Action OnSetData;
+    public event Action OnBuy;
+}
+
+public interface IShopCasinoEntitySpotProvider
+{
+    public void ActivateListener();
+    public void DeactivateListener();
 }

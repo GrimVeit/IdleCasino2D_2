@@ -21,6 +21,7 @@ public class ShopCasinoSpotModel
         _shopCasinoEntityDatasSO = shopCasinoEntityDatasSO;
 
         _listenerClickCasinoEntitySpot.OnClickToCloseCasinoEntity += SetBuyEntity;
+        _listenerClickCasinoEntitySpot.OnClickToOpenCasinoEntity += SetGame;
     }
 
     public void Initialize()
@@ -42,6 +43,15 @@ public class ShopCasinoSpotModel
 
             OnBuy?.Invoke();
         }
+    }
+
+    private void SetGame(CasinoEntityClickInteractionAdapter casinoEntityAdapter)
+    {
+        if (!isListen) return;
+
+        if (casinoEntityAdapter == null) return;
+
+        casinoEntityAdapter.CasinoEntityManual.ManualStartGame();
     }
 
     private void SetBuyEntity(CasinoEntityClickInteractionAdapter casinoEntityAdapter)

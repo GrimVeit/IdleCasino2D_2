@@ -9,36 +9,46 @@ public class MainState_Game : IState
     private readonly ITouchCameraProvider _touchCameraProvider;
     private readonly UIGameRoot _sceneRoot;
     private readonly IClickDispatcherProvider _clickDispatcherProvider;
+    private readonly IShopCasinoEntitySpotListener _shopCasinoEntitySpotListener;
+    private readonly IShopCasinoEntitySpotProvider _shopCasinoEntitySpotProvider;
 
-    public MainState_Game(IStateMachineProvider machineProvider, IVisitorCounterTrafficProvider visitorTrafficProvider, ITouchCameraProvider touchCameraProvider, UIGameRoot sceneRoot, IClickDispatcherProvider clickDispatcherProvider)
+    public MainState_Game(IStateMachineProvider machineProvider, IVisitorCounterTrafficProvider visitorTrafficProvider, ITouchCameraProvider touchCameraProvider, UIGameRoot sceneRoot, IClickDispatcherProvider clickDispatcherProvider, IShopCasinoEntitySpotListener shopCasinoEntitySpotListener, IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider)
     {
         _machineProvider = machineProvider;
         _visitorCounterTrafficProvider = visitorTrafficProvider;
         _touchCameraProvider = touchCameraProvider;
         _sceneRoot = sceneRoot;
         _clickDispatcherProvider = clickDispatcherProvider;
+        _shopCasinoEntitySpotListener = shopCasinoEntitySpotListener;
+        _shopCasinoEntitySpotProvider = shopCasinoEntitySpotProvider;
     }
 
     public void EnterState()
     {
         _sceneRoot.OnCLickToUpgrade_MAIN += ChangeStateToUpgrade;
         _sceneRoot.OnClickToHireStaff_MAIN += ChangeStateToHireStaff;
+        _shopCasinoEntitySpotListener.OnSetData += ChangeStateToShopSpot;
 
         _visitorCounterTrafficProvider.PlayTraffic();
         _touchCameraProvider.ActivateInteractive();
         _clickDispatcherProvider.Activate();
         _sceneRoot.OpenMainPanel();
         _sceneRoot.OpenAvatarBalancePanel();
+
+        _shopCasinoEntitySpotProvider.ActivateListener();
     }
 
     public void ExitState()
     {
         _sceneRoot.OnCLickToUpgrade_MAIN -= ChangeStateToUpgrade;
         _sceneRoot.OnClickToHireStaff_MAIN -= ChangeStateToHireStaff;
+        _shopCasinoEntitySpotListener.OnSetData -= ChangeStateToShopSpot;
 
         _touchCameraProvider.DeactivateInteractive();
         _sceneRoot.CloseMainPanel();
         _clickDispatcherProvider.Deactivate();
+
+        _shopCasinoEntitySpotProvider.DeactivateListener();
     }
 
     private void ChangeStateToUpgrade()
@@ -49,5 +59,10 @@ public class MainState_Game : IState
     private void ChangeStateToHireStaff()
     {
         _machineProvider.EnterState(_machineProvider.GetState<HireStaffState_Game>());
+    }
+
+    private void ChangeStateToShopSpot()
+    {
+        _machineProvider.EnterState(_machineProvider.GetState<ShopSpotState_Game>());
     }
 }

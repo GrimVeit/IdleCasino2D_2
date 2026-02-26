@@ -17,7 +17,7 @@ public class WheelEntityModel
     private readonly IGameSpot _wheelSpot;
     private IEnumerator gameRoutine;
 
-    private bool isOpen = true;
+    private bool isOpen = false;
     private bool isGameRunning;
     private bool isVisitorReady;   // дошёл ли до стола
     private bool isManualInteractive;

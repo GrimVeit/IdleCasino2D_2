@@ -33,6 +33,9 @@ public class GameSceneEntryPoint : MonoBehaviour
     private CoinSystemPresenter coinSystemPresenter;
     private CasinoEntityFinancePresenter casinoEntityFinancePresenter;
 
+    private CasinoEntityClickInteractionPresenter casinoEntityClickInteractionPresenter;
+    private ShopCasinoSpotPresenter shopCasinoSpotPresenter;
+
     private StateMachine_Game stateMachine;
 
     private readonly List<ICasinoEntityInfo> casinoEntities = new();
@@ -70,6 +73,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         coinSystemPresenter = new CoinSystemPresenter(new CoinSystemModel(bankPresenter), viewContainer.GetView<CoinSystemView>());
         casinoEntityFinancePresenter = new CasinoEntityFinancePresenter(new CasinoEntityFinanceModel(casinoEntities, coinSystemPresenter));
 
+        casinoEntityClickInteractionPresenter = new CasinoEntityClickInteractionPresenter(new CasinoEntityClickInteractionModel(casinoEntities));
+        shopCasinoSpotPresenter = new ShopCasinoSpotPresenter(new ShopCasinoSpotModel(casinoEntityClickInteractionPresenter, bankPresenter, shopCasinoEntityDatas), viewContainer.GetView<ShopCasinoSpotView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -84,13 +90,22 @@ public class GameSceneEntryPoint : MonoBehaviour
         visitorCounterTrafficPresenter.Initialize();
         visitorPathTrafficPresenter.Initialize();
 
-        stateMachine = new StateMachine_Game(sceneRoot, visitorCounterTrafficPresenter, touchCameraPresenter, clickDispatcherPresenter);
+        stateMachine = new StateMachine_Game
+            (sceneRoot, 
+            visitorCounterTrafficPresenter, 
+            touchCameraPresenter, 
+            clickDispatcherPresenter,
+            shopCasinoSpotPresenter,
+            shopCasinoSpotPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
         mapOrderPresenter.Initialize();
         coinSystemPresenter.Initialize();
         casinoEntityFinancePresenter.Initialize();
+
+        casinoEntityClickInteractionPresenter.Initialize();
+        shopCasinoSpotPresenter.Initialize();
     }
 
     private void CreateCasinoEntities()

@@ -14,13 +14,17 @@ public class StateMachine_Game : IStateMachineProvider
         UIGameRoot sceneRoot,
         IVisitorCounterTrafficProvider visitorCounterTrafficProvider,
         ITouchCameraProvider touchCameraProvider,
-        IClickDispatcherProvider clickDispatcherProvider
+        IClickDispatcherProvider clickDispatcherProvider,
+        IShopCasinoEntitySpotListener shopCasinoEntitySpotListener,
+        IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider
         )
     {
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
-        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider);
+        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider);
         states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot);
         states[typeof(UpgradeState_Game)] = new UpgradeState_Game(this, sceneRoot);
+
+        states[typeof(ShopSpotState_Game)] = new ShopSpotState_Game(this, shopCasinoEntitySpotListener, sceneRoot);
     }
 
     public void Initialize()
