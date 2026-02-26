@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic, ICasinoEntityProfit
+public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntityManual
 {
     private readonly PokerEntityModel _model;
 
@@ -28,9 +28,14 @@ public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
 
 
 
-    public void OpenEntity() => _model.OpenEntity();
-    public void CloseEntity() => _model.CloseEntity();
     public void SetDealer(IDealer newDealer) => _model.SetDealer(newDealer);
+
+    #region ACTIVATOR
+
+    public void Open() => _model.Open();
+    public void Close() => _model.Close();
+
+    #endregion
 
     #region VISITOR TRAFFIC
 
@@ -48,9 +53,8 @@ public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
 
     #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Poker;
-
+    public bool IsOpen => _model.IsOpen;
     public bool CanJoin => _model.CanJoin;
-
     public bool IsGameRunning => _model.IsGameRunning;
 
     #endregion
@@ -62,6 +66,22 @@ public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
         add => _model.OnAddCoins += value;
         remove => _model.OnAddCoins -= value;
     }
+
+    #endregion
+
+    #region SPOT CLICK LISTENER
+
+    public event Action OnSpotClick
+    {
+        add => _model.OnSpotClick += value;
+        remove => _model.OnSpotClick -= value;
+    }
+
+    #endregion
+
+    #region MANUAL
+
+    public void ManualStartGame() => _model.ManualStartGame();
 
     #endregion
 }

@@ -6,8 +6,20 @@ using UnityEngine;
 public interface ICasinoEntityInfo
 {
     CasinoEntityType CasinoEntityType { get; }
+    bool IsOpen { get; }
     bool CanJoin { get; }
     bool IsGameRunning {  get; }
+}
+
+public interface ICasinoEntityActivator
+{
+    void Open();
+    void Close();
+}
+
+public interface ICasinoEntityManual
+{
+    public void ManualStartGame();
 }
 
 public interface ICasinoEntityInteractiveProvider
@@ -32,4 +44,9 @@ public interface ICasinoEntityProfit
 public interface ICasinoEntityPersonal
 {
     public void SetDealer(IDealer newDealer);
+}
+
+public interface ICasinoEntitySpotClickListener
+{
+    public event Action OnSpotClick;
 }

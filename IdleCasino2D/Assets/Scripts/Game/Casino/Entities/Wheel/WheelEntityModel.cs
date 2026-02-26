@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class WheelEntityModel
 {
-    public event Action<IVisitor> OnVisitorRealised;
-
+    public bool IsOpen => isOpen;
     public bool CanJoin => isOpen && visitors.Count < 1;
     public bool IsGameRunning => isGameRunning;
 
@@ -31,12 +30,12 @@ public class WheelEntityModel
 
     public void Initialize()
     {
-        _wheelSpot.OnClick += ManualStartGame;
+        _wheelSpot.OnClick += SpotClick;
     }
 
     public void Dispose()
     {
-        _wheelSpot.OnClick -= ManualStartGame;
+        _wheelSpot.OnClick -= SpotClick;
     }
 
     #region Gameplay
@@ -47,15 +46,6 @@ public class WheelEntityModel
         isVisitorReady = true;
 
         TryStartGame(npc as IVisitor, auto: true);
-    }
-
-    private void ManualStartGame()
-    {
-        if (!isManualInteractive)
-            return;
-
-        var visitor = visitors[0];
-        TryStartGame(visitor, auto: false);
     }
 
     private void TryStartGame(IVisitor visitor, bool auto)
@@ -116,22 +106,46 @@ public class WheelEntityModel
 
     #endregion
 
-    #region CONTROLLER
+
+    #region MANUAL ACTIVATOR
 
     public void ActivateManualInteractive() => isManualInteractive = true;
     public void DeactivateManualInteractive() => isManualInteractive = false;
 
-    public void OpenEntity()
+    #endregion
+
+    #region MANUAL
+
+    public void ManualStartGame()
+    {
+        if (!isManualInteractive)
+            return;
+
+        var visitor = visitors[0];
+        TryStartGame(visitor, auto: false);
+    }
+
+    #endregion
+
+    #region MAIN ACTIVATOR
+
+    public void Open()
     {
         isOpen = true;
         _wheelSpot.ActivateAnimation("idle");
     }
 
-    public void CloseEntity()
+    public void Close()
     {
         isOpen = false;
         _wheelSpot.ActivateAnimation("not open");
     }
+
+    #endregion
+
+    #region VISITOR TRAFFIC
+
+    public event Action<IVisitor> OnVisitorRealised;
 
     public void AddVisitor(IVisitor visitor)
     {
@@ -161,6 +175,17 @@ public class WheelEntityModel
     #region PROFIT
 
     public event Action<Vector3, int> OnAddCoins;
+
+    #endregion
+
+    #region SPOT CLICK
+
+    public event Action OnSpotClick;
+
+    private void SpotClick()
+    {
+        OnSpotClick?.Invoke();
+    }
 
     #endregion
 }

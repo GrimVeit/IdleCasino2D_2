@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class SlotMachineEntityModel
 {
-    public event Action<IVisitor> OnVisitorRealised;
-
+    public bool IsOpen => isOpen;
     public bool CanJoin => isOpen && visitors.Count < 1;
     public bool IsGameRunning => isGameRunning;
 
@@ -17,7 +16,7 @@ public class SlotMachineEntityModel
     private readonly IGameSpot _slotSpot;
     private IEnumerator gameRoutine;
 
-    private bool isOpen = true;
+    private bool isOpen = false;
     private bool isGameRunning = false;
     private bool isVisitorReady = false;   // дошёл ли до стола
     private bool isManualInteractive = false;
@@ -30,12 +29,12 @@ public class SlotMachineEntityModel
 
     public void Initialize()
     {
-        _slotSpot.OnClick += ManualStartGame;
+        _slotSpot.OnClick += SpotClick;
     }
 
     public void Dispose()
     {
-        _slotSpot.OnClick -= ManualStartGame;
+        _slotSpot.OnClick -= SpotClick;
     }
 
     #region Gameplay
@@ -46,15 +45,6 @@ public class SlotMachineEntityModel
         isVisitorReady = true;
 
         TryStartGame(npc as IVisitor, auto: true);
-    }
-
-    private void ManualStartGame()
-    {
-        if (!isManualInteractive)
-            return;
-
-        var visitor = visitors[0];
-        TryStartGame(visitor, auto: false);
     }
 
     private void TryStartGame(IVisitor visitor, bool auto)
@@ -115,22 +105,46 @@ public class SlotMachineEntityModel
 
     #endregion
 
-    #region CONTROLLER
+    #region MANUAL ACTIVATOR
 
     public void ActivateManualInteractive() => isManualInteractive = true;
     public void DeactivateManualInteractive() => isManualInteractive = false;
 
-    public void OpenEntity()
+
+    #endregion
+
+    #region MANUAL
+
+    public void ManualStartGame()
+    {
+        if (!isManualInteractive)
+            return;
+
+        var visitor = visitors[0];
+        TryStartGame(visitor, auto: false);
+    }
+
+    #endregion
+
+    #region MAIN ACTIVATOR
+
+    public void Open()
     {
         isOpen = true;
         _slotSpot.ActivateAnimation("idle");
     }
 
-    public void CloseEntity()
+    public void Close()
     {
         isOpen = false;
         _slotSpot.ActivateAnimation("not open");
     }
+
+    #endregion
+
+    #region VISITOR TRAFFIC
+
+    public event Action<IVisitor> OnVisitorRealised;
 
     public void AddVisitor(IVisitor visitor)
     {
@@ -160,6 +174,17 @@ public class SlotMachineEntityModel
     #region PROFIT
 
     public event Action<Vector3, int> OnAddCoins;
+
+    #endregion
+
+    #region SPOT CLICK
+
+    public event Action OnSpotClick;
+
+    private void SpotClick()
+    {
+        OnSpotClick?.Invoke();
+    }
 
     #endregion
 }

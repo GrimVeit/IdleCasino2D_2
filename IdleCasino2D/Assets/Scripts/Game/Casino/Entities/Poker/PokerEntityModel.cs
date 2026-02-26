@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class PokerEntityModel
 {
-    public event Action<IVisitor> OnVisitorRealised;
-
+    public bool IsOpen => isOpen;
     public bool IsGameRunning => isGameRunning;
     public bool CanJoin => isOpen && visitors.Count < 1;
 
@@ -33,12 +31,18 @@ public class PokerEntityModel
 
     public void Initialize()
     {
-        _pokerSpot.OnClick += ManualStartGame;
+        _pokerSpot.OnClick += SpotClick;
     }
 
     public void Dispose()
     {
-        _pokerSpot.OnClick -= ManualStartGame;
+        _pokerSpot.OnClick -= SpotClick;
+    }
+
+    public void SetDealer(IDealer newDealer)
+    {
+        _dealer = newDealer;
+        _dealer.SetIdle();
     }
 
     #region Gameplay
@@ -56,14 +60,6 @@ public class PokerEntityModel
         {
             //ÄÈËÅÐÀ ÍÅÒ, ÍÓÆÍÀ ËÎÃÈÊÀ ÏÎÊÀÇÀ ÎÆÈÄÀÍÈß ÑÒÀÐÒÀ ×ÒÎÁÛ ÈÃÐÎÊ ÊËÈÊÀË
         }
-    }
-
-    private void ManualStartGame()
-    {
-        if (!isManualInteractive || visitors.Count == 0)
-            return;
-
-        TryStartGame(visitors[0], auto: false);
     }
 
     private void TryStartGame(IVisitor visitor, bool auto)
@@ -129,28 +125,44 @@ public class PokerEntityModel
 
     #endregion
 
-    #region CONTROLLER
+    #region MANUAL ACTIVATOR
 
     public void ActivateManualInteractive() => isManualInteractive = true;
     public void DeactivateManualInteractive() => isManualInteractive = false;
 
-    public void SetDealer(IDealer newDealer)
+    #endregion
+
+    #region MANUAL
+
+    public void ManualStartGame()
     {
-        _dealer = newDealer;
-        _dealer.SetIdle();
+        if (!isManualInteractive || visitors.Count == 0)
+            return;
+
+        TryStartGame(visitors[0], auto: false);
     }
 
-    public void OpenEntity()
+    #endregion
+
+    #region MAIN ACTIVATOR
+
+    public void Open()
     {
         isOpen = true;
         _pokerSpot.ActivateAnimation("idle");
     }
 
-    public void CloseEntity()
+    public void Close()
     {
         isOpen = false;
         _pokerSpot.ActivateAnimation("not open");
     }
+
+    #endregion
+
+    #region VISITOR TRAFFIC
+
+    public event Action<IVisitor> OnVisitorRealised;
 
     public void AddVisitor(IVisitor visitor)
     {
@@ -180,6 +192,17 @@ public class PokerEntityModel
     #region PROFIT
 
     public event Action<Vector3, int> OnAddCoins;
+
+    #endregion
+
+    #region SPOT CLICK
+
+    public event Action OnSpotClick;
+
+    private void SpotClick()
+    {
+        OnSpotClick?.Invoke();
+    }
 
     #endregion
 }

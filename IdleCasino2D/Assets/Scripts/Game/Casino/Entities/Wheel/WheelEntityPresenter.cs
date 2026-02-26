@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic, ICasinoEntityProfit
+public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual
 {
     private readonly WheelEntityModel _model;
 
@@ -24,8 +24,6 @@ public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
     }
 
 
-    public void Open() => _model.OpenEntity();
-    public void Close() => _model.CloseEntity();
 
 
     public void ActivateEntityInteractive()
@@ -43,6 +41,13 @@ public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
 
     }
 
+    #region ACTIVATOR
+
+    public void Open() => _model.Open();
+    public void Close() => _model.Close();
+
+    #endregion
+
     #region VISITOR TRAFFIC
 
     public event Action<IVisitor> OnVisitorRealised
@@ -59,9 +64,8 @@ public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
 
     #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Wheel;
-
+    public bool IsOpen => _model.IsOpen;
     public bool CanJoin => _model.CanJoin;
-
     public bool IsGameRunning => _model.IsGameRunning;
 
     #endregion
@@ -73,6 +77,22 @@ public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraff
         add => _model.OnAddCoins += value;
         remove => _model.OnAddCoins -= value;
     }
+
+    #endregion
+
+    #region SPOT CLICK LISTENER
+
+    public event Action OnSpotClick
+    {
+        add => _model.OnSpotClick += value;
+        remove => _model.OnSpotClick -= value;
+    }
+
+    #endregion
+
+    #region MANUAL
+
+    public void ManualStartGame() => _model.ManualStartGame();
 
     #endregion
 }

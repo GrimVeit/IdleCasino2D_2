@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private ViewContainer viewContainer_World;
+    [SerializeField] private ShopCasinoEntityDatasSO shopCasinoEntityDatas;
     [SerializeField] private List<Node> nodesEntranceQueue;
     [SerializeField] private List<Node> nodesSlot;
     [SerializeField] private List<Node> nodesWheel;
@@ -34,7 +35,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private StateMachine_Game stateMachine;
 
-    private List<ICasinoEntityInfo> casinoEntities = new();
+    private readonly List<ICasinoEntityInfo> casinoEntities = new();
 
     public void Run(UIRootView uIRootView)
     {

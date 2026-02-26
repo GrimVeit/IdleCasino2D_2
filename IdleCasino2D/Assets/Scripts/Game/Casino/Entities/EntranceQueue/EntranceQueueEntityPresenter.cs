@@ -53,9 +53,8 @@ public class EntranceQueueEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisi
 
     #region Input
     public CasinoEntityType CasinoEntityType => CasinoEntityType.EntranceQueue;
-
+    public bool IsOpen => true;
     public bool CanJoin => _model.CanJoin;
-
     public bool IsGameRunning => false;
 
     #endregion

@@ -50,9 +50,8 @@ public class ExitEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffi
 
     #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Exit;
-
+    public bool IsOpen => true;
     public bool CanJoin => true;
-
     public bool IsGameRunning => false;
 
     #endregion
