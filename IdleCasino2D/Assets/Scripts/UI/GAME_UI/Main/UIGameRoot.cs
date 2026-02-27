@@ -16,6 +16,9 @@ public class UIGameRoot : UIRoot
 
     [SerializeField] private ShopSpotPanel_Game shopSpotPanel;
 
+    [SerializeField] private ChooseAvailableSpotPanel_Game chooseAvailableSpotPanel;
+    [SerializeField] private LeavePanel_Game leavePanel;
+
     private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -35,6 +38,9 @@ public class UIGameRoot : UIRoot
         selectStaffPanel.Initialize();
 
         shopSpotPanel.Initialize();
+
+        chooseAvailableSpotPanel.Initialize();
+        leavePanel.Initialize();
     }
 
     public void Activate()
@@ -78,6 +84,9 @@ public class UIGameRoot : UIRoot
         selectStaffPanel.Dispose();
 
         shopSpotPanel.Dispose();
+
+        chooseAvailableSpotPanel.Dispose();
+        leavePanel.Dispose();
     }
 
     #region Input
@@ -211,6 +220,39 @@ public class UIGameRoot : UIRoot
         if (!shopSpotPanel.IsActive) return;
 
         CloseOtherPanel(shopSpotPanel);
+    }
+
+
+
+
+
+    public void OpenChooseAvailableSpotPanel()
+    {
+        if(chooseAvailableSpotPanel.IsActive) return;
+
+        OpenOtherPanel(chooseAvailableSpotPanel);
+    }
+
+    public void CloseChooseAvailableSpotPanel()
+    {
+        if(!chooseAvailableSpotPanel.IsActive) return;
+
+        CloseOtherPanel(chooseAvailableSpotPanel);
+    }
+
+
+    public void OpenLeavePanel()
+    {
+        if (leavePanel.IsActive) return;
+
+        OpenOtherPanel(leavePanel);
+    }
+
+    public void CloseLeavePanel()
+    {
+        if (!leavePanel.IsActive) return;
+
+        CloseOtherPanel(leavePanel);
     }
 
     #endregion

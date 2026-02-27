@@ -93,10 +93,10 @@ public class ShopCasinoPersonalView : View
 
     #region Output
 
-    public event Action<PersonalType> OnChoosePersonalType;
+    public event Action<StaffType> OnChoosePersonalType;
     public event Action<int> OnChoosePersonalSkinId;
 
-    private void ChoosePersonalType(PersonalType type)
+    private void ChoosePersonalType(StaffType type)
     {
         OnChoosePersonalType?.Invoke(type);
     }
@@ -112,7 +112,7 @@ public class ShopCasinoPersonalView : View
 [Serializable]
 public class ShopCasinoPersonalChoose
 {
-    [SerializeField] private PersonalType personalType;
+    [SerializeField] private StaffType personalType;
     [SerializeField] private Button buttonChoose;
 
     public void Initialize()
@@ -127,7 +127,7 @@ public class ShopCasinoPersonalChoose
 
     #region Output
 
-    public event Action<PersonalType> OnChoosePersonalType;
+    public event Action<StaffType> OnChoosePersonalType;
 
     private void Choose()
     {

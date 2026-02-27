@@ -17,6 +17,7 @@ public class SpawnerVisitorView : View
         view.transform.SetLocalPositionAndRotation(traspawnPoint.localPosition, visitorPrefab.transform.rotation);
         var presenter = new VisitorPresenter(new VisitorModel(route), view);
         presenter.Initialize();
+        presenter.Show();
 
         visitorViews.Add(presenter, view);
 
@@ -34,8 +35,8 @@ public class SpawnerVisitorView : View
         OnDestroyVisitor?.Invoke(visitor);
 
         var view = visitorViews[visitor];
+        view.HideDestroy();
         visitorViews.Remove(visitor);
-        Destroy(view.gameObject);
     }
 
     #region Output

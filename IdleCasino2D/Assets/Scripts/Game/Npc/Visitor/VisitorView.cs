@@ -17,6 +17,21 @@ public class VisitorView : View
 
     private Tween tweenMove;
 
+    public void Show()
+    {
+        transform.localScale = Vector3.zero;
+
+        transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f)
+            .SetEase(Ease.OutBack);
+    }
+
+    public void HideDestroy()
+    {
+        transform.DOScale(Vector3.zero, 0.25f)
+        .SetEase(Ease.InBack)
+        .OnComplete(() => Destroy(gameObject));
+    }
+
     public void MoveTo(Node node, bool isAbsolute)
     {
         currentPointPath = 0;
@@ -39,6 +54,15 @@ public class VisitorView : View
     public void SetOrder(int order)
     {
         animations.SetOrder(order);
+    }
+
+    public void SetMove(Node node)
+    {
+        tweenMove?.Kill();
+
+        _currentNode = node;
+
+        transform.localPosition = node.transform.localPosition;
     }
 
     private void MovePath(List<Node> nodes)

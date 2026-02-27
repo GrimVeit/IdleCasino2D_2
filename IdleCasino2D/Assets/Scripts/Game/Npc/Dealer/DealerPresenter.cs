@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DealerPresenter : IDealer
+public class DealerPresenter : IStaff
 {
+    public StaffType StaffType => StaffType.Croupier;
+
     private readonly DealerModel _model;
     private readonly DealerView _view;
 
@@ -25,21 +28,41 @@ public class DealerPresenter : IDealer
 
     private void ActivateEvents()
     {
-        _model.OnSetPlay += _view.Play;
-        _model.OnSetIdle += _view.Idle;
+        _model.OnSetAnimation += _view.ActivateAnimation;
     }
 
     private void DeactivateEvents()
     {
-        _model.OnSetPlay -= _view.Play;
-        _model.OnSetIdle -= _view.Idle;
+        _model.OnSetAnimation -= _view.ActivateAnimation;
     }
 
     #region DEALER
 
-    public void SetIdle() => _model.SetIdle();
+    public void ActivateAnimation(DealerAnimationEnum animationEnum) => _model.SetAnimation(animationEnum);
 
-    public void SetPlay() => _model.SetPlay();
+    #endregion
+
+    #region ACTIVATOR
+
+    public void Show() => _view.Show();
+
+    public void HideDestroy() => _view.HideDestroy();
+    public void SetMove(Node node) => _view.SetMove(node);
+
+    public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum) => _view.ActivateNpcRotation(npcRotationEnum);
+
+    public void SetOrder(int order) => _view.SetOrder(order);
+
+    public event Action<INpc, Node> OnEndDestination;
+
+    public Node CurrentNode => _view.CurrentNode;
+
+    public Vector3 Position => _view.Position;
+
+    public void MoveTo(Node target, bool IsAbsolute)
+    {
+
+    }
 
     #endregion
 }

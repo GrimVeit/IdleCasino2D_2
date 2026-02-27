@@ -17,7 +17,7 @@ public class ShopCasinoPersonalModel
         _moneyProvider = moneyProvider;
     }
 
-    public void SetShopPersonalGroup(PersonalType personalType)
+    public void SetShopPersonalGroup(StaffType personalType)
     {
         _currentShopPersonalGroup = _shopCasinoPersonalDatasSO.GetDataGroup(personalType);
         _currentSkinId = 0;

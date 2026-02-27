@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDealer : IStuff
+public interface IDealer : INpc
 {
-    void SetIdle();
-    void SetPlay();
+    public void ActivateAnimation(DealerAnimationEnum animationEnum);
 }

@@ -200,7 +200,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            spawnerVisitorPresenter.SpawnVisitor();
+
         }
     }
 

@@ -7,7 +7,7 @@ public class ShopCasinoPersonalDatasSO : ScriptableObject
 {
     [SerializeField] private List<ShopCasinoPersonalDataGroup> shopCasinoPersonalDataGroups = new();
 
-    public ShopCasinoPersonalDataGroup GetDataGroup(PersonalType personalType)
+    public ShopCasinoPersonalDataGroup GetDataGroup(StaffType personalType)
     {
         return shopCasinoPersonalDataGroups.Find(data => data.PersonalType == personalType);
     }
@@ -16,12 +16,12 @@ public class ShopCasinoPersonalDatasSO : ScriptableObject
 [System.Serializable]
 public class ShopCasinoPersonalDataGroup
 {
-    [SerializeField] private PersonalType personalType;
+    [SerializeField] private StaffType personalType;
     [SerializeField] private string name;
     [SerializeField] private int price;
     [SerializeField] private List<ShopCasinoPersonalData> shopCasinoPersonalDatas = new();
 
-    public PersonalType PersonalType => personalType;
+    public StaffType PersonalType => personalType;
     public string Name => name;
     public int Price => price;
     public List<ShopCasinoPersonalData> ShopCasinoPersonalDatas => shopCasinoPersonalDatas;

@@ -55,6 +55,7 @@ public class VisitorPresenter : IVisitor
     public Node CurrentNode => _view.CurrentNode;
 
     public void MoveTo(Node target, bool isAbsolute) => _model.MoveTo(target, isAbsolute);
+    public void SetMove(Node node) => _view.SetMove(node);
     public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum) => _view.ActivateNpcRotation(npcRotationEnum);
 
     public void Destroy() => _view.Exit();
@@ -82,6 +83,13 @@ public class VisitorPresenter : IVisitor
 
     public Vector3 Position => _view.Position;
     public void SetOrder(int order) => _view.SetOrder(order);
+
+    #endregion
+
+    #region ACTIVATOR
+
+    public void Show() => _view.Show();
+    public void HideDestroy() => _view.HideDestroy();
 
     #endregion
 

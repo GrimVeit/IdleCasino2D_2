@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PersonalType
+public enum DealerAnimationEnum
 {
-    Manager, Hostess, Croupier, Bartender, Sonstress
+    Idle, Game
 }

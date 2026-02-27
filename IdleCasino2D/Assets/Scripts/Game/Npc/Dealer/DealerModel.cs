@@ -5,20 +5,14 @@ using UnityEngine;
 
 public class DealerModel
 {
-    public void SetIdle()
+    public void SetAnimation(DealerAnimationEnum animationEnum)
     {
-        OnSetIdle?.Invoke();
-    }
-
-    public void SetPlay()
-    {
-        OnSetPlay?.Invoke();
+        OnSetAnimation?.Invoke(animationEnum);
     }
 
     #region Output
 
-    public event Action OnSetIdle;
-    public event Action OnSetPlay;
+    public event Action<DealerAnimationEnum> OnSetAnimation;
 
     #endregion
 }

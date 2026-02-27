@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IVisitor : INpc, ISortable
+public interface IVisitor : INpc
 {
     //Target
     bool MoveNextStep();

@@ -41,9 +41,18 @@ public interface ICasinoEntityProfit
     public event Action<Vector3, int> OnAddCoins;
 }
 
-public interface ICasinoEntityPersonal
+public interface ICasinoEntityStaff
 {
-    public void SetDealer(IDealer newDealer);
+    public StaffType PersonalType { get; }
+    public int CountStuffNeed { get; }
+    public int CountStuff { get; }
+    public void SetStuff(IStaff stuff);
+}
+
+public interface ICasinoEntityHighlightProvider
+{
+    public void ActivateHighlight();
+    public void DeactivateHighlight();
 }
 
 public interface ICasinoEntitySpotClickListener

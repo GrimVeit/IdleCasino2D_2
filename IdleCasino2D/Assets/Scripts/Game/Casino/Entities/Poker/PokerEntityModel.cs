@@ -42,7 +42,7 @@ public class PokerEntityModel
     public void SetDealer(IDealer newDealer)
     {
         _dealer = newDealer;
-        _dealer.SetIdle();
+        _dealer.ActivateAnimation(DealerAnimationEnum.Idle);
     }
 
     #region Gameplay
@@ -100,13 +100,13 @@ public class PokerEntityModel
     {
         isGameRunning = true;
 
-        _dealer?.SetPlay();
+        _dealer?.ActivateAnimation(DealerAnimationEnum.Game);
         _pokerSpot.ActivateAnimation("game");
         visitor.ActivatePlay();
 
         yield return new WaitForSeconds(5f);
 
-        _dealer?.SetIdle();
+        _dealer?.ActivateAnimation(DealerAnimationEnum.Idle);
         _pokerSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
         OnAddCoins?.Invoke(visitor.Position, 10);
