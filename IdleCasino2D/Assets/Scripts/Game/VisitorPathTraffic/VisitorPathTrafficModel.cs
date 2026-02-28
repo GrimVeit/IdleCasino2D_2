@@ -5,7 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class VisitorPathTrafficModel : IDisposable
+public class VisitorPathTrafficModel
 {
     private readonly CasinoEntityPathTrafficVisitorAdapter _exitEntity;
     private readonly List<CasinoEntityPathTrafficVisitorAdapter> _casinoEntities = new();

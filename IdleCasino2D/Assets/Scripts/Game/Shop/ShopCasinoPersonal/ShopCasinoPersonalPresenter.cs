@@ -32,6 +32,7 @@ public class ShopCasinoPersonalPresenter : IShopCasinoPersonalListener
     {
         _view.OnChoosePersonalType += _model.SetShopPersonalGroup;
         _view.OnChoosePersonalSkinId += _model.SetSkinId;
+        _view.OnSubmitChoice += _model.SubmitChoice;
 
         _model.OnChooseShopPersonalGroup += SetGroup;
         _model.OnChooseSkinId += _view.Choose;
@@ -42,6 +43,7 @@ public class ShopCasinoPersonalPresenter : IShopCasinoPersonalListener
     {
         _view.OnChoosePersonalType -= _model.SetShopPersonalGroup;
         _view.OnChoosePersonalSkinId -= _model.SetSkinId;
+        _view.OnSubmitChoice -= _model.SubmitChoice;
 
         _model.OnChooseShopPersonalGroup -= SetGroup;
         _model.OnChooseSkinId -= _view.Choose;
@@ -52,17 +54,24 @@ public class ShopCasinoPersonalPresenter : IShopCasinoPersonalListener
     {
         _view.SetDataGroup(personalDataGroup);
 
-        OnChoosePersonalGroup?.Invoke();
+        OnChooseStaffGroup?.Invoke();
     }
 
     #region Output
 
-    public event Action OnChoosePersonalGroup;
+    public event Action OnChooseStaffGroup;
+
+    public event Action<ShopCasinoStaffData> OnChooseStaffData
+    {
+        add => _model.OnChooseStaffData += value;
+        remove => _model.OnChooseStaffData -= value;
+    }
 
     #endregion
 }
 
 public interface IShopCasinoPersonalListener
 {
-    public event Action OnChoosePersonalGroup;
+    public event Action OnChooseStaffGroup;
+    public event Action<ShopCasinoStaffData> OnChooseStaffData;
 }

@@ -15,6 +15,7 @@ public class UIGameRoot : UIRoot
     [SerializeField] private SelectStaffPanel_Game selectStaffPanel;
 
     [SerializeField] private ShopSpotPanel_Game shopSpotPanel;
+    [SerializeField] private ChooseAvailableStaffPanel_Game chooseAvailableStaffPanel;
 
     [SerializeField] private ChooseAvailableSpotPanel_Game chooseAvailableSpotPanel;
     [SerializeField] private LeavePanel_Game leavePanel;
@@ -38,6 +39,7 @@ public class UIGameRoot : UIRoot
         selectStaffPanel.Initialize();
 
         shopSpotPanel.Initialize();
+        chooseAvailableStaffPanel.Initialize();
 
         chooseAvailableSpotPanel.Initialize();
         leavePanel.Initialize();
@@ -54,6 +56,7 @@ public class UIGameRoot : UIRoot
         hireStaffPanel.OnClickToBack += ClickToBack_HIRE_STAFF;
         selectStaffPanel.OnClickToBack += ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack += ClickToBack_SHOP_SPOT;
+        chooseAvailableStaffPanel.OnClickToExit += ClickToBack_CHOOSE_AVAILABLE_SPOT;
     }
 
     public void Deactivate()
@@ -67,6 +70,7 @@ public class UIGameRoot : UIRoot
         hireStaffPanel.OnClickToBack -= ClickToBack_HIRE_STAFF;
         selectStaffPanel.OnClickToBack -= ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack -= ClickToBack_SHOP_SPOT;
+        chooseAvailableStaffPanel.OnClickToExit -= ClickToBack_CHOOSE_AVAILABLE_SPOT;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -84,6 +88,7 @@ public class UIGameRoot : UIRoot
         selectStaffPanel.Dispose();
 
         shopSpotPanel.Dispose();
+        chooseAvailableStaffPanel.Dispose();
 
         chooseAvailableSpotPanel.Dispose();
         leavePanel.Dispose();
@@ -225,6 +230,23 @@ public class UIGameRoot : UIRoot
 
 
 
+    public void OpenChooseAvailableStaffPanel()
+    {
+        if(chooseAvailableStaffPanel.IsActive) return;
+
+        OpenOtherPanel(chooseAvailableStaffPanel);
+    }
+
+    public void CloseChooseAvailableStaffPanel()
+    {
+        if(!chooseAvailableStaffPanel.IsActive) return;
+
+        CloseOtherPanel(chooseAvailableStaffPanel);
+    }
+
+
+
+
 
     public void OpenChooseAvailableSpotPanel()
     {
@@ -328,6 +350,17 @@ public class UIGameRoot : UIRoot
     private void ClickToBack_SHOP_SPOT()
     {
         OnClickToBack_SHOP_SPOT?.Invoke();
+    }
+
+    #endregion
+
+    #region SHOP SPOT
+
+    public event Action OnClickToBack_CHOOSE_AVAILABLE_SPOT;
+
+    private void ClickToBack_CHOOSE_AVAILABLE_SPOT()
+    {
+        OnClickToBack_CHOOSE_AVAILABLE_SPOT?.Invoke();
     }
 
     #endregion

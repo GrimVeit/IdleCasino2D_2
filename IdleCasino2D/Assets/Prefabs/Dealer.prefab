@@ -56,7 +56,7 @@ MonoBehaviour:
         isLoop: 1
       - key: game
         animationEnum: 1
-        isLoop: 0
+        isLoop: 1
     - npcRotationEnum: 1
       skeletonAnimation: {fileID: 6702613723966304677}
       skeletonAnimationTypes:
@@ -65,7 +65,7 @@ MonoBehaviour:
         isLoop: 1
       - key: game
         animationEnum: 1
-        isLoop: 0
+        isLoop: 1
 --- !u!1 &4723722324540047203
 GameObject:
   m_ObjectHideFlags: 0

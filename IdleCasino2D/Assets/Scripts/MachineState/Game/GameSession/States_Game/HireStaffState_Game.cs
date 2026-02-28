@@ -17,7 +17,7 @@ public class HireStaffState_Game : IState
 
     public void EnterState()
     {
-        _shopCasinoPersonalListener.OnChoosePersonalGroup += ChangeStateToSelectStaff;
+        _shopCasinoPersonalListener.OnChooseStaffGroup += ChangeStateToSelectStaff;
         _sceneRoot.OnClickToBack_HIRE_STAFF += ChangeStateToMain;
 
         _sceneRoot.OpenHireStaffPanel();
@@ -27,7 +27,7 @@ public class HireStaffState_Game : IState
 
     public void ExitState()
     {
-        _shopCasinoPersonalListener.OnChoosePersonalGroup -= ChangeStateToSelectStaff;
+        _shopCasinoPersonalListener.OnChooseStaffGroup -= ChangeStateToSelectStaff;
         _sceneRoot.OnClickToBack_HIRE_STAFF -= ChangeStateToMain;
 
         _sceneRoot.CloseHireStaffPanel();

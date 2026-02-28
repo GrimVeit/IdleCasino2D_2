@@ -44,15 +44,39 @@ public class ShopCasinoPersonalModel
 
     public void SubmitChoice()
     {
-
+        OnChooseStaffData?.Invoke(new ShopCasinoStaffData
+            (_currentShopPersonalGroup.ShopCasinoPersonalDatas[_currentSkinId].SkinId,
+            _currentShopPersonalGroup.Name,
+            _currentShopPersonalGroup.ShopCasinoPersonalDatas[_currentSkinId].SpriteSkin,
+            _currentShopPersonalGroup.PersonalType,
+            _currentShopPersonalGroup.Price));
     }
 
     #region Output
 
     public event Action<ShopCasinoPersonalDataGroup> OnChooseShopPersonalGroup;
+    public event Action<ShopCasinoStaffData> OnChooseStaffData;
 
     public event Action<int> OnChooseSkinId;
     public event Action<int> OnUnchooseSkinId;
 
     #endregion
+}
+
+public class ShopCasinoStaffData
+{
+    public int SkinId { get; }
+    public string Name { get; }
+    public Sprite Sprite { get; }
+    public StaffType StaffType { get; }
+    public int Price { get; }
+
+    public ShopCasinoStaffData(int skinId, string name, Sprite sprite, StaffType staffType, int price)
+    {
+        SkinId = skinId;
+        Name = name;
+        Sprite = sprite;
+        StaffType = staffType;
+        Price = price;
+    }
 }

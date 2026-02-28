@@ -44,6 +44,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ShopCasinoSpotPresenter shopCasinoSpotPresenter;
 
     private ShopCasinoPersonalPresenter shopCasinoPersonalPresenter;
+    private FilterShopCasinoStaffPresenter filterShopCasinoStaffPresenter;
 
     private StateMachine_Game stateMachine;
 
@@ -87,6 +88,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         shopCasinoSpotPresenter = new ShopCasinoSpotPresenter(new ShopCasinoSpotModel(casinoEntityClickInteractionPresenter, bankPresenter, shopCasinoEntityDatas), viewContainer.GetView<ShopCasinoSpotView>());
 
         shopCasinoPersonalPresenter = new ShopCasinoPersonalPresenter(new ShopCasinoPersonalModel(shopCasinoPersonalDatas, bankPresenter), viewContainer.GetView<ShopCasinoPersonalView>());
+        filterShopCasinoStaffPresenter = new FilterShopCasinoStaffPresenter(new FilterShopCasinoStaffModel(casinoEntities, bankPresenter, staffSpawnerPresenter, shopCasinoPersonalPresenter), viewContainer.GetView<FilterShopCasinoStaffView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -110,7 +112,9 @@ public class GameSceneEntryPoint : MonoBehaviour
             clickDispatcherPresenter,
             shopCasinoSpotPresenter,
             shopCasinoSpotPresenter,
-            shopCasinoPersonalPresenter);
+            shopCasinoPersonalPresenter,
+            filterShopCasinoStaffPresenter,
+            filterShopCasinoStaffPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
@@ -122,6 +126,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         shopCasinoSpotPresenter.Initialize();
 
         shopCasinoPersonalPresenter.Initialize();
+        filterShopCasinoStaffPresenter.Initialize();
     }
 
     private void CreateCasinoEntities()

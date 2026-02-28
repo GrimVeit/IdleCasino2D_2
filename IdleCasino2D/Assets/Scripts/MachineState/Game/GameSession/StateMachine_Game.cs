@@ -17,7 +17,9 @@ public class StateMachine_Game : IStateMachineProvider
         IClickDispatcherProvider clickDispatcherProvider,
         IShopCasinoEntitySpotListener shopCasinoEntitySpotListener,
         IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider,
-        IShopCasinoPersonalListener shopCasinoPersonalListener
+        IShopCasinoPersonalListener shopCasinoPersonalListener,
+        IFilterShopCasinoStaffProvider filterShopCasinoStaffActivatorProvider,
+        IFilterShopCasinoStaffListener filterShopCasinoStaffListener
         )
     {
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
@@ -27,7 +29,8 @@ public class StateMachine_Game : IStateMachineProvider
 
         states[typeof(ShopSpotState_Game)] = new ShopSpotState_Game(this, shopCasinoEntitySpotListener, sceneRoot);
 
-        states[typeof(SelectStaffState_Game)] = new SelectStaffState_Game(this, sceneRoot);
+        states[typeof(SelectStaffState_Game)] = new SelectStaffState_Game(this, sceneRoot, filterShopCasinoStaffActivatorProvider, filterShopCasinoStaffListener);
+        states[typeof(ChooseSpotStaffState_Game)] = new ChooseSpotStaffState_Game(this, sceneRoot, filterShopCasinoStaffActivatorProvider, filterShopCasinoStaffListener, touchCameraProvider, clickDispatcherProvider);
     }
 
     public void Initialize()
