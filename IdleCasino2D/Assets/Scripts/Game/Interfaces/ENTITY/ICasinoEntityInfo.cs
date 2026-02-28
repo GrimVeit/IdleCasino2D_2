@@ -44,9 +44,9 @@ public interface ICasinoEntityProfit
 public interface ICasinoEntityStaff
 {
     public StaffType PersonalType { get; }
-    public int CountStuffNeed { get; }
-    public int CountStuff { get; }
-    public void SetStuff(IStaff stuff);
+    public int CountStaffNeed { get; }
+    public int CountStaff { get; }
+    public void SetStaff(IStaff stuff);
 }
 
 public interface ICasinoEntityHighlightProvider

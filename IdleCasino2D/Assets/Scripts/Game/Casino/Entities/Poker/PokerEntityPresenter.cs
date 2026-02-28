@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual
+public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual, ICasinoEntityStaff
 {
     private readonly PokerEntityModel _model;
 
@@ -27,8 +27,14 @@ public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, I
     public void DeactivateEntityInteractive() => _model.DeactivateManualInteractive();
 
 
+    #region STAFF
 
-    public void SetDealer(IDealer newDealer) => _model.SetDealer(newDealer);
+    public StaffType PersonalType => StaffType.Croupier;
+    public int CountStaffNeed => 1;
+    public int CountStaff => _model.CountStaff;
+    public void SetStaff(IStaff staff) => _model.SetStaff(staff);
+
+    #endregion
 
     #region ACTIVATOR
 

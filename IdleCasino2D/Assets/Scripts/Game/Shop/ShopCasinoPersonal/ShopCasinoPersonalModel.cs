@@ -42,6 +42,11 @@ public class ShopCasinoPersonalModel
         OnChooseSkinId?.Invoke(_currentSkinId);
     }
 
+    public void SubmitChoice()
+    {
+
+    }
+
     #region Output
 
     public event Action<ShopCasinoPersonalDataGroup> OnChooseShopPersonalGroup;

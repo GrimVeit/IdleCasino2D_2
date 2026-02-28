@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DealerPresenter : IStaff
+public class DealerPresenter : IDealer
 {
     public StaffType StaffType => StaffType.Croupier;
 
@@ -37,7 +35,6 @@ public class DealerPresenter : IStaff
     }
 
     #region DEALER
-
     public void ActivateAnimation(DealerAnimationEnum animationEnum) => _model.SetAnimation(animationEnum);
 
     #endregion

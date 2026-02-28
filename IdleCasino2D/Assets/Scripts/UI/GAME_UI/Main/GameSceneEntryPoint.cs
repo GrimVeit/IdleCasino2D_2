@@ -8,6 +8,11 @@ public class GameSceneEntryPoint : MonoBehaviour
     [SerializeField] private ViewContainer viewContainer_World;
     [SerializeField] private ShopCasinoEntityDatasSO shopCasinoEntityDatas;
     [SerializeField] private ShopCasinoPersonalDatasSO shopCasinoPersonalDatas;
+
+    [Header("NODES STAFF")]
+    [SerializeField] private List<Node> nodesPokerStaff = new();
+
+    [Header("NODES VISITOR")]
     [SerializeField] private List<Node> nodesEntranceQueue;
     [SerializeField] private List<Node> nodesSlot;
     [SerializeField] private List<Node> nodesWheel;
@@ -23,6 +28,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
+    private StaffSpawnerPresenter staffSpawnerPresenter;
     private SpawnerVisitorPresenter spawnerVisitorPresenter;
     private VisitorCounterTrafficPresenter visitorCounterTrafficPresenter;
     private VisitorPathTrafficPresenter visitorPathTrafficPresenter;
@@ -65,13 +71,14 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         CreateCasinoEntities();
 
+        staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(), viewContainer.GetView<StaffSpawnerView>());
         spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(), viewContainer.GetView<SpawnerVisitorView>());
         visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter, casinoEntities));
         visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
 
         clickDispatcherPresenter = new ClickDispatcherPresenter(new ClickDispatcherModel());
         touchCameraPresenter = new TouchCameraPresenter(viewContainer.GetView<TouchCameraView>());
-        mapOrderPresenter = new MapOrderPresenter(new MapOrderModel(spawnerVisitorPresenter), viewContainer.GetView<MapOrderView>());
+        mapOrderPresenter = new MapOrderPresenter(new MapOrderModel(spawnerVisitorPresenter, staffSpawnerPresenter), viewContainer.GetView<MapOrderView>());
 
         coinSystemPresenter = new CoinSystemPresenter(new CoinSystemModel(bankPresenter), viewContainer.GetView<CoinSystemView>());
         casinoEntityFinancePresenter = new CasinoEntityFinancePresenter(new CasinoEntityFinanceModel(casinoEntities, coinSystemPresenter));
@@ -91,6 +98,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot.Initialize();
         bankPresenter.Initialize();
 
+        staffSpawnerPresenter.Initialize();
         spawnerVisitorPresenter.Initialize();
         visitorCounterTrafficPresenter.Initialize();
         visitorPathTrafficPresenter.Initialize();
@@ -122,13 +130,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         entityEnter.Initialize();
         casinoEntities.Add(entityEnter);
 
-        Debug.Log("1");
-
         var entityExit = new ExitEntityPresenter(new ExitEntityModel(nodesExit));
         entityExit.Initialize();
         casinoEntities.Add(entityExit);
-
-        Debug.Log("2");
 
         for (int i = 0; i < 6; i++)
         {
@@ -147,8 +151,6 @@ public class GameSceneEntryPoint : MonoBehaviour
             casinoEntities.Add(entity);
         }
 
-        Debug.Log("3");
-
         for (int i = 0; i < 6; i++)
         {
             var spot = new WheelSpotPresenter(new WheelSpotModel(), viewContainer_World.GetView<WheelSpotView>($"Wheel_{i + 1}"));
@@ -160,14 +162,12 @@ public class GameSceneEntryPoint : MonoBehaviour
             casinoEntities.Add(entity);
         }
 
-        Debug.Log("4");
-
         for (int i = 0; i < 4; i++)
         {
             var spot = new PokerSpotPresenter(new PokerSpotModel(), viewContainer_World.GetView<PokerSpotView>($"Poker_{i + 1}"));
             spot.Initialize();
 
-            var entity = new PokerEntityPresenter(new PokerEntityModel(spot, nodesPoker[i]));
+            var entity = new PokerEntityPresenter(new PokerEntityModel(spot, nodesPoker[i], nodesPokerStaff[i]));
             entity.Initialize();
 
             casinoEntities.Add(entity);
@@ -200,7 +200,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            staffSpawnerPresenter.SetStaff(casinoEntities[15] as ICasinoEntityStaff, StaffType.Croupier);
         }
     }
 

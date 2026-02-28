@@ -6,18 +6,21 @@ public class MapOrderModel
 {
     private List<Room> _rooms = new();
 
-    private readonly List<ISortable> _visitors = new();
-    private readonly List<ISortable> _staffs = new();
+    private readonly List<ISortable> _peoples = new();
 
     private readonly ISpawnerVisitorListener _spawnerVisitorListener;
+    private readonly ISpawnerStaffListener _spawnerStaffListener;
     private IEnumerator cycle;
 
-    public MapOrderModel(ISpawnerVisitorListener spawnerVisitorListener)
+    public MapOrderModel(ISpawnerVisitorListener spawnerVisitorListener, ISpawnerStaffListener spawnerStaffListener)
     {
         _spawnerVisitorListener = spawnerVisitorListener;
+        _spawnerStaffListener = spawnerStaffListener;
 
         _spawnerVisitorListener.OnAddVisitor += AddVisitor;
         _spawnerVisitorListener.OnRemoveVisitor += RemoveVisitor;
+
+        _spawnerStaffListener.OnAddStaff += AddStaff;
     }
 
     public void SetRooms(List<Room> rooms)
@@ -80,7 +83,7 @@ public class MapOrderModel
                 }
             }
 
-            foreach (var visitor in _visitors)
+            foreach (var visitor in _peoples)
             {
                 if (room.IsInside(visitor.Position))
                     allObjects.Add(visitor);
@@ -103,12 +106,18 @@ public class MapOrderModel
     {
         Debug.Log("ADD ORDER VISITOR");
 
-        _visitors.Add(visitor);
+        _peoples.Add(visitor);
     }
 
     private void RemoveVisitor(IVisitor visitor)
     {
-        _visitors.Remove(visitor);
+        _peoples.Remove(visitor);
+    }
+
+
+    private void AddStaff(IStaff staff)
+    {
+        _peoples.Add(staff);
     }
 
     #endregion

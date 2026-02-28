@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDealer : INpc
+public interface IDealer : IStaff
 {
     public void ActivateAnimation(DealerAnimationEnum animationEnum);
 }

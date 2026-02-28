@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DealerModel
+public class DealerModel : IStaffModel
 {
     public void SetAnimation(DealerAnimationEnum animationEnum)
     {

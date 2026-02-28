@@ -8,8 +8,10 @@ public class PokerEntityModel
     public bool IsOpen => isOpen;
     public bool IsGameRunning => isGameRunning;
     public bool CanJoin => isOpen && visitors.Count < 1;
+    public int CountStaff => _dealer != null ? 1 : 0;
 
-    private readonly Node _nodePlace;
+    private readonly Node _nodePlaceVisitor;
+    private readonly Node _nodePlaceStaff;
     private readonly List<IVisitor> visitors = new();
     public bool HasDealer() => _dealer != null;
     public bool ContainsVisitor(IVisitor visitor) => visitors.Contains(visitor);
@@ -23,10 +25,11 @@ public class PokerEntityModel
     private bool isVisitorReady;   // дошёл ли до стола
     private bool isManualInteractive = true;
 
-    public PokerEntityModel(IGameSpot gameSpot, Node node)
+    public PokerEntityModel(IGameSpot gameSpot, Node nodePlaceVisitor, Node nodePlaceStaff)
     {
         _pokerSpot = gameSpot;
-        _nodePlace = node;
+        _nodePlaceVisitor = nodePlaceVisitor;
+        _nodePlaceStaff = nodePlaceStaff;
     }
 
     public void Initialize()
@@ -39,10 +42,13 @@ public class PokerEntityModel
         _pokerSpot.OnClick -= SpotClick;
     }
 
-    public void SetDealer(IDealer newDealer)
+    public void SetStaff(IStaff newDealer)
     {
-        _dealer = newDealer;
+        _dealer = newDealer as IDealer;
+        _dealer.SetMove(_nodePlaceStaff);
+        _dealer.Show();
         _dealer.ActivateAnimation(DealerAnimationEnum.Idle);
+        _dealer.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
     }
 
     #region Gameplay
@@ -171,7 +177,7 @@ public class PokerEntityModel
 
         visitors.Add(visitor);
         visitor.OnEndDestination += OnVisitorDestination;
-        visitor.MoveTo(_nodePlace, false);
+        visitor.MoveTo(_nodePlaceVisitor, false);
 
         isVisitorReady = false;
     }

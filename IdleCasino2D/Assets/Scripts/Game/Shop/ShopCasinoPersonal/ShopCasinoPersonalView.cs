@@ -14,6 +14,8 @@ public class ShopCasinoPersonalView : View
     [SerializeField] private ShopCasinoPersonalVisual personalVisualPrefab;
     [SerializeField] private Transform transformContent;
 
+    [SerializeField] private Button buttonSubmit;
+
     private readonly List<ShopCasinoPersonalVisual> _shopCasinoPersonalVisuals = new();
 
     public void Initialize()
@@ -23,6 +25,8 @@ public class ShopCasinoPersonalView : View
             shopCasinoPersonalChooses[i].OnChoosePersonalType += ChoosePersonalType;
             shopCasinoPersonalChooses[i].Initialize();
         }
+
+        buttonSubmit.onClick.AddListener(SubmitChoice);
     }
 
     public void Dispose()
@@ -32,6 +36,8 @@ public class ShopCasinoPersonalView : View
             shopCasinoPersonalChooses[i].OnChoosePersonalType -= ChoosePersonalType;
             shopCasinoPersonalChooses[i].Dispose();
         }
+
+        buttonSubmit.onClick.RemoveListener(SubmitChoice);
     }
 
     public void SetDataGroup(ShopCasinoPersonalDataGroup personalDataGroup)
@@ -95,6 +101,7 @@ public class ShopCasinoPersonalView : View
 
     public event Action<StaffType> OnChoosePersonalType;
     public event Action<int> OnChoosePersonalSkinId;
+    public event Action OnSubmitChoice;
 
     private void ChoosePersonalType(StaffType type)
     {
@@ -104,6 +111,11 @@ public class ShopCasinoPersonalView : View
     private void ChoosePersonalSkinId(int skinId)
     {
         OnChoosePersonalSkinId?.Invoke(skinId);
+    }
+
+    private void SubmitChoice()
+    {
+        OnSubmitChoice?.Invoke();
     }
 
     #endregion

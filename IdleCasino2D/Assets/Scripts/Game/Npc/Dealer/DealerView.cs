@@ -5,7 +5,7 @@ using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
 
-public class DealerView : View
+public class DealerView : View, IStaffView
 {
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
