@@ -9,11 +9,15 @@ public class StaffSpawnerModel
     private readonly Dictionary<StaffType, Func<IStaffModel>> _modelFactory = new()
     {
         { StaffType.Croupier, () => new DealerModel() },
+        { StaffType.Bartender, () => new BartenderModel() },
+        { StaffType.Songstress, () => new SongstressModel() },
     };
 
     private readonly Dictionary<StaffType, Func<IStaffModel, IStaffView, IStaff>> _presenterFactory = new()
     {
         { StaffType.Croupier, (model, view) => new DealerPresenter((DealerModel)model, (DealerView)view) },
+        { StaffType.Bartender, (model, view) => new BartenderPresenter((BartenderModel)model, (BartenderView)view) },
+        { StaffType.Songstress, (model, view) => new SongstressPresenter((SongstressModel)model, (SongstressView)view) },
     };
 
     private ICasinoEntityStaff _currentCasinoEntityStaff;

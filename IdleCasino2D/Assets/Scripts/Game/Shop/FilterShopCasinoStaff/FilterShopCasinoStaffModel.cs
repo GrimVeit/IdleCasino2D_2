@@ -66,6 +66,8 @@ public class FilterShopCasinoStaffModel
 
     private void SetStaffData(ShopCasinoStaffData staffData)
     {
+        Debug.Log(staffData.StaffType);
+
         _currentStaffData = staffData;
 
         if (!_moneyProvider.CanAfford(_currentStaffData.Price))
@@ -84,7 +86,7 @@ public class FilterShopCasinoStaffModel
             case StaffType.Manager:
             case StaffType.Hostess:
             case StaffType.Bartender:
-            case StaffType.Sonstress:
+            case StaffType.Songstress:
                 HandleInstantPurchase();
                 break;
             case StaffType.Croupier:

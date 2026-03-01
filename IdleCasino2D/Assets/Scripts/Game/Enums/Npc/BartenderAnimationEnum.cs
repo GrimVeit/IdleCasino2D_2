@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StaffType
+public enum BartenderAnimationEnum
 {
-    Manager, Hostess, Croupier, Bartender, Songstress
+    Idle, Work
 }

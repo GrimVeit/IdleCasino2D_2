@@ -10,7 +10,7 @@ public class Room
     public RectTransform[] vertices; // 4 точки ромба/зоны в Canvas
     public int orderMin;
     public int orderMax;
-    [SerializeField] private List<TestOrderItem> staticObjs = new List<TestOrderItem>();
+    [SerializeField] private List<OrderItem> staticObjs = new List<OrderItem>();
     public List<ISortable> staticObjects = new(); // Статические объекты комнаты
 
     public void Initialize()

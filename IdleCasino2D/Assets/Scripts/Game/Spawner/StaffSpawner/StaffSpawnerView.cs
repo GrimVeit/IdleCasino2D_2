@@ -7,6 +7,8 @@ public class StaffSpawnerView : View
 {
     [Header("Staff Prefabs")]
     [SerializeField] private DealerView dealerPrefab;
+    [SerializeField] private BartenderView bartenderPrefab;
+    [SerializeField] private SongstressView songstressPrefab;
 
     [SerializeField] private Transform transformParentVisitors;
 
@@ -15,6 +17,8 @@ public class StaffSpawnerView : View
         IStaffView viewInstance = type switch
         {
             StaffType.Croupier => Instantiate(dealerPrefab, transformParentVisitors),
+            StaffType.Bartender => Instantiate(bartenderPrefab, transformParentVisitors),
+            StaffType.Songstress => Instantiate(songstressPrefab, transformParentVisitors),
             _ => throw new Exception($"No prefab for {type}")
         };
 

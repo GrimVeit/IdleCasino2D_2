@@ -11,6 +11,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     [Header("NODES STAFF")]
     [SerializeField] private List<Node> nodesPokerStaff = new();
+    [SerializeField] private List<Node> nodesBarStaff = new();
+    [SerializeField] private Node nodeSongstress;
 
     [Header("NODES VISITOR")]
     [SerializeField] private List<Node> nodesEntranceQueue;
@@ -18,6 +20,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     [SerializeField] private List<Node> nodesWheel;
     [SerializeField] private List<Node> nodesPoker;
     [SerializeField] private List<Node> nodesExit;
+    [SerializeField] private List<Node> nodesBar;
+    [SerializeField] private List<Node> nodesMusic;
     [SerializeField] private Sounds sounds;
     [SerializeField] private UIGameRoot menuRootPrefab;
 
@@ -138,6 +142,14 @@ public class GameSceneEntryPoint : MonoBehaviour
         var entityExit = new ExitEntityPresenter(new ExitEntityModel(nodesExit));
         entityExit.Initialize();
         casinoEntities.Add(entityExit);
+
+        var entityBar = new BarEntityPresenter(new BarEntityModel(nodesBar, nodesBarStaff));
+        entityBar.Initialize();
+        casinoEntities.Add(entityBar);
+
+        var musicZone = new MusicEntityPresenter(new MusicEntityModel(nodesMusic, nodeSongstress));
+        musicZone.Initialize();
+        casinoEntities.Add(musicZone);
 
         for (int i = 0; i < 6; i++)
         {
