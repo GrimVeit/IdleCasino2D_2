@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class VisitorView : View
 {
+    [SerializeField] private ClickItem clickItem;
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
@@ -16,6 +17,16 @@ public class VisitorView : View
     private int currentPointPath = 0;
 
     private Tween tweenMove;
+
+    public void Initialize()
+    {
+        clickItem.OnClick += ClickItem;
+    }
+
+    public void Dispose()
+    {
+        clickItem.OnClick -= ClickItem;
+    }
 
     public void Show()
     {
@@ -62,7 +73,7 @@ public class VisitorView : View
 
         _currentNode = node;
 
-        transform.localPosition = node.transform.localPosition;
+        transform.localPosition = new Vector3(node.transform.localPosition.x, node.transform.localPosition.y, -5); ;
     }
 
     private void MovePath(List<Node> nodes)
@@ -80,7 +91,7 @@ public class VisitorView : View
 
         _currentNode = nodes[currentPointPath];
 
-        Vector3 localTarget = _currentNode.transform.localPosition;
+        Vector3 localTarget = new Vector3(_currentNode.transform.localPosition.x, _currentNode.transform.localPosition.y, -5);
 
         float distance = Vector3.Distance(transform.localPosition, localTarget);
         float duration = distance / speedMove;
@@ -129,6 +140,12 @@ public class VisitorView : View
     #region Output
 
     public event Action<Node> OnPathCompleted;
+    public event Action OnClick;
+
+    private void ClickItem()
+    {
+        OnClick?.Invoke();
+    }
 
     #endregion
 }

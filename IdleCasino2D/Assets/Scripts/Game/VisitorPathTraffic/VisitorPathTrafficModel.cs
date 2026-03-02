@@ -44,6 +44,8 @@ public class VisitorPathTrafficModel
         IVisitor visitor,
         CasinoEntityPathTrafficVisitorAdapter dto)
     {
+        if(dto.CasinoEntityType == CasinoEntityType.EntranceQueue) return;
+
         dto.CasinoEntityVisitorTraffic.RemoveVisitor(visitor);
 
         if (dto.CasinoEntityType == CasinoEntityType.Exit)
@@ -52,14 +54,25 @@ public class VisitorPathTrafficModel
             return;
         }
 
-        if (visitor.MoveNextStep())
+        if (visitor.HasNextStep())
         {
+            visitor.SetNextStep();
             TryAssign(visitor);
         }
         else
         {
             _exitEntity.CasinoEntityVisitorTraffic.AddVisitor(visitor);
         }
+    }
+
+    public void TryAssign(IVisitor visitor, ICasinoEntityVisitorTraffic casinoEntityVisitorTraffic)
+    {
+        casinoEntityVisitorTraffic.AddVisitor(visitor);
+    }
+
+    public void TryAssignVisitorLeave(IVisitor visitor)
+    {
+        _exitEntity.CasinoEntityVisitorTraffic.AddVisitor(visitor);
     }
 
     private void TryAssign(IVisitor visitor)

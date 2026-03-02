@@ -5,21 +5,58 @@ using UnityEngine;
 
 public class VisitorModel
 {
-    public CasinoEntityType CurrentTarget => routeTargets[currentStepTarget];
-
     private readonly List<CasinoEntityType> routeTargets;
-
-    public VisitorModel(List<CasinoEntityType> routeTargets)
-    {
-        this.routeTargets = routeTargets;
-    }
 
     private int currentStepTarget = 0;
 
-    public bool MoveNextStep()
+    public VisitorModel(List<CasinoEntityType> routeTargets)
     {
-        currentStepTarget++;
-        return currentStepTarget <= routeTargets.Count;
+        this.routeTargets = routeTargets ?? throw new ArgumentNullException(nameof(routeTargets));
+    }
+
+    // Текущая цель
+    public CasinoEntityType CurrentTarget
+    {
+        get
+        {
+            if (!HasCurrentStep())
+                throw new InvalidOperationException("Visitor has no current target.");
+
+            return routeTargets[currentStepTarget];
+        }
+    }
+
+    // Есть ли текущий шаг
+    public bool HasCurrentStep()
+    {
+        return currentStepTarget < routeTargets.Count;
+    }
+
+    // Есть ли следующий шаг
+    public bool HasNextStep()
+    {
+        return currentStepTarget + 1 < routeTargets.Count;
+    }
+
+    // Переход к следующему шагу
+    public void SetNextStep()
+    {
+        if (!HasNextStep())
+            return;
+
+        currentStepTarget += 1;
+    }
+
+    // Вторая цель (если нужна для предсмотра)
+    public CasinoEntityType? SecondTarget
+    {
+        get
+        {
+            if (!HasNextStep())
+                return null;
+
+            return routeTargets[currentStepTarget + 1];
+        }
     }
 
     public void MoveTo(Node target, bool isAbsolute)
@@ -27,9 +64,15 @@ public class VisitorModel
         OnStartMove?.Invoke(target, isAbsolute);
     }
 
+    public void Click()
+    {
+        OnClick?.Invoke();
+    }
+
     #region Output
 
     public event Action<Node, bool> OnStartMove;
+    public event Action OnClick;
 
     #endregion
 }

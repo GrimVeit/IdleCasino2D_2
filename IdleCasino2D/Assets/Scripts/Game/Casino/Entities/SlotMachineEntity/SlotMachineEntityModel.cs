@@ -20,6 +20,7 @@ public class SlotMachineEntityModel
     private bool isGameRunning = false;
     private bool isVisitorReady = false;   // дошёл ли до стола
     private bool isManualInteractive = false;
+    private bool isEntityInteractive = true;
 
     public SlotMachineEntityModel(IGameSpot slotSpot, Node node)
     {
@@ -105,6 +106,9 @@ public class SlotMachineEntityModel
 
     #endregion
 
+    public void ActivateEntityInteractive() => isEntityInteractive = true;
+    public void DeactivateEntityInteractive() => isEntityInteractive = false;
+
     #region MANUAL ACTIVATOR
 
     public void ActivateManualInteractive() => isManualInteractive = true;
@@ -183,6 +187,8 @@ public class SlotMachineEntityModel
 
     private void SpotClick()
     {
+        if (!isEntityInteractive) return;
+
         OnSpotClick?.Invoke();
     }
 

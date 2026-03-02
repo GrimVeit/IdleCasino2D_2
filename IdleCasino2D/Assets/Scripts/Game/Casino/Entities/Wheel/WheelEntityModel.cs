@@ -21,6 +21,7 @@ public class WheelEntityModel
     private bool isGameRunning;
     private bool isVisitorReady;   // дошёл ли до стола
     private bool isManualInteractive;
+    private bool isEntityInteractive = true;
 
     public WheelEntityModel(IGameSpot wheelSpot, Node node)
     {
@@ -106,6 +107,9 @@ public class WheelEntityModel
 
     #endregion
 
+    public void ActivateEntityInteractive() => isEntityInteractive = true;
+    public void DeactivateEntityInteractive() => isEntityInteractive = false;
+
 
     #region MANUAL ACTIVATOR
 
@@ -184,6 +188,8 @@ public class WheelEntityModel
 
     private void SpotClick()
     {
+        if(!isEntityInteractive) return;
+
         OnSpotClick?.Invoke();
     }
 

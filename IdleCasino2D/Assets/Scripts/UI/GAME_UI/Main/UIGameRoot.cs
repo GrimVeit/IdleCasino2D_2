@@ -57,6 +57,7 @@ public class UIGameRoot : UIRoot
         selectStaffPanel.OnClickToBack += ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack += ClickToBack_SHOP_SPOT;
         chooseAvailableStaffPanel.OnClickToExit += ClickToBack_CHOOSE_AVAILABLE_SPOT;
+        chooseAvailableSpotPanel.OnClickToExit += ClickToBack_CHOOSE_AVAILABLE_ENTITY;
     }
 
     public void Deactivate()
@@ -71,6 +72,7 @@ public class UIGameRoot : UIRoot
         selectStaffPanel.OnClickToBack -= ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack -= ClickToBack_SHOP_SPOT;
         chooseAvailableStaffPanel.OnClickToExit -= ClickToBack_CHOOSE_AVAILABLE_SPOT;
+        chooseAvailableSpotPanel.OnClickToExit -= ClickToBack_CHOOSE_AVAILABLE_ENTITY;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -361,6 +363,17 @@ public class UIGameRoot : UIRoot
     private void ClickToBack_CHOOSE_AVAILABLE_SPOT()
     {
         OnClickToBack_CHOOSE_AVAILABLE_SPOT?.Invoke();
+    }
+
+    #endregion
+
+    #region CHOOSE AVAILABLE ENTITY
+
+    public event Action OnClickToBack_CHOOSE_AVAILABLE_ENTITY;
+
+    private void ClickToBack_CHOOSE_AVAILABLE_ENTITY()
+    {
+        OnClickToBack_CHOOSE_AVAILABLE_ENTITY?.Invoke();
     }
 
     #endregion

@@ -11,8 +11,12 @@ public class SpawnerVisitorModel
     private readonly List<List<CasinoEntityType>> routesVisitor = new()
     {
         new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Wheel, CasinoEntityType.Exit },
+        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Wheel, CasinoEntityType.Music, CasinoEntityType.Exit },
+
         new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Slot, CasinoEntityType.Exit },
-        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Exit }
+
+        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Exit },
+        new List<CasinoEntityType> {CasinoEntityType.EntranceQueue, CasinoEntityType.Poker, CasinoEntityType.Music, CasinoEntityType.Exit }
     };
 
     private readonly List<IVisitor> _visitors = new List<IVisitor>();

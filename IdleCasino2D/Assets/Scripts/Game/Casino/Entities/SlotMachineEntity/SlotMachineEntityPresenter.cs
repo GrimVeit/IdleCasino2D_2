@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotMachineEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual
+public class SlotMachineEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityInteractiveProvider, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual
 {
     private readonly SlotMachineEntityModel _model;
 
@@ -24,15 +24,9 @@ public class SlotMachineEntityPresenter : ICasinoEntityInfo, ICasinoEntityActiva
 
 
 
-    public void ActivateEntityInteractive()
-    {
+    public void ActivateEntityInteractive() => _model.ActivateEntityInteractive();
 
-    }
-
-    public void DeactivateEntityInteractive()
-    {
-
-    }
+    public void DeactivateEntityInteractive() => _model.DeactivateEntityInteractive();
 
     public void SetDealer(IDealer newDealer)
     {

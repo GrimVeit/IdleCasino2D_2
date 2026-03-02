@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntranceQueueEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic
+public class EntranceQueueEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic, ICasinoEntityVisitorClickListener
 {
     private readonly EntranceQueueEntityModel _model;
 
@@ -51,11 +51,21 @@ public class EntranceQueueEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisi
 
     #endregion
 
-    #region Input
+    #region INFO
     public CasinoEntityType CasinoEntityType => CasinoEntityType.EntranceQueue;
     public bool IsOpen => true;
     public bool CanJoin => _model.CanJoin;
     public bool IsGameRunning => false;
+
+    #endregion
+
+    #region VISITOR CLICK
+
+    public event Action<IVisitor> OnVisitorClick
+    {
+        add => _model.OnClickVisitor += value;
+        remove => _model.OnClickVisitor -= value;
+    }
 
     #endregion
 }

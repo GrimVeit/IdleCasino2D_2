@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,6 +26,7 @@ public class EntranceQueueEntityModel
             return;
 
         visitors.Add(visitor);
+        visitor.OnClick += ClickVisitor;
         visitor.OnEndDestination += OnVisitorReachedPoint;
 
         UpdateQueuePositions(false);
@@ -37,6 +37,7 @@ public class EntranceQueueEntityModel
         if (!visitors.Contains(visitor))
             return;
 
+        visitor.OnClick -= ClickVisitor;
         visitor.OnEndDestination -= OnVisitorReachedPoint;
         visitors.Remove(visitor);
 
@@ -67,7 +68,7 @@ public class EntranceQueueEntityModel
             }
             else
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.01f);
             }
         }
     }
@@ -80,13 +81,17 @@ public class EntranceQueueEntityModel
         if (visitors[0] != visitor)
             return;
 
-        Coroutines.Start(Timer(visitor));
-    }
-
-    private IEnumerator Timer(IVisitor visitor)
-    {
-        yield return new WaitForSeconds(5);
-
         OnVisitorRealised?.Invoke(visitor);
     }
+
+    #region VISITOR CLICK
+
+    public event Action<IVisitor> OnClickVisitor;
+
+    private void ClickVisitor(IVisitor visitor)
+    {
+        OnClickVisitor?.Invoke(visitor);
+    }
+
+    #endregion
 }

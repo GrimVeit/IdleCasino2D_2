@@ -59,3 +59,8 @@ public interface ICasinoEntitySpotClickListener
 {
     public event Action OnSpotClick;
 }
+
+public interface ICasinoEntityVisitorClickListener
+{
+    public event Action<IVisitor> OnVisitorClick;
+}

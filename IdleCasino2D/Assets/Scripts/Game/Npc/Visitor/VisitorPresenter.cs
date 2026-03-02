@@ -17,25 +17,33 @@ public class VisitorPresenter : IVisitor
     public void Initialize()
     {
         ActivateEvents();
+
+        _view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        _view.Dispose();
     }
 
     private void ActivateEvents()
     {
         _view.OnPathCompleted += EndDestination;
+        _view.OnClick += _model.Click;
 
         _model.OnStartMove += _view.MoveTo;
+        _model.OnClick += Click;
     }
 
     private void DeactivateEvents()
     {
         _view.OnPathCompleted -= EndDestination;
+        _view.OnClick -= _model.Click;
 
         _model.OnStartMove -= _view.MoveTo;
+        _model.OnClick -= Click;
     }
 
 
@@ -63,7 +71,11 @@ public class VisitorPresenter : IVisitor
     #region TARGET
 
     public CasinoEntityType CurrentTarget => _model.CurrentTarget;
-    public bool MoveNextStep() => _model.MoveNextStep();
+    public CasinoEntityType? SecondTarget => _model?.SecondTarget;
+    public bool HasNextStep() => _model.HasNextStep();
+    public bool HasCurrentStep() => _model.HasCurrentStep();
+
+    public void SetNextStep() => _model.SetNextStep();
 
 
     #endregion
@@ -82,6 +94,7 @@ public class VisitorPresenter : IVisitor
     #region ORDER
 
     public Vector3 Position => _view.Position;
+
     public void SetOrder(int order) => _view.SetOrder(order);
 
     #endregion
@@ -90,6 +103,17 @@ public class VisitorPresenter : IVisitor
 
     public void Show() => _view.Show();
     public void HideDestroy() => _view.HideDestroy();
+
+    #endregion
+
+    #region INTERACTIVE
+
+    public event Action<IVisitor> OnClick;
+
+    private void Click()
+    {
+        OnClick?.Invoke(this);
+    }
 
     #endregion
 

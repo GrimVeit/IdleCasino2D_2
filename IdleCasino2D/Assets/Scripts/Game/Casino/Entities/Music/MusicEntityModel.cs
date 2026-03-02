@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MusicEntityModel
 {
     public bool IsOpen => true;
-    public bool CanJoin => IsOpen && _songstress != null && _visitors.Count < _visitorNodes.Count;
+    public bool CanJoin => IsOpen && _songstress != null && _occupiedNodes.Count < _visitorNodes.Count;
     public int CountStaff => _songstress != null ? 1 : 0;
 
     private readonly Node _songstressNode;
     private readonly List<Node> _visitorNodes;
-    private readonly List<IVisitor> _visitors = new();
+
+    private readonly Dictionary<IVisitor, Node> _occupiedNodes = new();
 
     private ISongstress _songstress;
     private IEnumerator danceRoutine;
@@ -24,7 +26,6 @@ public class MusicEntityModel
 
     public void Initialize()
     {
-        // Запускаем постоянный цикл танца
         if (_songstress != null)
         {
             danceRoutine = DanceCycle();
@@ -62,6 +63,7 @@ public class MusicEntityModel
         {
             _songstress.ActivateAnimation(SongstressAnimationEnum.Idle);
             yield return new WaitForSeconds(UnityEngine.Random.Range(4f, 8f));
+
             _songstress.ActivateAnimation(SongstressAnimationEnum.Song);
             yield return new WaitForSeconds(UnityEngine.Random.Range(12f, 20f));
         }
@@ -76,31 +78,63 @@ public class MusicEntityModel
 
     public void AddVisitor(IVisitor visitor)
     {
-        if (!CanJoin || _visitors.Contains(visitor))
+        if (!CanJoin || _occupiedNodes.ContainsKey(visitor))
             return;
 
-        _visitors.Add(visitor);
+        // Получаем список свободных нод
+        var freeNodes = _visitorNodes
+            .Where(n => !_occupiedNodes.ContainsValue(n))
+            .ToList();
 
-        int index = _visitors.IndexOf(visitor);
-        visitor.MoveTo(_visitorNodes[index], false);
+        if (freeNodes.Count == 0)
+            return;
+
+        // Выбираем случайную свободную точку
+        Node randomNode = freeNodes[UnityEngine.Random.Range(0, freeNodes.Count)];
+
+        _occupiedNodes[visitor] = randomNode;
+
+        visitor.MoveTo(randomNode, false);
         visitor.OnEndDestination += OnVisitorArrived;
     }
 
     public void RemoveVisitor(IVisitor visitor)
     {
-        if (!_visitors.Contains(visitor))
+        if (!_occupiedNodes.ContainsKey(visitor))
             return;
 
         visitor.OnEndDestination -= OnVisitorArrived;
-        _visitors.Remove(visitor);
+
+        _occupiedNodes.Remove(visitor);
     }
 
     private void OnVisitorArrived(INpc npc, Node node)
     {
         var visitor = npc as IVisitor;
-        if (visitor == null) return;
+        if (visitor == null)
+            return;
 
-        visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+        if (!_occupiedNodes.TryGetValue(visitor, out var visitorNode))
+            return;
+
+        int index = _visitorNodes.IndexOf(visitorNode);
+
+        switch (index)
+        {
+            case 0:
+                visitor.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+                break;
+            case 1:
+                visitor.ActivateNpcRotation(NpcRotationEnum.BackRight);
+                break;
+            case 2:
+                visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+                break;
+            default:
+                visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+                break;
+        }
+
         Coroutines.Start(VisitorRoutine(visitor));
     }
 

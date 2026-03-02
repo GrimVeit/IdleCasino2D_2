@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual
+public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityInteractiveProvider, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual
 {
     private readonly WheelEntityModel _model;
 
@@ -26,15 +26,9 @@ public class WheelEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, I
 
 
 
-    public void ActivateEntityInteractive()
-    {
+    public void ActivateEntityInteractive() => _model.ActivateEntityInteractive();
 
-    }
-
-    public void DeactivateEntityInteractive()
-    {
-
-    }
+    public void DeactivateEntityInteractive() => _model.DeactivateEntityInteractive();
 
     public void SetDealer(IDealer newDealer)
     {

@@ -50,6 +50,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ShopCasinoPersonalPresenter shopCasinoPersonalPresenter;
     private FilterShopCasinoStaffPresenter filterShopCasinoStaffPresenter;
 
+    private HostessEntityPresenter hostessEntityPresenter;
+
     private StateMachine_Game stateMachine;
 
     private readonly List<ICasinoEntityInfo> casinoEntities = new();
@@ -74,12 +76,12 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
-        CreateCasinoEntities();
-
         staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(), viewContainer.GetView<StaffSpawnerView>());
         spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(), viewContainer.GetView<SpawnerVisitorView>());
+
+        CreateCasinoEntities();
+
         visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter, casinoEntities));
-        visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
 
         clickDispatcherPresenter = new ClickDispatcherPresenter(new ClickDispatcherModel());
         touchCameraPresenter = new TouchCameraPresenter(viewContainer.GetView<TouchCameraView>());
@@ -108,6 +110,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         spawnerVisitorPresenter.Initialize();
         visitorCounterTrafficPresenter.Initialize();
         visitorPathTrafficPresenter.Initialize();
+        hostessEntityPresenter.Initialize();
 
         stateMachine = new StateMachine_Game
             (sceneRoot, 
@@ -118,7 +121,9 @@ public class GameSceneEntryPoint : MonoBehaviour
             shopCasinoSpotPresenter,
             shopCasinoPersonalPresenter,
             filterShopCasinoStaffPresenter,
-            filterShopCasinoStaffPresenter);
+            filterShopCasinoStaffPresenter,
+            hostessEntityPresenter,
+            hostessEntityPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
@@ -189,6 +194,9 @@ public class GameSceneEntryPoint : MonoBehaviour
 
             casinoEntities.Add(entity);
         }
+
+        visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
+        hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter), viewContainer.GetView<HostessEntityView>());
 
         Debug.Log("5");
     }

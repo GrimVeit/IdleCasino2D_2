@@ -12,7 +12,10 @@ public class MainState_Game : IState
     private readonly IShopCasinoEntitySpotListener _shopCasinoEntitySpotListener;
     private readonly IShopCasinoEntitySpotProvider _shopCasinoEntitySpotProvider;
 
-    public MainState_Game(IStateMachineProvider machineProvider, IVisitorCounterTrafficProvider visitorTrafficProvider, ITouchCameraProvider touchCameraProvider, UIGameRoot sceneRoot, IClickDispatcherProvider clickDispatcherProvider, IShopCasinoEntitySpotListener shopCasinoEntitySpotListener, IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider)
+    private readonly IHostessEntityControllerProvider _hostessEntityControllerProvider;
+    private readonly IHostessEntityControllerListener _hostessEntityControllerListener;
+
+    public MainState_Game(IStateMachineProvider machineProvider, IVisitorCounterTrafficProvider visitorTrafficProvider, ITouchCameraProvider touchCameraProvider, UIGameRoot sceneRoot, IClickDispatcherProvider clickDispatcherProvider, IShopCasinoEntitySpotListener shopCasinoEntitySpotListener, IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider, IHostessEntityControllerProvider hostessEntityControllerProvider, IHostessEntityControllerListener hostessEntityControllerListener)
     {
         _machineProvider = machineProvider;
         _visitorCounterTrafficProvider = visitorTrafficProvider;
@@ -21,6 +24,8 @@ public class MainState_Game : IState
         _clickDispatcherProvider = clickDispatcherProvider;
         _shopCasinoEntitySpotListener = shopCasinoEntitySpotListener;
         _shopCasinoEntitySpotProvider = shopCasinoEntitySpotProvider;
+        _hostessEntityControllerProvider = hostessEntityControllerProvider;
+        _hostessEntityControllerListener = hostessEntityControllerListener;
     }
 
     public void EnterState()
@@ -28,6 +33,7 @@ public class MainState_Game : IState
         _sceneRoot.OnCLickToUpgrade_MAIN += ChangeStateToUpgrade;
         _sceneRoot.OnClickToHireStaff_MAIN += ChangeStateToHireStaff;
         _shopCasinoEntitySpotListener.OnSetData += ChangeStateToShopSpot;
+        _hostessEntityControllerListener.OnHostessOpenChoose += ChangeStateToChooseCasinoEntityState;
 
         _visitorCounterTrafficProvider.PlayTraffic();
         _touchCameraProvider.ActivateInteractive();
@@ -36,6 +42,7 @@ public class MainState_Game : IState
         _sceneRoot.OpenAvatarBalancePanel();
 
         _shopCasinoEntitySpotProvider.ActivateListener();
+        _hostessEntityControllerProvider.ActivateEntranceQueueInteractive();
     }
 
     public void ExitState()
@@ -43,12 +50,14 @@ public class MainState_Game : IState
         _sceneRoot.OnCLickToUpgrade_MAIN -= ChangeStateToUpgrade;
         _sceneRoot.OnClickToHireStaff_MAIN -= ChangeStateToHireStaff;
         _shopCasinoEntitySpotListener.OnSetData -= ChangeStateToShopSpot;
+        _hostessEntityControllerListener.OnHostessOpenChoose -= ChangeStateToChooseCasinoEntityState;
 
         _touchCameraProvider.DeactivateInteractive();
         _sceneRoot.CloseMainPanel();
         _clickDispatcherProvider.Deactivate();
 
         _shopCasinoEntitySpotProvider.DeactivateListener();
+        _hostessEntityControllerProvider.DeactivateEntranceQueueInteractive();
     }
 
     private void ChangeStateToUpgrade()
@@ -64,5 +73,10 @@ public class MainState_Game : IState
     private void ChangeStateToShopSpot()
     {
         _machineProvider.EnterState(_machineProvider.GetState<ShopSpotState_Game>());
+    }
+
+    private void ChangeStateToChooseCasinoEntityState()
+    {
+        _machineProvider.EnterState(_machineProvider.GetState<ChooseCasinoEntityState_Game>());
     }
 }
