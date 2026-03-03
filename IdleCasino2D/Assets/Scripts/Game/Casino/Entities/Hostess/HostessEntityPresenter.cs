@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HostessEntityPresenter : IHostessEntityControllerListener, IHostessEntityControllerProvider
+public class HostessEntityPresenter : IHostessEntityControllerListener, IHostessEntityControllerProvider, ICasinoEntityInfo, ICasinoEntityStaff
 {
     private readonly HostessEntityModel _model;
     private readonly HostessEntityView _view;
@@ -76,6 +76,34 @@ public class HostessEntityPresenter : IHostessEntityControllerListener, IHostess
 
 
     public void ActivateAll() => _model.ActivateAll();
+
+    #endregion
+
+    #region INFO
+
+    public CasinoEntityType CasinoEntityType => CasinoEntityType.Host;
+
+    public bool IsOpen => true;
+
+    public bool CanJoin => true;
+
+    public bool IsGameRunning => false;
+
+    #endregion
+
+    #region STAFF
+
+    public StaffType PersonalType => StaffType.Hostess;
+
+    public int CountStaffNeed => 1;
+
+    public int CountStaff => _model.CountStaff;
+
+    public void SetStaff(IStaff stuff)
+    {
+
+    }
+
 
     #endregion
 }

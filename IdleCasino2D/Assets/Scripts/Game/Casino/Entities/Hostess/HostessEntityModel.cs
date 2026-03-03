@@ -6,10 +6,14 @@ using UnityEngine;
 
 public class HostessEntityModel
 {
+    public int CountStaff => _countStaff;
+
     private readonly List<CasinoEntityHostessTargetAdapter> _casinoEntities = new();
     private readonly List<CasinoEntityEntranceQueueAdapter> _casinoEntityEntrances = new();
     private readonly List<(IVisitor, ICasinoEntityVisitorTraffic)> _firstVisitors = new();
     private readonly IVisitorPathTrafficProvider _visitorPathTrafficProvider;
+
+    private int _countStaff;
 
     private (IVisitor visitor, ICasinoEntityVisitorTraffic casinoTraffic) _currentVisitor;
 

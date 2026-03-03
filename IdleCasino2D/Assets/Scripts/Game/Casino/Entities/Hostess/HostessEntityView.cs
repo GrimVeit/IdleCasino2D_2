@@ -30,6 +30,7 @@ public class HostessEntityView : View
 
         var visual = hostessTypeVisuals.FirstOrDefault(data => data.CasinoEntityType == casinoEntityType);
 
+        imageSpot.rectTransform.sizeDelta = visual.VectorSize;
         imageSpot.sprite = visual.Sprite;
         textSpot.text = visual.Name;
     }
@@ -52,8 +53,10 @@ public class HostessTypeVisual
     [SerializeField] private CasinoEntityType casinoEntityType;
     [SerializeField] private Sprite spriteSpot;
     [SerializeField] private string nameSpot;
+    [SerializeField] private Vector2 vectorSize;
 
     public string Name => nameSpot;
     public Sprite Sprite => spriteSpot;
     public CasinoEntityType CasinoEntityType => casinoEntityType;
+    public Vector2 VectorSize => vectorSize;
 }
