@@ -9,6 +9,7 @@ public class StaffSpawnerView : View
     [SerializeField] private DealerView dealerPrefab;
     [SerializeField] private BartenderView bartenderPrefab;
     [SerializeField] private SongstressView songstressPrefab;
+    [SerializeField] private HostessView hostessPrefab;
 
     [SerializeField] private Transform transformParentVisitors;
 
@@ -19,6 +20,7 @@ public class StaffSpawnerView : View
             StaffType.Croupier => Instantiate(dealerPrefab, transformParentVisitors),
             StaffType.Bartender => Instantiate(bartenderPrefab, transformParentVisitors),
             StaffType.Songstress => Instantiate(songstressPrefab, transformParentVisitors),
+            StaffType.Hostess => Instantiate(hostessPrefab, transformParentVisitors),
             _ => throw new Exception($"No prefab for {type}")
         };
 

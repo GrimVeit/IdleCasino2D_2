@@ -10,7 +10,7 @@ public class VisitorCounterTrafficModel
 
     private IEnumerator trafficRoutine;
 
-    private readonly float spawnInterval = 1f; // секунда между попытками спавна
+    private readonly float spawnInterval = 3f; // секунда между попытками спавна
     private readonly int maxVisitors = 15;
 
     public VisitorCounterTrafficModel(ISpawnerVisitorProvider spawner, ISpawnerVisitorInfoProvider info, List<ICasinoEntityInfo> casinoEntityInfos)

@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class HostessEntityPresenter : IHostessEntityControllerListener, IHostessEntityControllerProvider, ICasinoEntityInfo, ICasinoEntityStaff
 {
@@ -99,10 +96,7 @@ public class HostessEntityPresenter : IHostessEntityControllerListener, IHostess
 
     public int CountStaff => _model.CountStaff;
 
-    public void SetStaff(IStaff stuff)
-    {
-
-    }
+    public void SetStaff(IStaff stuff) => _model.SetStaff(stuff);
 
 
     #endregion

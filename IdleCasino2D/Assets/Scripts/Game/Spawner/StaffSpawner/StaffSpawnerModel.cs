@@ -11,6 +11,7 @@ public class StaffSpawnerModel
         { StaffType.Croupier, () => new DealerModel() },
         { StaffType.Bartender, () => new BartenderModel() },
         { StaffType.Songstress, () => new SongstressModel() },
+        { StaffType.Hostess, () => new HostessModel() },
     };
 
     private readonly Dictionary<StaffType, Func<IStaffModel, IStaffView, IStaff>> _presenterFactory = new()
@@ -18,6 +19,7 @@ public class StaffSpawnerModel
         { StaffType.Croupier, (model, view) => new DealerPresenter((DealerModel)model, (DealerView)view) },
         { StaffType.Bartender, (model, view) => new BartenderPresenter((BartenderModel)model, (BartenderView)view) },
         { StaffType.Songstress, (model, view) => new SongstressPresenter((SongstressModel)model, (SongstressView)view) },
+        { StaffType.Hostess, (model, view) => new HostessPresenter((HostessModel) model, (HostessView)view) },
     };
 
     private ICasinoEntityStaff _currentCasinoEntityStaff;

@@ -204,7 +204,7 @@ public class VisitorAnimation
     public void ActivateAnimation(VisitorAnimationEnum animationEnum)
     {
         var skeletonAnimationType = GetSkeletonAnimationType(animationEnum);
-        if(skeletonAnimationType == null) return;
+        if(skeletonAnimationType == null || skeletonAnimation == null) return;
 
         skeletonAnimation.AnimationState.SetAnimation(0, skeletonAnimationType.Key, skeletonAnimationType.IsLoop);
     }

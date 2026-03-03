@@ -13,6 +13,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     [SerializeField] private List<Node> nodesPokerStaff = new();
     [SerializeField] private List<Node> nodesBarStaff = new();
     [SerializeField] private Node nodeSongstress;
+    [SerializeField] private List<Node> nodesHostess;
 
     [Header("NODES VISITOR")]
     [SerializeField] private List<Node> nodesEntranceQueue;
@@ -196,7 +197,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         }
 
         visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
-        hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter), viewContainer.GetView<HostessEntityView>());
+        hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter, nodesHostess), viewContainer.GetView<HostessEntityView>());
+        casinoEntities.Add(hostessEntityPresenter);
 
         Debug.Log("5");
     }

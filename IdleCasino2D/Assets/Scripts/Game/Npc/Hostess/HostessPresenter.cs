@@ -28,11 +28,15 @@ public class HostessPresenter : IHostess
 
     private void ActivateEvents()
     {
+        _view.OnPathCompleted += EndDestination;
+
         _model.OnSetAnimation += _view.ActivateAnimation;
     }
 
     private void DeactivateEvents()
     {
+        _view.OnPathCompleted -= EndDestination;
+
         _model.OnSetAnimation -= _view.ActivateAnimation;
     }
 
@@ -60,6 +64,11 @@ public class HostessPresenter : IHostess
     #region MOVE
 
     public event Action<INpc, Node> OnEndDestination;
+
+    private void EndDestination(Node node)
+    {
+        OnEndDestination?.Invoke(this, node);
+    }
     public void SetMove(Node node) => _view.SetMove(node);
     public void MoveTo(Node target, bool IsAbsolute) => _view.MoveTo(target, IsAbsolute);
 
