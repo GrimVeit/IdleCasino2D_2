@@ -13,11 +13,13 @@ public class BarEntityModel
     private readonly List<Node> _nodesPlaceStaff;
     private readonly List<IVisitor> visitors = new();
 
+    private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private IBartender _bartender;
     private IEnumerator gameRoutine;
 
-    public BarEntityModel(List<Node> nodePlaceVisitors, List<Node> nodesPlaceStaff)
+    public BarEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, List<Node> nodePlaceVisitors, List<Node> nodesPlaceStaff)
     {
+        _casinoProfitStoreInfo = casinoProfitStoreInfo;
         _nodePlaceVisitors = nodePlaceVisitors;
         _nodesPlaceStaff = nodesPlaceStaff;
     }
@@ -102,7 +104,7 @@ public class BarEntityModel
 
         visitor.ActivateIdle();
 
-        AddProfit(visitor.Position, 20);
+        AddProfit(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Bar));
         // Событие завершения обслуживания
         OnVisitorRealised?.Invoke(visitor);
 

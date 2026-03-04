@@ -13,6 +13,7 @@ public class SlotMachineEntityModel
     private readonly List<IVisitor> visitors = new();
     public bool ContainsVisitor(IVisitor visitor) => visitors.Contains(visitor);
 
+    private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _slotSpot;
     private IEnumerator gameRoutine;
 
@@ -22,8 +23,9 @@ public class SlotMachineEntityModel
     private bool isManualInteractive = false;
     private bool isEntityInteractive = true;
 
-    public SlotMachineEntityModel(IGameSpot slotSpot, Node node)
+    public SlotMachineEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, IGameSpot slotSpot, Node node)
     {
+        _casinoProfitStoreInfo = casinoProfitStoreInfo;
         _slotSpot = slotSpot;
         _nodePlace = node;
     }
@@ -90,7 +92,7 @@ public class SlotMachineEntityModel
 
         _slotSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
-        OnAddCoins?.Invoke(visitor.Position, 10);
+        OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Slot));
 
         yield return new WaitForSeconds(1f);
 

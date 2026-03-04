@@ -9,7 +9,9 @@ public class UIGameRoot : UIRoot
     [SerializeField] private MainPanel_Game mainPanel;
     [SerializeField] private AvatarBalancePanel_Game avatarBalancePanel;
     [SerializeField] private BlackBackgroundPanel_Game blackBackgroundPanel;
+
     [SerializeField] private UpgradePanel_Game upgradePanel;
+    [SerializeField] private ProfitUpgradePanel_Game profitUpgradePanel;
 
     [SerializeField] private HireStaffPanel_Game hireStaffPanel;
     [SerializeField] private SelectStaffPanel_Game selectStaffPanel;
@@ -33,7 +35,9 @@ public class UIGameRoot : UIRoot
         mainPanel.Initialize();
         avatarBalancePanel.Initialize();
         blackBackgroundPanel.Initialize();
+
         upgradePanel.Initialize();
+        profitUpgradePanel.Initialize();
 
         hireStaffPanel.Initialize();
         selectStaffPanel.Initialize();
@@ -53,6 +57,8 @@ public class UIGameRoot : UIRoot
         mainPanel.OnClickToHireStaff += ClickToHireStaff_MAIN;
 
         upgradePanel.OnClickToBack += ClickToBack_UPGRADE;
+        profitUpgradePanel.OnClickToExit += ClickToBack_UPGRADE_PROFIT;
+
         hireStaffPanel.OnClickToBack += ClickToBack_HIRE_STAFF;
         selectStaffPanel.OnClickToBack += ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack += ClickToBack_SHOP_SPOT;
@@ -68,6 +74,8 @@ public class UIGameRoot : UIRoot
         mainPanel.OnClickToHireStaff -= ClickToHireStaff_MAIN;
 
         upgradePanel.OnClickToBack -= ClickToBack_UPGRADE;
+        profitUpgradePanel.OnClickToExit -= ClickToBack_UPGRADE_PROFIT;
+
         hireStaffPanel.OnClickToBack -= ClickToBack_HIRE_STAFF;
         selectStaffPanel.OnClickToBack -= ClickToBack_SELECT_STAFF;
         shopSpotPanel.OnClickToBack -= ClickToBack_SHOP_SPOT;
@@ -84,7 +92,9 @@ public class UIGameRoot : UIRoot
         mainPanel.Dispose();
         avatarBalancePanel.Dispose();
         blackBackgroundPanel.Dispose();
+
         upgradePanel.Dispose();
+        profitUpgradePanel.Dispose();
 
         hireStaffPanel.Dispose();
         selectStaffPanel.Dispose();
@@ -171,6 +181,21 @@ public class UIGameRoot : UIRoot
     }
 
     public void CloseUpgradePanel()
+    {
+        if (!upgradePanel.IsActive) return;
+
+        CloseOtherPanel(upgradePanel);
+    }
+
+
+    public void OpenProfitUpgradePanel()
+    {
+        if(upgradePanel.IsActive) return;
+
+        OpenOtherPanel(upgradePanel);
+    }
+
+    public void CloseProfitUpgradePanel()
     {
         if (!upgradePanel.IsActive) return;
 
@@ -319,6 +344,17 @@ public class UIGameRoot : UIRoot
     private void ClickToBack_UPGRADE()
     {
         OnClickToBack_UPGRADE?.Invoke();
+    }
+
+    #endregion
+
+    #region UPGRADE_PROFIT
+
+    public event Action OnClickToBack_UPGRADE_PROFIT;
+
+    private void ClickToBack_UPGRADE_PROFIT()
+    {
+        OnClickToBack_UPGRADE_PROFIT?.Invoke();
     }
 
     #endregion

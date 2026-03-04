@@ -14,6 +14,7 @@ public class WheelEntityModel
     private readonly List<IVisitor> visitors = new();
     public bool ContainsVisitor(IVisitor visitor) => visitors.Contains(visitor);
 
+    private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _wheelSpot;
     private IEnumerator gameRoutine;
 
@@ -23,8 +24,9 @@ public class WheelEntityModel
     private bool isManualInteractive;
     private bool isEntityInteractive = true;
 
-    public WheelEntityModel(IGameSpot wheelSpot, Node node)
+    public WheelEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, IGameSpot wheelSpot, Node node)
     {
+        _casinoProfitStoreInfo = casinoProfitStoreInfo;
         _wheelSpot = wheelSpot;
         _nodePlace = node;
     }
@@ -91,7 +93,7 @@ public class WheelEntityModel
 
         _wheelSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
-        OnAddCoins?.Invoke(visitor.Position, 10);
+        OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Wheel));
 
         yield return new WaitForSeconds(1f);
 

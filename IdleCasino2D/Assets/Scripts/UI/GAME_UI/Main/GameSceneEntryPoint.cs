@@ -33,6 +33,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
+    private CasinoProfitStorePresenter casinoProfitStorePresenter;
+
     private StaffSpawnerPresenter staffSpawnerPresenter;
     private SpawnerVisitorPresenter spawnerVisitorPresenter;
     private VisitorCounterTrafficPresenter visitorCounterTrafficPresenter;
@@ -71,6 +73,8 @@ public class GameSceneEntryPoint : MonoBehaviour
                     (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC),
                     viewContainer.GetView<SoundView>());
 
+        casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
+
         particleEffectPresenter = new ParticleEffectPresenter
             (new ParticleEffectModel(),
             viewContainer.GetView<ParticleEffectView>());
@@ -106,6 +110,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
         sceneRoot.Initialize();
         bankPresenter.Initialize();
+        casinoProfitStorePresenter.Initialize();
 
         staffSpawnerPresenter.Initialize();
         spawnerVisitorPresenter.Initialize();
@@ -149,11 +154,11 @@ public class GameSceneEntryPoint : MonoBehaviour
         entityExit.Initialize();
         casinoEntities.Add(entityExit);
 
-        var entityBar = new BarEntityPresenter(new BarEntityModel(nodesBar, nodesBarStaff));
+        var entityBar = new BarEntityPresenter(new BarEntityModel(casinoProfitStorePresenter, nodesBar, nodesBarStaff));
         entityBar.Initialize();
         casinoEntities.Add(entityBar);
 
-        var musicZone = new MusicEntityPresenter(new MusicEntityModel(nodesMusic, nodeSongstress));
+        var musicZone = new MusicEntityPresenter(new MusicEntityModel(casinoProfitStorePresenter, nodesMusic, nodeSongstress));
         musicZone.Initialize();
         casinoEntities.Add(musicZone);
 
@@ -166,7 +171,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
             Debug.Log("2.2");
 
-            var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(spot, nodesSlot[i]));
+            var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(casinoProfitStorePresenter, spot, nodesSlot[i]));
             entity.Initialize();
 
             Debug.Log("2.3");
@@ -179,7 +184,7 @@ public class GameSceneEntryPoint : MonoBehaviour
             var spot = new WheelSpotPresenter(new WheelSpotModel(), viewContainer_World.GetView<WheelSpotView>($"Wheel_{i + 1}"));
             spot.Initialize();
 
-            var entity = new WheelEntityPresenter(new WheelEntityModel(spot, nodesWheel[i]));
+            var entity = new WheelEntityPresenter(new WheelEntityModel(casinoProfitStorePresenter, spot, nodesWheel[i]));
             entity.Initialize();
 
             casinoEntities.Add(entity);
@@ -190,7 +195,7 @@ public class GameSceneEntryPoint : MonoBehaviour
             var spot = new PokerSpotPresenter(new PokerSpotModel(), viewContainer_World.GetView<PokerSpotView>($"Poker_{i + 1}"));
             spot.Initialize();
 
-            var entity = new PokerEntityPresenter(new PokerEntityModel(spot, nodesPoker[i], nodesPokerStaff[i]));
+            var entity = new PokerEntityPresenter(new PokerEntityModel(casinoProfitStorePresenter, spot, nodesPoker[i], nodesPokerStaff[i]));
             entity.Initialize();
 
             casinoEntities.Add(entity);
@@ -246,6 +251,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
+
+        casinoProfitStorePresenter?.Dispose();
 
         //touchCameraPresenter?.Dispose();
         

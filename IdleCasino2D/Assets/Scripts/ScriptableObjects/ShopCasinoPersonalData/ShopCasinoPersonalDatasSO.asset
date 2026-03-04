@@ -15,7 +15,7 @@ MonoBehaviour:
   shopCasinoPersonalDataGroups:
   - personalType: 0
     name: Manager
-    price: 20
+    price: 500
     shopCasinoPersonalDatas:
     - sprite: {fileID: 21300000, guid: 27f09ee9acd329f47a1329b5f9d841aa, type: 3}
       skinId: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       skinId: 3
   - personalType: 1
     name: Hostess
-    price: 25
+    price: 1000
     shopCasinoPersonalDatas:
     - sprite: {fileID: 21300000, guid: ae2b67fa79c344946be8c2239a9e5aa6, type: 3}
       skinId: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
       skinId: 3
   - personalType: 2
     name: Croupier
-    price: 30
+    price: 400
     shopCasinoPersonalDatas:
     - sprite: {fileID: 21300000, guid: 57c6816d85bb4ff4c80ad0eb6cf44954, type: 3}
       skinId: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
       skinId: 3
   - personalType: 3
     name: Bartender
-    price: 35
+    price: 1000
     shopCasinoPersonalDatas:
     - sprite: {fileID: 21300000, guid: e401f62428f5cfe4fb56280defcf2a2f, type: 3}
       skinId: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
       skinId: 3
   - personalType: 4
     name: Sonstress
-    price: 40
+    price: 1000
     shopCasinoPersonalDatas:
     - sprite: {fileID: 21300000, guid: 2baf13e8a012b4d4fa3c6de189865be1, type: 3}
       skinId: 0

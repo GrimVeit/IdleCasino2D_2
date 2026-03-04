@@ -14,6 +14,7 @@ public class PokerEntityModel
     private readonly Node _nodePlaceStaff;
     private readonly List<IVisitor> visitors = new();
 
+    private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _pokerSpot;
     private IDealer _dealer;
     private IEnumerator gameRoutine;
@@ -23,8 +24,9 @@ public class PokerEntityModel
     private bool isVisitorReady;   // дошёл ли до стола
     private bool isEntityInteractive = true;
 
-    public PokerEntityModel(IGameSpot gameSpot, Node nodePlaceVisitor, Node nodePlaceStaff)
+    public PokerEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, IGameSpot gameSpot, Node nodePlaceVisitor, Node nodePlaceStaff)
     {
+        _casinoProfitStoreInfo = casinoProfitStoreInfo;
         _pokerSpot = gameSpot;
         _nodePlaceVisitor = nodePlaceVisitor;
         _nodePlaceStaff = nodePlaceStaff;
@@ -116,7 +118,7 @@ public class PokerEntityModel
         _dealer?.ActivateAnimation(DealerAnimationEnum.Idle);
         _pokerSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
-        OnAddCoins?.Invoke(visitor.Position, 10);
+        OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Poker));
 
         yield return new WaitForSeconds(1f);
 

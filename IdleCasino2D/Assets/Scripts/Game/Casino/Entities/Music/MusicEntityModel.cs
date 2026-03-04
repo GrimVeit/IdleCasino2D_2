@@ -15,11 +15,13 @@ public class MusicEntityModel
 
     private readonly Dictionary<IVisitor, Node> _occupiedNodes = new();
 
+    private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private ISongstress _songstress;
     private IEnumerator danceRoutine;
 
-    public MusicEntityModel(List<Node> visitorNodes, Node songstressNode)
+    public MusicEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, List<Node> visitorNodes, Node songstressNode)
     {
+        _casinoProfitStoreInfo = casinoProfitStoreInfo;
         _songstressNode = songstressNode;
         _visitorNodes = visitorNodes;
     }
@@ -146,8 +148,7 @@ public class MusicEntityModel
         // 20% шанс оставить деньги
         if (UnityEngine.Random.value <= 0.2f)
         {
-            int reward = UnityEngine.Random.Range(5, 15);
-            OnAddCoins?.Invoke(visitor.Position, reward);
+            OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Music));
         }
 
         OnVisitorRealised?.Invoke(visitor);
