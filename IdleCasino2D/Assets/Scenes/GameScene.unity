@@ -2165,7 +2165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &118199627
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2231,7 +2231,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118199626}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2921,6 +2921,94 @@ MonoBehaviour:
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
   - {fileID: 719678801}
+--- !u!1 &169101655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 169101656}
+  - component: {fileID: 169101657}
+  m_Layer: 5
+  m_Name: CasinoProfitView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &169101656
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169101655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 426014025604183617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &169101657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169101655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec49455bd348ddc43a2e5d42942229ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  casinoProfitCasinoTypes:
+  - entityType: 1
+    buttonType: {fileID: 997316322}
+  - entityType: 2
+    buttonType: {fileID: 620705618}
+  - entityType: 3
+    buttonType: {fileID: 537841190}
+  - entityType: 4
+    buttonType: {fileID: 248636159}
+  - entityType: 5
+    buttonType: {fileID: 583973346}
+  - entityType: 8
+    buttonType: {fileID: 1129619063}
+  casinoProfitInfos:
+  - casinoEntityType: 1
+    spriteSpot: {fileID: 21300000, guid: 5c45f778420f6a34e83039d274cdcbf3, type: 3}
+    nameSpot: Slot Machine
+    vectorSize: {x: 162, y: 310}
+  - casinoEntityType: 2
+    spriteSpot: {fileID: 21300000, guid: f644f3abde3986e4aaf4d7dc94a5f340, type: 3}
+    nameSpot: Wheel of Fortune
+    vectorSize: {x: 135, y: 310}
+  - casinoEntityType: 3
+    spriteSpot: {fileID: 21300000, guid: 00131dd4a2a9c004e81c56ecb0705dd3, type: 3}
+    nameSpot: Poker Table
+    vectorSize: {x: 378, y: 310}
+  - casinoEntityType: 4
+    spriteSpot: {fileID: 21300000, guid: 175244c168fc76e4080c777b1d7c6373, type: 3}
+    nameSpot: Bar
+    vectorSize: {x: 143, y: 310}
+  - casinoEntityType: 5
+    spriteSpot: {fileID: 21300000, guid: d865bb9069e9d50449df9f2939e05c98, type: 3}
+    nameSpot: Dane Floor
+    vectorSize: {x: 310, y: 310}
+  - casinoEntityType: 8
+    spriteSpot: {fileID: 21300000, guid: d865bb9069e9d50449df9f2939e05c98, type: 3}
+    nameSpot: Roulette Table
+    vectorSize: {x: 389, y: 310}
+  imageSpot: {fileID: 1002434470}
+  textSpot: {fileID: 67190084}
 --- !u!1 &169994125
 GameObject:
   m_ObjectHideFlags: 0
@@ -17147,7 +17235,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c45f778420f6a34e83039d274cdcbf3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84a51538216ce0347b8324e03285f1f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28989,7 +29077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1774762752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29007,7 +29095,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1774762754
@@ -29026,7 +29114,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774762751}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -34705,6 +34793,7 @@ RectTransform:
   - {fileID: 246960818}
   - {fileID: 505520060}
   - {fileID: 727322993}
+  - {fileID: 169101656}
   m_Father: {fileID: 7268127844772316494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

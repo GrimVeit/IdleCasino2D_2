@@ -34,6 +34,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private SoundPresenter soundPresenter;
 
     private CasinoProfitStorePresenter casinoProfitStorePresenter;
+    private CasinoProfitPresenter casinoProfitPresenter;
 
     private StaffSpawnerPresenter staffSpawnerPresenter;
     private SpawnerVisitorPresenter spawnerVisitorPresenter;
@@ -74,6 +75,7 @@ public class GameSceneEntryPoint : MonoBehaviour
                     viewContainer.GetView<SoundView>());
 
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
+        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter), viewContainer.GetView<CasinoProfitView>());
 
         particleEffectPresenter = new ParticleEffectPresenter
             (new ParticleEffectModel(),
@@ -111,6 +113,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot.Initialize();
         bankPresenter.Initialize();
         casinoProfitStorePresenter.Initialize();
+        casinoProfitPresenter.Initialize();
 
         staffSpawnerPresenter.Initialize();
         spawnerVisitorPresenter.Initialize();
@@ -129,7 +132,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             filterShopCasinoStaffPresenter,
             filterShopCasinoStaffPresenter,
             hostessEntityPresenter,
-            hostessEntityPresenter);
+            hostessEntityPresenter,
+            casinoProfitPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
@@ -253,6 +257,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter?.Dispose();
 
         casinoProfitStorePresenter?.Dispose();
+        casinoProfitPresenter?.Dispose();
 
         //touchCameraPresenter?.Dispose();
         

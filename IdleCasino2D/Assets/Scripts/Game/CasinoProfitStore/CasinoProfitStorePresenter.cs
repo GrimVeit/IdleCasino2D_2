@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
-public class CasinoProfitStorePresenter : ICasinoProfitStoreInfo
+public class CasinoProfitStorePresenter : ICasinoProfitStoreInfo, ICasinoProfitStoreProvider, ICasinoProfitStoreListener
 {
     private readonly CasinoProfitStoreModel _model;
 
@@ -21,9 +23,20 @@ public class CasinoProfitStorePresenter : ICasinoProfitStoreInfo
         _model.Dispose();
     }
 
+    #region Output
+
+    public event Action<CasinoEntityType, int> OnProfitStoreChanged
+    {
+        add => _model.OnChangeProfitValue += value;
+        remove => _model.OnChangeProfitValue -= value;
+    }
+
+    #endregion
+
     #region Input
 
     public int GetProfit(CasinoEntityType type) => _model.GetProfit(type);
+    public void SetProfit(CasinoEntityType type, int profit) => _model.SetProfit(type, profit);
 
     #endregion
 }
@@ -40,5 +53,5 @@ public interface ICasinoProfitStoreProvider
 
 public interface ICasinoProfitStoreListener
 {
-    public void OnProfitStoreChanged(CasinoEntityType entityType, int value);
+    public event Action<CasinoEntityType, int> OnProfitStoreChanged;
 }

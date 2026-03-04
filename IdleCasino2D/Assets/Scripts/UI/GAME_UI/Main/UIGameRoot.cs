@@ -190,16 +190,16 @@ public class UIGameRoot : UIRoot
 
     public void OpenProfitUpgradePanel()
     {
-        if(upgradePanel.IsActive) return;
+        if(profitUpgradePanel.IsActive) return;
 
-        OpenOtherPanel(upgradePanel);
+        OpenOtherPanel(profitUpgradePanel);
     }
 
     public void CloseProfitUpgradePanel()
     {
-        if (!upgradePanel.IsActive) return;
+        if (!profitUpgradePanel.IsActive) return;
 
-        CloseOtherPanel(upgradePanel);
+        CloseOtherPanel(profitUpgradePanel);
     }
 
 
