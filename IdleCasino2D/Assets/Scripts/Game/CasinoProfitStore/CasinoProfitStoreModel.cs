@@ -27,7 +27,7 @@ public class CasinoProfitStoreModel
         else
         {
             foreach (CasinoEntityType type in Enum.GetValues(typeof(CasinoEntityType)))
-                _profits[type] = 100;
+                _profits[type] = 10;
         }
 
         for (int i = 0; i < _profits.Count; i++)

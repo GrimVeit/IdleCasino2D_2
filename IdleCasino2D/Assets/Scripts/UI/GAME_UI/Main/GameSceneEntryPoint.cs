@@ -75,7 +75,7 @@ public class GameSceneEntryPoint : MonoBehaviour
                     viewContainer.GetView<SoundView>());
 
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
-        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter), viewContainer.GetView<CasinoProfitView>());
+        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter), viewContainer.GetView<CasinoProfitView>());
 
         particleEffectPresenter = new ParticleEffectPresenter
             (new ParticleEffectModel(),

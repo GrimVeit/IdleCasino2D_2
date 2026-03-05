@@ -18,6 +18,7 @@ public class CasinoProfitPresenter : ICasinoProfitListener
     {
         ActivateEvents();
 
+        _model.Initialize();
         _view.Initialize();
     }
 
@@ -31,15 +32,21 @@ public class CasinoProfitPresenter : ICasinoProfitListener
     private void ActivateEvents()
     {
         _view.OnChooseProfitType += _model.SetCasinoType;
+        _view.OnUpgrade += _model.UpgradeCurrentType;
 
         _model.OnChooseEntityType += SetCasinoType;
+        _model.OnUpdateDetailPanel += _view.UpdateDetailPanel;
+        _model.OnUpdateMain += _view.UpdatePriceMain;
     }
 
     private void DeactivateEvents()
     {
         _view.OnChooseProfitType -= _model.SetCasinoType;
+        _view.OnUpgrade -= _model.UpgradeCurrentType;
 
         _model.OnChooseEntityType += SetCasinoType;
+        _model.OnUpdateDetailPanel -= _view.UpdateDetailPanel;
+        _model.OnUpdateMain -= _view.UpdatePriceMain;
     }
 
 
