@@ -211,13 +211,13 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         var spotRoulette_1 = new RouletteSpotPresenter(new RouletteSpotModel(), viewContainer_World.GetView<RouletteSpotView>($"Roulette_1"));
         spotRoulette_1.Initialize();
-        var entityRoulette_1 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_1, nodesRoulette_1[0], nodeRouletteStaff_1));
+        var entityRoulette_1 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_1, nodesRoulette_1[1], nodeRouletteStaff_1));
         entityRoulette_1.Initialize();
         casinoEntities.Add(entityRoulette_1);
 
         var spotRoulette_2 = new RouletteSpotPresenter(new RouletteSpotModel(), viewContainer_World.GetView<RouletteSpotView>($"Roulette_2"));
         spotRoulette_2.Initialize();
-        var entityRoulette_2 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_2, nodesRoulette_2[0], nodeRouletteStaff_2));
+        var entityRoulette_2 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_2, nodesRoulette_2[1], nodeRouletteStaff_2));
         entityRoulette_2.Initialize();
         casinoEntities.Add(entityRoulette_2);
 
