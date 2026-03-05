@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -338,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -371,6 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -423,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -793,8 +797,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1050547464}
-  - {fileID: 735263896}
+  - {fileID: 678434867}
+  - {fileID: 480736717}
   m_Father: {fileID: 360031292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -846,6 +850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -1316,6 +1321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -1457,6 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -1795,6 +1802,7 @@ RectTransform:
   - {fileID: 55735673}
   - {fileID: 2052852865}
   - {fileID: 73584029}
+  - {fileID: 1691124923}
   m_Father: {fileID: 1251441308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1850,6 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960337, b: 0.022012413, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -1902,6 +1911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -1955,6 +1965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0.007843138, b: 0, a: 1}
   neighbors: []
@@ -2281,6 +2292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -2534,6 +2546,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126970681}
   m_CullTransparentMesh: 1
+--- !u!1 &130176188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130176189}
+  - component: {fileID: 130176190}
+  m_Layer: 0
+  m_Name: DEALER_PLACE_ROULETTE_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &130176189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130176188}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.19, y: 3.69, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1691124923}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &130176190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130176188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors: []
 --- !u!1 &134953337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -2775,6 +2836,59 @@ PolygonCollider2D:
       - {x: 0.97737694, y: 0.28495598}
       - {x: 0.9823437, y: 1.5887889}
   m_UseDelaunayMesh: 0
+--- !u!1 &140211541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 140211542}
+  - component: {fileID: 140211543}
+  m_Layer: 5
+  m_Name: ROULETTE_EXIT_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &140211542
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140211541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10.371, y: -2.136}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &140211543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140211541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.16272211, b: 0.015686274, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors:
+  - {fileID: 1224930710}
 --- !u!1 &153829363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2868,6 +2982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -2917,6 +3032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.04039049, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -3097,7 +3213,7 @@ Transform:
   m_GameObject: {fileID: 169994125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.84, y: -6.38, z: 80}
+  m_LocalPosition: {x: -2.54, y: -7.73, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3302,10 +3418,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.0017576218, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
   - {fileID: 1619837816}
+--- !u!1 &180533106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180533107}
+  m_Layer: 5
+  m_Name: RIGHT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &180533107
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180533106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2118120398}
+  - {fileID: 2060724371}
+  - {fileID: 714553123}
+  - {fileID: 140211542}
+  - {fileID: 1224930709}
+  - {fileID: 1938321304}
+  - {fileID: 944034342}
+  m_Father: {fileID: 234609094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &201890783
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,6 +3877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -3961,10 +4121,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.1350236, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
   - {fileID: 2108347968}
+--- !u!1 &234609093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234609094}
+  m_Layer: 5
+  m_Name: ROULETTE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &234609094
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234609093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 180533107}
+  - {fileID: 1802578691}
+  m_Father: {fileID: 2102783399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &235410385
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,6 +4470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.04039049, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -4877,6 +5076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 0, g: 1, b: 0.26993752, a: 1}
   neighbors:
@@ -5060,6 +5260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -5452,6 +5653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -5750,6 +5952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -6122,6 +6325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -6173,6 +6377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -6261,6 +6466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -6538,6 +6744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.0017576218, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -6590,6 +6797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -6851,6 +7059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -6903,6 +7112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -6952,6 +7162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.032774635, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -7139,6 +7350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -7277,6 +7489,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474251074}
   m_CullTransparentMesh: 1
+--- !u!1 &480736716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 480736717}
+  - component: {fileID: 480736719}
+  - component: {fileID: 480736718}
+  m_Layer: 0
+  m_Name: ROULETTE_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &480736717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480736716}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.83, y: -1.48, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1489927200}
+  m_Father: {fileID: 60192086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &480736718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480736716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421abe77f824624489def79d20a2d429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Roulette_2
+  itemRouletteTable: {fileID: 1489927204}
+  animationSlot: {fileID: 1489927201}
+--- !u!114 &480736719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480736716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd684cd9d7306014d9fbd5aa89480d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 1489927201}
 --- !u!1 &490805264
 GameObject:
   m_ObjectHideFlags: 0
@@ -7546,6 +7820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -7688,6 +7963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.04039049, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -7740,11 +8016,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
   - {fileID: 99343591}
   - {fileID: 920654567}
+--- !u!1 &530504393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530504394}
+  - component: {fileID: 530504395}
+  m_Layer: 5
+  m_Name: ROULETTE_LEFT_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &530504394
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530504393}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1802578691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.0970006, y: 3.3029997}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &530504395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530504393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 0, g: 0, b: 1, a: 1}
+  colorLine: {r: 1, g: 1, b: 1, a: 1}
+  neighbors:
+  - {fileID: 140211543}
 --- !u!1 &531227720
 GameObject:
   m_ObjectHideFlags: 0
@@ -8103,6 +8433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -8152,6 +8483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 1, g: 0, b: 0.052653313, a: 1}
   neighbors:
@@ -8204,6 +8536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -8253,6 +8586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 1, g: 0, b: 0.052653313, a: 1}
   neighbors:
@@ -8307,6 +8641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -8607,7 +8942,7 @@ Transform:
   m_GameObject: {fileID: 573408559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.84, y: -6.38, z: 80}
+  m_LocalPosition: {x: -2.54, y: -7.73, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8754,6 +9089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -9246,6 +9582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -9336,6 +9673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -9388,6 +9726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -9441,6 +9780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -9474,6 +9814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -9546,6 +9887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -9933,6 +10275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.1350236, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -10119,6 +10462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -10153,6 +10497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -10344,6 +10689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -10754,6 +11100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -10802,6 +11149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -10854,6 +11202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -10902,6 +11251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -11084,6 +11434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -11325,6 +11676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960337, b: 0.022012413, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -11463,6 +11815,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678356203}
   m_CullTransparentMesh: 1
+--- !u!1 &678434866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678434867}
+  - component: {fileID: 678434869}
+  - component: {fileID: 678434868}
+  m_Layer: 0
+  m_Name: ROULETTE_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &678434867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678434866}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.89, y: 3.123, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1050547464}
+  m_Father: {fileID: 60192086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &678434868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678434866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421abe77f824624489def79d20a2d429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Roulette_1
+  itemRouletteTable: {fileID: 1050547465}
+  animationSlot: {fileID: 1050547461}
+--- !u!114 &678434869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678434866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd684cd9d7306014d9fbd5aa89480d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 1050547461}
 --- !u!1 &681724610
 GameObject:
   m_ObjectHideFlags: 0
@@ -11647,6 +12061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -12164,6 +12579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -12531,6 +12947,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.1
   scaleElement: {fileID: 713308880}
+--- !u!1 &714553122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714553123}
+  - component: {fileID: 714553124}
+  m_Layer: 5
+  m_Name: ROULETTE_ENTER_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &714553123
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714553122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10.41, y: -2.11}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &714553124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714553122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors:
+  - {fileID: 944034343}
 --- !u!1 &716848219
 GameObject:
   m_ObjectHideFlags: 0
@@ -12728,6 +13197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -12792,6 +13262,10 @@ MonoBehaviour:
   - casinoEntityType: 3
     spriteSpot: {fileID: 21300000, guid: 00131dd4a2a9c004e81c56ecb0705dd3, type: 3}
     nameSpot: Poker Table
+    vectorSize: {x: 268, y: 220}
+  - casinoEntityType: 8
+    spriteSpot: {fileID: 21300000, guid: 84a51538216ce0347b8324e03285f1f2, type: 3}
+    nameSpot: Roulette Table
     vectorSize: {x: 268, y: 220}
   imageSpot: {fileID: 1637453388}
   textSpot: {fileID: 205503857}
@@ -12930,127 +13404,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734253942}
   m_CullTransparentMesh: 1
---- !u!1 &735263895
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 735263896}
-  - component: {fileID: 735263899}
-  - component: {fileID: 735263898}
-  - component: {fileID: 735263897}
-  m_Layer: 0
-  m_Name: Roulette_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &735263896
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735263895}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.7, y: -2.71, z: -90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 60192086}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &735263897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735263895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ae13b542c5344094fb804936e628bc06, type: 2}
-  initialSkinName: 
-  initialFlipX: 0
-  initialFlipY: 0
-  updateWhenInvisible: 3
-  separatorSlotNames: []
-  zSpacing: 0
-  useClipping: 1
-  immutableTriangles: 0
-  pmaVertexColors: 1
-  clearStateOnDisable: 0
-  tintBlack: 0
-  singleSubmesh: 0
-  fixDrawOrder: 0
-  addNormals: 0
-  calculateTangents: 0
-  maskInteraction: 0
-  maskMaterials:
-    materialsMaskDisabled: []
-    materialsInsideMask: []
-    materialsOutsideMask: []
-  disableRenderingOnOverride: 1
-  _animationName: not open
-  loop: 1
-  timeScale: 0.3
---- !u!23 &735263898
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735263895}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 784e68d6eacad1f4e892ffadcd47e989, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 11
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &735263899
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735263895}
-  m_Mesh: {fileID: 0}
 --- !u!1 &735591095
 GameObject:
   m_ObjectHideFlags: 0
@@ -13229,6 +13582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.1350236, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -13378,6 +13732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -13894,6 +14249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.1350236, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -13946,6 +14302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -14033,6 +14390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -14234,9 +14592,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
-  neighbors: []
+  neighbors:
+  - {fileID: 2118120399}
 --- !u!1 &803444323
 GameObject:
   m_ObjectHideFlags: 0
@@ -14415,6 +14775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.032774635, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -14507,6 +14868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -14909,6 +15271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -15742,6 +16105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -15908,6 +16272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -15993,6 +16358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 0, g: 1, b: 0.26993752, a: 1}
   neighbors:
@@ -16054,6 +16420,8 @@ MonoBehaviour:
   - {fileID: 1941176501}
   - {fileID: 1929082217}
   nodeSongstress: {fileID: 1572425843}
+  nodeRouletteStaff_1: {fileID: 130176190}
+  nodeRouletteStaff_2: {fileID: 1525877396}
   nodesHostess:
   - {fileID: 60765909}
   - {fileID: 1904607803}
@@ -16093,6 +16461,12 @@ MonoBehaviour:
   - {fileID: 208067691}
   - {fileID: 689744980}
   - {fileID: 2002438788}
+  nodesRoulette_1:
+  - {fileID: 1847735726}
+  - {fileID: 530504395}
+  nodesRoulette_2:
+  - {fileID: 1938321305}
+  - {fileID: 944034343}
   nodesPoker:
   - {fileID: 1334955140}
   - {fileID: 616356299}
@@ -16301,12 +16675,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
   - {fileID: 157389882}
   - {fileID: 1551029216}
   - {fileID: 1182310647}
+--- !u!1 &944034341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 944034342}
+  - component: {fileID: 944034343}
+  m_Layer: 5
+  m_Name: ROULETTE_RIGHT_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &944034342
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944034341}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 9.97, y: -1.279}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &944034343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944034341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 0, g: 0, b: 1, a: 1}
+  colorLine: {r: 1, g: 1, b: 1, a: 1}
+  neighbors:
+  - {fileID: 140211543}
 --- !u!1 &944947745
 GameObject:
   m_ObjectHideFlags: 0
@@ -16355,6 +16783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -17613,6 +18042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -17724,6 +18154,8 @@ GameObject:
   - component: {fileID: 1050547463}
   - component: {fileID: 1050547462}
   - component: {fileID: 1050547461}
+  - component: {fileID: 1050547466}
+  - component: {fileID: 1050547465}
   m_Layer: 0
   m_Name: Roulette_1
   m_TagString: Untagged
@@ -17827,12 +18259,79 @@ Transform:
   m_GameObject: {fileID: 1050547460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.77, y: 2.18, z: -90}
+  m_LocalPosition: {x: -1.343, y: -0.747, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 60192086}
+  m_Father: {fileID: 678434867}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1050547465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050547460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9a58eeafe74db469e2c172a24571aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &1050547466
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050547460}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.6385133, y: 0.9924898}
+      - {x: 2.6642976, y: 1.1334574}
+      - {x: 1.2256389, y: 2.1015015}
+      - {x: 1.1250732, y: 2.1068344}
+      - {x: 0.0082163215, y: 1.474118}
+      - {x: 0.009606898, y: 1.3089976}
+      - {x: 1.622232, y: 0.39350605}
+      - {x: 1.579299, y: 0.048831105}
+      - {x: 1.6989174, y: -0.009280682}
+      - {x: 2.4953556, y: 0.4792831}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1056169953
 GameObject:
   m_ObjectHideFlags: 0
@@ -18113,6 +18612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -19262,6 +19762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -19871,6 +20372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.04039049, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -19923,6 +20425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -20124,6 +20627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -20264,6 +20768,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221904292}
   m_CullTransparentMesh: 1
+--- !u!1 &1224930708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1224930709}
+  - component: {fileID: 1224930710}
+  m_Layer: 5
+  m_Name: ROULETTE_EXIT_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1224930709
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224930708}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7.438, y: -2.717}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1224930710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224930708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.16272211, b: 0.015686274, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors:
+  - {fileID: 1932520579}
 --- !u!1 &1229967016
 GameObject:
   m_ObjectHideFlags: 0
@@ -20312,6 +20869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -20498,6 +21056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -20631,7 +21190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.84, y: -6.38}
+  m_AnchoredPosition: {x: -2.54, y: -7.73}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240903012
@@ -20801,6 +21360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -21016,6 +21576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.032774635, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -21240,6 +21801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -21468,6 +22030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -21535,6 +22098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -21589,6 +22153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -21691,6 +22256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.0017576218, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -21877,6 +22443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -22039,6 +22606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -22090,6 +22658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -22143,6 +22712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -22450,6 +23020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -22638,6 +23209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -22689,6 +23261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960337, b: 0.022012413, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -22871,6 +23444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -23566,6 +24140,8 @@ MonoBehaviour:
       vectorSize: {x: 162, y: 372}
     - entityType: 3
       vectorSize: {x: 453, y: 372}
+    - entityType: 8
+      vectorSize: {x: 453, y: 372}
   transformSprite: {fileID: 494095791}
   textSpotName: {fileID: 1832605953}
   textSpotPrice: {fileID: 115852811}
@@ -23933,6 +24509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.0017576218, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -24097,6 +24674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -24149,6 +24727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -24242,6 +24821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -24298,6 +24878,196 @@ MonoBehaviour:
   coinPrefab: {fileID: 869856773}
   coinSpawnParent: {fileID: 1330428580}
   _activeCoins: []
+--- !u!1 &1489927199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489927200}
+  - component: {fileID: 1489927203}
+  - component: {fileID: 1489927202}
+  - component: {fileID: 1489927201}
+  - component: {fileID: 1489927205}
+  - component: {fileID: 1489927204}
+  m_Layer: 0
+  m_Name: Roulette_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1489927200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489927199}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.343, y: -0.747, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 480736717}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1489927201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489927199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: ae13b542c5344094fb804936e628bc06, type: 2}
+  initialSkinName: 
+  initialFlipX: 0
+  initialFlipY: 0
+  updateWhenInvisible: 3
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  _animationName: not open
+  loop: 1
+  timeScale: 0.3
+--- !u!23 &1489927202
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489927199}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 784e68d6eacad1f4e892ffadcd47e989, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 11
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1489927203
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489927199}
+  m_Mesh: {fileID: 0}
+--- !u!114 &1489927204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489927199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9a58eeafe74db469e2c172a24571aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &1489927205
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489927199}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.6385133, y: 0.9924898}
+      - {x: 2.6642976, y: 1.1334574}
+      - {x: 1.2256389, y: 2.1015015}
+      - {x: 1.1250732, y: 2.1068344}
+      - {x: 0.0082163215, y: 1.474118}
+      - {x: 0.009606898, y: 1.3089976}
+      - {x: 1.622232, y: 0.39350605}
+      - {x: 1.579299, y: 0.048831105}
+      - {x: 1.6989174, y: -0.009280682}
+      - {x: 2.4953556, y: 0.4792831}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1492794865
 GameObject:
   m_ObjectHideFlags: 0
@@ -24495,6 +25265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -24760,7 +25531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1525836120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24849,6 +25620,54 @@ MonoBehaviour:
   canvasGroup: {fileID: 1525836123}
   effectCombination: {fileID: 1525836124}
   buttonExit: {fileID: 126970684}
+--- !u!1 &1525877394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1525877395}
+  - component: {fileID: 1525877396}
+  m_Layer: 0
+  m_Name: DEALER_PLACE_ROULETTE_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1525877395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525877394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.74, y: -0.96, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1691124923}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1525877396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525877394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors: []
 --- !u!1 &1526561509
 GameObject:
   m_ObjectHideFlags: 0
@@ -24893,6 +25712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.032774635, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -25178,6 +25998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -25226,6 +26047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.04039049, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -25547,6 +26369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960337, b: 0.022012413, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -25595,6 +26418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -25908,6 +26732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -26022,6 +26847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960337, b: 0.022012413, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -26070,6 +26896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.9927062, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -26131,6 +26958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -26378,6 +27206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -26604,6 +27433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.0017576218, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -26718,6 +27548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -26860,6 +27691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -27109,6 +27941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -27334,6 +28167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -27802,6 +28636,43 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6812957707268474574, guid: dec683b599806244f8bc2958f4edafae, type: 3}
   m_PrefabInstance: {fileID: 1682389246}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1691124922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1691124923}
+  m_Layer: 5
+  m_Name: ROULETTE_DEALER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1691124923
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691124922}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 130176189}
+  - {fileID: 1525877395}
+  m_Father: {fileID: 98551759}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1699050374
 GameObject:
   m_ObjectHideFlags: 0
@@ -28031,6 +28902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -28145,6 +29017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -28331,6 +29204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -28614,6 +29488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -28742,6 +29617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -28794,6 +29670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -28846,6 +29723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -29026,6 +29904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.0017576218, g: 0, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -29488,6 +30367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -29639,6 +30519,43 @@ MonoBehaviour:
   size: 0.1
   color: {r: 0, g: 1, b: 0.7583308, a: 1}
   drawType: 0
+--- !u!1 &1802578690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1802578691}
+  m_Layer: 5
+  m_Name: LEFT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1802578691
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802578690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1847735725}
+  - {fileID: 530504394}
+  m_Father: {fileID: 234609094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1813396410
 GameObject:
   m_ObjectHideFlags: 0
@@ -29745,6 +30662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -29797,6 +30715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -30244,10 +31163,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
   - {fileID: 69418973}
+--- !u!1 &1847735724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1847735725}
+  - component: {fileID: 1847735726}
+  m_Layer: 5
+  m_Name: ROULETTE_LEFT_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1847735725
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847735724}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1802578691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.48, y: 2.535}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1847735726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847735724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 3
+  colorSphere: {r: 0, g: 0, b: 1, a: 1}
+  colorLine: {r: 1, g: 0, b: 0, a: 1}
+  neighbors:
+  - {fileID: 1932520579}
 --- !u!1 &1853491081
 GameObject:
   m_ObjectHideFlags: 0
@@ -30296,6 +31269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -30898,6 +31872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -31033,6 +32008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.032774635, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -31085,6 +32061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -31133,6 +32110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0.04039049, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -31181,6 +32159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 0, g: 1, b: 0.26993752, a: 1}
   neighbors:
@@ -31287,6 +32266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -31335,6 +32315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -31481,6 +32462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -31533,10 +32515,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
   - {fileID: 320480077}
+--- !u!1 &1938321303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1938321304}
+  - component: {fileID: 1938321305}
+  m_Layer: 5
+  m_Name: ROULETTE_RIGHT_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1938321304
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938321303}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.353, y: -2.047}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1938321305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938321303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 3
+  colorSphere: {r: 0, g: 0, b: 1, a: 1}
+  colorLine: {r: 1, g: 0, b: 0, a: 1}
+  neighbors:
+  - {fileID: 1932520579}
 --- !u!1 &1941176499
 GameObject:
   m_ObjectHideFlags: 0
@@ -31581,6 +32617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors: []
@@ -31632,6 +32669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -31755,6 +32793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 1, g: 0, b: 0.052653313, a: 1}
   neighbors:
@@ -32051,6 +33090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -32104,6 +33144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -32363,6 +33404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.1603772, g: 1, b: 0.90389776, a: 1}
   colorLine: {r: 1, g: 0, b: 0.052653313, a: 1}
   neighbors:
@@ -32858,6 +33900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0.032774635, g: 0.015686274, b: 1, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -33040,6 +34083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -33351,6 +34395,59 @@ PolygonCollider2D:
       - {x: 1.6374578, y: 0.9744463}
       - {x: 1.5087708, y: 1.0518862}
   m_UseDelaunayMesh: 0
+--- !u!1 &2060724370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2060724371}
+  - component: {fileID: 2060724372}
+  m_Layer: 5
+  m_Name: ROULETTE_ENTER_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2060724371
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060724370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.6, y: -2.94}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2060724372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060724370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors:
+  - {fileID: 714553124}
 --- !u!1 &2066791065
 GameObject:
   m_ObjectHideFlags: 0
@@ -33399,6 +34496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 0, g: 0, b: 0, a: 1}
   neighbors:
@@ -33451,6 +34549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -33753,6 +34852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 1, b: 0, a: 1}
   colorLine: {r: 0, g: 1, b: 0, a: 1}
   neighbors:
@@ -33890,6 +34990,7 @@ RectTransform:
   - {fileID: 1020539688}
   - {fileID: 38744693}
   - {fileID: 103736086}
+  - {fileID: 234609094}
   m_Father: {fileID: 98551759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -33941,6 +35042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 0, g: 0, b: 0, a: 1}
   colorLine: {r: 1, g: 0, b: 0.022886276, a: 1}
   neighbors:
@@ -33993,6 +35095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 1, b: 1, a: 1}
   colorLine: {r: 1, g: 1, b: 1, a: 1}
   neighbors:
@@ -34315,6 +35418,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2077423530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2118120397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2118120398}
+  - component: {fileID: 2118120399}
+  m_Layer: 5
+  m_Name: ROULETTE_ENTER_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2118120398
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118120397}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180533107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6.35, y: -3.35}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2118120399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118120397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationEnum: 0
+  colorSphere: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorLine: {r: 0, g: 1, b: 0, a: 1}
+  neighbors:
+  - {fileID: 1938321305}
+  - {fileID: 2060724372}
 --- !u!1 &2121097432
 GameObject:
   m_ObjectHideFlags: 0
@@ -34406,7 +35563,8 @@ MonoBehaviour:
     - {fileID: 1788165430}
     orderMin: 1
     orderMax: 29
-    staticObjs: []
+    staticObjs:
+    - {fileID: 678434869}
   - roomName: Right
     vertices:
     - {fileID: 1406240374}
@@ -34415,7 +35573,8 @@ MonoBehaviour:
     - {fileID: 1788165430}
     orderMin: 31
     orderMax: 59
-    staticObjs: []
+    staticObjs:
+    - {fileID: 480736719}
 --- !u!1 &2123123979
 GameObject:
   m_ObjectHideFlags: 0
@@ -34464,6 +35623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:
@@ -34516,6 +35676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378d51dc5154d0442b9fd4997ada7c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnum: 0
   colorSphere: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   colorLine: {r: 1, g: 0.21960784, b: 0.023529412, a: 1}
   neighbors:

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    public NpcRotationEnum RotationEnum => rotationEnum;
+
+    [SerializeField] private NpcRotationEnum rotationEnum;
+
     public Color colorSphere = Color.yellow;
     public Color colorLine = Color.green;
     public List<Node> neighbors = new List<Node>();

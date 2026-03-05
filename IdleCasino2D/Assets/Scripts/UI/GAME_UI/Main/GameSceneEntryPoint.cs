@@ -13,12 +13,16 @@ public class GameSceneEntryPoint : MonoBehaviour
     [SerializeField] private List<Node> nodesPokerStaff = new();
     [SerializeField] private List<Node> nodesBarStaff = new();
     [SerializeField] private Node nodeSongstress;
+    [SerializeField] private Node nodeRouletteStaff_1;
+    [SerializeField] private Node nodeRouletteStaff_2;
     [SerializeField] private List<Node> nodesHostess;
 
     [Header("NODES VISITOR")]
     [SerializeField] private List<Node> nodesEntranceQueue;
     [SerializeField] private List<Node> nodesSlot;
     [SerializeField] private List<Node> nodesWheel;
+    [SerializeField] private List<Node> nodesRoulette_1;
+    [SerializeField] private List<Node> nodesRoulette_2;
     [SerializeField] private List<Node> nodesPoker;
     [SerializeField] private List<Node> nodesExit;
     [SerializeField] private List<Node> nodesBar;
@@ -204,6 +208,18 @@ public class GameSceneEntryPoint : MonoBehaviour
 
             casinoEntities.Add(entity);
         }
+
+        var spotRoulette_1 = new RouletteSpotPresenter(new RouletteSpotModel(), viewContainer_World.GetView<RouletteSpotView>($"Roulette_1"));
+        spotRoulette_1.Initialize();
+        var entityRoulette_1 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_1, nodesRoulette_1[0], nodeRouletteStaff_1));
+        entityRoulette_1.Initialize();
+        casinoEntities.Add(entityRoulette_1);
+
+        var spotRoulette_2 = new RouletteSpotPresenter(new RouletteSpotModel(), viewContainer_World.GetView<RouletteSpotView>($"Roulette_2"));
+        spotRoulette_2.Initialize();
+        var entityRoulette_2 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_2, nodesRoulette_2[0], nodeRouletteStaff_2));
+        entityRoulette_2.Initialize();
+        casinoEntities.Add(entityRoulette_2);
 
         visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
         hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter, nodesHostess), viewContainer.GetView<HostessEntityView>());

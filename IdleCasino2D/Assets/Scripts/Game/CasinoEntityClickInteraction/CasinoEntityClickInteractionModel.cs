@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CasinoEntityClickInteractionModel
 {
-    private List<CasinoEntityClickInteractionAdapter> _casinoEntityClickInteractionAdapters = new();
+    private readonly List<CasinoEntityClickInteractionAdapter> _casinoEntityClickInteractionAdapters = new();
 
     public CasinoEntityClickInteractionModel(List<ICasinoEntityInfo> casinoEntities)
     {

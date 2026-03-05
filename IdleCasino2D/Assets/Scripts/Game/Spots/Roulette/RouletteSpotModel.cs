@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PokerSpotModel
+public class RouletteSpotModel
 {
     public void ActivateAnimation(string name)
     {
