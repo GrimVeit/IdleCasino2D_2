@@ -58,7 +58,7 @@ public class RouletteEntityModel
 
     private void OnVisitorDestination(INpc npc, Node node)
     {
-        npc.ActivateNpcRotation(NpcRotationEnum.BackRight);
+        npc.ActivateNpcRotation(node.RotationEnum);
         isVisitorReady = true;
 
         if (_dealer != null)

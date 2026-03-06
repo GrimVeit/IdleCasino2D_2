@@ -15,6 +15,7 @@ public class SpawnerVisitorView : View
     {
         var view = Instantiate(visitorPrefab, transformParentVisitors);
         view.transform.SetLocalPositionAndRotation(traspawnPoint.localPosition, visitorPrefab.transform.rotation);
+        view.SetSkin(UnityEngine.Random.Range(1, 5));
         var presenter = new VisitorPresenter(new VisitorModel(route), view);
         presenter.Initialize();
         presenter.Show();

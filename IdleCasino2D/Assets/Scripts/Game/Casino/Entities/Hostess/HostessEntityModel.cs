@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HostessEntityModel
@@ -107,7 +106,7 @@ public class HostessEntityModel
         else
         {
             _hostess.ActivateAnimation(HostessAnimationEnum.WaveHand);
-            _hostess.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+            _hostess.ActivateNpcRotation(node.RotationEnum);
 
             Coroutines.Start(ReturnToMainNode());
         }

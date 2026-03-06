@@ -36,6 +36,25 @@ public class VisitorView : View
             .SetEase(Ease.OutBack);
     }
 
+    public void SetSkin(int number)
+    {
+        switch (number)
+        {
+            case 1:
+                animations.SetSkin("mn01");
+                break;
+            case 2:
+                animations.SetSkin("mn02");
+                break;
+            case 3:
+                animations.SetSkin("mn03");
+                break;
+            case 4:
+                animations.SetSkin("mn04");
+                break;
+        }
+    }
+
     public void HideDestroy()
     {
         transform.DOScale(Vector3.zero, 0.25f)
@@ -165,6 +184,11 @@ public class VisitorAnimations
         visitorAnimations.ForEach(data => data.SetOrder(order));
     }
 
+    public void SetSkin(string name)
+    {
+        visitorAnimations.ForEach(data => data.SetSkin(name));
+    }
+
     public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum)
     {
         for (int i = 0; i < visitorAnimations.Count; i++)
@@ -189,6 +213,11 @@ public class VisitorAnimation
     public void SetOrder(int order)
     {
         skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = order;
+    }
+
+    public void SetSkin(string name)
+    {
+        skeletonAnimation.Skeleton.SetSkin(name);
     }
 
     public void Activate()
