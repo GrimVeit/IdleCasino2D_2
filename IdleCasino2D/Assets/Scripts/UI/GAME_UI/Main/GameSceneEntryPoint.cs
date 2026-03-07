@@ -262,6 +262,9 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private void Dispose()
     {
+        casinoEntityStorePresenter?.Dispose();
+        staffSpawnerPresenter?.Dispose();
+
         DeactivateEvents();
 
         soundPresenter?.Dispose();
@@ -273,9 +276,6 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoProfitPresenter?.Dispose();
 
         //touchCameraPresenter?.Dispose();
-
-        casinoEntityStorePresenter?.Dispose();
-        staffSpawnerPresenter?.Dispose();
         
         stateMachine?.Dispose();
     }
@@ -283,6 +283,33 @@ public class GameSceneEntryPoint : MonoBehaviour
     private void OnDestroy()
     {
         Dispose();
+    }
+
+    private void OnApplicationQuit()
+    {
+        Dispose();
+    }
+
+    void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            casinoProfitStorePresenter?.Dispose();
+            casinoEntityStorePresenter?.Dispose();
+            staffSpawnerPresenter?.Dispose();
+            bankPresenter?.Dispose();
+        }
+    }
+
+    void OnApplicationFocus(bool focusStatus)
+    {
+        if (!focusStatus)
+        {
+            casinoProfitStorePresenter?.Dispose();
+            casinoEntityStorePresenter?.Dispose();
+            staffSpawnerPresenter?.Dispose();
+            bankPresenter?.Dispose();
+        }
     }
 
     #region Output
