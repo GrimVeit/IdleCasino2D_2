@@ -40,6 +40,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private CasinoProfitStorePresenter casinoProfitStorePresenter;
     private CasinoProfitPresenter casinoProfitPresenter;
 
+    private CasinoEntityStorePresenter casinoEntityStorePresenter;
     private StaffSpawnerPresenter staffSpawnerPresenter;
     private SpawnerVisitorPresenter spawnerVisitorPresenter;
     private VisitorCounterTrafficPresenter visitorCounterTrafficPresenter;
@@ -87,10 +88,17 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
-        staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(), viewContainer.GetView<StaffSpawnerView>());
+        CreateCasinoEntities();
+
         spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(), viewContainer.GetView<SpawnerVisitorView>());
 
-        CreateCasinoEntities();
+        visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
+        hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter, nodesHostess), viewContainer.GetView<HostessEntityView>());
+        casinoEntities.Add(hostessEntityPresenter);
+
+        casinoEntityStorePresenter = new CasinoEntityStorePresenter(new CasinoEntityStoreModel(casinoEntities));
+
+        staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(casinoEntities), viewContainer.GetView<StaffSpawnerView>());
 
         visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter, casinoEntities));
 
@@ -119,6 +127,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoProfitStorePresenter.Initialize();
         casinoProfitPresenter.Initialize();
 
+        casinoEntityStorePresenter.Initialize();
         staffSpawnerPresenter.Initialize();
         spawnerVisitorPresenter.Initialize();
         visitorCounterTrafficPresenter.Initialize();
@@ -221,10 +230,6 @@ public class GameSceneEntryPoint : MonoBehaviour
         entityRoulette_2.Initialize();
         casinoEntities.Add(entityRoulette_2);
 
-        visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
-        hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter, nodesHostess), viewContainer.GetView<HostessEntityView>());
-        casinoEntities.Add(hostessEntityPresenter);
-
         Debug.Log("5");
     }
 
@@ -268,6 +273,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoProfitPresenter?.Dispose();
 
         //touchCameraPresenter?.Dispose();
+
+        casinoEntityStorePresenter?.Dispose();
+        staffSpawnerPresenter?.Dispose();
         
         stateMachine?.Dispose();
     }

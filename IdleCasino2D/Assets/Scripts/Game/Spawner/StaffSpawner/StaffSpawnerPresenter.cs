@@ -17,11 +17,15 @@ public class StaffSpawnerPresenter : ISpawnerStaffProvider, ISpawnerStaffListene
     public void Initialize()
     {
         ActivateEvents();
+
+        _model.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        _model.Dispose();
     }
 
     private void ActivateEvents()

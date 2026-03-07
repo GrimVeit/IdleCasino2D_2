@@ -1,10 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class StaffSpawnerModel
 {
     private readonly List<IStaff> _staffList = new();
+    private readonly List<ICasinoEntityStaff> _casinoEntityStaffList = new();
 
     private readonly Dictionary<StaffType, Func<IStaffModel>> _modelFactory = new()
     {
@@ -13,7 +14,6 @@ public class StaffSpawnerModel
         { StaffType.Songstress, () => new SongstressModel() },
         { StaffType.Hostess, () => new HostessModel() },
     };
-
     private readonly Dictionary<StaffType, Func<IStaffModel, IStaffView, IStaff>> _presenterFactory = new()
     {
         { StaffType.Croupier, (model, view) => new DealerPresenter((DealerModel)model, (DealerView)view) },
@@ -22,13 +22,74 @@ public class StaffSpawnerModel
         { StaffType.Hostess, (model, view) => new HostessPresenter((HostessModel) model, (HostessView)view) },
     };
 
+    private const string PlayerPrefsKey = "CasinoStaff";
+    private readonly List<StaffSaveData> _savedStaff = new();
+    private int _currentSkinId;
+    private int _currentEntityIndex;
+
     private ICasinoEntityStaff _currentCasinoEntityStaff;
+
+    public StaffSpawnerModel(List<ICasinoEntityInfo> casinoEntities)
+    {
+        foreach (var entity in casinoEntities)
+        {
+            if (entity is ICasinoEntityStaff casinoEntityStaff)
+            {
+                _casinoEntityStaffList.Add(casinoEntityStaff);
+            }
+        }
+    }
+
+    public void Initialize()
+    {
+        if (!PlayerPrefs.HasKey(PlayerPrefsKey))
+            return;
+
+        string json = PlayerPrefs.GetString(PlayerPrefsKey);
+
+        var container = JsonUtility.FromJson<StaffSaveContainer>(json);
+
+        List<StaffSaveData> saved = new();
+        saved.AddRange(container.Items);
+
+        foreach (var data in saved)
+        {
+            var entity = _casinoEntityStaffList[data.EntityIndex];
+
+            SpawnStaff(entity, data.StaffType, data.SkinId);
+        }
+    }
+
+    public void Dispose()
+    {
+        var container = new StaffSaveContainer
+        {
+            Items = _savedStaff
+        };
+
+        string json = JsonUtility.ToJson(container);
+
+        PlayerPrefs.SetString(PlayerPrefsKey, json);
+        PlayerPrefs.Save();
+    }
 
     #region Public Methods
 
     public void SpawnStaff(ICasinoEntityStaff casinoEntityStaff, StaffType type, int skinId)
     {
         _currentCasinoEntityStaff = casinoEntityStaff;
+
+        _currentEntityIndex = _casinoEntityStaffList.IndexOf(_currentCasinoEntityStaff);
+        _currentSkinId = skinId;
+
+        var data = new StaffSaveData
+        {
+            EntityIndex = _currentEntityIndex,
+            StaffType = type,
+            SkinId = skinId
+        };
+
+        _savedStaff.Add(data);
 
         OnSpawnPrefab?.Invoke(type, skinId);
     }
@@ -71,4 +132,18 @@ public class StaffSpawnerModel
     public event Action<IStaff> OnAddStaff;
 
     #endregion
+}
+
+[Serializable]
+public class StaffSaveData
+{
+    public int EntityIndex;
+    public StaffType StaffType;
+    public int SkinId;
+}
+
+[Serializable]
+public class StaffSaveContainer
+{
+    public List<StaffSaveData> Items = new();
 }
