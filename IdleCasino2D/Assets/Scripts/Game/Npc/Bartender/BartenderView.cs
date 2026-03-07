@@ -41,6 +41,11 @@ public class BartenderView : View, IStaffView
         animations.SetOrder(order);
     }
 
+    public void SetSkin(string name)
+    {
+        animations.SetSkin(name);
+    }
+
     public void ActivateAnimation(BartenderAnimationEnum visitorAnimation)
     {
         animations.ActivateAnimation(visitorAnimation);
@@ -67,6 +72,11 @@ public class BartenderAnimations
         bartenderAnimations.ForEach(data => data.SetOrder(order));
     }
 
+    public void SetSkin(string name)
+    {
+        bartenderAnimations.ForEach(data => data.SetSKin(name));
+    }
+
     public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum)
     {
         for (int i = 0; i < bartenderAnimations.Count; i++)
@@ -91,6 +101,11 @@ public class BartenderAnimation
     public void SetOrder(int order)
     {
         skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = order;
+    }
+
+    public void SetSKin(string name)
+    {
+        skeletonAnimation.Skeleton.SetSkin(name);
     }
 
     public void Activate()

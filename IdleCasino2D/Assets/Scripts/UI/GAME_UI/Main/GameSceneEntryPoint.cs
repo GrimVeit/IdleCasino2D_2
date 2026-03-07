@@ -248,14 +248,6 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            staffSpawnerPresenter.SetStaff(casinoEntities[15] as ICasinoEntityStaff, StaffType.Croupier);
-        }
-    }
-
     private void Deactivate()
     {
         clickDispatcherPresenter?.Deactivate();

@@ -68,6 +68,11 @@ public class HostessView : View, IStaffView
         animations.SetOrder(order);
     }
 
+    public void SetSkin(string name)
+    {
+        animations.SetSkin(name);
+    }
+
     public void SetMove(Node node)
     {
         tweenMove?.Kill();
@@ -166,6 +171,11 @@ public class HostessAnimations
         visitorAnimations.ForEach(data => data.SetOrder(order));
     }
 
+    public void SetSkin(string name)
+    {
+        visitorAnimations.ForEach(data => data.SetSkin(name));
+    }
+
     public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum)
     {
         for (int i = 0; i < visitorAnimations.Count; i++)
@@ -190,6 +200,11 @@ public class HostessAnimation
     public void SetOrder(int order)
     {
         skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = order;
+    }
+
+    public void SetSkin(string name)
+    {
+        skeletonAnimation.Skeleton.SetSkin(name);
     }
 
     public void Activate()

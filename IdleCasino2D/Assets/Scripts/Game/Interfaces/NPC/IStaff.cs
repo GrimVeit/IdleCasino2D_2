@@ -11,4 +11,7 @@ public interface IStaff : INpc
 }
 
 public interface IStaffModel { }
-public interface IStaffView { }
+public interface IStaffView 
+{
+    void SetSkin(string name);
+}

@@ -26,11 +26,11 @@ public class StaffSpawnerModel
 
     #region Public Methods
 
-    public void SpawnStaff(ICasinoEntityStaff casinoEntityStaff, StaffType type)
+    public void SpawnStaff(ICasinoEntityStaff casinoEntityStaff, StaffType type, int skinId)
     {
         _currentCasinoEntityStaff = casinoEntityStaff;
 
-        OnSpawnPrefab?.Invoke(type);
+        OnSpawnPrefab?.Invoke(type, skinId);
     }
 
     public void CreateStaff(StaffType type, IStaffView view)
@@ -66,7 +66,7 @@ public class StaffSpawnerModel
 
     #region Output
 
-    public event Action<StaffType> OnSpawnPrefab;
+    public event Action<StaffType, int> OnSpawnPrefab;
 
     public event Action<IStaff> OnAddStaff;
 

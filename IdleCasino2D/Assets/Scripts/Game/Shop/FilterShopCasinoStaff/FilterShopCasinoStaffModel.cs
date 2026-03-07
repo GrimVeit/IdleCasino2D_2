@@ -110,7 +110,7 @@ public class FilterShopCasinoStaffModel
         }
 
         _moneyProvider.SendMoney(-_currentStaffData.Price);
-        _spawnerStaffProvider.SetStaff(availableEntity.CasinoEntityStaff, _currentStaffData.StaffType);
+        _spawnerStaffProvider.SetStaff(availableEntity.CasinoEntityStaff, _currentStaffData.StaffType, _currentStaffData.SkinId);
         OnStaffPurchased?.Invoke();
 
         CancelSelection();
@@ -162,7 +162,7 @@ public class FilterShopCasinoStaffModel
         if (dto.CasinoEntityStaff.PersonalType != _currentStaffData.StaffType) return;
 
         _moneyProvider.SendMoney(-_currentStaffData.Price);
-        _spawnerStaffProvider.SetStaff(dto.CasinoEntityStaff, _currentStaffData.StaffType);
+        _spawnerStaffProvider.SetStaff(dto.CasinoEntityStaff, _currentStaffData.StaffType, _currentStaffData.SkinId);
         OnStaffPurchased?.Invoke();
 
         CancelSelection();

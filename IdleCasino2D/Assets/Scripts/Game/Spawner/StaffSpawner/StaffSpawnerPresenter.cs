@@ -50,14 +50,14 @@ public class StaffSpawnerPresenter : ISpawnerStaffProvider, ISpawnerStaffListene
 
     #region Input
 
-    public void SetStaff(ICasinoEntityStaff casinoEntity, StaffType type) => _model.SpawnStaff(casinoEntity, type);
+    public void SetStaff(ICasinoEntityStaff casinoEntity, StaffType type, int skinId) => _model.SpawnStaff(casinoEntity, type, skinId);
 
     #endregion
 }
 
 public interface ISpawnerStaffProvider
 {
-    public void SetStaff(ICasinoEntityStaff casinoEntity, StaffType type);
+    public void SetStaff(ICasinoEntityStaff casinoEntity, StaffType type, int skinId);
 }
 
 public interface ISpawnerStaffListener

@@ -15940,7 +15940,7 @@ Transform:
   m_GameObject: {fileID: 869856768}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.76, y: -9.59, z: 0}
+  m_LocalPosition: {x: 8.76, y: -9.59, z: -20}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -28477,6 +28477,26 @@ MonoBehaviour:
   bartenderPrefab: {fileID: 6953465716999619075, guid: be9fb82e05b0eaa4088ecf77f41c462b, type: 3}
   songstressPrefab: {fileID: 4232863239559052811, guid: 0e0b3a907aae58140a708ab972879d64, type: 3}
   hostessPrefab: {fileID: 6066809328746140588, guid: e0afe267551df354f9e298c36cec7389, type: 3}
+  dealerSkins:
+  - cr01
+  - cr02
+  - cr03
+  - cr04
+  bartenderSkins:
+  - br01
+  - br02
+  - br03
+  - br04
+  songstressSkins:
+  - sg01
+  - sg02
+  - sg03
+  - sg04
+  hostessSkins:
+  - hs1
+  - hs2
+  - hs3
+  - hs4
   transformParentVisitors: {fileID: 783153910}
 --- !u!1 &1675147596
 GameObject:

@@ -41,6 +41,11 @@ public class SongstressView : View, IStaffView
         animations.SetOrder(order);
     }
 
+    public void SetSkin(string name)
+    {
+        animations.SetSkin(name);
+    }
+
     public void ActivateAnimation(SongstressAnimationEnum visitorAnimation)
     {
         animations.ActivateAnimation(visitorAnimation);
@@ -67,6 +72,11 @@ public class SongstressAnimations
         songstressAnimations.ForEach(data => data.SetOrder(order));
     }
 
+    public void SetSkin(string name)
+    {
+        songstressAnimations.ForEach(data => data.SetSkin(name));
+    }
+
     public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum)
     {
         for (int i = 0; i < songstressAnimations.Count; i++)
@@ -91,6 +101,11 @@ public class SongstressAnimation
     public void SetOrder(int order)
     {
         skeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = order;
+    }
+
+    public void SetSkin(string name)
+    {
+        skeletonAnimation.Skeleton.SetSkin(name);
     }
 
     public void Activate()
