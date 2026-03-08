@@ -216,5 +216,19 @@ public class PokerEntityModel
     }
 
     #endregion
+
+    #region HIGHLIGHT
+
+    public void ActivateHighlight()
+    {
+        _pokerSpot.ActivateHightlight();
+    }
+
+    public void DeactivateHighlight()
+    {
+        _pokerSpot.DeactivateHighlight();
+    }
+
+    #endregion
 }
 

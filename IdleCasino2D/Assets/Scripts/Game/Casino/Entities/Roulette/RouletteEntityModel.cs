@@ -15,7 +15,7 @@ public class RouletteEntityModel
     private readonly List<IVisitor> visitors = new();
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
-    private readonly IGameSpot _pokerSpot;
+    private readonly IGameSpot _rouletteSpot;
     private IDealer _dealer;
     private IEnumerator gameRoutine;
 
@@ -27,19 +27,19 @@ public class RouletteEntityModel
     public RouletteEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, IGameSpot gameSpot, Node nodePlaceVisitor, Node nodePlaceStaff)
     {
         _casinoProfitStoreInfo = casinoProfitStoreInfo;
-        _pokerSpot = gameSpot;
+        _rouletteSpot = gameSpot;
         _nodePlaceVisitor = nodePlaceVisitor;
         _nodePlaceStaff = nodePlaceStaff;
     }
 
     public void Initialize()
     {
-        _pokerSpot.OnClick += SpotClick;
+        _rouletteSpot.OnClick += SpotClick;
     }
 
     public void Dispose()
     {
-        _pokerSpot.OnClick -= SpotClick;
+        _rouletteSpot.OnClick -= SpotClick;
     }
 
     public void SetStaff(IStaff newDealer)
@@ -110,13 +110,13 @@ public class RouletteEntityModel
         isGameRunning = true;
 
         _dealer?.ActivateAnimation(DealerAnimationEnum.Game);
-        _pokerSpot.ActivateAnimation("game");
+        _rouletteSpot.ActivateAnimation("game");
         visitor.ActivatePlay();
 
         yield return new WaitForSeconds(5f);
 
         _dealer?.ActivateAnimation(DealerAnimationEnum.Idle);
-        _pokerSpot.ActivateAnimation("idle");
+        _rouletteSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
         OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Poker));
 
@@ -158,13 +158,13 @@ public class RouletteEntityModel
     public void Open()
     {
         isOpen = true;
-        _pokerSpot.ActivateAnimation("idle");
+        _rouletteSpot.ActivateAnimation("idle");
     }
 
     public void Close()
     {
         isOpen = false;
-        _pokerSpot.ActivateAnimation("not open");
+        _rouletteSpot.ActivateAnimation("not open");
     }
 
     #endregion
@@ -217,6 +217,20 @@ public class RouletteEntityModel
         Debug.Log("CLICK ENTITY");
 
         OnSpotClick?.Invoke();
+    }
+
+    #endregion
+
+    #region HIGHLIGHT
+
+    public void ActivateHighlight()
+    {
+        _rouletteSpot.ActivateHightlight();
+    }
+
+    public void DeactivateHighlight()
+    {
+        _rouletteSpot.DeactivateHighlight();
     }
 
     #endregion

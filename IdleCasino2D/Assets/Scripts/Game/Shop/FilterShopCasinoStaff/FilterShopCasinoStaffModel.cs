@@ -23,8 +23,9 @@ public class FilterShopCasinoStaffModel
             {
                 ICasinoEntitySpotClickListener clickListener = entity as ICasinoEntitySpotClickListener;
                 ICasinoEntityInteractiveProvider interactiveProvider = entity as ICasinoEntityInteractiveProvider;
+                ICasinoEntityHighlightProvider highlight = entity as ICasinoEntityHighlightProvider;
 
-                var dto = new CasinoEntityStaffAdapter(entity, staff, clickListener, interactiveProvider);
+                var dto = new CasinoEntityStaffAdapter(entity, staff, clickListener, interactiveProvider, highlight);
                 dto.OnCasinoSpotClicked += OnSpotClick;
                 dto.Initialize();
 
@@ -62,6 +63,11 @@ public class FilterShopCasinoStaffModel
         _currentStaffData = null;
 
         ActivateAll();
+
+        foreach (var d in _casinoEntities)
+        {
+            d.CasinoEntityHighlightProvider?.DeactivateHighlight();
+        }
     }
 
     private void SetStaffData(ShopCasinoStaffData staffData)
@@ -132,6 +138,7 @@ public class FilterShopCasinoStaffModel
             {
                 if (isAvailable)
                 {
+                    dto.CasinoEntityHighlightProvider?.ActivateHighlight();
                     dto.CasinoEntityInteractiveProvider.ActivateEntityInteractive();
                 }
                 else
@@ -180,6 +187,7 @@ public class FilterShopCasinoStaffModel
     {
         foreach (var d in _casinoEntities)
         {
+            d.CasinoEntityHighlightProvider?.DeactivateHighlight();
             d.CasinoEntityInteractiveProvider?.DeactivateEntityInteractive();
         }
     }
@@ -201,6 +209,7 @@ public class CasinoEntityStaffAdapter
 
     public ICasinoEntitySpotClickListener SpotClickListener { get; }
     public ICasinoEntityInteractiveProvider CasinoEntityInteractiveProvider { get; }
+    public ICasinoEntityHighlightProvider CasinoEntityHighlightProvider { get; }
 
 
     public CasinoEntityType CasinoEntityType => CasinoEntityInfo.CasinoEntityType;
@@ -213,13 +222,15 @@ public class CasinoEntityStaffAdapter
         ICasinoEntityStaff casinoEntityStaff,
 
         ICasinoEntitySpotClickListener casinoEntitySpotClick = null,
-        ICasinoEntityInteractiveProvider casinoEntityInteractiveProvider = null)
+        ICasinoEntityInteractiveProvider casinoEntityInteractiveProvider = null,
+        ICasinoEntityHighlightProvider casinoEntityHighlightProvider = null)
     {
         CasinoEntityInfo = casinoEntityInfo;
         CasinoEntityStaff = casinoEntityStaff;
 
         SpotClickListener = casinoEntitySpotClick;
         CasinoEntityInteractiveProvider = casinoEntityInteractiveProvider;
+        CasinoEntityHighlightProvider = casinoEntityHighlightProvider;
     }
 
     private void CasinoSpotClicked()

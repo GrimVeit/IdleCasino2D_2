@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class ShopSpotPanel_Game : MovePanel
 {
     [SerializeField] private UIEffectCombination effectCombination;
     [SerializeField] private Button buttonBack;
+    [SerializeField] private SkeletonGraphic skeletonGraphic_Star;
 
     public override void Initialize()
     {
@@ -30,6 +32,8 @@ public class ShopSpotPanel_Game : MovePanel
     public override void ActivatePanel()
     {
         base.ActivatePanel();
+
+        skeletonGraphic_Star.AnimationState.SetAnimation(0, "animation", false);
 
         effectCombination.ActivateEffect();
     }

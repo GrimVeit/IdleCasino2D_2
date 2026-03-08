@@ -21,7 +21,7 @@ public class BankModel
 
     public void Destroy()
     {
-        PlayerPrefs.SetInt(BANK_MONEY, money);
+        Save();
     }
 
     public void SendMoney(int money)
@@ -40,6 +40,11 @@ public class BankModel
         }
         this.money += money;
         OnChangeMoney?.Invoke(this.money);
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt(BANK_MONEY, money);
     }
 
     public bool CanAfford(float bet)

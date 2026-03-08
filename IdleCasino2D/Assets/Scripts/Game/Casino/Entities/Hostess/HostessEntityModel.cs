@@ -36,9 +36,10 @@ public class HostessEntityModel
             if (entity is ICasinoEntitySpotClickListener clickListener &&
                 entity is ICasinoEntityInteractiveProvider interactiveProvider &&
                 entity is ICasinoEntityVisitorTraffic visitorTraffic &&
+                entity is ICasinoEntityHighlightProvider highlight &&
                 entity.CasinoEntityType != CasinoEntityType.EntranceQueue)
             {
-                var dto = new CasinoEntityHostessTargetAdapter(i, entity, clickListener, interactiveProvider, visitorTraffic);
+                var dto = new CasinoEntityHostessTargetAdapter(i, entity, clickListener, interactiveProvider, visitorTraffic, highlight);
                 dto.OnCasinoSpotClicked += OnSpotClick;
                 dto.Initialize();
                 _casinoEntities.Add(dto);
@@ -200,6 +201,9 @@ public class HostessEntityModel
 
         ActivateAll();
 
+        foreach (var d in _casinoEntities)
+            d.CasinoEntityHighlightProvider?.DeactivateHighlight();
+
         OnLeave?.Invoke();
     }
 
@@ -222,7 +226,10 @@ public class HostessEntityModel
             .ToList();
 
         foreach (var c in candidates)
+        {
+            c.CasinoEntityHighlightProvider?.ActivateHighlight();
             c.CasinoEntityInteractiveProvider?.ActivateEntityInteractive();
+        }
 
         OnHostessOpenChoose?.Invoke(nextTarget);
     }
@@ -241,6 +248,9 @@ public class HostessEntityModel
 
         ActivateAll();
 
+        foreach (var d in _casinoEntities)
+            d.CasinoEntityHighlightProvider?.DeactivateHighlight();
+
         OnSuccessAssign?.Invoke();
     }
 
@@ -251,6 +261,9 @@ public class HostessEntityModel
 
     public void DeactivateInteractiveCasinoEntity()
     {
+        foreach (var d in _casinoEntities)
+            d.CasinoEntityHighlightProvider?.DeactivateHighlight();
+
         isActiveCasinoEntityInteractive = false;
     }
 
@@ -296,6 +309,7 @@ public class CasinoEntityHostessTargetAdapter
     public ICasinoEntitySpotClickListener SpotClickListener { get; }
     public ICasinoEntityVisitorTraffic CasinoEntityVisitorTraffic { get; }
     public ICasinoEntityInteractiveProvider CasinoEntityInteractiveProvider { get; }
+    public ICasinoEntityHighlightProvider CasinoEntityHighlightProvider { get; }
 
     public event Action<CasinoEntityHostessTargetAdapter> OnCasinoSpotClicked;
 
@@ -304,12 +318,14 @@ public class CasinoEntityHostessTargetAdapter
         ICasinoEntityInfo casinoEntityInfo,
         ICasinoEntitySpotClickListener casinoEntitySpotClick,
         ICasinoEntityInteractiveProvider casinoEntityInteractiveProvider,
-        ICasinoEntityVisitorTraffic casinoEntityVisitorTraffic)
+        ICasinoEntityVisitorTraffic casinoEntityVisitorTraffic,
+        ICasinoEntityHighlightProvider casinoEntityHighlightProvider)
     {
         CasinoEntityInfo = casinoEntityInfo;
         SpotClickListener = casinoEntitySpotClick;
         CasinoEntityInteractiveProvider = casinoEntityInteractiveProvider;
         CasinoEntityVisitorTraffic = casinoEntityVisitorTraffic;
+        CasinoEntityHighlightProvider = casinoEntityHighlightProvider;
     }
 
     private void CasinoSpotClicked()

@@ -52,5 +52,8 @@ public class RouletteSpotPresenter : IGameSpot
     #region Input
     public void ActivateAnimation(string name) => _model.ActivateAnimation(name);
 
+    public void ActivateHightlight() => _view.ActivateHighlight();
+    public void DeactivateHighlight() => _view.DeactivateHighlight();
+
     #endregion
 }

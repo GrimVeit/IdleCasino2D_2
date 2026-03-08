@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RouletteEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual, ICasinoEntityStaff, ICasinoEntityInteractiveProvider
+public class RouletteEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual, ICasinoEntityStaff, ICasinoEntityInteractiveProvider, ICasinoEntityHighlightProvider
 {
     private readonly RouletteEntityModel _model;
 
@@ -87,6 +87,14 @@ public class RouletteEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator
     #region MANUAL
 
     public void ManualStartGame() => _model.ManualStartGame();
+
+    #endregion
+
+    #region HIGHLIGHT
+
+    public void ActivateHighlight() => _model.ActivateHighlight();
+
+    public void DeactivateHighlight() => _model.DeactivateHighlight();
 
     #endregion
 }

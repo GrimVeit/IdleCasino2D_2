@@ -296,8 +296,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         {
             casinoProfitStorePresenter?.Dispose();
             casinoEntityStorePresenter?.Dispose();
-            staffSpawnerPresenter?.Dispose();
-            bankPresenter?.Dispose();
+            staffSpawnerPresenter?.Save();
+            bankPresenter?.Save();
         }
     }
 
@@ -307,8 +307,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         {
             casinoProfitStorePresenter?.Dispose();
             casinoEntityStorePresenter?.Dispose();
-            staffSpawnerPresenter?.Dispose();
-            bankPresenter?.Dispose();
+            staffSpawnerPresenter?.Save();
+            bankPresenter?.Save();
         }
     }
 

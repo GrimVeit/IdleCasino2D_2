@@ -196,4 +196,18 @@ public class WheelEntityModel
     }
 
     #endregion
+
+    #region HIGHLIGHT
+
+    public void ActivateHighlight()
+    {
+        _wheelSpot.ActivateHightlight();
+    }
+
+    public void DeactivateHighlight()
+    {
+        _wheelSpot.DeactivateHighlight();
+    }
+
+    #endregion
 }

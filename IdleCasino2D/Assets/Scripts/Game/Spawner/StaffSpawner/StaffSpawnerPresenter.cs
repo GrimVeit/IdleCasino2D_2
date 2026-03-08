@@ -56,6 +56,8 @@ public class StaffSpawnerPresenter : ISpawnerStaffProvider, ISpawnerStaffListene
 
     public void SetStaff(ICasinoEntityStaff casinoEntity, StaffType type, int skinId) => _model.SpawnStaff(casinoEntity, type, skinId);
 
+    public void Save() => _model.Dispose();
+
     #endregion
 }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual, ICasinoEntityStaff, ICasinoEntityInteractiveProvider
+public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, ICasinoEntityVisitorTraffic, ICasinoEntityProfit, ICasinoEntitySpotClickListener, ICasinoEntityManual, ICasinoEntityStaff, ICasinoEntityInteractiveProvider, ICasinoEntityHighlightProvider
 {
     private readonly PokerEntityModel _model;
 
@@ -88,6 +88,14 @@ public class PokerEntityPresenter : ICasinoEntityInfo, ICasinoEntityActivator, I
     #region MANUAL
 
     public void ManualStartGame() => _model.ManualStartGame();
+
+    #endregion
+
+    #region HIGHLIGHT
+
+    public void ActivateHighlight() => _model.ActivateHighlight();
+
+    public void DeactivateHighlight() => _model.DeactivateHighlight();
 
     #endregion
 }

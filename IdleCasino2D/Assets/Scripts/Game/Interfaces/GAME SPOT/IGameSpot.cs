@@ -10,4 +10,7 @@ public interface IGameSpot
 
     //ANIMATIONS
     public void ActivateAnimation(string name);
+
+    public void ActivateHightlight();
+    public void DeactivateHighlight();
 }

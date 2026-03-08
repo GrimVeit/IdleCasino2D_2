@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ public class RouletteSpotView : View, IIdentify
     [SerializeField] private string id;
     [SerializeField] private ClickItem itemRouletteTable;
     [SerializeField] private SkeletonAnimation animationSlot;
+    [SerializeField] private Transform transformStar;
+
+    private Tween tweenHighlight;
 
     public void Initialize()
     {
@@ -17,6 +21,20 @@ public class RouletteSpotView : View, IIdentify
     public void Dispose()
     {
         itemRouletteTable.OnClick -= Click;
+    }
+
+    public void ActivateHighlight()
+    {
+        tweenHighlight?.Kill();
+
+        tweenHighlight = transformStar.DOScale(1, 0.2f);
+    }
+
+    public void DeactivateHighlight()
+    {
+        tweenHighlight?.Kill();
+
+        tweenHighlight = transformStar.DOScale(0, 0.2f);
     }
 
     public void SetAnimation(string name)

@@ -42,6 +42,8 @@ public class BankPresenter : IMoneyProvider, IMoneyEventsProvider
         return _model.CanAfford(bet);
     }
 
+    public void Save() => _model.Save();
+
     public float GetMoney() => _model.Money;
 
     public event Action<float> OnChangeMoney

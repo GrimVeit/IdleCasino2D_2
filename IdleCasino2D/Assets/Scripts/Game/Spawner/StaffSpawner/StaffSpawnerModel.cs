@@ -77,10 +77,14 @@ public class StaffSpawnerModel
 
     public void SpawnStaff(ICasinoEntityStaff casinoEntityStaff, StaffType type, int skinId)
     {
+        Debug.Log($"SPAWN STAFF 1 - {type} and {skinId}");
+
         _currentCasinoEntityStaff = casinoEntityStaff;
 
         _currentEntityIndex = _casinoEntityStaffList.IndexOf(_currentCasinoEntityStaff);
         _currentSkinId = skinId;
+
+        Debug.Log("SPAWN STAFF 2");
 
         var data = new StaffSaveData
         {
@@ -89,7 +93,11 @@ public class StaffSpawnerModel
             SkinId = skinId
         };
 
+        Debug.Log("SPAWN STAFF 3");
+
         _savedStaff.Add(data);
+
+        Debug.Log("SPAWN STAFF 4");
 
         OnSpawnPrefab?.Invoke(type, skinId);
     }

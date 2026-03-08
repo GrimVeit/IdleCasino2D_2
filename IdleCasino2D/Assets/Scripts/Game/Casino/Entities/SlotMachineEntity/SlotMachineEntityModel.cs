@@ -195,4 +195,18 @@ public class SlotMachineEntityModel
     }
 
     #endregion
+
+    #region HIGHLIGHT
+
+    public void ActivateHighlight()
+    {
+        _slotSpot.ActivateHightlight();
+    }
+
+    public void DeactivateHighlight()
+    {
+        _slotSpot.DeactivateHighlight();
+    }
+
+    #endregion
 }

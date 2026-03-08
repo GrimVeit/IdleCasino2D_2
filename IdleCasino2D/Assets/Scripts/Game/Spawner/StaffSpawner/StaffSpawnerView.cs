@@ -21,6 +21,8 @@ public class StaffSpawnerView : View
 
     public void SpawnVisitor(StaffType type, int skinId)
     {
+        Debug.Log("SPAWN STAFF");
+
         IStaffView viewInstance = type switch
         {
             StaffType.Croupier => Instantiate(dealerPrefab, transformParentVisitors),

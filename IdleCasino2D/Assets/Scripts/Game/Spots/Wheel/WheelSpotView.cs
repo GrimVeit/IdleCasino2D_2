@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class WheelSpotView : View, IIdentify
     [SerializeField] private string id;
     [SerializeField] private ClickItem itemPokerTable;
     [SerializeField] private SkeletonAnimation animationWheel;
+    [SerializeField] private Transform transformStar;
+
+    private Tween tweenHighlight;
 
     public void Initialize()
     {
@@ -19,6 +23,20 @@ public class WheelSpotView : View, IIdentify
     public void Dispose()
     {
         itemPokerTable.OnClick -= Click;
+    }
+
+    public void ActivateHighlight()
+    {
+        tweenHighlight?.Kill();
+
+        tweenHighlight = transformStar.DOScale(1, 0.2f);
+    }
+
+    public void DeactivateHighlight()
+    {
+        tweenHighlight?.Kill();
+
+        tweenHighlight = transformStar.DOScale(0, 0.2f);
     }
 
     public void SetAnimation(string name)
