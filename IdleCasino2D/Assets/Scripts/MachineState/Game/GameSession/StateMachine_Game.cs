@@ -22,11 +22,12 @@ public class StateMachine_Game : IStateMachineProvider
         IFilterShopCasinoStaffListener filterShopCasinoStaffListener,
         IHostessEntityControllerListener hostessEntityControllerListener,
         IHostessEntityControllerProvider hostessEntityControllerProvider,
-        ICasinoProfitListener casinoProfitListener
+        ICasinoProfitListener casinoProfitListener,
+        IAdministratorVisualProvider administratorVisualProvider
         )
     {
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
-        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener);
+        states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
         states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot, shopCasinoPersonalListener);
 

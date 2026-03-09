@@ -15,7 +15,9 @@ public class MainState_Game : IState
     private readonly IHostessEntityControllerProvider _hostessEntityControllerProvider;
     private readonly IHostessEntityControllerListener _hostessEntityControllerListener;
 
-    public MainState_Game(IStateMachineProvider machineProvider, IVisitorCounterTrafficProvider visitorTrafficProvider, ITouchCameraProvider touchCameraProvider, UIGameRoot sceneRoot, IClickDispatcherProvider clickDispatcherProvider, IShopCasinoEntitySpotListener shopCasinoEntitySpotListener, IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider, IHostessEntityControllerProvider hostessEntityControllerProvider, IHostessEntityControllerListener hostessEntityControllerListener)
+    private readonly IAdministratorVisualProvider _administratorVisualProvider;
+
+    public MainState_Game(IStateMachineProvider machineProvider, IVisitorCounterTrafficProvider visitorTrafficProvider, ITouchCameraProvider touchCameraProvider, UIGameRoot sceneRoot, IClickDispatcherProvider clickDispatcherProvider, IShopCasinoEntitySpotListener shopCasinoEntitySpotListener, IShopCasinoEntitySpotProvider shopCasinoEntitySpotProvider, IHostessEntityControllerProvider hostessEntityControllerProvider, IHostessEntityControllerListener hostessEntityControllerListener, IAdministratorVisualProvider administratorVisualProvider)
     {
         _machineProvider = machineProvider;
         _visitorCounterTrafficProvider = visitorTrafficProvider;
@@ -26,6 +28,7 @@ public class MainState_Game : IState
         _shopCasinoEntitySpotProvider = shopCasinoEntitySpotProvider;
         _hostessEntityControllerProvider = hostessEntityControllerProvider;
         _hostessEntityControllerListener = hostessEntityControllerListener;
+        _administratorVisualProvider = administratorVisualProvider;
     }
 
     public void EnterState()
@@ -43,6 +46,7 @@ public class MainState_Game : IState
 
         _shopCasinoEntitySpotProvider.ActivateListener();
         _hostessEntityControllerProvider.ActivateEntranceQueueInteractive();
+        _administratorVisualProvider.Deactivate();
     }
 
     public void ExitState()
@@ -58,6 +62,7 @@ public class MainState_Game : IState
 
         _shopCasinoEntitySpotProvider.DeactivateListener();
         _hostessEntityControllerProvider.DeactivateEntranceQueueInteractive();
+        _administratorVisualProvider.Activate();
     }
 
     private void ChangeStateToUpgrade()

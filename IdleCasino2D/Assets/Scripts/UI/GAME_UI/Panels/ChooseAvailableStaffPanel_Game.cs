@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,7 @@ public class ChooseAvailableStaffPanel_Game : MovePanel
 {
     [SerializeField] private UIEffectCombination effectCombination;
     [SerializeField] private Button buttonExit;
+    [SerializeField] private SkeletonGraphic skeletonGraphic_Star;
 
     public override void Initialize()
     {
@@ -32,6 +32,8 @@ public class ChooseAvailableStaffPanel_Game : MovePanel
         base.ActivatePanel();
 
         effectCombination.ActivateEffect();
+
+        skeletonGraphic_Star.AnimationState.SetAnimation(0, "animation", false);
     }
 
     public override void DeactivatePanel()

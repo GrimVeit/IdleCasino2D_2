@@ -61,6 +61,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private HostessEntityPresenter hostessEntityPresenter;
 
+    private AdministratorPresenter administratorPresenter;
+
     private StateMachine_Game stateMachine;
 
     private readonly List<ICasinoEntityInfo> casinoEntities = new();
@@ -115,6 +117,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         shopCasinoPersonalPresenter = new ShopCasinoPersonalPresenter(new ShopCasinoPersonalModel(shopCasinoPersonalDatas, bankPresenter), viewContainer.GetView<ShopCasinoPersonalView>());
         filterShopCasinoStaffPresenter = new FilterShopCasinoStaffPresenter(new FilterShopCasinoStaffModel(casinoEntities, bankPresenter, staffSpawnerPresenter, shopCasinoPersonalPresenter), viewContainer.GetView<FilterShopCasinoStaffView>());
 
+        administratorPresenter = new AdministratorPresenter(viewContainer.GetView<AdministratorView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -133,6 +137,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         visitorCounterTrafficPresenter.Initialize();
         visitorPathTrafficPresenter.Initialize();
         hostessEntityPresenter.Initialize();
+        administratorPresenter.Initialize();
 
         stateMachine = new StateMachine_Game
             (sceneRoot, 
@@ -146,7 +151,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             filterShopCasinoStaffPresenter,
             hostessEntityPresenter,
             hostessEntityPresenter,
-            casinoProfitPresenter);
+            casinoProfitPresenter,
+            administratorPresenter);
 
         stateMachine.Initialize();
         touchCameraPresenter.Initialize();
