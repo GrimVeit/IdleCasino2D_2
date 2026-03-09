@@ -5,19 +5,25 @@ using UnityEngine;
 
 public class BarEntityModel
 {
-    public bool IsOpen => true;
-    public bool CanJoin => IsOpen &&_bartender != null && visitors.Count < _nodePlaceVisitors.Count;
+    public bool CanJoin => _bartender != null && visitors.Count < _nodePlaceVisitors.Count;
     public int CountStaff => _bartender != null ? 1 : 0;
 
     private readonly List<Node> _nodePlaceVisitors;
     private readonly List<Node> _nodesPlaceStaff;
+
     private readonly List<IVisitor> visitors = new();
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
-    private IBartender _bartender;
-    private IEnumerator gameRoutine;
 
-    public BarEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, List<Node> nodePlaceVisitors, List<Node> nodesPlaceStaff)
+    private IBartender _bartender;
+
+    private readonly Dictionary<IVisitor, int> visitorSlots = new();
+    private readonly Dictionary<int, IEnumerator> slotRoutines = new();
+
+    public BarEntityModel(
+        ICasinoProfitStoreInfo casinoProfitStoreInfo,
+        List<Node> nodePlaceVisitors,
+        List<Node> nodesPlaceStaff)
     {
         _casinoProfitStoreInfo = casinoProfitStoreInfo;
         _nodePlaceVisitors = nodePlaceVisitors;
@@ -27,10 +33,14 @@ public class BarEntityModel
     public void Initialize() { }
     public void Dispose() { }
 
+    // ======================== STAFF ========================
+
     public void SetStaff(IStaff newStaff)
     {
         _bartender = newStaff as IBartender;
-        if (_bartender == null) return;
+
+        if (_bartender == null)
+            return;
 
         _bartender.SetMove(_nodesPlaceStaff[0]);
         _bartender.Show();
@@ -38,81 +48,107 @@ public class BarEntityModel
         _bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
     }
 
-    // ======================== GAMEPLAY ========================
+    // ======================== VISITOR ARRIVAL ========================
+
     private void OnVisitorDestination(INpc npc, Node node)
     {
-        npc.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+        IVisitor visitor = npc as IVisitor;
 
-        if (_bartender != null)
-        {
-            TryStartGame(npc as IVisitor, auto: true);
-        }
-    }
-
-    private void TryStartGame(IVisitor visitor, bool auto)
-    {
-        if (!CanStartGame(visitor, auto))
+        if (visitor == null)
             return;
 
-        StartGame(visitor);
+        npc.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+
+        if (!visitorSlots.ContainsKey(visitor))
+            return;
+
+        int slotIndex = visitorSlots[visitor];
+
+        TryStartGame(visitor, slotIndex);
     }
 
-    private bool CanStartGame(IVisitor visitor, bool auto)
+    // ======================== GAMEPLAY ========================
+
+    private void TryStartGame(IVisitor visitor, int slotIndex)
+    {
+        if (!CanStartGame(visitor))
+            return;
+
+        StartGame(visitor, slotIndex);
+    }
+
+    private bool CanStartGame(IVisitor visitor)
     {
         if (visitor == null)
             return false;
 
-        if (!auto && _bartender != null)
+        if (_bartender == null)
             return false;
 
         return true;
     }
 
-    private void StartGame(IVisitor visitor)
+    private void StartGame(IVisitor visitor, int slotIndex)
     {
-        if (gameRoutine != null)
-            Coroutines.Stop(gameRoutine);
+        if (slotRoutines.ContainsKey(slotIndex))
+        {
+            Coroutines.Stop(slotRoutines[slotIndex]);
+        }
 
-        gameRoutine = Game(visitor);
-        Coroutines.Start(gameRoutine);
+        IEnumerator routine = Game(visitor, slotIndex);
+
+        slotRoutines[slotIndex] = routine;
+
+        Coroutines.Start(routine);
     }
 
-    private IEnumerator Game(IVisitor visitor)
+    private IEnumerator Game(IVisitor visitor, int slotIndex)
     {
         if (_bartender == null || visitor == null)
             yield break;
 
-        // Бармен идёт к точке и активирует анимацию работы
-        _bartender.SetMove(_nodesPlaceStaff[0]);
+        Node staffNode = _nodesPlaceStaff[slotIndex];
+
+        int indexCurrent = _nodesPlaceStaff.IndexOf(_bartender.CurrentNode);
+
+        if(slotIndex > indexCurrent)
+        {
+            _bartender.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+        }
+        else if(slotIndex < indexCurrent)
+        {
+            _bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+        }
+
+        _bartender.MoveTo(staffNode, IsAbsolute: true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        _bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
         _bartender.ActivateAnimation(BartenderAnimationEnum.Work);
 
-        // Работа бармена 2 секунды
         yield return new WaitForSeconds(2f);
 
-        // Останавливаем анимацию бармена
         _bartender.ActivateAnimation(BartenderAnimationEnum.Idle);
 
-        // Задержка перед анимацией визитора
         yield return new WaitForSeconds(0.2f);
 
-        // Визитор играет
         visitor.ActivatePlay();
 
-        // Случайное время ожидания 2-7 секунд
-        float waitTime = UnityEngine.Random.Range(2f, 7f);
+        float waitTime = UnityEngine.Random.Range(5f, 10f);
         yield return new WaitForSeconds(waitTime);
 
         visitor.ActivateIdle();
 
         AddProfit(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Bar));
-        // Событие завершения обслуживания
+
         OnVisitorRealised?.Invoke(visitor);
 
-        // Убираем визитора
         RemoveVisitor(visitor);
     }
 
     // ======================== VISITOR TRAFFIC ========================
+
     public event Action<IVisitor> OnVisitorRealised;
 
     public void AddVisitor(IVisitor visitor)
@@ -120,11 +156,17 @@ public class BarEntityModel
         if (!CanJoin || visitors.Contains(visitor))
             return;
 
+        int slotIndex = GetFreeSlot();
+
+        if (slotIndex == -1)
+            return;
+
         visitors.Add(visitor);
+        visitorSlots[visitor] = slotIndex;
+
         visitor.OnEndDestination += OnVisitorDestination;
-        // Можно добавить перемещение к свободной точке
-        int index = visitors.IndexOf(visitor);
-        visitor.MoveTo(_nodePlaceVisitors[index], false);
+
+        visitor.MoveTo(_nodePlaceVisitors[slotIndex], false);
     }
 
     public void RemoveVisitor(IVisitor visitor)
@@ -133,11 +175,42 @@ public class BarEntityModel
             return;
 
         visitor.OnEndDestination -= OnVisitorDestination;
+
+        if (visitorSlots.TryGetValue(visitor, out int slot))
+        {
+            visitorSlots.Remove(visitor);
+
+            if (slotRoutines.ContainsKey(slot))
+            {
+                Coroutines.Stop(slotRoutines[slot]);
+                slotRoutines.Remove(slot);
+            }
+        }
+
         visitors.Remove(visitor);
     }
 
+    private int GetFreeSlot()
+    {
+        List<int> freeSlots = new();
+
+        for (int i = 0; i < _nodePlaceVisitors.Count; i++)
+        {
+            bool busy = visitorSlots.ContainsValue(i);
+
+            if (!busy)
+                freeSlots.Add(i);
+        }
+
+        if (freeSlots.Count == 0)
+            return -1;
+
+        int randomIndex = UnityEngine.Random.Range(0, freeSlots.Count);
+
+        return freeSlots[randomIndex];
+    }
+
     // ======================== PROFIT ========================
-    #region PROFIT
 
     public event Action<Vector3, int> OnAddCoins;
 
@@ -145,6 +218,4 @@ public class BarEntityModel
     {
         OnAddCoins?.Invoke(position, amount);
     }
-
-    #endregion
 }

@@ -58,10 +58,7 @@ public class BartenderPresenter : IBartender
 
     public Vector3 Position => _view.Position;
 
-    public void MoveTo(Node target, bool IsAbsolute)
-    {
-
-    }
+    public void MoveTo(Node target, bool IsAbsolute) => _view.MoveTo(target, IsAbsolute);
 
     #endregion
 }

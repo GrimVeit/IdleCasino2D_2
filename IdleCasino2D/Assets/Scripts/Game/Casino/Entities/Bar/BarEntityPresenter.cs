@@ -31,7 +31,7 @@ public class BarEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffic
 
     // ======================== INFO ========================
     public CasinoEntityType CasinoEntityType => CasinoEntityType.Bar;
-    public bool IsOpen => _model.IsOpen;
+    public bool IsOpen => true;
     public bool CanJoin => _model.CanJoin;
     public bool IsGameRunning => false;
 

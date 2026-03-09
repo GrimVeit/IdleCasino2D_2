@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum NpcRotationEnum
 {
-    FrontLeft, FrontRight, BackLeft, BackRight
+    FrontLeft, FrontRight, BackLeft, BackRight, None
 }

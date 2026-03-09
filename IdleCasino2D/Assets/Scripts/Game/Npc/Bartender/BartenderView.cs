@@ -10,9 +10,12 @@ public class BartenderView : View, IStaffView
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
+    [SerializeField] private float speedMove;
     [SerializeField] private BartenderAnimations animations;
 
     private Node _currentNode;
+
+    private Tween tweenMove;
 
     public void Show()
     {
@@ -34,6 +37,34 @@ public class BartenderView : View, IStaffView
         _currentNode = node;
 
         transform.localPosition = _currentNode.transform.localPosition;
+    }
+
+    public void MoveTo(Node node, bool isAbsolute)
+    {
+        if (isAbsolute)
+        {
+            MovePath(node);
+        }
+        else
+        {
+            //MovePath(Paths.FindPath(_currentNode, node));
+        }
+    }
+
+    private void MovePath(Node node)
+    {
+        tweenMove?.Kill();
+
+        _currentNode = node;
+
+        Vector3 localTarget = new Vector3(_currentNode.transform.localPosition.x, _currentNode.transform.localPosition.y, -5);
+
+        float distance = Vector3.Distance(transform.localPosition, localTarget);
+        float duration = distance / speedMove;
+
+        tweenMove = transform.DOLocalMove(localTarget, duration)
+            .SetEase(Ease.Linear);
+
     }
 
     public void SetOrder(int order)
@@ -60,6 +91,8 @@ public class BartenderView : View, IStaffView
 [Serializable]
 public class BartenderAnimations
 {
+    public NpcRotationEnum CurrentRotationEnum = NpcRotationEnum.None;
+
     [SerializeField] private List<BartenderAnimation> bartenderAnimations = new List<BartenderAnimation>();
 
     public void ActivateAnimation(BartenderAnimationEnum animationEnum)
@@ -81,7 +114,7 @@ public class BartenderAnimations
     {
         for (int i = 0; i < bartenderAnimations.Count; i++)
         {
-            if (bartenderAnimations[i].NpcRotationEnum == npcRotationEnum)
+            if (bartenderAnimations[i].NpcRotationEnum == npcRotationEnum )
                 bartenderAnimations[i].Activate();
             else
                 bartenderAnimations[i].Deactivate();

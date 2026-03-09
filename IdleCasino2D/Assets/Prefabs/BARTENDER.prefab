@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adbc6187390b0df4495a8f3dc7737b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedMove: 1
   animations:
     bartenderAnimations:
     - npcRotationEnum: 0
