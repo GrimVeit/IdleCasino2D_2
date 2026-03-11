@@ -8,7 +8,7 @@ public class BankModel
     private int money;
     public event Action OnAddMoney;
     public event Action OnRemoveMoney;
-    public event Action<float> OnChangeMoney;
+    public event Action<int> OnChangeMoney;
 
     public event Action<int> OnSendMoney;
 

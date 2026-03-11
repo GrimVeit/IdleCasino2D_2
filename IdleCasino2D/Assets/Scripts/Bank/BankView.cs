@@ -32,7 +32,7 @@ public class BankView : View
         }
     }
 
-    public void SendMoneyDisplay(float money)
+    public void SendMoneyDisplay(int money)
     {
         for (int i = 0; i < bankDisplayViews.Count; i++)
         {
