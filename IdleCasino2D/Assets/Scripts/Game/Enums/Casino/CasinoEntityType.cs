@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum CasinoEntityType
 {
-    EntranceQueue, Slot, Wheel, Poker, Bar, Music, Exit, Host, Roulette
+    EntranceQueue, Slot, Wheel, Poker, Bar, Music, Exit, Host, Roulette, Management
 }

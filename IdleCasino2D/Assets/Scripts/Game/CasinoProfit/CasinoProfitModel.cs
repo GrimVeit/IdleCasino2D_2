@@ -96,7 +96,7 @@ public class CasinoProfitModel
         var list = _upgrades[_currentSelectedType];
         int currentIndex = list.FindIndex(x => x.profitValue == _casinoProfitStoreInfo.GetProfit(_currentSelectedType));
         if (currentIndex < 0) currentIndex = 0;
-        if (currentIndex >= list.Count - 1) return; // уже макс уровень
+        if (currentIndex >= list.Count - 1) return;
 
         int newProfit = list[currentIndex + 1].profitValue;
         _casinoProfitStoreProvider.SetProfit(_currentSelectedType, newProfit);
