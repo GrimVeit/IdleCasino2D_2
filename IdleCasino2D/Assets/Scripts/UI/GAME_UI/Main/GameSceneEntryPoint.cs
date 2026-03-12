@@ -16,6 +16,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     [SerializeField] private Node nodeRouletteStaff_1;
     [SerializeField] private Node nodeRouletteStaff_2;
     [SerializeField] private List<Node> nodesHostess;
+    [SerializeField] private List<Node> nodesManager;
 
     [Header("NODES VISITOR")]
     [SerializeField] private List<Node> nodesEntranceQueue;
@@ -82,14 +83,14 @@ public class GameSceneEntryPoint : MonoBehaviour
                     (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC),
                     viewContainer.GetView<SoundView>());
 
+        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
-        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter), viewContainer.GetView<CasinoProfitView>());
+        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter, bankPresenter), viewContainer.GetView<CasinoProfitView>());
 
         particleEffectPresenter = new ParticleEffectPresenter
             (new ParticleEffectModel(),
             viewContainer.GetView<ParticleEffectView>());
-
-        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
         CreateCasinoEntities();
 
@@ -187,6 +188,10 @@ public class GameSceneEntryPoint : MonoBehaviour
         var musicZone = new MusicEntityPresenter(new MusicEntityModel(casinoProfitStorePresenter, nodesMusic, nodeSongstress));
         musicZone.Initialize();
         casinoEntities.Add(musicZone);
+
+        var management = new ManagementEntityPresenter(new ManagementEntityModel(nodesManager));
+        management.Initialize();
+        casinoEntities.Add(management);
 
         for (int i = 0; i < 6; i++)
         {

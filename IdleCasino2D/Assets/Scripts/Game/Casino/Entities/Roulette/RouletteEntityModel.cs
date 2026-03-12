@@ -45,6 +45,11 @@ public class RouletteEntityModel
     public void SetStaff(IStaff newDealer)
     {
         _dealer = newDealer as IDealer;
+
+        Debug.Log(_dealer);
+
+        if (_dealer == null) return;
+
         _dealer.SetMove(_nodePlaceStaff);
         _dealer.Show();
         _dealer.ActivateAnimation(DealerAnimationEnum.Idle);

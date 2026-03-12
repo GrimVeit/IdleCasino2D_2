@@ -10,12 +10,14 @@ public class StaffSpawnerView : View
     [SerializeField] private BartenderView bartenderPrefab;
     [SerializeField] private SongstressView songstressPrefab;
     [SerializeField] private HostessView hostessPrefab;
+    [SerializeField] private ManagerView managerPrefab;
 
     [Header("Skins")]
-    [SerializeField] private string[] dealerSkins;     // cr1, cr2, cr3
+    [SerializeField] private string[] dealerSkins;     // cr1, cr2
     [SerializeField] private string[] bartenderSkins;  // br1, br2
     [SerializeField] private string[] songstressSkins; // sg1, sg2
     [SerializeField] private string[] hostessSkins;    // hs1, hs2
+    [SerializeField] private string[] managerSkins;    // mn01, mn02
 
     [SerializeField] private Transform transformParentVisitors;
 
@@ -29,6 +31,7 @@ public class StaffSpawnerView : View
             StaffType.Bartender => Instantiate(bartenderPrefab, transformParentVisitors),
             StaffType.Songstress => Instantiate(songstressPrefab, transformParentVisitors),
             StaffType.Hostess => Instantiate(hostessPrefab, transformParentVisitors),
+            StaffType.Manager => Instantiate(managerPrefab, transformParentVisitors),
             _ => throw new Exception($"No prefab for {type}")
         };
 
@@ -47,6 +50,7 @@ public class StaffSpawnerView : View
             StaffType.Bartender => bartenderSkins,
             StaffType.Songstress => songstressSkins,
             StaffType.Hostess => hostessSkins,
+            StaffType.Manager => managerSkins,
             _ => throw new Exception($"No skins for {type}")
         };
 

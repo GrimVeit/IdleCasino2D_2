@@ -20,7 +20,7 @@ public class ManagementEntityPresenter :
     #region STAFF
 
     public StaffType PersonalType => StaffType.Manager;
-    public int CountStaffNeed => 5;
+    public int CountStaffNeed => 6;
     public int CountStaff => _model.CountStaff;
     public void SetStaff(IStaff staff) => _model.SetStaff(staff);
 

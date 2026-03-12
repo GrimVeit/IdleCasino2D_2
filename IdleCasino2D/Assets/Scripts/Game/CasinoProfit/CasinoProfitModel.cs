@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class CasinoProfitModel
@@ -9,17 +7,19 @@ public class CasinoProfitModel
     private readonly ICasinoProfitStoreProvider _casinoProfitStoreProvider;
     private readonly ICasinoProfitStoreListener _casinoProfitStoreListener;
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
+    private readonly IMoneyProvider _moneyProvider;
 
     private readonly Dictionary<CasinoEntityType, List<(int profitValue, int upgradeCost)>> _upgrades
         = new Dictionary<CasinoEntityType, List<(int, int)>>();
 
     private CasinoEntityType _currentSelectedType;
 
-    public CasinoProfitModel(ICasinoProfitStoreProvider casinoProfitStoreProvider, ICasinoProfitStoreListener casinoProfitStoreListener, ICasinoProfitStoreInfo casinoProfitStoreInfo)
+    public CasinoProfitModel(ICasinoProfitStoreProvider casinoProfitStoreProvider, ICasinoProfitStoreListener casinoProfitStoreListener, ICasinoProfitStoreInfo casinoProfitStoreInfo, IMoneyProvider moneyProvider)
     {
         _casinoProfitStoreProvider = casinoProfitStoreProvider;
         _casinoProfitStoreListener = casinoProfitStoreListener;
         _casinoProfitStoreInfo = casinoProfitStoreInfo;
+        _moneyProvider = moneyProvider;
 
         _upgrades[CasinoEntityType.Bar] = new List<(int, int)> { (10, 0), (15, 100), (20, 200), (28, 350), (35, 500), (45, 700), (55, 950), (70, 1300), (85, 1700), (100, 2000)  };
         _upgrades[CasinoEntityType.Music] = new List<(int, int)> { (10, 0), (15, 100), (20, 200), (28, 350), (35, 500), (45, 700), (55, 950), (70, 1300), (85, 1700), (100, 2000) };
@@ -98,9 +98,18 @@ public class CasinoProfitModel
         if (currentIndex < 0) currentIndex = 0;
         if (currentIndex >= list.Count - 1) return;
 
-        int newProfit = list[currentIndex + 1].profitValue;
-        _casinoProfitStoreProvider.SetProfit(_currentSelectedType, newProfit);
-        // UI обновится через событие стора
+        var cost = list[currentIndex + 1].upgradeCost;
+
+        if (_moneyProvider.CanAfford(cost))
+        {
+            _moneyProvider.SendMoney(-cost);
+            int newProfit = list[currentIndex + 1].profitValue;
+            _casinoProfitStoreProvider.SetProfit(_currentSelectedType, newProfit);
+        }
+        else
+        {
+
+        }
     }
 
     #region Output

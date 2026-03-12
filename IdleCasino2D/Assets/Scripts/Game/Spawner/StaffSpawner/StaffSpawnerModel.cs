@@ -13,6 +13,7 @@ public class StaffSpawnerModel
         { StaffType.Bartender, () => new BartenderModel() },
         { StaffType.Songstress, () => new SongstressModel() },
         { StaffType.Hostess, () => new HostessModel() },
+        { StaffType.Manager, () => new ManagerModel() },
     };
     private readonly Dictionary<StaffType, Func<IStaffModel, IStaffView, IStaff>> _presenterFactory = new()
     {
@@ -20,6 +21,7 @@ public class StaffSpawnerModel
         { StaffType.Bartender, (model, view) => new BartenderPresenter((BartenderModel)model, (BartenderView)view) },
         { StaffType.Songstress, (model, view) => new SongstressPresenter((SongstressModel)model, (SongstressView)view) },
         { StaffType.Hostess, (model, view) => new HostessPresenter((HostessModel) model, (HostessView)view) },
+        { StaffType.Manager, (model, view) => new ManagerPresenter((ManagerModel)model, (ManagerView)view) },
     };
 
     private const string PlayerPrefsKey = "CasinoStaff";

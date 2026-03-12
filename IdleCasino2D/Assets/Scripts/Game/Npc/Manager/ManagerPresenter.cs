@@ -50,7 +50,7 @@ public class ManagerPresenter : IManager
 
     public void ActivateNpcRotation(NpcRotationEnum npcRotationEnum) => _view.ActivateNpcRotation(npcRotationEnum);
 
-    public void SetOrder(int order) { }
+    public void SetOrder(int order)  => _view.SetOrder(order);
 
     public event Action<INpc, Node> OnEndDestination;
 

@@ -7,7 +7,7 @@ public class GameProgressModel
 {
     private readonly IMoneyProvider _moneyProvider;
 
-    private const int maxValue = 100000000;
+    private const int maxValue = 1000000;
 
     public GameProgressModel(IMoneyProvider moneyProvider)
     {
