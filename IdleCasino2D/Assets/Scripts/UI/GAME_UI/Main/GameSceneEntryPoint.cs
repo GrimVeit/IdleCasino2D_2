@@ -35,6 +35,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ViewContainer viewContainer;
 
     private BankPresenter bankPresenter;
+    private BankTransactionVisualPresenter bankTransactionVisualPresenter;
+
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
@@ -84,6 +86,7 @@ public class GameSceneEntryPoint : MonoBehaviour
                     viewContainer.GetView<SoundView>());
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+        bankTransactionVisualPresenter = new BankTransactionVisualPresenter(new BankTransactionVisualModel(bankPresenter), viewContainer.GetView<BankTransactionVisualView>());
 
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
         casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter, bankPresenter), viewContainer.GetView<CasinoProfitView>());
@@ -131,6 +134,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
         sceneRoot.Initialize();
         bankPresenter.Initialize();
+        bankTransactionVisualPresenter.Initialize();
         casinoProfitStorePresenter.Initialize();
         casinoProfitPresenter.Initialize();
 
@@ -285,6 +289,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
+        bankTransactionVisualPresenter?.Dispose();
 
         casinoProfitStorePresenter?.Dispose();
         casinoProfitPresenter?.Dispose();
