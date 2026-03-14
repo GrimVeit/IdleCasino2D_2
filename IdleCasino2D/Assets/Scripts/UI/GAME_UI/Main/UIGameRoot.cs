@@ -9,6 +9,7 @@ public class UIGameRoot : UIRoot
     [SerializeField] private MainPanel_Game mainPanel;
     [SerializeField] private AvatarBalancePanel_Game avatarBalancePanel;
     [SerializeField] private BlackBackgroundPanel_Game blackBackgroundPanel;
+    [SerializeField] private OfflineEarningsPanel_Game offlineEarningsPanel;
 
     [SerializeField] private UpgradePanel_Game upgradePanel;
     [SerializeField] private ProfitUpgradePanel_Game profitUpgradePanel;
@@ -35,6 +36,7 @@ public class UIGameRoot : UIRoot
         mainPanel.Initialize();
         avatarBalancePanel.Initialize();
         blackBackgroundPanel.Initialize();
+        offlineEarningsPanel.Initialize();
 
         upgradePanel.Initialize();
         profitUpgradePanel.Initialize();
@@ -92,6 +94,7 @@ public class UIGameRoot : UIRoot
         mainPanel.Dispose();
         avatarBalancePanel.Dispose();
         blackBackgroundPanel.Dispose();
+        offlineEarningsPanel.Dispose();
 
         upgradePanel.Dispose();
         profitUpgradePanel.Dispose();
@@ -168,6 +171,24 @@ public class UIGameRoot : UIRoot
         if (!blackBackgroundPanel.IsActive) return;
 
         CloseOtherPanel(blackBackgroundPanel);
+    }
+
+
+
+
+
+    public void OpenOfflineEarningsPanel()
+    {
+        if (offlineEarningsPanel.IsActive) return;
+
+        OpenOtherPanel(offlineEarningsPanel);
+    } 
+
+    public void CloseOfflineEarningsPanel()
+    {
+        if(!offlineEarningsPanel.IsActive) return;
+
+        CloseOtherPanel(offlineEarningsPanel);
     }
 
 

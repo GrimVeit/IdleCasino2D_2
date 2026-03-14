@@ -23,13 +23,18 @@ public class StateMachine_Game : IStateMachineProvider
         IHostessEntityControllerListener hostessEntityControllerListener,
         IHostessEntityControllerProvider hostessEntityControllerProvider,
         ICasinoProfitListener casinoProfitListener,
-        IAdministratorVisualProvider administratorVisualProvider
+        IAdministratorVisualProvider administratorVisualProvider,
+        IProfitOfflineInfo profitOfflineInfo,
+        IProfitOfflineListener profitOfflineListener
         )
     {
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
         states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
         states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot, shopCasinoPersonalListener);
+
+        states[typeof(CheckProfitOnlineState_Game)] = new CheckProfitOnlineState_Game(this, profitOfflineInfo);
+        states[typeof(ProfitOnlineState_Game)] = new ProfitOnlineState_Game(this, profitOfflineListener, sceneRoot);
 
         states[typeof(UpgradeState_Game)] = new UpgradeState_Game(this, sceneRoot, casinoProfitListener);
         states[typeof(ProfitUpgradeState_Game)] = new ProfitUpgradeState_Game(this, sceneRoot);

@@ -49,6 +49,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private VisitorCounterTrafficPresenter visitorCounterTrafficPresenter;
     private VisitorPathTrafficPresenter visitorPathTrafficPresenter;
 
+    private ProfitOfflinePresenter profitOfflinePresenter;
+
     private ClickDispatcherPresenter clickDispatcherPresenter;
     private TouchCameraPresenter touchCameraPresenter;
     private MapOrderPresenter mapOrderPresenter;
@@ -103,10 +105,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter, nodesHostess), viewContainer.GetView<HostessEntityView>());
         casinoEntities.Add(hostessEntityPresenter);
 
+        profitOfflinePresenter = new ProfitOfflinePresenter(new ProfitOfflineModel(casinoEntities, casinoProfitStorePresenter, bankPresenter), viewContainer.GetView<ProfitOfflineView>());
         casinoEntityStorePresenter = new CasinoEntityStorePresenter(new CasinoEntityStoreModel(casinoEntities));
-
         staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(casinoEntities), viewContainer.GetView<StaffSpawnerView>());
-
         visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter, casinoEntities));
 
         clickDispatcherPresenter = new ClickDispatcherPresenter(new ClickDispatcherModel());
@@ -146,6 +147,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         hostessEntityPresenter.Initialize();
         gameProgressPresenter.Initialize();
         administratorPresenter.Initialize();
+        profitOfflinePresenter.Initialize();
 
         stateMachine = new StateMachine_Game
             (sceneRoot, 
@@ -160,9 +162,10 @@ public class GameSceneEntryPoint : MonoBehaviour
             hostessEntityPresenter,
             hostessEntityPresenter,
             casinoProfitPresenter,
-            administratorPresenter);
+            administratorPresenter,
+            profitOfflinePresenter,
+            profitOfflinePresenter);
 
-        stateMachine.Initialize();
         touchCameraPresenter.Initialize();
         mapOrderPresenter.Initialize();
         coinSystemPresenter.Initialize();
@@ -173,6 +176,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         shopCasinoPersonalPresenter.Initialize();
         filterShopCasinoStaffPresenter.Initialize();
+        stateMachine.Initialize();
     }
 
     private void CreateCasinoEntities()
@@ -293,6 +297,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         casinoProfitStorePresenter?.Dispose();
         casinoProfitPresenter?.Dispose();
+        profitOfflinePresenter?.Dispose();
 
         //touchCameraPresenter?.Dispose();
         
@@ -315,6 +320,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         {
             casinoProfitStorePresenter?.Dispose();
             casinoEntityStorePresenter?.Dispose();
+            profitOfflinePresenter?.Save();
             staffSpawnerPresenter?.Save();
             bankPresenter?.Save();
         }
@@ -326,6 +332,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         {
             casinoProfitStorePresenter?.Dispose();
             casinoEntityStorePresenter?.Dispose();
+            profitOfflinePresenter?.Save();
             staffSpawnerPresenter?.Save();
             bankPresenter?.Save();
         }

@@ -29,11 +29,11 @@ public class BankTransactionVisualPresenter
 
     private void ActivateEvents()
     {
-
+        _model.OnSetTransaction += _view.SetTransaction;
     }
 
     private void DeactivateEvents()
     {
-
+        _model.OnSetTransaction -= _view.SetTransaction;
     }
 }

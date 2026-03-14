@@ -18,6 +18,8 @@ public class GameProgressView : View
         float progress = (float)currentPoints / maxPoints;
         float targetWidth = progress * maxWidth;
 
+        if(targetWidth >= maxWidth) targetWidth = maxWidth;
+
         tweenScale = bar.DOSizeDelta(new Vector2(targetWidth, bar.sizeDelta.y), tweenDuration)
            .SetEase(Ease.OutCubic);
     }

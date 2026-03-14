@@ -30,7 +30,7 @@ public class BankTransactionVisualView : View
                 timerCoroutine = null;
             }
 
-            _currentVisual.Deactivate(transformStart, 0.5f);
+            _currentVisual.Deactivate(transformStart, 1.3f);
         }
 
         BankTransactionVisual newVisual = Instantiate(bankTransactionVisualPrefab, transformParent);
@@ -44,7 +44,7 @@ public class BankTransactionVisualView : View
 
         newVisual.Activate(transformEnd, 0.5f);
 
-        timerCoroutine = StartCoroutine(AutoDeactivateAfterDelay(newVisual, 4f));
+        timerCoroutine = StartCoroutine(AutoDeactivateAfterDelay(newVisual, 0.7f));
     }
 
     private IEnumerator AutoDeactivateAfterDelay(BankTransactionVisual visual, float delay)

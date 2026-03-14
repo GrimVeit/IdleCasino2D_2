@@ -11,7 +11,7 @@ public class BankTransactionVisualModel
     {
         _moneyProvider = moneyProvider;
 
-        _moneyProvider.OnChangeMoney += SetTransaction;
+        _moneyProvider.OnSendMoney += SetTransaction;
     }
 
     public void Initialize()
@@ -21,7 +21,7 @@ public class BankTransactionVisualModel
 
     public void Dispose()
     {
-        _moneyProvider.OnChangeMoney -= SetTransaction;
+        _moneyProvider.OnSendMoney -= SetTransaction;
     }
 
     #region Output

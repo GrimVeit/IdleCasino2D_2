@@ -48,6 +48,6 @@ public class StartState_Game : IState
 
     private void ActivateMainState()
     {
-        _machineProvider.EnterState(_machineProvider.GetState<MainState_Game>());
+        _machineProvider.EnterState(_machineProvider.GetState<CheckProfitOnlineState_Game>());
     }
 }

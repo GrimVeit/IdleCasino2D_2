@@ -64,6 +64,7 @@ public interface IMoneyProvider
     int Money { get; }
 
     event Action<int> OnChangeMoney;
+    event Action<int> OnSendMoney;
     void SendMoney(int money);
     bool CanAfford(int money);
 }

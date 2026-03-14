@@ -27,8 +27,13 @@ public class BankTransactionVisual : MonoBehaviour
         tweenMove?.Kill();
         tweenFade?.Kill();
 
-        tweenMove = transform.DOLocalMove(transformTargetLocal.localPosition, speed);
-        tweenFade = textTransaction.DOFade(1, speed);
+        tweenMove = transform
+            .DOLocalMove(transformTargetLocal.localPosition, speed)
+            .SetEase(Ease.InCubic);
+
+        tweenFade = textTransaction
+            .DOFade(1, speed * 0.8f)
+            .SetEase(Ease.OutQuad);
     }
 
     public void Deactivate(Transform transformTargetLocal, float speed)
@@ -36,8 +41,14 @@ public class BankTransactionVisual : MonoBehaviour
         tweenMove?.Kill();
         tweenFade?.Kill();
 
-        tweenMove = transform.DOLocalMove(transformTargetLocal.localPosition, speed).OnComplete(() => OnDeactivate?.Invoke(this));
-        tweenFade = textTransaction.DOFade(0, speed);
+        tweenMove = transform
+            .DOLocalMove(transformTargetLocal.localPosition, speed)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() => OnDeactivate?.Invoke(this));
+
+        tweenFade = textTransaction
+            .DOFade(0, speed * 0.8f)
+            .SetEase(Ease.InQuad);
     }
 
     public void Destroy()
