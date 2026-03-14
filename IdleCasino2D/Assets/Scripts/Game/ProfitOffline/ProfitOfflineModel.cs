@@ -58,13 +58,17 @@ public class ProfitOfflineModel
 
     public void Dispose()
     {
-        if (!_profitCollected) return;
+        long lastTime = long.Parse(PlayerPrefs.GetString(LAST_EXIT_TIME));
+        long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
-        PlayerPrefs.SetString(
-            LAST_EXIT_TIME,
-            DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()
-        );
-        PlayerPrefs.Save();
+        if(lastTime > now)
+        {
+            PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
+        }
+
+        if (!_profitCollected || lastTime < now) return;
+
+        PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
     }
 
     #endregion

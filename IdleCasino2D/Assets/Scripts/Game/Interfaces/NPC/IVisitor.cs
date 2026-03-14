@@ -21,4 +21,8 @@ public interface IVisitor : INpc
     void ActivatePlay();
     void ActivateIdle();
     void Destroy();
+
+    //Message
+    void SetMessage(string message, SpeechTurnEnum turn);
+    void SetMessage(string message);
 }

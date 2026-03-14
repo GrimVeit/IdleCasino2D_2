@@ -7,6 +7,8 @@ using UnityEngine;
 public class VisitorView : View
 {
     [SerializeField] private ClickItem clickItem;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private MessageVisualModul messageVisualModul;
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
@@ -26,6 +28,11 @@ public class VisitorView : View
     public void Dispose()
     {
         clickItem.OnClick -= ClickItem;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        messageVisualModul.SetMessage(message, turnEnum);
     }
 
     public void Show()
@@ -84,6 +91,8 @@ public class VisitorView : View
     public void SetOrder(int order)
     {
         animations.SetOrder(order);
+
+        canvas.sortingOrder = order;
     }
 
     public void SetMove(Node node)

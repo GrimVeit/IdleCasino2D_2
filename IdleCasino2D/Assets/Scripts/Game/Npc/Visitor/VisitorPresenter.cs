@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class VisitorPresenter : IVisitor
 {
@@ -113,6 +112,19 @@ public class VisitorPresenter : IVisitor
     private void Click()
     {
         OnClick?.Invoke(this);
+    }
+
+    #endregion
+
+    #region MESSAGE
+
+    public void SetMessage(string message, SpeechTurnEnum turn) => _view.SetMessage(message, turn);
+
+    public void SetMessage(string message)
+    {
+        SpeechTurnEnum turnEnum = (SpeechTurnEnum)Random.Range(0, 2);
+
+        _view.SetMessage(message, turnEnum);
     }
 
     #endregion

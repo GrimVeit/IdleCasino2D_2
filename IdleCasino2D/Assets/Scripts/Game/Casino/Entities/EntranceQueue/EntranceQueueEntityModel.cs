@@ -90,6 +90,8 @@ public class EntranceQueueEntityModel
 
     private void ClickVisitor(IVisitor visitor)
     {
+        visitor.SetMessage("Hello");
+
         OnClickVisitor?.Invoke(visitor);
     }
 
