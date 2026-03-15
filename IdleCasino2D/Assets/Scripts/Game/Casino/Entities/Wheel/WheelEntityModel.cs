@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WheelEntityModel
 {
@@ -17,6 +18,8 @@ public class WheelEntityModel
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _wheelSpot;
+
+    private IEnumerator messageRoutine;
     private IEnumerator gameRoutine;
 
     private bool isOpen = false;
@@ -35,11 +38,18 @@ public class WheelEntityModel
     public void Initialize()
     {
         _wheelSpot.OnClick += SpotClick;
+
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+
+        messageRoutine = SingleVisitorTalk();
+        Coroutines.Start(messageRoutine);
     }
 
     public void Dispose()
     {
         _wheelSpot.OnClick -= SpotClick;
+
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
     }
 
     #region Gameplay
@@ -222,6 +232,35 @@ public class WheelEntityModel
     #region VISITOR CLICK
 
     private void VisitorClick(IVisitor visitor)
+    {
+        SetMessage(visitor);
+    }
+
+    #endregion
+
+    #region MESSAGE VISITOR
+
+    private IEnumerator SingleVisitorTalk()
+    {
+        while (true)
+        {
+            if (visitors.Count == 0)
+            {
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+            IVisitor visitor = visitors.Keys.First();
+
+            if (Random.value <= 0.7f)
+            {
+                SetMessage(visitor);
+            }
+
+            yield return new WaitForSeconds(Random.Range(3f, 7f));
+        }
+    }
+    private void SetMessage(IVisitor visitor)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;

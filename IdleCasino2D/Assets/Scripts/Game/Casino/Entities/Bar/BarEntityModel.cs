@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum VisitorState
 {
@@ -22,6 +23,8 @@ public class BarEntityModel
 
     private IBartender _bartender;
 
+    private IEnumerator messageRoutine;
+
     private readonly Dictionary<IVisitor, int> visitorSlots = new();
     private readonly Dictionary<int, IEnumerator> slotRoutines = new();
 
@@ -35,8 +38,17 @@ public class BarEntityModel
         _nodesPlaceStaff = nodesPlaceStaff;
     }
 
-    public void Initialize() { }
-    public void Dispose() { }
+    public void Initialize() 
+    {
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+
+        messageRoutine = RandomVisitorTalk();
+        Coroutines.Start(messageRoutine);
+    }
+    public void Dispose() 
+    {
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+    }
 
     // ======================== STAFF ========================
 
@@ -228,6 +240,45 @@ public class BarEntityModel
     //========================= VISITOR CLICK =================
 
     private void VisitorClick(IVisitor visitor)
+    {
+        SetMessage(visitor);
+    }
+
+    //========================== VISITOR MESSAGE ===============
+
+    private IEnumerator RandomVisitorTalk()
+    {
+        while (true)
+        {
+            if (visitors.Count == 0)
+            {
+                yield return new WaitForSeconds(2f);
+                continue;
+            }
+
+            int talkCount = Random.Range(1, visitors.Count + 1);
+
+            List<IVisitor> availableVisitors = new List<IVisitor>(visitors.Keys);
+
+            for (int i = 0; i < talkCount && availableVisitors.Count > 0; i++)
+            {
+                int index = Random.Range(0, availableVisitors.Count);
+                IVisitor visitor = availableVisitors[index];
+                availableVisitors.RemoveAt(index);
+
+                if (Random.value <= 0.7f)
+                {
+                    SetMessage(visitor);
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
+            }
+
+            yield return new WaitForSeconds(Random.Range(2f, 6f));
+        }
+    }
+
+    private void SetMessage(IVisitor visitor)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;

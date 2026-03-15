@@ -11,12 +11,12 @@ public class ExitEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisitorTraffi
 
     public void Initialize()
     {
-
+        _model.Initialize();
     }
 
     public void Dispose()
     {
-
+        _model.Dispose();
     }
 
     public void ActivateEntityInteractive()

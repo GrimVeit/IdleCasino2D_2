@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
+using Random = UnityEngine.Random;
 
 public class RouletteEntityModel
 {
@@ -19,6 +20,8 @@ public class RouletteEntityModel
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _rouletteSpot;
     private IDealer _dealer;
+
+    private IEnumerator messageRoutine;
     private IEnumerator gameRoutine;
 
     private bool isOpen = false;
@@ -37,11 +40,18 @@ public class RouletteEntityModel
     public void Initialize()
     {
         _rouletteSpot.OnClick += SpotClick;
+
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+
+        messageRoutine = SingleVisitorTalk();
+        Coroutines.Start(messageRoutine);
     }
 
     public void Dispose()
     {
         _rouletteSpot.OnClick -= SpotClick;
+
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
     }
 
     public void SetStaff(IStaff newDealer)
@@ -247,6 +257,36 @@ public class RouletteEntityModel
     #region VISITOR CLICK
 
     private void VisitorClick(IVisitor visitor)
+    {
+        SetMessage(visitor);
+    }
+
+    #endregion
+
+    #region VISITOR MESSAGE
+
+    private IEnumerator SingleVisitorTalk()
+    {
+        while (true)
+        {
+            if (visitors.Count == 0)
+            {
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+            IVisitor visitor = visitors.Keys.First();
+
+            if (Random.value <= 0.7f)
+            {
+                SetMessage(visitor);
+            }
+
+            yield return new WaitForSeconds(Random.Range(3f, 7f));
+        }
+    }
+
+    private void SetMessage(IVisitor visitor)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;

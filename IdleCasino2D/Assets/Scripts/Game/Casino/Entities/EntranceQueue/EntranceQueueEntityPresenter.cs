@@ -14,12 +14,12 @@ public class EntranceQueueEntityPresenter : ICasinoEntityInfo, ICasinoEntityVisi
 
     public void Initialize()
     {
-
+        _model.Initialize();
     }
 
     public void Dispose()
     {
-
+        _model.Dispose();
     }
 
     public void ActivateEntityInteractive()

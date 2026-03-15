@@ -21,6 +21,8 @@ public class MusicEntityModel
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
 
     private ISongstress _songstress;
+
+    private IEnumerator messageRoutine;
     private IEnumerator danceRoutine;
 
     public MusicEntityModel(
@@ -40,12 +42,17 @@ public class MusicEntityModel
             danceRoutine = DanceCycle();
             Coroutines.Start(danceRoutine);
         }
+
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+
+        messageRoutine = RandomVisitorTalk();
+        Coroutines.Start(messageRoutine);
     }
 
     public void Dispose()
     {
-        if (danceRoutine != null)
-            Coroutines.Stop(danceRoutine);
+        if (danceRoutine != null) Coroutines.Stop(danceRoutine);
+        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
     }
 
     #region STAFF
@@ -201,6 +208,47 @@ public class MusicEntityModel
     #region VISITOR CLICK
 
     private void VisitorClick(IVisitor visitor)
+    {
+        SetMessage(visitor);
+    }
+
+    #endregion
+
+    #region VISITOR MESSAGE
+
+    private IEnumerator RandomVisitorTalk()
+    {
+        while (true)
+        {
+            if (visitors.Count == 0)
+            {
+                yield return new WaitForSeconds(2f);
+                continue;
+            }
+
+            int talkCount = Random.Range(1, visitors.Count + 1);
+
+            List<IVisitor> availableVisitors = new List<IVisitor>(visitors.Keys);
+
+            for (int i = 0; i < talkCount && availableVisitors.Count > 0; i++)
+            {
+                int index = Random.Range(0, availableVisitors.Count);
+                IVisitor visitor = availableVisitors[index];
+                availableVisitors.RemoveAt(index);
+
+                if (Random.value <= 0.7f)
+                {
+                    SetMessage(visitor);
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
+            }
+
+            yield return new WaitForSeconds(Random.Range(2f, 6f));
+        }
+    }
+
+    private void SetMessage(IVisitor visitor)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
