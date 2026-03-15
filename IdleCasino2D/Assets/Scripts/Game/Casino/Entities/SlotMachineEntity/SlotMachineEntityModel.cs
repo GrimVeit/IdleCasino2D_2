@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
 
 public class SlotMachineEntityModel
 {
@@ -10,8 +12,8 @@ public class SlotMachineEntityModel
     public bool IsGameRunning => isGameRunning;
 
     private readonly Node _nodePlace;
-    private readonly List<IVisitor> visitors = new();
-    public bool ContainsVisitor(IVisitor visitor) => visitors.Contains(visitor);
+    private readonly Dictionary<IVisitor, VisitorState> visitors = new();
+
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _slotSpot;
@@ -44,10 +46,14 @@ public class SlotMachineEntityModel
 
     private void OnVisitorDestination(INpc npc, Node node)
     {
-        npc.ActivateNpcRotation(NpcRotationEnum.BackRight);
+        var visitor = npc as IVisitor;
+
+        visitor.ActivateNpcRotation(NpcRotationEnum.BackRight);
+        visitors[visitor] = VisitorState.At;
+
         isVisitorReady = true;
 
-        TryStartGame(npc as IVisitor, auto: true);
+        TryStartGame(visitor, auto: true);
     }
 
     private void TryStartGame(IVisitor visitor, bool auto)
@@ -126,7 +132,7 @@ public class SlotMachineEntityModel
         if (!isManualInteractive)
             return;
 
-        var visitor = visitors[0];
+        var visitor = visitors.Keys.First();
         TryStartGame(visitor, auto: false);
     }
 
@@ -154,10 +160,11 @@ public class SlotMachineEntityModel
 
     public void AddVisitor(IVisitor visitor)
     {
-        if (!CanJoin || visitors.Contains(visitor))
+        if (!CanJoin || visitors.ContainsKey(visitor))
             return;
 
-        visitors.Add(visitor);
+        visitors.Add(visitor, VisitorState.GoTo);
+        visitor.OnClick += VisitorClick;
         visitor.OnEndDestination += OnVisitorDestination;
         visitor.MoveTo(_nodePlace, false);
 
@@ -166,9 +173,10 @@ public class SlotMachineEntityModel
 
     public void RemoveVisitor(IVisitor visitor)
     {
-        if (!visitors.Contains(visitor))
+        if (!visitors.ContainsKey(visitor))
             return;
 
+        visitor.OnClick -= VisitorClick;
         visitor.OnEndDestination -= OnVisitorDestination;
         visitors.Remove(visitor);
 
@@ -206,6 +214,26 @@ public class SlotMachineEntityModel
     public void DeactivateHighlight()
     {
         _slotSpot.DeactivateHighlight();
+    }
+
+    #endregion
+
+    #region VISITOR CLICK
+
+    private void VisitorClick(IVisitor visitor)
+    {
+        if (!visitors.TryGetValue(visitor, out var state))
+            return;
+
+        switch (state)
+        {
+            case VisitorState.GoTo:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToSlot));
+                break;
+            case VisitorState.At:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingSlot));
+                break;
+        }
     }
 
     #endregion

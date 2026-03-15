@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum VisitorState
+{
+    GoTo, At
+}
+
 public class BarEntityModel
 {
     public bool CanJoin => _bartender != null && visitors.Count < _nodePlaceVisitors.Count;
@@ -11,7 +16,7 @@ public class BarEntityModel
     private readonly List<Node> _nodePlaceVisitors;
     private readonly List<Node> _nodesPlaceStaff;
 
-    private readonly List<IVisitor> visitors = new();
+    private readonly Dictionary<IVisitor, VisitorState> visitors = new();
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
 
@@ -52,12 +57,11 @@ public class BarEntityModel
 
     private void OnVisitorDestination(INpc npc, Node node)
     {
-        IVisitor visitor = npc as IVisitor;
-
-        if (visitor == null)
+        if (npc is not IVisitor visitor)
             return;
 
-        npc.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+        visitors[visitor] = VisitorState.At;
+        visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
 
         if (!visitorSlots.ContainsKey(visitor))
             return;
@@ -153,7 +157,7 @@ public class BarEntityModel
 
     public void AddVisitor(IVisitor visitor)
     {
-        if (!CanJoin || visitors.Contains(visitor))
+        if (!CanJoin || visitors.ContainsKey(visitor))
             return;
 
         int slotIndex = GetFreeSlot();
@@ -161,9 +165,10 @@ public class BarEntityModel
         if (slotIndex == -1)
             return;
 
-        visitors.Add(visitor);
+        visitors.Add(visitor, VisitorState.GoTo);
         visitorSlots[visitor] = slotIndex;
 
+        visitor.OnClick += VisitorClick;
         visitor.OnEndDestination += OnVisitorDestination;
 
         visitor.MoveTo(_nodePlaceVisitors[slotIndex], false);
@@ -171,9 +176,10 @@ public class BarEntityModel
 
     public void RemoveVisitor(IVisitor visitor)
     {
-        if (!visitors.Contains(visitor))
+        if (!visitors.ContainsKey(visitor))
             return;
 
+        visitor.OnClick -= VisitorClick;
         visitor.OnEndDestination -= OnVisitorDestination;
 
         if (visitorSlots.TryGetValue(visitor, out int slot))
@@ -217,5 +223,23 @@ public class BarEntityModel
     private void AddProfit(Vector3 position, int amount)
     {
         OnAddCoins?.Invoke(position, amount);
+    }
+
+    //========================= VISITOR CLICK =================
+
+    private void VisitorClick(IVisitor visitor)
+    {
+        if (!visitors.TryGetValue(visitor, out var state))
+            return;
+
+        switch (state)
+        {
+            case VisitorState.GoTo:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToBar));
+                break;
+            case VisitorState.At:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtBar));
+                break;
+        }
     }
 }

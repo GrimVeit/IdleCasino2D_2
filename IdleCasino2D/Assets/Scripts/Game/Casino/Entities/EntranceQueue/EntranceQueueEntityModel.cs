@@ -90,7 +90,7 @@ public class EntranceQueueEntityModel
 
     private void ClickVisitor(IVisitor visitor)
     {
-        visitor.SetMessage("Hello");
+        visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.Waiting));
 
         OnClickVisitor?.Invoke(visitor);
     }

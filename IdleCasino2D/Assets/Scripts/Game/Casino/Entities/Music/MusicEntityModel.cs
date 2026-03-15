@@ -3,32 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MusicEntityModel
 {
     public bool IsOpen => true;
-    public bool CanJoin => IsOpen && _songstress != null && _occupiedNodes.Count < _visitorNodes.Count;
+    public bool CanJoin => _songstress != null && visitors.Count < _visitorNodes.Count;
     public int CountStaff => _songstress != null ? 1 : 0;
 
     private readonly Node _songstressNode;
     private readonly List<Node> _visitorNodes;
 
-    private readonly Dictionary<IVisitor, Node> _occupiedNodes = new();
+    private readonly Dictionary<IVisitor, VisitorState> visitors = new();
+
+    private readonly Dictionary<IVisitor, int> visitorSlots = new();
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
+
     private ISongstress _songstress;
     private IEnumerator danceRoutine;
 
-    public MusicEntityModel(ICasinoProfitStoreInfo casinoProfitStoreInfo, List<Node> visitorNodes, Node songstressNode)
+    public MusicEntityModel(
+        ICasinoProfitStoreInfo casinoProfitStoreInfo,
+        List<Node> visitorNodes,
+        Node songstressNode)
     {
         _casinoProfitStoreInfo = casinoProfitStoreInfo;
-        _songstressNode = songstressNode;
         _visitorNodes = visitorNodes;
+        _songstressNode = songstressNode;
     }
 
     public void Initialize()
     {
-        if (_songstress != null)
+        if (_songstress != null && danceRoutine == null)
         {
             danceRoutine = DanceCycle();
             Coroutines.Start(danceRoutine);
@@ -46,7 +53,9 @@ public class MusicEntityModel
     public void SetStaff(IStaff staff)
     {
         _songstress = staff as ISongstress;
-        if (_songstress == null) return;
+
+        if (_songstress == null)
+            return;
 
         _songstress.Show();
         _songstress.SetMove(_songstressNode);
@@ -64,10 +73,10 @@ public class MusicEntityModel
         while (true)
         {
             _songstress.ActivateAnimation(SongstressAnimationEnum.Idle);
-            yield return new WaitForSeconds(UnityEngine.Random.Range(4f, 8f));
+            yield return new WaitForSeconds(Random.Range(4f, 8f));
 
             _songstress.ActivateAnimation(SongstressAnimationEnum.Song);
-            yield return new WaitForSeconds(UnityEngine.Random.Range(12f, 20f));
+            yield return new WaitForSeconds(Random.Range(12f, 20f));
         }
     }
 
@@ -80,79 +89,132 @@ public class MusicEntityModel
 
     public void AddVisitor(IVisitor visitor)
     {
-        if (!CanJoin || _occupiedNodes.ContainsKey(visitor))
+        if (!CanJoin || visitors.ContainsKey(visitor))
             return;
 
-        // Получаем список свободных нод
-        var freeNodes = _visitorNodes
-            .Where(n => !_occupiedNodes.ContainsValue(n))
-            .ToList();
+        int slotIndex = GetFreeSlot();
 
-        if (freeNodes.Count == 0)
+        if (slotIndex == -1)
             return;
 
-        // Выбираем случайную свободную точку
-        Node randomNode = freeNodes[UnityEngine.Random.Range(0, freeNodes.Count)];
+        visitors[visitor] = VisitorState.GoTo;
+        visitorSlots[visitor] = slotIndex;
 
-        _occupiedNodes[visitor] = randomNode;
-
-        visitor.MoveTo(randomNode, false);
+        visitor.OnClick += VisitorClick;
         visitor.OnEndDestination += OnVisitorArrived;
+
+        visitor.MoveTo(_visitorNodes[slotIndex], false);
     }
 
     public void RemoveVisitor(IVisitor visitor)
     {
-        if (!_occupiedNodes.ContainsKey(visitor))
+        if (!visitors.ContainsKey(visitor))
             return;
 
+        visitor.OnClick -= VisitorClick;
         visitor.OnEndDestination -= OnVisitorArrived;
 
-        _occupiedNodes.Remove(visitor);
+        visitors.Remove(visitor);
+        visitorSlots.Remove(visitor);
+    }
+
+    private int GetFreeSlot()
+    {
+        List<int> freeSlots = new();
+
+        for (int i = 0; i < _visitorNodes.Count; i++)
+        {
+            bool busy = visitorSlots.ContainsValue(i);
+
+            if (!busy)
+                freeSlots.Add(i);
+        }
+
+        if (freeSlots.Count == 0)
+            return -1;
+
+        int randomIndex = Random.Range(0, freeSlots.Count);
+
+        return freeSlots[randomIndex];
     }
 
     private void OnVisitorArrived(INpc npc, Node node)
     {
-        var visitor = npc as IVisitor;
+        IVisitor visitor = npc as IVisitor;
+
         if (visitor == null)
             return;
 
-        if (!_occupiedNodes.TryGetValue(visitor, out var visitorNode))
+        if (!visitorSlots.ContainsKey(visitor))
             return;
 
-        int index = _visitorNodes.IndexOf(visitorNode);
+        int slotIndex = visitorSlots[visitor];
 
-        switch (index)
-        {
-            case 0:
-                visitor.ActivateNpcRotation(NpcRotationEnum.FrontRight);
-                break;
-            case 1:
-                visitor.ActivateNpcRotation(NpcRotationEnum.BackRight);
-                break;
-            case 2:
-                visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
-                break;
-            default:
-                visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
-                break;
-        }
+        visitors[visitor] = VisitorState.At;
+
+        RotateVisitor(visitor, slotIndex);
 
         Coroutines.Start(VisitorRoutine(visitor));
     }
 
+    private void RotateVisitor(IVisitor visitor, int slotIndex)
+    {
+        switch (slotIndex)
+        {
+            case 0:
+                visitor.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+                break;
+
+            case 1:
+                visitor.ActivateNpcRotation(NpcRotationEnum.BackRight);
+                break;
+
+            case 2:
+                visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+                break;
+
+            default:
+                visitor.ActivateNpcRotation(NpcRotationEnum.BackLeft);
+                break;
+        }
+    }
+
     private IEnumerator VisitorRoutine(IVisitor visitor)
     {
-        float waitTime = UnityEngine.Random.Range(4f, 10f);
+        float waitTime = Random.Range(4f, 10f);
         yield return new WaitForSeconds(waitTime);
 
-        // 20% шанс оставить деньги
-        if (UnityEngine.Random.value <= 0.2f)
+        if (Random.value <= 0.2f)
         {
-            OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Music));
+            OnAddCoins?.Invoke(
+                visitor.Position,
+                _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Music));
         }
 
         OnVisitorRealised?.Invoke(visitor);
+
         RemoveVisitor(visitor);
+    }
+
+    #endregion
+
+    #region VISITOR CLICK
+
+    private void VisitorClick(IVisitor visitor)
+    {
+        if (!visitors.TryGetValue(visitor, out var state))
+            return;
+
+        switch (state)
+        {
+            case VisitorState.GoTo:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToSinger));
+                break;
+
+            case VisitorState.At:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtSinger));
+                break;
+        }
     }
 
     #endregion

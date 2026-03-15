@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
 
 public class PokerEntityModel
 {
@@ -12,7 +14,7 @@ public class PokerEntityModel
 
     private readonly Node _nodePlaceVisitor;
     private readonly Node _nodePlaceStaff;
-    private readonly List<IVisitor> visitors = new();
+    private readonly Dictionary<IVisitor, VisitorState> visitors = new();
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _pokerSpot;
@@ -51,23 +53,23 @@ public class PokerEntityModel
         _dealer.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
 
         if(visitors.Count > 0)
-            TryStartGame(visitors[0], auto: true);
+            TryStartGame(visitors.Keys.First(), auto: true);
     }
 
     #region Gameplay
 
     private void OnVisitorDestination(INpc npc, Node node)
     {
-        npc.ActivateNpcRotation(NpcRotationEnum.BackRight);
+        var visitor = npc as IVisitor;
+
+        visitor.ActivateNpcRotation(NpcRotationEnum.BackRight);
+        visitors[visitor] = VisitorState.At;
+
         isVisitorReady = true;
 
         if (_dealer != null)
         {
-            TryStartGame(npc as IVisitor, auto: true);
-        }
-        else
-        {
-            //ƒ»À≈–¿ Õ≈“, Õ”∆Õ¿ ÀŒ√» ¿ œŒ ¿«¿ Œ∆»ƒ¿Õ»ﬂ —“¿–“¿ ◊“Œ¡€ »√–Œ   À» ¿À
+            TryStartGame(visitor, auto: true);
         }
     }
 
@@ -148,7 +150,7 @@ public class PokerEntityModel
         if (!isEntityInteractive || visitors.Count == 0)
             return;
 
-        TryStartGame(visitors[0], auto: false);
+        TryStartGame(visitors.Keys.First(), auto: false);
     }
 
     #endregion
@@ -175,10 +177,11 @@ public class PokerEntityModel
 
     public void AddVisitor(IVisitor visitor)
     {
-        if (!CanJoin || visitors.Contains(visitor))
+        if (!CanJoin || visitors.ContainsKey(visitor))
             return;
 
-        visitors.Add(visitor);
+        visitors.Add(visitor, VisitorState.GoTo);
+        visitor.OnClick += VisitorClick;
         visitor.OnEndDestination += OnVisitorDestination;
         visitor.MoveTo(_nodePlaceVisitor, false);
 
@@ -187,9 +190,10 @@ public class PokerEntityModel
 
     public void RemoveVisitor(IVisitor visitor)
     {
-        if (!visitors.Contains(visitor))
+        if (!visitors.ContainsKey(visitor))
             return;
 
+        visitor.OnClick -= VisitorClick;
         visitor.OnEndDestination -= OnVisitorDestination;
         visitors.Remove(visitor);
 
@@ -227,6 +231,26 @@ public class PokerEntityModel
     public void DeactivateHighlight()
     {
         _pokerSpot.DeactivateHighlight();
+    }
+
+    #endregion
+
+    #region VISITOR CLICK
+
+    private void VisitorClick(IVisitor visitor)
+    {
+        if (!visitors.TryGetValue(visitor, out var state))
+            return;
+
+        switch (state)
+        {
+            case VisitorState.GoTo:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToPoker));
+                break;
+            case VisitorState.At:
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingPoker));
+                break;
+        }
     }
 
     #endregion

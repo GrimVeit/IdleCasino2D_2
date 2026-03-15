@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ExitEntityModel
@@ -23,6 +21,7 @@ public class ExitEntityModel
             return;
 
         visitors.Add(visitor);
+        visitor.OnClick += ClickVisitor;
         visitor.OnEndDestination += OnVisitorReachedPoint;
         var node = _nodesExit[Random.Range(0, _nodesExit.Count)];
         visitor.MoveTo(node, false);
@@ -33,6 +32,7 @@ public class ExitEntityModel
         if (!visitors.Contains(visitor))
             return;
 
+        visitor.OnClick -= ClickVisitor;
         visitor.OnEndDestination -= OnVisitorReachedPoint;
         visitors.Remove(visitor);
     }
@@ -43,4 +43,13 @@ public class ExitEntityModel
     {
         OnVisitorRealised?.Invoke(npc as IVisitor);
     }
+
+    #region VISITOR CLICK
+
+    private void ClickVisitor(IVisitor visitor)
+    {
+        visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.Exit));
+    }
+
+    #endregion
 }

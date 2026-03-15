@@ -13,6 +13,7 @@ public class CoinSystemView : View
     {
         var coin = Instantiate(coinPrefab, coinSpawnParent);
         coin.transform.SetPositionAndRotation(position, Quaternion.identity);
+        coin.transform.localPosition = new Vector3(coin.transform.localPosition.x, coin.transform.localPosition.y, -8);
         coin.SetData(count);
 
         coin.OnCollectCoin += HandleCoinCollected;
