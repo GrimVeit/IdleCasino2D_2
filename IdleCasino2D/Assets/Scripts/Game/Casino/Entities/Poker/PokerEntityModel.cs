@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
 using Random = UnityEngine.Random;
 
 public class PokerEntityModel
@@ -11,7 +10,7 @@ public class PokerEntityModel
     public bool IsOpen => isOpen;
     public bool IsGameRunning => isGameRunning;
     public bool CanJoin => isOpen && visitors.Count < 1;
-    public int CountStaff => _dealer != null ? 1 : 0;
+    public int CountStaff => _dealerData.dealer != null ? 1 : 0;
 
     private readonly Node _nodePlaceVisitor;
     private readonly Node _nodePlaceStaff;
@@ -19,9 +18,10 @@ public class PokerEntityModel
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
     private readonly IGameSpot _pokerSpot;
-    private IDealer _dealer;
+    private (IDealer dealer, MessagesDealerType messagesType) _dealerData;
 
-    private IEnumerator messageRoutine;
+    private IEnumerator messageVisitorRoutine;
+    private IEnumerator messageDealerRoutine;
     private IEnumerator gameRoutine;
 
     private bool isOpen = false;
@@ -41,26 +41,38 @@ public class PokerEntityModel
     {
         _pokerSpot.OnClick += SpotClick;
 
-        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+        if (messageVisitorRoutine != null) Coroutines.Stop(messageVisitorRoutine);
+        if (messageDealerRoutine != null) Coroutines.Stop(messageDealerRoutine);
 
-        messageRoutine = SingleVisitorTalk();
-        Coroutines.Start(messageRoutine);
+        messageVisitorRoutine = SingleVisitorTalk();
+        Coroutines.Start(messageVisitorRoutine);
+
+        messageDealerRoutine = SingleDealerTalk();
+        Coroutines.Start(messageDealerRoutine);
     }
 
     public void Dispose()
     {
         _pokerSpot.OnClick -= SpotClick;
 
-        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+        if (messageVisitorRoutine != null) Coroutines.Stop(messageVisitorRoutine);
+        if (messageDealerRoutine != null) Coroutines.Stop(messageDealerRoutine);
+
+        if (_dealerData.dealer != null)
+        {
+            _dealerData.dealer.OnClick -= DealerClick;
+            _dealerData.dealer.Dispose();
+        }
     }
 
     public void SetStaff(IStaff newDealer)
     {
-        _dealer = newDealer as IDealer;
-        _dealer.SetMove(_nodePlaceStaff);
-        _dealer.Show();
-        _dealer.ActivateAnimation(DealerAnimationEnum.Idle);
-        _dealer.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+        _dealerData.dealer = newDealer as IDealer;
+        _dealerData.dealer.OnClick += DealerClick;
+        _dealerData.dealer.SetMove(_nodePlaceStaff);
+        _dealerData.dealer.Show();
+        _dealerData.dealer.ActivateAnimation(DealerAnimationEnum.Idle);
+        _dealerData.dealer.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
 
         if(visitors.Count > 0)
             TryStartGame(visitors.Keys.First(), auto: true);
@@ -77,7 +89,7 @@ public class PokerEntityModel
 
         isVisitorReady = true;
 
-        if (_dealer != null)
+        if (_dealerData.dealer != null)
         {
             TryStartGame(visitor, auto: true);
         }
@@ -102,7 +114,7 @@ public class PokerEntityModel
         if (!isVisitorReady)
             return false;
 
-        if (!auto && _dealer != null) // защита от ручного запуска при дилере
+        if (!auto && _dealerData.dealer != null) // защита от ручного запуска при дилере
             return false;
 
         return true;
@@ -121,13 +133,16 @@ public class PokerEntityModel
     {
         isGameRunning = true;
 
-        _dealer?.ActivateAnimation(DealerAnimationEnum.Game);
+        _dealerData.dealer?.ActivateAnimation(DealerAnimationEnum.Game);
+        _dealerData.messagesType = MessagesDealerType.Game;
+        SetMessageDealer(_dealerData.dealer);
         _pokerSpot.ActivateAnimation("game");
         visitor.ActivatePlay();
 
         yield return new WaitForSeconds(5f);
 
-        _dealer?.ActivateAnimation(DealerAnimationEnum.Idle);
+        _dealerData.dealer?.ActivateAnimation(DealerAnimationEnum.Idle);
+        _dealerData.messagesType = MessagesDealerType.Idle;
         _pokerSpot.ActivateAnimation("idle");
         visitor.ActivateWin();
         OnAddCoins?.Invoke(visitor.Position, _casinoProfitStoreInfo.GetProfit(CasinoEntityType.Poker));
@@ -291,6 +306,45 @@ public class PokerEntityModel
                 visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingPoker));
                 break;
         }
+    }
+
+    #endregion
+
+    #region SONGSTRESS CLICK
+
+    private void DealerClick(IDealer dealer)
+    {
+        SetMessageDealer(dealer);
+    }
+
+    #endregion
+
+    #region MESSAGE
+
+    private IEnumerator SingleDealerTalk()
+    {
+        while (true)
+        {
+            if (_dealerData.dealer == null)
+            {
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+            if (Random.value <= 0.6f)
+            {
+                SetMessageDealer(_dealerData.dealer);
+            }
+
+            yield return new WaitForSeconds(Random.Range(4f, 9f));
+        }
+    }
+
+    private void SetMessageDealer(IDealer dealer)
+    {
+        if (dealer == null) return;
+
+        dealer.SetMessage(MessagesDealer.GetRandomQuote(_dealerData.messagesType));
     }
 
     #endregion

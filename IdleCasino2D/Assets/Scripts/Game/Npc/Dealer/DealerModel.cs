@@ -10,9 +10,15 @@ public class DealerModel : IStaffModel
         OnSetAnimation?.Invoke(animationEnum);
     }
 
+    public void Click()
+    {
+        OnClick?.Invoke();
+    }
+
     #region Output
 
     public event Action<DealerAnimationEnum> OnSetAnimation;
+    public event Action OnClick;
 
     #endregion
 }

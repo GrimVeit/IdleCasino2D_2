@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Spine.Unity;
@@ -7,12 +6,30 @@ using UnityEngine;
 
 public class DealerView : View, IStaffView
 {
+    [SerializeField] private ClickItem clickItem;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private MessageVisualModul messageVisualModul;
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
     [SerializeField] private DealerAnimations animations;
 
     private Node _currentNode;
+
+    public void Initialize()
+    {
+        clickItem.OnClick += ClickItem;
+    }
+
+    public void Dispose()
+    {
+        clickItem.OnClick -= ClickItem;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        messageVisualModul.SetMessage(message, turnEnum);
+    }
 
     public void Show()
     {
@@ -39,6 +56,8 @@ public class DealerView : View, IStaffView
     public void SetOrder(int order)
     {
         animations.SetOrder(order);
+
+        canvas.sortingOrder = order;
     }
 
     public void SetSkin(string name)
@@ -55,6 +74,17 @@ public class DealerView : View, IStaffView
     {
         animations.ActivateNpcRotation(npcRotationEnum);
     }
+
+    #region Output
+
+    public event Action OnClick;
+
+    private void ClickItem()
+    {
+        OnClick?.Invoke();
+    }
+
+    #endregion
 }
 
 [Serializable]
