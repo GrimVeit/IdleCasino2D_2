@@ -617,6 +617,9 @@ MonoBehaviour:
   messageVisualPrefab_Left: {fileID: 5243472717313186083, guid: 2da5fb15cf98cd046baf081884f41f13, type: 3}
   messageVisualPrefab_Right: {fileID: 2640983707979834534, guid: 910a1f28d6eaac94080668dd54951d00, type: 3}
   transformParent: {fileID: 9215261330936448992}
+  duration: 0.7
+  backgroundColor: {r: 1, g: 1, b: 1, a: 0.78431374}
+  textColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &4868276406745126513
 GameObject:
   m_ObjectHideFlags: 0

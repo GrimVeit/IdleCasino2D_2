@@ -19,21 +19,31 @@ public class SongstressPresenter : ISongstress
     public void Initialize()
     {
         ActivateEvents();
+
+        _view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        _view.Dispose();
     }
 
     private void ActivateEvents()
     {
+        _view.OnClick += _model.Click;
+
         _model.OnSetAnimation += _view.ActivateAnimation;
+        _model.OnClick += Click;
     }
 
     private void DeactivateEvents()
     {
+        _view.OnClick -= _model.Click;
+
         _model.OnSetAnimation -= _view.ActivateAnimation;
+        _model.OnClick -= Click;
     }
 
     #region DEALER
@@ -61,6 +71,30 @@ public class SongstressPresenter : ISongstress
     public void MoveTo(Node target, bool IsAbsolute)
     {
 
+    }
+
+    #endregion
+
+    #region CLICK
+
+    public event Action<ISongstress> OnClick;
+
+    private void Click()
+    {
+        OnClick?.Invoke(this);
+    }
+
+    #endregion
+
+    #region MESSAGE
+
+    public void SetMessage(string message, SpeechTurnEnum turn) => _view.SetMessage(message, turn);
+
+    public void SetMessage(string message)
+    {
+        SpeechTurnEnum turnEnum = (SpeechTurnEnum)UnityEngine.Random.Range(0, 2);
+
+        _view.SetMessage(message, turnEnum);
     }
 
     #endregion

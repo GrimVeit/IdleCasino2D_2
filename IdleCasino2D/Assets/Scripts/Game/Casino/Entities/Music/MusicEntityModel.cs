@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 public class MusicEntityModel
 {
     public bool IsOpen => true;
-    public bool CanJoin => _songstress != null && visitors.Count < _visitorNodes.Count;
-    public int CountStaff => _songstress != null ? 1 : 0;
+    public bool CanJoin => _songstressData.songstress != null && visitors.Count < _visitorNodes.Count;
+    public int CountStaff => _songstressData.songstress != null ? 1 : 0;
 
     private readonly Node _songstressNode;
     private readonly List<Node> _visitorNodes;
@@ -20,7 +20,7 @@ public class MusicEntityModel
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
 
-    private ISongstress _songstress;
+    private (ISongstress songstress, MessagesSongstressType messagesType) _songstressData;
 
     private IEnumerator messageRoutine;
     private IEnumerator danceRoutine;
@@ -37,7 +37,7 @@ public class MusicEntityModel
 
     public void Initialize()
     {
-        if (_songstress != null && danceRoutine == null)
+        if (_songstressData.songstress != null && danceRoutine == null)
         {
             danceRoutine = DanceCycle();
             Coroutines.Start(danceRoutine);
@@ -53,20 +53,28 @@ public class MusicEntityModel
     {
         if (danceRoutine != null) Coroutines.Stop(danceRoutine);
         if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+
+        if(_songstressData.songstress != null)
+        {
+            _songstressData.songstress.OnClick -= SongstressClick;
+            _songstressData.songstress.Dispose();
+        }
     }
 
     #region STAFF
 
     public void SetStaff(IStaff staff)
     {
-        _songstress = staff as ISongstress;
+        _songstressData.songstress = staff as ISongstress;
 
-        if (_songstress == null)
+        if (_songstressData.songstress == null)
             return;
 
-        _songstress.Show();
-        _songstress.SetMove(_songstressNode);
-        _songstress.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+        _songstressData.songstress.Show();
+        _songstressData.songstress.OnClick += SongstressClick;
+        _songstressData.songstress.SetMove(_songstressNode);
+        _songstressData.songstress.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+        _songstressData.messagesType = MessagesSongstressType.Idle;
 
         if (danceRoutine == null)
         {
@@ -79,11 +87,20 @@ public class MusicEntityModel
     {
         while (true)
         {
-            _songstress.ActivateAnimation(SongstressAnimationEnum.Idle);
-            yield return new WaitForSeconds(Random.Range(4f, 8f));
+            _songstressData.songstress.ActivateAnimation(SongstressAnimationEnum.Idle);
+            _songstressData.messagesType = MessagesSongstressType.Idle;
+            yield return new WaitForSeconds(Random.Range(4f, 9f));
 
-            _songstress.ActivateAnimation(SongstressAnimationEnum.Song);
-            yield return new WaitForSeconds(Random.Range(12f, 20f));
+
+            _songstressData.songstress.ActivateAnimation(SongstressAnimationEnum.Song);
+            _songstressData.messagesType = MessagesSongstressType.Performing;
+            int cyclesSong = Random.Range(6, 12);
+
+            for (int i = 0; i < cyclesSong; i++)
+            {
+                SetMessageSongstressRandomTurn(_songstressData.songstress);
+                yield return new WaitForSeconds(Random.Range(1f, 2f));
+            }
         }
     }
 
@@ -263,6 +280,52 @@ public class MusicEntityModel
                 visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtSinger));
                 break;
         }
+    }
+
+    #endregion
+
+    #region SONGSTRESS CLICK
+
+    private void SongstressClick(ISongstress songstress)
+    {
+        SetMessageSongstressRandomTurn(songstress);
+    }
+
+    #endregion
+
+    #region MESSAGE
+
+    private IEnumerator SingleVisitorTalk()
+    {
+        while (true)
+        {
+            if (_songstressData.songstress == null)
+            {
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+            if (Random.value <= 0.6f)
+            {
+                SetMessageSongstressRandomTurn(_songstressData.songstress);
+            }
+
+            yield return new WaitForSeconds(Random.Range(4f, 9f));
+        }
+    }
+
+    private void SetMessageSongstressRandomTurn(ISongstress songstress)
+    {
+        if (songstress == null) return;
+
+        songstress.SetMessage(MessagesSongstress.GetRandomQuote(_songstressData.messagesType));
+    }
+
+    private void SetMessageTurn(ISongstress songstress, SpeechTurnEnum speechTurnEnum)
+    {
+        if (songstress == null) return;
+
+        songstress.SetMessage(MessagesSongstress.GetRandomQuote(_songstressData.messagesType), speechTurnEnum);
     }
 
     #endregion

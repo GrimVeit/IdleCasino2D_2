@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMessage: {fileID: 1045251548208744921}
+  imageBackground: {fileID: 3780597044397024188}
 --- !u!1 &6894848948925488618
 GameObject:
   m_ObjectHideFlags: 0

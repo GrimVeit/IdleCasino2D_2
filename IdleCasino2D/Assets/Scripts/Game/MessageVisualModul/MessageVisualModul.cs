@@ -8,6 +8,11 @@ public class MessageVisualModul : MonoBehaviour
     [SerializeField] private MessageVisual messageVisualPrefab_Left;
     [SerializeField] private MessageVisual messageVisualPrefab_Right;
     [SerializeField] private Transform transformParent;
+    [SerializeField] private float duration = 0.7f;
+
+    [Header("Color")]
+    [SerializeField] private Color backgroundColor = Color.white;
+    [SerializeField] private Color textColor = Color.black;
 
     private readonly List<MessageVisual> visuals = new();
     private MessageVisual _currentVisual;
@@ -38,6 +43,8 @@ public class MessageVisualModul : MonoBehaviour
         }
 
         newVisual.transform.localPosition = Vector3.zero;
+        newVisual.SetColorText(textColor);
+        newVisual.SetColorBackground(backgroundColor);
         newVisual.SetText(message);
 
         newVisual.OnDeactivate += OnVisualDeactivate;
@@ -46,7 +53,7 @@ public class MessageVisualModul : MonoBehaviour
 
         newVisual.Activate();
 
-        timerCoroutine = StartCoroutine(AutoDeactivateAfterDelay(newVisual, 0.7f));
+        timerCoroutine = StartCoroutine(AutoDeactivateAfterDelay(newVisual, duration));
     }
 
     private IEnumerator AutoDeactivateAfterDelay(MessageVisual visual, float delay)

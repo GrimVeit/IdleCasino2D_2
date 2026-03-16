@@ -2,12 +2,24 @@ using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MessageVisual : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textMessage;
+    [SerializeField] private Image imageBackground;
 
     private Tween tweenScale;
+
+    public void SetColorText(Color color)
+    {
+        textMessage.color = color;
+    }
+
+    public void SetColorBackground(Color color)
+    {
+        imageBackground.color = color;
+    }
 
     public void SetText(string text)
     {
