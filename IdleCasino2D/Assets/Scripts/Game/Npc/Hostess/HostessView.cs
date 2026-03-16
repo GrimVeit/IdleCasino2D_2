@@ -8,6 +8,8 @@ using UnityEngine;
 public class HostessView : View, IStaffView
 {
     [SerializeField] private ClickItem clickItem;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private MessageVisualModul messageVisualModul;
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
@@ -27,6 +29,11 @@ public class HostessView : View, IStaffView
     public void Dispose()
     {
         clickItem.OnClick -= ClickItem;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        messageVisualModul.SetMessage(message, turnEnum);
     }
 
     public void Show()
@@ -66,6 +73,8 @@ public class HostessView : View, IStaffView
     public void SetOrder(int order)
     {
         animations.SetOrder(order);
+
+        canvas.sortingOrder = order;
     }
 
     public void SetSkin(string name)

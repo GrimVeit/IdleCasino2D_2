@@ -15,6 +15,7 @@ public class HostessEntityPresenter : IHostessEntityControllerListener, IHostess
     {
         ActivateEvents();
 
+        _model.Initialize();
         _view.Initialize();
     }
 
@@ -22,6 +23,7 @@ public class HostessEntityPresenter : IHostessEntityControllerListener, IHostess
     {
         DeactivateEvents();
 
+        _model.Dispose();
         _view.Dispose();
     }
 

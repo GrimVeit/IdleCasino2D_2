@@ -9,7 +9,7 @@ public class ProfitOfflineModel
     public int Earn => _earn;
 
     private const string LAST_EXIT_TIME = "offline_exit_time";
-    private const int PROFIT_INTERVAL = 120;         // 2 минуты
+    private const int PROFIT_INTERVAL = 120;
     private const int MAX_OFFLINE_PROFIT = 15000;
 
     private readonly List<ICasinoEntityInfo> _entities;
@@ -29,7 +29,6 @@ public class ProfitOfflineModel
         _profitStore = profitStore;
         _moneyProvider = moneyProvider;
 
-        // Берём первого менеджера, если есть
         _managerStaff = _entities
             .OfType<ICasinoEntityStaff>()
             .FirstOrDefault(data => data.PersonalType == StaffType.Hostess);
@@ -39,46 +38,68 @@ public class ProfitOfflineModel
 
     public void Initialize()
     {
-        Debug.Log("ACTIVE EARN");
-        Debug.Log(_managerStaff);
-        Debug.Log(_managerStaff.CountStaff);
+        long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
-        if (!IsActive) return;
+        if (!PlayerPrefs.HasKey(LAST_EXIT_TIME))
+        {
+            PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
+            return;
+        }
 
-        Debug.Log("ACTIVE EARN");
+        long lastTime = long.Parse(PlayerPrefs.GetString(LAST_EXIT_TIME));
+
+        // защита от перемотки времени назад
+        if (lastTime > now)
+        {
+            PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
+            return;
+        }
+
+        if (!IsActive)
+            return;
 
         _profitCollected = false;
 
-        if (!PlayerPrefs.HasKey(LAST_EXIT_TIME)) return;
+        _earn = CalculateOfflineProfit(lastTime, now);
 
-        _earn = CalculateOfflineProfit();
-
-        OnOfflineProfitCalculated?.Invoke(_earn, GetOfflineDurationText());
+        if (_earn > 0)
+        {
+            OnOfflineProfitCalculated?.Invoke(_earn, GetOfflineDurationText(lastTime, now));
+        }
     }
 
     public void Dispose()
     {
-        long lastTime = long.Parse(PlayerPrefs.GetString(LAST_EXIT_TIME));
         long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
-        if(lastTime > now)
+        if (!PlayerPrefs.HasKey(LAST_EXIT_TIME))
         {
             PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
+            return;
         }
 
-        if (!_profitCollected || lastTime < now) return;
+        long lastTime = long.Parse(PlayerPrefs.GetString(LAST_EXIT_TIME));
+
+        // защита от перемотки времени назад
+        if (lastTime > now)
+        {
+            PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
+            return;
+        }
+
+        // если прибыль была рассчитана и НЕ забрана — не обновляем время
+        if (!_profitCollected && _earn > 0)
+            return;
 
         PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
     }
 
     #endregion
 
-    #region Public Methods
+    #region Public
 
     public void CollectProfit()
     {
-        Debug.Log("COLLECT");
-
         _profitCollected = true;
 
         if (_earn > 0)
@@ -86,21 +107,38 @@ public class ProfitOfflineModel
 
         _earn = 0;
 
+        long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        PlayerPrefs.SetString(LAST_EXIT_TIME, now.ToString());
+
         OnCollectProfit?.Invoke();
     }
 
     #endregion
 
-    #region Internal Logic
+    #region Internal
 
-    public string GetOfflineDurationText()
+    private int CalculateOfflineProfit(long lastTime, long now)
     {
-        if (!PlayerPrefs.HasKey(LAST_EXIT_TIME))
-            return "0m"; // Если нет сохранённого времени
+        int cycles = (int)((now - lastTime) / PROFIT_INTERVAL);
 
-        long lastTime = long.Parse(PlayerPrefs.GetString(LAST_EXIT_TIME));
-        long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        if (cycles <= 0)
+            return 0;
 
+        int profit = 0;
+
+        foreach (var entity in _entities)
+        {
+            if (!entity.IsOpen)
+                continue;
+
+            profit += _profitStore.GetProfit(entity.CasinoEntityType) * cycles;
+        }
+
+        return Mathf.Min(profit, MAX_OFFLINE_PROFIT);
+    }
+
+    public string GetOfflineDurationText(long lastTime, long now)
+    {
         TimeSpan offlineSpan = TimeSpan.FromSeconds(now - lastTime);
 
         int days = offlineSpan.Days;
@@ -108,6 +146,7 @@ public class ProfitOfflineModel
         int minutes = offlineSpan.Minutes;
 
         string result = "";
+
         if (days > 0) result += $"{days}d ";
         if (hours > 0 || days > 0) result += $"{hours}h ";
         result += $"{minutes}m";
@@ -115,30 +154,11 @@ public class ProfitOfflineModel
         return result.Trim();
     }
 
-    private int CalculateOfflineProfit()
-    {
-        long lastTime = long.Parse(PlayerPrefs.GetString(LAST_EXIT_TIME));
-        long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-
-        int cycles = (int)((now - lastTime) / PROFIT_INTERVAL);
-        if (cycles <= 0) return 0;
-
-        int profit = 0;
-        foreach (var entity in _entities)
-        {
-            if (!entity.IsOpen) continue;
-            profit += _profitStore.GetProfit(entity.CasinoEntityType) * cycles;
-        }
-
-        return Mathf.Min(profit, MAX_OFFLINE_PROFIT);
-    }
-
     #endregion
 
-    #region Output Events
+    #region Events
 
     public event Action<int, string> OnOfflineProfitCalculated;
-
     public event Action OnCollectProfit;
 
     #endregion

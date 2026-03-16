@@ -7,12 +7,30 @@ using UnityEngine;
 
 public class ManagerView : View, IStaffView
 {
+    [SerializeField] private ClickItem clickItem;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private MessageVisualModul messageVisualModul;
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
     [SerializeField] private ManagerAnimations animations;
 
     private Node _currentNode;
+
+    public void Initialize()
+    {
+        clickItem.OnClick += ClickItem;
+    }
+
+    public void Dispose()
+    {
+        clickItem.OnClick -= ClickItem;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        messageVisualModul.SetMessage(message, turnEnum);
+    }
 
     public void Show()
     {
@@ -39,6 +57,8 @@ public class ManagerView : View, IStaffView
     public void SetOrder(int order)
     {
         animations.SetOrder(order);
+
+        canvas.sortingOrder = order;
     }
 
     public void SetSkin(string name)
@@ -55,6 +75,17 @@ public class ManagerView : View, IStaffView
     {
         animations.ActivateNpcRotation(npcRotationEnum);
     }
+
+    #region Output
+
+    public event Action OnClick;
+
+    private void ClickItem()
+    {
+        OnClick?.Invoke();
+    }
+
+    #endregion
 }
 
 [Serializable]

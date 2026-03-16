@@ -10,9 +10,15 @@ public class HostessModel : IStaffModel
         OnSetAnimation?.Invoke(animationEnum);
     }
 
+    public void Click()
+    {
+        OnClick?.Invoke();
+    }
+
     #region Output
 
     public event Action<HostessAnimationEnum> OnSetAnimation;
+    public event Action OnClick;
 
     #endregion
 }

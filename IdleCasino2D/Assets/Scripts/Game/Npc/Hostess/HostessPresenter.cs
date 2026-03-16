@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HostessPresenter : IHostess
@@ -19,25 +17,33 @@ public class HostessPresenter : IHostess
     public void Initialize()
     {
         ActivateEvents();
+
+        _view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        _view.Dispose();
     }
 
     private void ActivateEvents()
     {
         _view.OnPathCompleted += EndDestination;
+        _view.OnClick += _model.Click;
 
         _model.OnSetAnimation += _view.ActivateAnimation;
+        _model.OnClick += Click;
     }
 
     private void DeactivateEvents()
     {
         _view.OnPathCompleted -= EndDestination;
+        _view.OnClick += _model.Click;
 
         _model.OnSetAnimation -= _view.ActivateAnimation;
+        _model.OnClick -= Click;
     }
 
     #region DEALER
@@ -71,6 +77,30 @@ public class HostessPresenter : IHostess
     }
     public void SetMove(Node node) => _view.SetMove(node);
     public void MoveTo(Node target, bool IsAbsolute) => _view.MoveTo(target, IsAbsolute);
+
+    #endregion
+
+    #region MESSAGE
+
+    public void SetMessage(string message, SpeechTurnEnum turn) => _view.SetMessage(message, turn);
+
+    public void SetMessage(string message)
+    {
+        SpeechTurnEnum turnEnum = (SpeechTurnEnum)UnityEngine.Random.Range(0, 2);
+
+        _view.SetMessage(message, turnEnum);
+    }
+
+    #endregion
+
+    #region CLICK
+
+    public event Action<IHostess> OnClick;
+
+    private void Click()
+    {
+        OnClick?.Invoke(this);
+    }
 
     #endregion
 }

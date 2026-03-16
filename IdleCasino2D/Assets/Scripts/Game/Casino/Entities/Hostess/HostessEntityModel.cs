@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HostessEntityModel
 {
-    public int CountStaff => _hostess != null ? 1 : 0;
+    public int CountStaff => _hostessData.hostess != null ? 1 : 0;
 
     private readonly List<CasinoEntityHostessTargetAdapter> _casinoEntities = new();
     private readonly List<CasinoEntityEntranceQueueAdapter> _casinoEntityEntrances = new();
     private readonly List<(IVisitor, ICasinoEntityVisitorTraffic)> _firstVisitors = new();
     private readonly IVisitorPathTrafficProvider _visitorPathTrafficProvider;
 
-    private IHostess _hostess;
+    private (IHostess hostess, MessagesHostessType messageType) _hostessData;
     private readonly Node _nodeMain;
     private readonly Node _nodeMainBack;
     private readonly List<Node> _nodesTarget = new();
@@ -24,6 +25,8 @@ public class HostessEntityModel
     private bool isActiveEntranceQueueInteractive = false;
 
     private bool isHostessInBase = true;
+
+    private IEnumerator messageCoroutine;
 
     public HostessEntityModel(List<ICasinoEntityInfo> casinoEntities, IVisitorPathTrafficProvider visitorPathTrafficProvider, List<Node> nodesTarget)
     {
@@ -39,7 +42,7 @@ public class HostessEntityModel
                 entity is ICasinoEntityHighlightProvider highlight &&
                 entity.CasinoEntityType != CasinoEntityType.EntranceQueue)
             {
-                var dto = new CasinoEntityHostessTargetAdapter(i, entity, clickListener, interactiveProvider, visitorTraffic, highlight);
+                var dto = new CasinoEntityHostessTargetAdapter(entity, clickListener, interactiveProvider, visitorTraffic, highlight);
                 dto.OnCasinoSpotClicked += OnSpotClick;
                 dto.Initialize();
                 _casinoEntities.Add(dto);
@@ -61,7 +64,7 @@ public class HostessEntityModel
                     if (!_firstVisitors.Contains((visitor, traffic)))
                         _firstVisitors.Add((visitor, traffic));
 
-                    if(_hostess != null && isHostessInBase)
+                    if(_hostessData.hostess != null && isHostessInBase)
                     {
                         TryAssignVisitorAuto();
                     }
@@ -84,13 +87,21 @@ public class HostessEntityModel
 
     public void Initialize()
     {
+        if (messageCoroutine != null) Coroutines.Stop(messageCoroutine);
 
+        messageCoroutine = SingleVisitorTalk();
+        Coroutines.Start(messageCoroutine);
     }
 
     public void Dispose()
     {
-        if (_hostess != null)
-            _hostess.OnEndDestination -= HostessEndDestination;
+        if (_hostessData.hostess != null)
+        {
+            _hostessData.hostess.OnClick -= HostessClick;
+            _hostessData.hostess.OnEndDestination -= HostessEndDestination;
+        }
+
+        if (messageCoroutine != null) Coroutines.Stop(messageCoroutine);
     }
 
     private void HostessEndDestination(INpc hostess, Node node)
@@ -99,15 +110,17 @@ public class HostessEntityModel
         {
             isHostessInBase = true;
 
-            _hostess.SetMove(_nodeMain);
-            _hostess.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+            hostess.SetMove(_nodeMain);
+            hostess.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
 
             TryAssignVisitorAuto();
         }
         else
         {
-            _hostess.ActivateAnimation(HostessAnimationEnum.WaveHand);
-            _hostess.ActivateNpcRotation(node.RotationEnum);
+            _hostessData.hostess.ActivateAnimation(HostessAnimationEnum.WaveHand);
+            hostess.ActivateNpcRotation(node.RotationEnum);
+            _hostessData.messageType = MessagesHostessType.CallingVisitor;
+            SetMessageRandomTurn(_hostessData.hostess);
 
             Coroutines.Start(ReturnToMainNode());
         }
@@ -117,12 +130,13 @@ public class HostessEntityModel
     {
         yield return new WaitForSeconds(2f);
 
-        _hostess?.MoveTo(_nodeMainBack, false);
+        _hostessData.messageType = MessagesHostessType.Walking;
+        _hostessData.hostess.MoveTo(_nodeMainBack, false);
     }
 
     private void TryAssignVisitorAuto()
     {
-        if (_firstVisitors.Count == 0 || _hostess == null || !isHostessInBase)
+        if (_firstVisitors.Count == 0 || _hostessData.hostess == null || !isHostessInBase)
             return;
 
         _currentVisitor = _firstVisitors[0];
@@ -142,10 +156,15 @@ public class HostessEntityModel
             _currentVisitor.casinoTraffic.RemoveVisitor(_currentVisitor.visitor);
             _visitorPathTrafficProvider.TryAssignLeave(_currentVisitor.visitor);
             _currentVisitor = (null, null);
+
+            _hostessData.messageType = MessagesHostessType.NoFreePlaces;
+            SetMessageTurn(_hostessData.hostess, SpeechTurnEnum.Right);
             return;
         }
 
-        var chosen = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+        _hostessData.messageType = MessagesHostessType.InviteVisitor;
+
+        var chosen = candidates[Random.Range(0, candidates.Count)];
 
         Coroutines.Start(DelayedAssign(chosen));
     }
@@ -161,7 +180,9 @@ public class HostessEntityModel
         Debug.Log("??????????????????????????????????????????????????????");
         Debug.Log("??????????????????????????????????????????????????????");
 
-        _hostess.MoveTo(targetNode, false);
+        _hostessData.hostess.MoveTo(targetNode, false);
+        SetMessageTurn(_hostessData.hostess, SpeechTurnEnum.Right);
+        _hostessData.messageType = MessagesHostessType.Walking;
 
         isHostessInBase = false;
 
@@ -178,12 +199,13 @@ public class HostessEntityModel
 
     public void SetStaff(IStaff staff)
     {
-        _hostess = staff as IHostess;
-        _hostess.OnEndDestination += HostessEndDestination;
-        _hostess.SetMove(_nodeMain);
-        _hostess.Show();
-        _hostess.ActivateAnimation(HostessAnimationEnum.Idle);
-        _hostess.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+        _hostessData.hostess = staff as IHostess;
+        _hostessData.hostess.OnClick += HostessClick;
+        _hostessData.hostess.OnEndDestination += HostessEndDestination;
+        _hostessData.hostess.SetMove(_nodeMain);
+        _hostessData.hostess.Show();
+        _hostessData.hostess.ActivateAnimation(HostessAnimationEnum.Idle);
+        _hostessData.hostess.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
 
         TryAssignVisitorAuto();
     }
@@ -209,7 +231,7 @@ public class HostessEntityModel
 
     private void OnQueueVisitorClick(IVisitor visitor, CasinoEntityEntranceQueueAdapter queueAdapter)
     {
-        if(!isActiveEntranceQueueInteractive || _hostess != null) return;
+        if(!isActiveEntranceQueueInteractive || _hostessData.hostess != null) return;
 
         if (!_firstVisitors.Any(d => d.Item1 == visitor)) return;
 
@@ -236,7 +258,7 @@ public class HostessEntityModel
 
     private void OnSpotClick(CasinoEntityHostessTargetAdapter dto)
     {
-        if (!isActiveCasinoEntityInteractive || _hostess != null) return;
+        if (!isActiveCasinoEntityInteractive || _hostessData.hostess != null) return;
 
         if (!dto.CasinoEntityInfo.IsOpen || !dto.CasinoEntityInfo.CanJoin) return;
 
@@ -301,6 +323,52 @@ public class HostessEntityModel
     public event Action OnLeave;
 
     #endregion
+
+    #region HOSTESS CLICK
+
+    private void HostessClick(IHostess hostess)
+    {
+        SetMessageRandomTurn(hostess);
+    }
+
+    #endregion
+
+    #region MESSAGE
+
+    private IEnumerator SingleVisitorTalk()
+    {
+        while (true)
+        {
+            if (_hostessData.hostess == null)
+            {
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+            if (Random.value <= 0.6f)
+            {
+                SetMessageRandomTurn(_hostessData.hostess);
+            }
+
+            yield return new WaitForSeconds(Random.Range(4f, 9f));
+        }
+    }
+
+    private void SetMessageRandomTurn(IHostess hostess)
+    {
+        if (hostess == null) return;
+
+        hostess.SetMessage(MessagesHostess.GetRandomQuote(_hostessData.messageType));
+    }
+
+    private void SetMessageTurn(IHostess hostess, SpeechTurnEnum speechTurnEnum)
+    {
+        if (hostess == null) return;
+
+        hostess.SetMessage(MessagesHostess.GetRandomQuote(_hostessData.messageType), speechTurnEnum);
+    }
+
+    #endregion
 }
 
 public class CasinoEntityHostessTargetAdapter
@@ -314,7 +382,6 @@ public class CasinoEntityHostessTargetAdapter
     public event Action<CasinoEntityHostessTargetAdapter> OnCasinoSpotClicked;
 
     public CasinoEntityHostessTargetAdapter(
-        int numberId,
         ICasinoEntityInfo casinoEntityInfo,
         ICasinoEntitySpotClickListener casinoEntitySpotClick,
         ICasinoEntityInteractiveProvider casinoEntityInteractiveProvider,
