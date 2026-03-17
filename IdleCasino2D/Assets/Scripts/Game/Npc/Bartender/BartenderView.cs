@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Spine.Unity;
@@ -7,6 +6,9 @@ using UnityEngine;
 
 public class BartenderView : View, IStaffView
 {
+    [SerializeField] private ClickItem clickItem;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private MessageVisualModul messageVisualModul;
     public Vector3 Position => transform.position;
     public Node CurrentNode => _currentNode;
 
@@ -16,6 +18,21 @@ public class BartenderView : View, IStaffView
     private Node _currentNode;
 
     private Tween tweenMove;
+
+    public void Initialize()
+    {
+        clickItem.OnClick += ClickItem;
+    }
+
+    public void Dispose()
+    {
+        clickItem.OnClick -= ClickItem;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        messageVisualModul.SetMessage(message, turnEnum);
+    }
 
     public void Show()
     {
@@ -70,6 +87,8 @@ public class BartenderView : View, IStaffView
     public void SetOrder(int order)
     {
         animations.SetOrder(order);
+
+        canvas.sortingOrder = order;
     }
 
     public void SetSkin(string name)
@@ -86,6 +105,17 @@ public class BartenderView : View, IStaffView
     {
         animations.ActivateNpcRotation(npcRotationEnum);
     }
+
+    #region Output
+
+    public event Action OnClick;
+
+    private void ClickItem()
+    {
+        OnClick?.Invoke();
+    }
+
+    #endregion
 }
 
 [Serializable]

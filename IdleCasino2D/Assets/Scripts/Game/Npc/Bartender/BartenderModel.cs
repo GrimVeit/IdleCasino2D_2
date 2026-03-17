@@ -10,9 +10,15 @@ public class BartenderModel : IStaffModel
         OnSetAnimation?.Invoke(animationEnum);
     }
 
+    public void Click()
+    {
+        OnClick?.Invoke();
+    }
+
     #region Output
 
     public event Action<BartenderAnimationEnum> OnSetAnimation;
+    public event Action OnClick;
 
     #endregion
 }

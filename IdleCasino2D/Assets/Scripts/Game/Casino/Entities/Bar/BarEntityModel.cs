@@ -11,8 +11,8 @@ public enum VisitorState
 
 public class BarEntityModel
 {
-    public bool CanJoin => _bartender != null && visitors.Count < _nodePlaceVisitors.Count;
-    public int CountStaff => _bartender != null ? 1 : 0;
+    public bool CanJoin => _bartenderData.bartender != null && visitors.Count < _nodePlaceVisitors.Count;
+    public int CountStaff => _bartenderData.bartender != null ? 1 : 0;
 
     private readonly List<Node> _nodePlaceVisitors;
     private readonly List<Node> _nodesPlaceStaff;
@@ -21,9 +21,10 @@ public class BarEntityModel
 
     private readonly ICasinoProfitStoreInfo _casinoProfitStoreInfo;
 
-    private IBartender _bartender;
+    private (IBartender bartender, MessagesBartenderType messagesType) _bartenderData;
 
-    private IEnumerator messageRoutine;
+    private IEnumerator messageVisitorRoutine;
+    private IEnumerator messageDealerRoutine;
 
     private readonly Dictionary<IVisitor, int> visitorSlots = new();
     private readonly Dictionary<int, IEnumerator> slotRoutines = new();
@@ -40,29 +41,42 @@ public class BarEntityModel
 
     public void Initialize() 
     {
-        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+        if (messageVisitorRoutine != null) Coroutines.Stop(messageVisitorRoutine);
+        if (messageDealerRoutine != null) Coroutines.Stop(messageDealerRoutine);
 
-        messageRoutine = RandomVisitorTalk();
-        Coroutines.Start(messageRoutine);
+        messageVisitorRoutine = RandomVisitorTalk();
+        Coroutines.Start(messageVisitorRoutine);
+
+        messageDealerRoutine = SingleBartenderTalk();
+        Coroutines.Start(messageDealerRoutine);
     }
     public void Dispose() 
     {
-        if (messageRoutine != null) Coroutines.Stop(messageRoutine);
+        if (messageVisitorRoutine != null) Coroutines.Stop(messageVisitorRoutine);
+        if (messageDealerRoutine != null) Coroutines.Stop(messageDealerRoutine);
+
+        if (_bartenderData.bartender != null)
+        {
+            _bartenderData.bartender.OnClick -= BartenderClick;
+            _bartenderData.bartender.Dispose();
+        }
     }
 
     // ======================== STAFF ========================
 
     public void SetStaff(IStaff newStaff)
     {
-        _bartender = newStaff as IBartender;
+        _bartenderData.bartender = newStaff as IBartender;
 
-        if (_bartender == null)
+        if (_bartenderData.bartender == null)
             return;
 
-        _bartender.SetMove(_nodesPlaceStaff[0]);
-        _bartender.Show();
-        _bartender.ActivateAnimation(BartenderAnimationEnum.Idle);
-        _bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+        _bartenderData.bartender.OnClick += BartenderClick;
+        _bartenderData.bartender.SetMove(_nodesPlaceStaff[0]);
+        _bartenderData.bartender.Show();
+        _bartenderData.bartender.ActivateAnimation(BartenderAnimationEnum.Idle);
+        _bartenderData.bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+        _bartenderData.messagesType = MessagesBartenderType.Idle;
     }
 
     // ======================== VISITOR ARRIVAL ========================
@@ -98,7 +112,7 @@ public class BarEntityModel
         if (visitor == null)
             return false;
 
-        if (_bartender == null)
+        if (_bartenderData.bartender == null)
             return false;
 
         return true;
@@ -120,32 +134,35 @@ public class BarEntityModel
 
     private IEnumerator Game(IVisitor visitor, int slotIndex)
     {
-        if (_bartender == null || visitor == null)
+        if (_bartenderData.bartender == null || visitor == null)
             yield break;
 
         Node staffNode = _nodesPlaceStaff[slotIndex];
 
-        int indexCurrent = _nodesPlaceStaff.IndexOf(_bartender.CurrentNode);
+        int indexCurrent = _nodesPlaceStaff.IndexOf(_bartenderData.bartender.CurrentNode);
 
         if(slotIndex > indexCurrent)
         {
-            _bartender.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
+            _bartenderData.bartender.ActivateNpcRotation(NpcRotationEnum.FrontLeft);
         }
         else if(slotIndex < indexCurrent)
         {
-            _bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+            _bartenderData.bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
         }
 
-        _bartender.MoveTo(staffNode, IsAbsolute: true);
+        _bartenderData.bartender.MoveTo(staffNode, IsAbsolute: true);
 
         yield return new WaitForSeconds(0.5f);
 
-        _bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
-        _bartender.ActivateAnimation(BartenderAnimationEnum.Work);
+        _bartenderData.bartender.ActivateNpcRotation(NpcRotationEnum.FrontRight);
+        _bartenderData.bartender.ActivateAnimation(BartenderAnimationEnum.Work);
+        _bartenderData.messagesType = MessagesBartenderType.Serving;
+        SetMessageBartender(_bartenderData.bartender);
 
         yield return new WaitForSeconds(2f);
 
-        _bartender.ActivateAnimation(BartenderAnimationEnum.Idle);
+        _bartenderData.bartender.ActivateAnimation(BartenderAnimationEnum.Idle);
+        _bartenderData.messagesType = MessagesBartenderType.Idle;
 
         yield return new WaitForSeconds(0.2f);
 
@@ -241,7 +258,7 @@ public class BarEntityModel
 
     private void VisitorClick(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessageVisitor(visitor);
     }
 
     //========================== VISITOR MESSAGE ===============
@@ -268,7 +285,7 @@ public class BarEntityModel
 
                 if (Random.value <= 0.7f)
                 {
-                    SetMessage(visitor);
+                    SetMessageVisitor(visitor);
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
@@ -278,7 +295,7 @@ public class BarEntityModel
         }
     }
 
-    private void SetMessage(IVisitor visitor)
+    private void SetMessageVisitor(IVisitor visitor)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
@@ -292,5 +309,44 @@ public class BarEntityModel
                 visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtBar));
                 break;
         }
+    }
+
+
+
+    //========================== BARTENDER CLICK ===============
+
+    private void BartenderClick(IBartender bartender)
+    {
+        SetMessageBartender(bartender);
+    }
+
+
+
+    //========================== BARTENDER MESSAGE ===============
+
+    private IEnumerator SingleBartenderTalk()
+    {
+        while (true)
+        {
+            if (_bartenderData.bartender == null)
+            {
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+            if (Random.value <= 0.6f)
+            {
+                SetMessageBartender(_bartenderData.bartender);
+            }
+
+            yield return new WaitForSeconds(Random.Range(4f, 9f));
+        }
+    }
+
+    private void SetMessageBartender(IBartender bartender)
+    {
+        if (bartender == null) return;
+
+        bartender.SetMessage(MessagesBartender.GetRandomQuote(_bartenderData.messagesType));
     }
 }

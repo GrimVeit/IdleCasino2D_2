@@ -5,6 +5,7 @@ using UnityEngine;
 public class StarSpawnerEffectView : View
 {
     public StarEffect starPrefab;
+    [SerializeField] private Transform parentSpawn;
     public Transform[] spawnPoints; // 200 точек
     public int poolSize = 50;       // сколько звёзд держим одновременно
 
@@ -15,7 +16,7 @@ public class StarSpawnerEffectView : View
         // Создаём пул
         for (int i = 0; i < poolSize; i++)
         {
-            StarEffect star = Instantiate(starPrefab);
+            StarEffect star = Instantiate(starPrefab, parentSpawn);
             starPool.Add(star);
         }
 
@@ -36,7 +37,7 @@ public class StarSpawnerEffectView : View
             {
                 // Рандомная точка
                 Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                freeStar.transform.position = point.position;
+                freeStar.transform.localPosition = point.localPosition;
 
                 // Активируем
                 freeStar.Activate();

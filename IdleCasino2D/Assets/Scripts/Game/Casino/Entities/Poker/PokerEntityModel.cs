@@ -310,7 +310,7 @@ public class PokerEntityModel
 
     #endregion
 
-    #region SONGSTRESS CLICK
+    #region DEALER CLICK
 
     private void DealerClick(IDealer dealer)
     {
@@ -319,7 +319,7 @@ public class PokerEntityModel
 
     #endregion
 
-    #region MESSAGE
+    #region DEALER MESSAGE
 
     private IEnumerator SingleDealerTalk()
     {
