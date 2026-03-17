@@ -1,11 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnerVisitorView : View
 {
-    [SerializeField] private VisitorView visitorPrefab;
+    [SerializeField] private VisitorView visitorPrefab_1;
+    [SerializeField] private VisitorView visitorPrefab_2;
+    [SerializeField] private List<string> skinsId_1;
+    [SerializeField] private List<string> skinsId_2;
     [SerializeField] private Transform transformParentVisitors;
     [SerializeField] private Transform traspawnPoint;
 
@@ -13,9 +16,20 @@ public class SpawnerVisitorView : View
 
     public void SpawnVisitor(List<CasinoEntityType> route)
     {
-        var view = Instantiate(visitorPrefab, transformParentVisitors);
-        view.transform.SetLocalPositionAndRotation(traspawnPoint.localPosition, visitorPrefab.transform.rotation);
-        view.SetSkin(UnityEngine.Random.Range(1, 5));
+        VisitorView view;
+
+        if (Random.value < 0.5f)
+        {
+            view = Instantiate(visitorPrefab_1, transformParentVisitors);
+            view.SetSkin(skinsId_1[Random.Range(0, skinsId_1.Count)]);
+        }
+        else
+        {
+            view = Instantiate(visitorPrefab_2, transformParentVisitors);
+            view.SetSkin(skinsId_2[Random.Range(0, skinsId_2.Count)]);
+        }
+        view.transform.SetLocalPositionAndRotation(traspawnPoint.localPosition, visitorPrefab_1.transform.rotation);
+
         var presenter = new VisitorPresenter(new VisitorModel(route), view);
         presenter.Initialize();
         presenter.Show();

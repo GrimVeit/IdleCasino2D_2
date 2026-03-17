@@ -37854,7 +37854,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a4e9b5367b0e54394bcdcacac03ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visitorPrefab: {fileID: 3355883948482388950, guid: 820b03fd215355946879e1bb8fb6154f, type: 3}
+  visitorPrefab_1: {fileID: 3355883948482388950, guid: 820b03fd215355946879e1bb8fb6154f, type: 3}
+  visitorPrefab_2: {fileID: 7912327903762512606, guid: e9e6b8e2b00da3047a6e51ce7c29da4d, type: 3}
+  skinsId_1:
+  - mn01
+  - mn02
+  - mn03
+  - mn04
+  skinsId_2:
+  - wm01
+  - wm02
+  - wm03
+  - wm04
   transformParentVisitors: {fileID: 349724874}
   traspawnPoint: {fileID: 1648817374}
 --- !u!1 &1704286998

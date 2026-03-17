@@ -43,23 +43,9 @@ public class VisitorView : View
             .SetEase(Ease.OutBack);
     }
 
-    public void SetSkin(int number)
+    public void SetSkin(string skinId)
     {
-        switch (number)
-        {
-            case 1:
-                animations.SetSkin("mn01");
-                break;
-            case 2:
-                animations.SetSkin("mn02");
-                break;
-            case 3:
-                animations.SetSkin("mn03");
-                break;
-            case 4:
-                animations.SetSkin("mn04");
-                break;
-        }
+        animations.SetSkin(skinId);
     }
 
     public void HideDestroy()

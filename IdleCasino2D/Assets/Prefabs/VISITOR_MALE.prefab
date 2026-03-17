@@ -618,8 +618,8 @@ MonoBehaviour:
   messageVisualPrefab_Right: {fileID: 2640983707979834534, guid: 910a1f28d6eaac94080668dd54951d00, type: 3}
   transformParent: {fileID: 9215261330936448992}
   duration: 0.7
-  backgroundColor: {r: 1, g: 1, b: 1, a: 0.78431374}
-  textColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundColor: {r: 0.8509804, g: 1, b: 0.81960785, a: 0.78431374}
+  textColor: {r: 0.21568628, g: 0.5058824, b: 1, a: 1}
 --- !u!1 &4868276406745126513
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 1918496455436140622}
   - component: {fileID: 3355883948482388950}
   m_Layer: 0
-  m_Name: Visitor
+  m_Name: VISITOR_MALE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
