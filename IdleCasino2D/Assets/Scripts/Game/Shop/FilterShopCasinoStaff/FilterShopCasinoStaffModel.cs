@@ -11,11 +11,12 @@ public class FilterShopCasinoStaffModel
     private readonly IMoneyProvider _moneyProvider;
     private readonly ISpawnerStaffProvider _spawnerStaffProvider;
     private readonly IShopCasinoPersonalListener _shopCasinoPersonalListener;
+    private readonly ISoundProvider _soundProvider;
 
     private bool isActiveClicked = false;
 
     public FilterShopCasinoStaffModel(
-        List<ICasinoEntityInfo> casinoEntities, IMoneyProvider moneyProvider, ISpawnerStaffProvider spawnerStaffProvider, IShopCasinoPersonalListener shopCasinoPersonalListener)
+        List<ICasinoEntityInfo> casinoEntities, IMoneyProvider moneyProvider, ISpawnerStaffProvider spawnerStaffProvider, IShopCasinoPersonalListener shopCasinoPersonalListener, ISoundProvider soundProvider)
     {
         foreach (var entity in casinoEntities)
         {
@@ -36,6 +37,7 @@ public class FilterShopCasinoStaffModel
         _moneyProvider = moneyProvider;
         _spawnerStaffProvider = spawnerStaffProvider;
         _shopCasinoPersonalListener = shopCasinoPersonalListener;
+        _soundProvider = soundProvider;
     }
 
     public void Activate()
@@ -79,6 +81,7 @@ public class FilterShopCasinoStaffModel
         if (!_moneyProvider.CanAfford(_currentStaffData.Price))
         {
             OnPurchaseFailed?.Invoke("Not enough money for this staff");
+            _soundProvider.PlayOneShot("Error");
             return;
         }
 
@@ -111,6 +114,7 @@ public class FilterShopCasinoStaffModel
         if (availableEntity == null)
         {
             OnPurchaseFailed?.Invoke("No available slot for this staff");
+            _soundProvider.PlayOneShot("Error");
             CancelSelection();
             return;
         }
@@ -153,6 +157,7 @@ public class FilterShopCasinoStaffModel
         if (!hasAvailable)
         {
             OnPurchaseFailed?.Invoke("No available tables for this staff");
+            _soundProvider.PlayOneShot("Error");
             CancelSelection();
             return;
         }

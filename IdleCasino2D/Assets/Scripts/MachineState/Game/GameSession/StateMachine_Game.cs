@@ -25,7 +25,8 @@ public class StateMachine_Game : IStateMachineProvider
         ICasinoProfitListener casinoProfitListener,
         IAdministratorVisualProvider administratorVisualProvider,
         IProfitOfflineInfo profitOfflineInfo,
-        IProfitOfflineListener profitOfflineListener
+        IProfitOfflineListener profitOfflineListener,
+        ISoundProvider soundProvider
         )
     {
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
@@ -33,7 +34,7 @@ public class StateMachine_Game : IStateMachineProvider
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
         states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot, shopCasinoPersonalListener);
 
-        states[typeof(CheckProfitOnlineState_Game)] = new CheckProfitOnlineState_Game(this, profitOfflineInfo);
+        states[typeof(CheckProfitOnlineState_Game)] = new CheckProfitOnlineState_Game(this, profitOfflineInfo, soundProvider);
         states[typeof(ProfitOnlineState_Game)] = new ProfitOnlineState_Game(this, profitOfflineListener, sceneRoot);
 
         states[typeof(UpgradeState_Game)] = new UpgradeState_Game(this, sceneRoot, casinoProfitListener);

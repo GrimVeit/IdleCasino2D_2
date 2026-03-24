@@ -90,7 +90,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankTransactionVisualPresenter = new BankTransactionVisualPresenter(new BankTransactionVisualModel(bankPresenter), viewContainer.GetView<BankTransactionVisualView>());
 
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
-        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter, bankPresenter), viewContainer.GetView<CasinoProfitView>());
+        casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter, bankPresenter, soundPresenter), viewContainer.GetView<CasinoProfitView>());
 
         particleEffectPresenter = new ParticleEffectPresenter
             (new ParticleEffectModel(),
@@ -120,7 +120,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         shopCasinoSpotPresenter = new ShopCasinoSpotPresenter(new ShopCasinoSpotModel(casinoEntityClickInteractionPresenter, bankPresenter, shopCasinoEntityDatas), viewContainer.GetView<ShopCasinoSpotView>());
 
         shopCasinoPersonalPresenter = new ShopCasinoPersonalPresenter(new ShopCasinoPersonalModel(shopCasinoPersonalDatas, bankPresenter), viewContainer.GetView<ShopCasinoPersonalView>());
-        filterShopCasinoStaffPresenter = new FilterShopCasinoStaffPresenter(new FilterShopCasinoStaffModel(casinoEntities, bankPresenter, staffSpawnerPresenter, shopCasinoPersonalPresenter), viewContainer.GetView<FilterShopCasinoStaffView>());
+        filterShopCasinoStaffPresenter = new FilterShopCasinoStaffPresenter(new FilterShopCasinoStaffModel(casinoEntities, bankPresenter, staffSpawnerPresenter, shopCasinoPersonalPresenter, soundPresenter), viewContainer.GetView<FilterShopCasinoStaffView>());
 
         gameProgressPresenter = new GameProgressPresenter(new GameProgressModel(bankPresenter), viewContainer.GetView<GameProgressView>());
         administratorPresenter = new AdministratorPresenter(viewContainer.GetView<AdministratorView>());
@@ -163,7 +163,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             casinoProfitPresenter,
             administratorPresenter,
             profitOfflinePresenter,
-            profitOfflinePresenter);
+            profitOfflinePresenter,
+            soundPresenter);
 
         touchCameraPresenter.Initialize();
         mapOrderPresenter.Initialize();
@@ -203,18 +204,15 @@ public class GameSceneEntryPoint : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             var spot = new SlotSpotPresenter(new SlotSpotModel(), viewContainer_World.GetView<SlotSpotView>($"Slot_{i + 1}"));
-
-            Debug.Log("2.1");
             spot.Initialize();
-
-            Debug.Log("2.2");
 
             var entity = new SlotMachineEntityPresenter(new SlotMachineEntityModel(casinoProfitStorePresenter, spot, nodesSlot[i]));
             entity.Initialize();
 
-            Debug.Log("2.3");
-
             casinoEntities.Add(entity);
+
+            if(i == 0)
+                entity.Open();
         }
 
         for (int i = 0; i < 6; i++)

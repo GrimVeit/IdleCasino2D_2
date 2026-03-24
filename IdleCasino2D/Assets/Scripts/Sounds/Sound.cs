@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -26,6 +27,7 @@ public class Sound : ISound
     private bool isMainControl;
 
     private IEnumerator setVolume_Coroutine;
+    private IEnumerator play_Coroutine;
 
     public void Initialize()
     {
@@ -89,7 +91,20 @@ public class Sound : ISound
 
     public void Play()
     {
-        audioSource.Play();
+        if (play_Coroutine != null)
+            Coroutines.Stop(play_Coroutine);
+
+        play_Coroutine = Play_Coroutine(0);
+        Coroutines.Start(play_Coroutine);
+    }
+
+    public void Play(float await)
+    {
+        if (play_Coroutine != null)
+            Coroutines.Stop(play_Coroutine);
+
+        play_Coroutine = Play_Coroutine(await);
+        Coroutines.Start(play_Coroutine);
     }
 
     public void PlayOneShot()
@@ -113,7 +128,7 @@ public class Sound : ISound
         if (setVolume_Coroutine != null)
             Coroutines.Stop(setVolume_Coroutine);
 
-        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, durationChangeVolume, action);
+        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, durationChangeVolume, 0, action);
         Coroutines.Start(setVolume_Coroutine);
     }
 
@@ -122,7 +137,7 @@ public class Sound : ISound
         if (setVolume_Coroutine != null)
             Coroutines.Stop(setVolume_Coroutine);
 
-        setVolume_Coroutine = ChangeVolume_Coroutine(normalVolume, endVolume, time, action);
+        setVolume_Coroutine = ChangeVolume_Coroutine(normalVolume, endVolume, time, 0, action);
         Coroutines.Start(setVolume_Coroutine);
     }
 
@@ -131,15 +146,33 @@ public class Sound : ISound
         if (setVolume_Coroutine != null)
             Coroutines.Stop(setVolume_Coroutine);
 
-        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, time, action);
+        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, time, 0, action);
         Coroutines.Start(setVolume_Coroutine);
     }
 
-    private IEnumerator ChangeVolume_Coroutine(float startVolume, float endVolume, float time, Action actionOnend)
+    public void SetVolume(float startVolume, float endVolume, float time, float awate, Action action = null)
+    {
+        if (setVolume_Coroutine != null)
+            Coroutines.Stop(setVolume_Coroutine);
+
+        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, time, 0, action);
+        Coroutines.Start(setVolume_Coroutine);
+    }
+
+    private IEnumerator Play_Coroutine(float await)
+    {
+        yield return new WaitForSeconds(await);
+
+        audioSource.Play();
+    }
+
+    private IEnumerator ChangeVolume_Coroutine(float startVolume, float endVolume, float time, float awate, Action actionOnend)
     {
         if (audioSource == null) yield break;
 
         if (audioSource.volume == endVolume) yield break;
+
+        yield return new WaitForSeconds(awate);
 
         audioSource.volume = startVolume;
         float elapsedTime = 0f;
@@ -165,11 +198,13 @@ public interface ISound
 {
     public float Volume { get; }
     public void Play();
+    public void Play(float await);
     public void PlayOneShot();
     public void Stop();
     public void SetVolume(float vol);
     public void SetVolume(float startVolume, float endVolume, Action action = null);
     public void SetVolume(float startVolume, float endVolume, float time, Action action = null);
+    public void SetVolume(float startVolume, float endVolume, float time, float timeAwait, Action action = null);
     public void SetVolume_End(float endVolume, float time, Action action = null);
     public void SetPitch(float pitch);
 }
