@@ -348,11 +348,15 @@ public class UIGameRoot : UIRoot
 
     private void ClickToUpgrade_MAIN()
     {
+        _soundProvider.PlayOneShot("PanelOpen");
+
         OnCLickToUpgrade_MAIN?.Invoke();
     }
 
     private void ClickToHireStaff_MAIN()
     {
+        _soundProvider.PlayOneShot("PanelOpen");
+
         OnClickToHireStaff_MAIN?.Invoke();
     }
 
@@ -364,6 +368,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_UPGRADE()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_UPGRADE?.Invoke();
     }
 
@@ -375,6 +381,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_UPGRADE_PROFIT()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_UPGRADE_PROFIT?.Invoke();
     }
 
@@ -386,6 +394,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_HIRE_STAFF()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_HIRE_STAFF?.Invoke();
     }
 
@@ -397,6 +407,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_SELECT_STAFF()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_SELECT_STAFF?.Invoke();
     }
 
@@ -408,6 +420,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_SHOP_SPOT()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_SHOP_SPOT?.Invoke();
     }
 
@@ -419,6 +433,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_CHOOSE_AVAILABLE_SPOT()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_CHOOSE_AVAILABLE_SPOT?.Invoke();
     }
 
@@ -430,6 +446,8 @@ public class UIGameRoot : UIRoot
 
     private void ClickToBack_CHOOSE_AVAILABLE_ENTITY()
     {
+        _soundProvider.PlayOneShot("PanelClose");
+
         OnClickToBack_CHOOSE_AVAILABLE_ENTITY?.Invoke();
     }
 

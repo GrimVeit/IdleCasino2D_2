@@ -98,7 +98,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         CreateCasinoEntities();
 
-        spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(), viewContainer.GetView<SpawnerVisitorView>());
+        spawnerVisitorPresenter = new SpawnerVisitorPresenter(new SpawnerVisitorModel(soundPresenter), viewContainer.GetView<SpawnerVisitorView>());
 
         visitorPathTrafficPresenter = new VisitorPathTrafficPresenter(new VisitorPathTrafficModel(casinoEntities, spawnerVisitorPresenter, spawnerVisitorPresenter));
         hostessEntityPresenter = new HostessEntityPresenter(new HostessEntityModel(casinoEntities, visitorPathTrafficPresenter, nodesHostess), viewContainer.GetView<HostessEntityView>());

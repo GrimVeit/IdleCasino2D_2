@@ -9,9 +9,12 @@ public class VisitorModel
 
     private int currentStepTarget = 0;
 
-    public VisitorModel(List<CasinoEntityType> routeTargets)
+    private readonly ISoundProvider _soundProvider;
+
+    public VisitorModel(List<CasinoEntityType> routeTargets, ISoundProvider soundProvider)
     {
         this.routeTargets = routeTargets ?? throw new ArgumentNullException(nameof(routeTargets));
+        _soundProvider = soundProvider;
     }
 
     // Текущая цель
@@ -69,10 +72,19 @@ public class VisitorModel
         OnClick?.Invoke();
     }
 
+    public void SendMessage(string message, SpeechTurnEnum turn)
+    {
+        Debug.Log(message);
+        _soundProvider.PlayOneShot("Message");
+
+        OnSendMessage?.Invoke(message, turn);
+    }
+
     #region Output
 
     public event Action<Node, bool> OnStartMove;
     public event Action OnClick;
+    public event Action<string, SpeechTurnEnum> OnSendMessage;
 
     #endregion
 }

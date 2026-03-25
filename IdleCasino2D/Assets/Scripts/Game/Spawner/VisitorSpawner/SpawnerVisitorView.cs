@@ -14,7 +14,7 @@ public class SpawnerVisitorView : View
 
     private readonly Dictionary<IVisitor, VisitorView> visitorViews = new();
 
-    public void SpawnVisitor(List<CasinoEntityType> route)
+    public void SpawnVisitor(List<CasinoEntityType> route, ISoundProvider soundProvider)
     {
         VisitorView view;
 
@@ -30,7 +30,7 @@ public class SpawnerVisitorView : View
         }
         view.transform.SetLocalPositionAndRotation(traspawnPoint.localPosition, visitorPrefab_1.transform.rotation);
 
-        var presenter = new VisitorPresenter(new VisitorModel(route), view);
+        var presenter = new VisitorPresenter(new VisitorModel(route, soundProvider), view);
         presenter.Initialize();
         presenter.Show();
 

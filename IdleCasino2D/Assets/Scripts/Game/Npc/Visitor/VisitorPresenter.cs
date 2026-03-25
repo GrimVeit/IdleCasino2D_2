@@ -34,6 +34,7 @@ public class VisitorPresenter : IVisitor
 
         _model.OnStartMove += _view.MoveTo;
         _model.OnClick += Click;
+        _model.OnSendMessage += _view.SetMessage;
     }
 
     private void DeactivateEvents()
@@ -43,6 +44,7 @@ public class VisitorPresenter : IVisitor
 
         _model.OnStartMove -= _view.MoveTo;
         _model.OnClick -= Click;
+        _model.OnSendMessage -= _view.SetMessage;
     }
 
 
@@ -118,13 +120,13 @@ public class VisitorPresenter : IVisitor
 
     #region MESSAGE
 
-    public void SetMessage(string message, SpeechTurnEnum turn) => _view.SetMessage(message, turn);
+    public void SetMessage(string message, SpeechTurnEnum turn) => _model.SendMessage(message, turn);
 
     public void SetMessage(string message)
     {
         SpeechTurnEnum turnEnum = (SpeechTurnEnum)Random.Range(0, 2);
 
-        _view.SetMessage(message, turnEnum);
+        _model.SendMessage(message, turnEnum);
     }
 
     #endregion

@@ -88,6 +88,8 @@ public class CasinoProfitModel
         // сразу обновляем детальную панель
         int profit = _casinoProfitStoreInfo.GetProfit(casinoEntityType);
         UpdateLevel(casinoEntityType, profit);
+
+        _soundProvider.PlayOneShot("PanelOpen");
     }
 
     // апгрейд текущего выбранного типа

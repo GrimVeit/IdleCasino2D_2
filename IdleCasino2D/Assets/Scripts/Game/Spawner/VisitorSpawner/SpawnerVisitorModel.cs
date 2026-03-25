@@ -28,6 +28,12 @@ public class SpawnerVisitorModel
     };
 
     private readonly List<IVisitor> _visitors = new List<IVisitor>();
+    private readonly ISoundProvider _soundProvider;
+
+    public SpawnerVisitorModel(ISoundProvider soundProvider)
+    {
+        _soundProvider = soundProvider;
+    }
 
     public void AddVisitor(IVisitor visitor)
     {
@@ -47,7 +53,7 @@ public class SpawnerVisitorModel
 
     public void SpawnVisitor()
     {
-        OnSpawnVisitor?.Invoke(routesVisitor[Random.Range(0, routesVisitor.Count)]);
+        OnSpawnVisitor?.Invoke(routesVisitor[Random.Range(0, routesVisitor.Count)], _soundProvider);
     }
 
     public void DestroyVisitor(IVisitor visitor)
@@ -57,7 +63,7 @@ public class SpawnerVisitorModel
 
     #region Output
 
-    public event Action<List<CasinoEntityType>> OnSpawnVisitor;
+    public event Action<List<CasinoEntityType>, ISoundProvider> OnSpawnVisitor;
     public event Action<IVisitor> OnDestroyVisitor;
 
     public event Action<IVisitor> OnAddVisitor;
