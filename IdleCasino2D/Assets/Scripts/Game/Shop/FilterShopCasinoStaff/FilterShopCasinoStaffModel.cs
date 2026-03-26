@@ -123,6 +123,8 @@ public class FilterShopCasinoStaffModel
         _spawnerStaffProvider.SetStaff(availableEntity.CasinoEntityStaff, _currentStaffData.StaffType, _currentStaffData.SkinId);
         OnStaffPurchased?.Invoke();
 
+        _soundProvider.PlayOneShot("Submit");
+
         CancelSelection();
     }
 
@@ -176,6 +178,8 @@ public class FilterShopCasinoStaffModel
         _moneyProvider.SendMoney(-_currentStaffData.Price);
         _spawnerStaffProvider.SetStaff(dto.CasinoEntityStaff, _currentStaffData.StaffType, _currentStaffData.SkinId);
         OnStaffPurchased?.Invoke();
+
+        _soundProvider.PlayOneShot("Submit");
 
         CancelSelection();
     }

@@ -117,9 +117,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoEntityFinancePresenter = new CasinoEntityFinancePresenter(new CasinoEntityFinanceModel(casinoEntities, coinSystemPresenter));
 
         casinoEntityClickInteractionPresenter = new CasinoEntityClickInteractionPresenter(new CasinoEntityClickInteractionModel(casinoEntities));
-        shopCasinoSpotPresenter = new ShopCasinoSpotPresenter(new ShopCasinoSpotModel(casinoEntityClickInteractionPresenter, bankPresenter, shopCasinoEntityDatas), viewContainer.GetView<ShopCasinoSpotView>());
+        shopCasinoSpotPresenter = new ShopCasinoSpotPresenter(new ShopCasinoSpotModel(casinoEntityClickInteractionPresenter, bankPresenter, shopCasinoEntityDatas, soundPresenter), viewContainer.GetView<ShopCasinoSpotView>());
 
-        shopCasinoPersonalPresenter = new ShopCasinoPersonalPresenter(new ShopCasinoPersonalModel(shopCasinoPersonalDatas, bankPresenter), viewContainer.GetView<ShopCasinoPersonalView>());
+        shopCasinoPersonalPresenter = new ShopCasinoPersonalPresenter(new ShopCasinoPersonalModel(shopCasinoPersonalDatas, soundPresenter), viewContainer.GetView<ShopCasinoPersonalView>());
         filterShopCasinoStaffPresenter = new FilterShopCasinoStaffPresenter(new FilterShopCasinoStaffModel(casinoEntities, bankPresenter, staffSpawnerPresenter, shopCasinoPersonalPresenter, soundPresenter), viewContainer.GetView<FilterShopCasinoStaffView>());
 
         gameProgressPresenter = new GameProgressPresenter(new GameProgressModel(bankPresenter), viewContainer.GetView<GameProgressView>());

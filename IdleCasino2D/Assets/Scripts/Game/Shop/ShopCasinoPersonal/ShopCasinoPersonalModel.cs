@@ -6,15 +6,15 @@ using UnityEngine;
 public class ShopCasinoPersonalModel
 {
     private readonly ShopCasinoPersonalDatasSO _shopCasinoPersonalDatasSO;
-    private readonly IMoneyProvider _moneyProvider;
+    private readonly ISoundProvider _soundProvider;
 
     private ShopCasinoPersonalDataGroup _currentShopPersonalGroup;
     private int _currentSkinId = 0;
 
-    public ShopCasinoPersonalModel(ShopCasinoPersonalDatasSO shopCasinoPersonalDatasSO, IMoneyProvider moneyProvider)
+    public ShopCasinoPersonalModel(ShopCasinoPersonalDatasSO shopCasinoPersonalDatasSO, ISoundProvider soundProvider)
     {
         _shopCasinoPersonalDatasSO = shopCasinoPersonalDatasSO;
-        _moneyProvider = moneyProvider;
+        _soundProvider = soundProvider;
     }
 
     public void SetShopPersonalGroup(StaffType personalType)
@@ -30,6 +30,8 @@ public class ShopCasinoPersonalModel
 
         OnChooseShopPersonalGroup?.Invoke(_currentShopPersonalGroup);
         OnChooseSkinId?.Invoke(_currentSkinId);
+
+        _soundProvider.PlayOneShot("PanelOpen");
     }
 
     public void SetSkinId(int skinId)

@@ -11,10 +11,11 @@ public class ShopCasinoSpotModel
     private readonly IMoneyProvider _moneyProvider;
 
     private readonly ShopCasinoEntityDatasSO _shopCasinoEntityDatasSO;
+    private readonly ISoundProvider _soundProvider;
 
     private bool isListen = false;
 
-    public ShopCasinoSpotModel(IListenerClickCasinoEntitySpot listenerClickCasinoEntitySpot, IMoneyProvider moneyProvider, ShopCasinoEntityDatasSO shopCasinoEntityDatasSO)
+    public ShopCasinoSpotModel(IListenerClickCasinoEntitySpot listenerClickCasinoEntitySpot, IMoneyProvider moneyProvider, ShopCasinoEntityDatasSO shopCasinoEntityDatasSO, ISoundProvider soundProvider)
     {
         _listenerClickCasinoEntitySpot = listenerClickCasinoEntitySpot;
         _moneyProvider = moneyProvider;
@@ -22,6 +23,7 @@ public class ShopCasinoSpotModel
 
         _listenerClickCasinoEntitySpot.OnClickToCloseCasinoEntity += SetBuyEntity;
         _listenerClickCasinoEntitySpot.OnClickToOpenCasinoEntity += SetGame;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -41,7 +43,12 @@ public class ShopCasinoSpotModel
             _moneyProvider.SendMoney(-_currentCasinoEntityDataSO.Price);
             _currentCasinoEntityAdapter.CasinoEntityActivator.Open();
 
+            _soundProvider.PlayOneShot("Submit");
             OnBuy?.Invoke();
+        }
+        else
+        {
+            _soundProvider.PlayOneShot("Error");
         }
     }
 
@@ -63,7 +70,7 @@ public class ShopCasinoSpotModel
         _currentCasinoEntityDataSO = _shopCasinoEntityDatasSO.GetShopCasinoEntityData(casinoEntityAdapter.CasinoEntityType);
         if(_currentCasinoEntityDataSO == null) return;
 
-
+        _soundProvider.PlayOneShot("PanelOpen");
 
         _currentCasinoEntityAdapter = casinoEntityAdapter;
 

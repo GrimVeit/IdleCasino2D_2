@@ -74,6 +74,15 @@ public class CasinoProfitModel
                 list.Count,
                 nextLevel.Item2
             );
+
+            if(list.Count >= nextLevel.Item2)
+            {
+                _soundProvider.PlayOneShot("UpgradeFull");
+            }
+            else
+            {
+                _soundProvider.PlayOneShot("Upgrade");
+            }
         }
 
         OnUpdateMain?.Invoke(type, nextLevel.Item2);
