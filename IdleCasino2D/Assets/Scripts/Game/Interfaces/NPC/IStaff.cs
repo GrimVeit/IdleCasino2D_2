@@ -10,7 +10,10 @@ public interface IStaff : INpc
     public void Dispose();
 }
 
-public interface IStaffModel { }
+public interface IStaffModel 
+{ 
+    public void SetSoundProvider(ISoundProvider soundProvider);
+}
 public interface IStaffView 
 {
     void SetSkin(string name);

@@ -24,6 +24,8 @@ public class StaffSpawnerModel
         { StaffType.Manager, (model, view) => new ManagerPresenter((ManagerModel)model, (ManagerView)view) },
     };
 
+    private readonly ISoundProvider _soundProvider;
+
     private const string PlayerPrefsKey = "CasinoStaff";
     private readonly List<StaffSaveData> _savedStaff = new();
     private int _currentSkinId;
@@ -31,7 +33,7 @@ public class StaffSpawnerModel
 
     private ICasinoEntityStaff _currentCasinoEntityStaff;
 
-    public StaffSpawnerModel(List<ICasinoEntityInfo> casinoEntities)
+    public StaffSpawnerModel(List<ICasinoEntityInfo> casinoEntities, ISoundProvider soundProvider)
     {
         foreach (var entity in casinoEntities)
         {
@@ -40,6 +42,8 @@ public class StaffSpawnerModel
                 _casinoEntityStaffList.Add(casinoEntityStaff);
             }
         }
+
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -115,6 +119,7 @@ public class StaffSpawnerModel
             throw new Exception($"No presenter for {type}");
 
         var model = modelCreator();
+        model.SetSoundProvider(_soundProvider);
         var staff = presenterCreator(model, view);
 
         staff.Initialize();

@@ -36,6 +36,7 @@ public class ManagerPresenter : IManager
 
         _model.OnSetAnimation += _view.ActivateAnimation;
         _model.OnClick += Click;
+        _model.OnSetMessage += _view.SetMessage;
     }
 
     private void DeactivateEvents()
@@ -44,6 +45,7 @@ public class ManagerPresenter : IManager
 
         _model.OnSetAnimation -= _view.ActivateAnimation;
         _model.OnClick -= Click;
+        _model.OnSetMessage -= _view.SetMessage;
     }
 
     #region DEALER
@@ -88,13 +90,13 @@ public class ManagerPresenter : IManager
 
     #region MESSAGE
 
-    public void SetMessage(string message, SpeechTurnEnum turn) => _view.SetMessage(message, turn);
+    public void SetMessage(string message, SpeechTurnEnum turn) => _model.SetMessage(message, turn);
 
     public void SetMessage(string message)
     {
         SpeechTurnEnum turnEnum = (SpeechTurnEnum)UnityEngine.Random.Range(0, 2);
 
-        _view.SetMessage(message, turnEnum);
+        _model.SetMessage(message, turnEnum);
     }
 
     #endregion

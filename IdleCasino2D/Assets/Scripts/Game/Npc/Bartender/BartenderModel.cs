@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BartenderModel : IStaffModel
 {
+    private ISoundProvider _soundProvider;
+
     public void SetAnimation(BartenderAnimationEnum animationEnum)
     {
         OnSetAnimation?.Invoke(animationEnum);
@@ -15,10 +17,23 @@ public class BartenderModel : IStaffModel
         OnClick?.Invoke();
     }
 
+    public void SetSoundProvider(ISoundProvider soundProvider)
+    {
+        _soundProvider = soundProvider;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        _soundProvider?.PlayOneShot("Message");
+
+        OnSetMessage?.Invoke(message, turnEnum);
+    }
+
     #region Output
 
     public event Action<BartenderAnimationEnum> OnSetAnimation;
     public event Action OnClick;
+    public event Action<string, SpeechTurnEnum> OnSetMessage;
 
     #endregion
 }

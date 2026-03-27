@@ -40,8 +40,8 @@ public class SoundModel
         volumeSound = PlayerPrefs.GetFloat(KEY_VOLUME_SOUND, 0.5f);
         volumeMusic = PlayerPrefs.GetFloat(KEY_VOLUME_MUSIC, 0.7f);
 
-        SetVolume(volumeSound, AudioType.Sound);
-        SetVolume(volumeMusic, AudioType.Music);
+        //SetVolume(volumeSound, AudioType.Sound);
+        //SetVolume(volumeMusic, AudioType.Music);
 
         foreach (var sound in sounds.Values)
         {
@@ -148,25 +148,25 @@ public class SoundModel
 
     public void SetVolume(float value, AudioType type)
     {
-        foreach (var sound in sounds.Values)
-        {
-            if (sound.AudioType == type)
-            {
-                sound.SetNormalVolume(value);
-                sound.SetVolume(value);
-            }
-        }
+        //foreach (var sound in sounds.Values)
+        //{
+        //    if (sound.AudioType == type)
+        //    {
+        //        sound.SetNormalVolume(value);
+        //        sound.SetVolume(value);
+        //    }
+        //}
 
-        if (type == AudioType.Sound)
-        {
-            OnChangeVolumeSound?.Invoke(value);
-            volumeSound = value;
-        }
-        else
-        {
-            volumeMusic = value;
-            OnChangeVolumeMusic?.Invoke(value);
-        }
+        //if (type == AudioType.Sound)
+        //{
+        //    OnChangeVolumeSound?.Invoke(value);
+        //    volumeSound = value;
+        //}
+        //else
+        //{
+        //    volumeMusic = value;
+        //    OnChangeVolumeMusic?.Invoke(value);
+        //}
     }
 
     #endregion

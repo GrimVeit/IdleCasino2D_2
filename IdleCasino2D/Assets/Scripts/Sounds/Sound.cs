@@ -31,11 +31,12 @@ public class Sound : ISound
 
     public void Initialize()
     {
+        normalVolume = volume;
+
         audioSource.clip = audioClip;
         audioSource.pitch = pitch;
+        audioSource.volume = volume;
         audioSource.loop = isLoop;
-
-        SetVolume(0, normalVolume);
 
         if (isPlayAwake)
         {
@@ -76,12 +77,6 @@ public class Sound : ISound
     public void SetPitch(float pitch)
     {
         audioSource.pitch = pitch;
-    }
-
-
-    public void SetNormalVolume(float volume)
-    {
-        normalVolume = volume;
     }
 
     public void SetVolume(float volume)

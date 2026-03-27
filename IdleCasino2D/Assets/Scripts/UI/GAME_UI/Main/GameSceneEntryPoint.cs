@@ -106,7 +106,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         profitOfflinePresenter = new ProfitOfflinePresenter(new ProfitOfflineModel(casinoEntities, casinoProfitStorePresenter, bankPresenter), viewContainer.GetView<ProfitOfflineView>());
         casinoEntityStorePresenter = new CasinoEntityStorePresenter(new CasinoEntityStoreModel(casinoEntities));
-        staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(casinoEntities), viewContainer.GetView<StaffSpawnerView>());
+        staffSpawnerPresenter = new StaffSpawnerPresenter(new StaffSpawnerModel(casinoEntities, soundPresenter), viewContainer.GetView<StaffSpawnerView>());
         visitorCounterTrafficPresenter = new VisitorCounterTrafficPresenter(new VisitorCounterTrafficModel(spawnerVisitorPresenter, spawnerVisitorPresenter, casinoEntities));
 
         clickDispatcherPresenter = new ClickDispatcherPresenter(new ClickDispatcherModel());

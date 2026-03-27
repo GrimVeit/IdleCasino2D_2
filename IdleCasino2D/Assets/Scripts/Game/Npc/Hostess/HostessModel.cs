@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class HostessModel : IStaffModel
 {
+    private ISoundProvider _soundProvider;
+
     public void SetAnimation(HostessAnimationEnum animationEnum)
     {
         OnSetAnimation?.Invoke(animationEnum);
@@ -15,10 +17,23 @@ public class HostessModel : IStaffModel
         OnClick?.Invoke();
     }
 
+    public void SetSoundProvider(ISoundProvider soundProvider)
+    {
+        _soundProvider = soundProvider;
+    }
+
+    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    {
+        _soundProvider?.PlayOneShot("Message");
+
+        OnSetMessage?.Invoke(message, turnEnum);
+    }
+
     #region Output
 
     public event Action<HostessAnimationEnum> OnSetAnimation;
     public event Action OnClick;
+    public event Action<string, SpeechTurnEnum> OnSetMessage;
 
     #endregion
 }
