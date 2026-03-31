@@ -73,6 +73,11 @@ public class StaffSpawnerModel
             _staffList[i].Dispose();
         }
 
+        Save();
+    }
+
+    public void Save()
+    {
         var container = new StaffSaveContainer
         {
             Items = _savedStaff
