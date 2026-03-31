@@ -57,7 +57,6 @@ public class MusicEntityModel
         if(_songstressData.songstress != null)
         {
             _songstressData.songstress.OnClick -= SongstressClick;
-            _songstressData.songstress.Dispose();
         }
     }
 

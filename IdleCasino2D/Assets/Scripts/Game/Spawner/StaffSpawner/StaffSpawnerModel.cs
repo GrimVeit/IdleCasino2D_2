@@ -68,6 +68,11 @@ public class StaffSpawnerModel
 
     public void Dispose()
     {
+        for (int i = 0; i < _staffList.Count; i++)
+        {
+            _staffList[i].Dispose();
+        }
+
         var container = new StaffSaveContainer
         {
             Items = _savedStaff
@@ -129,13 +134,6 @@ public class StaffSpawnerModel
         OnAddStaff?.Invoke(staff);
 
         _staffList.Add(staff);
-    }
-
-    public void ClearAll()
-    {
-        foreach (var staff in _staffList)
-            staff.Dispose();
-        _staffList.Clear();
     }
 
     #endregion

@@ -31,7 +31,6 @@ public class ManagementEntityModel
         foreach (var manager in managers.Keys)
         {
             manager.OnClick -= ManagerClick;
-            manager.Dispose();
         }
 
         // ќстанавливаем все корутины при уничтожении

@@ -62,7 +62,6 @@ public class RouletteEntityModel
         if (_dealerData.dealer != null)
         {
             _dealerData.dealer.OnClick -= DealerClick;
-            _dealerData.dealer.Dispose();
         }
     }
 

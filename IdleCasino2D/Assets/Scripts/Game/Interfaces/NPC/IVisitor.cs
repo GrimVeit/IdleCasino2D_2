@@ -8,6 +8,9 @@ public interface IVisitor : INpc
     //Interactive
     public event Action<IVisitor> OnClick;
 
+    void Initialize();
+    void Dispose();
+
     //Target
     bool HasNextStep();
     bool HasCurrentStep();

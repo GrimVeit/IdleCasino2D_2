@@ -287,17 +287,33 @@ public class GameSceneEntryPoint : MonoBehaviour
         DeactivateEvents();
 
         soundPresenter?.Dispose();
-        sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
+        sceneRoot?.Dispose();
         bankPresenter?.Dispose();
         bankTransactionVisualPresenter?.Dispose();
-
         casinoProfitStorePresenter?.Dispose();
         casinoProfitPresenter?.Dispose();
+
+        casinoEntityStorePresenter?.Dispose();
+        staffSpawnerPresenter?.Dispose();
+        spawnerVisitorPresenter?.Dispose();
+        visitorCounterTrafficPresenter?.Dispose();
+        visitorPathTrafficPresenter?.Dispose();
+        hostessEntityPresenter?.Dispose();
+        gameProgressPresenter?.Dispose();
+        administratorPresenter?.Dispose();
         profitOfflinePresenter?.Dispose();
 
-        //touchCameraPresenter?.Dispose();
-        
+        touchCameraPresenter?.Dispose();
+        mapOrderPresenter?.Dispose();
+        coinSystemPresenter?.Dispose();
+        casinoEntityFinancePresenter?.Dispose();
+
+        casinoEntityClickInteractionPresenter?.Dispose();
+        shopCasinoSpotPresenter?.Dispose();
+
+        shopCasinoPersonalPresenter?.Dispose();
+        filterShopCasinoStaffPresenter?.Dispose();
         stateMachine?.Dispose();
     }
 

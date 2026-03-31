@@ -58,7 +58,6 @@ public class BarEntityModel
         if (_bartenderData.bartender != null)
         {
             _bartenderData.bartender.OnClick -= BartenderClick;
-            _bartenderData.bartender.Dispose();
         }
     }
 

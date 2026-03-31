@@ -19,7 +19,7 @@ public class HostessEntityPresenter : IHostessEntityControllerListener, IHostess
         _view.Initialize();
     }
 
-    public void Dispsoe()
+    public void Dispose()
     {
         DeactivateEvents();
 

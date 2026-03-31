@@ -22,6 +22,8 @@ public class SpawnerVisitorPresenter : ISpawnerVisitorProvider, ISpawnerVisitorL
     public void Dispose()
     {
         DeactivateEvents();
+
+        _model.Dispose();
     }
 
     private void ActivateEvents()

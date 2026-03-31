@@ -74,7 +74,7 @@ public class VisitorModel
 
     public void SendMessage(string message, SpeechTurnEnum turn)
     {
-        Debug.Log(message);
+        //Debug.Log(message);
         _soundProvider.PlayOneShot("Message");
 
         OnSendMessage?.Invoke(message, turn);
