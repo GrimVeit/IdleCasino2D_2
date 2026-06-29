@@ -120,13 +120,13 @@ public class VisitorPresenter : IVisitor
 
     #region MESSAGE
 
-    public void SetMessage(string message, SpeechTurnEnum turn) => _model.SendMessage(message, turn);
+    public void SetMessage(string message, SpeechTurnEnum turn, bool isSound = false) => _model.SendMessage(message, turn, isSound);
 
-    public void SetMessage(string message)
+    public void SetMessage(string message, bool isSound = false)
     {
         SpeechTurnEnum turnEnum = (SpeechTurnEnum)Random.Range(0, 2);
 
-        _model.SendMessage(message, turnEnum);
+        _model.SendMessage(message, turnEnum, isSound);
     }
 
     #endregion

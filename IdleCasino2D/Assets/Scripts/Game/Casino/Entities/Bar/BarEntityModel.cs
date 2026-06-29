@@ -257,7 +257,7 @@ public class BarEntityModel
 
     private void VisitorClick(IVisitor visitor)
     {
-        SetMessageVisitor(visitor);
+        SetMessageVisitor(visitor, true);
     }
 
     //========================== VISITOR MESSAGE ===============
@@ -284,7 +284,7 @@ public class BarEntityModel
 
                 if (Random.value <= 0.7f)
                 {
-                    SetMessageVisitor(visitor);
+                    SetMessageVisitor(visitor, false);
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
@@ -294,7 +294,7 @@ public class BarEntityModel
         }
     }
 
-    private void SetMessageVisitor(IVisitor visitor)
+    private void SetMessageVisitor(IVisitor visitor, bool isSound = false)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
@@ -302,10 +302,10 @@ public class BarEntityModel
         switch (state)
         {
             case VisitorState.GoTo:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToBar));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToBar), isSound);
                 break;
             case VisitorState.At:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtBar));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtBar), isSound);
                 break;
         }
     }
@@ -316,7 +316,7 @@ public class BarEntityModel
 
     private void BartenderClick(IBartender bartender)
     {
-        SetMessageBartender(bartender);
+        SetMessageBartender(bartender, true);
     }
 
 
@@ -335,17 +335,17 @@ public class BarEntityModel
 
             if (Random.value <= 0.6f)
             {
-                SetMessageBartender(_bartenderData.bartender);
+                SetMessageBartender(_bartenderData.bartender, false);
             }
 
             yield return new WaitForSeconds(Random.Range(4f, 9f));
         }
     }
 
-    private void SetMessageBartender(IBartender bartender)
+    private void SetMessageBartender(IBartender bartender, bool isSound = false)
     {
         if (bartender == null) return;
 
-        bartender.SetMessage(MessagesBartender.GetRandomQuote(_bartenderData.messagesType));
+        bartender.SetMessage(MessagesBartender.GetRandomQuote(_bartenderData.messagesType), isSound);
     }
 }

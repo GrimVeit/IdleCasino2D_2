@@ -97,7 +97,7 @@ public class MusicEntityModel
 
             for (int i = 0; i < cyclesSong; i++)
             {
-                SetMessageSongstressRandomTurn(_songstressData.songstress);
+                SetMessageSongstressRandomTurn(_songstressData.songstress, false);
                 yield return new WaitForSeconds(Random.Range(1f, 2f));
             }
         }
@@ -225,7 +225,7 @@ public class MusicEntityModel
 
     private void VisitorClick(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessageVisitor(visitor, true);
     }
 
     #endregion
@@ -254,7 +254,7 @@ public class MusicEntityModel
 
                 if (Random.value <= 0.7f)
                 {
-                    SetMessage(visitor);
+                    SetMessageVisitor(visitor, false);
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
@@ -264,7 +264,7 @@ public class MusicEntityModel
         }
     }
 
-    private void SetMessage(IVisitor visitor)
+    private void SetMessageVisitor(IVisitor visitor, bool isSound = false)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
@@ -272,11 +272,11 @@ public class MusicEntityModel
         switch (state)
         {
             case VisitorState.GoTo:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToSinger));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToSinger), isSound);
                 break;
 
             case VisitorState.At:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtSinger));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.AtSinger), isSound);
                 break;
         }
     }
@@ -287,44 +287,18 @@ public class MusicEntityModel
 
     private void SongstressClick(ISongstress songstress)
     {
-        SetMessageSongstressRandomTurn(songstress);
+        SetMessageSongstressRandomTurn(songstress, true);
     }
 
     #endregion
 
     #region MESSAGE
 
-    private IEnumerator SingleVisitorTalk()
-    {
-        while (true)
-        {
-            if (_songstressData.songstress == null)
-            {
-                yield return new WaitForSeconds(1f);
-                continue;
-            }
-
-            if (Random.value <= 0.6f)
-            {
-                SetMessageSongstressRandomTurn(_songstressData.songstress);
-            }
-
-            yield return new WaitForSeconds(Random.Range(4f, 9f));
-        }
-    }
-
-    private void SetMessageSongstressRandomTurn(ISongstress songstress)
+    private void SetMessageSongstressRandomTurn(ISongstress songstress, bool isSound)
     {
         if (songstress == null) return;
 
-        songstress.SetMessage(MessagesSongstress.GetRandomQuote(_songstressData.messagesType));
-    }
-
-    private void SetMessageTurn(ISongstress songstress, SpeechTurnEnum speechTurnEnum)
-    {
-        if (songstress == null) return;
-
-        songstress.SetMessage(MessagesSongstress.GetRandomQuote(_songstressData.messagesType), speechTurnEnum);
+        songstress.SetMessage(MessagesSongstress.GetRandomQuote(_songstressData.messagesType), isSound);
     }
 
     #endregion

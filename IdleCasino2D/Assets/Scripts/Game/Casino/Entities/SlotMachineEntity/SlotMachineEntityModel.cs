@@ -232,7 +232,7 @@ public class SlotMachineEntityModel
 
     private void VisitorClick(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessage(visitor, true);
     }
 
     #endregion
@@ -253,14 +253,14 @@ public class SlotMachineEntityModel
 
             if (Random.value <= 0.7f)
             {
-                SetMessage(visitor);
+                SetMessage(visitor, false);
             }
 
             yield return new WaitForSeconds(Random.Range(3f, 7f));
         }
     }
 
-    private void SetMessage(IVisitor visitor)
+    private void SetMessage(IVisitor visitor, bool isSound = false)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
@@ -268,10 +268,10 @@ public class SlotMachineEntityModel
         switch (state)
         {
             case VisitorState.GoTo:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToSlot));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToSlot), isSound);
                 break;
             case VisitorState.At:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingSlot));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingSlot), isSound);
                 break;
         }
     }

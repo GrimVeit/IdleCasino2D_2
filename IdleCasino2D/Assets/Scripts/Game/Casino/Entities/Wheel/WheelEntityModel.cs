@@ -233,7 +233,7 @@ public class WheelEntityModel
 
     private void VisitorClick(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessage(visitor, true);
     }
 
     #endregion
@@ -254,13 +254,13 @@ public class WheelEntityModel
 
             if (Random.value <= 0.7f)
             {
-                SetMessage(visitor);
+                SetMessage(visitor, false);
             }
 
             yield return new WaitForSeconds(Random.Range(3f, 7f));
         }
     }
-    private void SetMessage(IVisitor visitor)
+    private void SetMessage(IVisitor visitor, bool isSound = false)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
@@ -268,10 +268,10 @@ public class WheelEntityModel
         switch (state)
         {
             case VisitorState.GoTo:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToWheel));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToWheel), isSound);
                 break;
             case VisitorState.At:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingWheel));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingWheel), isSound);
                 break;
         }
     }

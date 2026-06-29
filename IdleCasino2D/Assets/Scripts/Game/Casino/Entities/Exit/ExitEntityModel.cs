@@ -64,7 +64,7 @@ public class ExitEntityModel
 
     private void ClickVisitor(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessage(visitor, true);
     }
 
     #endregion
@@ -93,7 +93,7 @@ public class ExitEntityModel
 
                 if (Random.value <= 0.7f)
                 {
-                    SetMessage(visitor);
+                    SetMessage(visitor, false);
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
@@ -104,9 +104,9 @@ public class ExitEntityModel
         }
     }
 
-    private void SetMessage(IVisitor visitor)
+    private void SetMessage(IVisitor visitor, bool isSound = false)
     {
-        visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.Exit));
+        visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.Exit), isSound);
     }
 
     #endregion

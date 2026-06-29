@@ -86,7 +86,7 @@ public class ManagementEntityModel
             // Gesturing 3-6 секунд
             manager.ActivateAnimation(ManagerAnimationEnum.Gesture);
             managers[manager] = MessagesManagerType.RadioTalk;
-            SetMessage(manager);
+            SetMessageManager(manager, false);
             yield return new WaitForSeconds(Random.Range(3f, 6f));
         }
     }
@@ -95,7 +95,7 @@ public class ManagementEntityModel
 
     private void ManagerClick(IManager manager)
     {
-        SetMessage(manager);
+        SetMessageManager(manager, true);
     }
 
     #endregion
@@ -123,7 +123,7 @@ public class ManagementEntityModel
 
                 if (Random.value <= 0.7f)
                 {
-                    SetMessage(manager);
+                    SetMessageManager(manager, false);
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.4f, 1.5f));
@@ -133,18 +133,11 @@ public class ManagementEntityModel
         }
     }
 
-    private void SetMessage(IManager manager)
+    private void SetMessageManager(IManager manager, bool isSound = false)
     {
         if (manager == null) return;
 
-        manager.SetMessage(MessagesManager.GetRandomQuote(managers[manager]));
-    }
-
-    private void SetMessageTurn(IManager manager, SpeechTurnEnum speechTurnEnum)
-    {
-        if (manager == null) return;
-
-        manager.SetMessage(MessagesManager.GetRandomQuote(managers[manager]), speechTurnEnum);
+        manager.SetMessage(MessagesManager.GetRandomQuote(managers[manager]), isSound);
     }
 
     #endregion

@@ -72,10 +72,12 @@ public class VisitorModel
         OnClick?.Invoke();
     }
 
-    public void SendMessage(string message, SpeechTurnEnum turn)
+    public void SendMessage(string message, SpeechTurnEnum turn, bool isSound = false)
     {
         //Debug.Log(message);
-        _soundProvider.PlayOneShot("Message");
+
+        if(isSound)
+           _soundProvider.PlayOneShot("Message");
 
         OnSendMessage?.Invoke(message, turn);
     }

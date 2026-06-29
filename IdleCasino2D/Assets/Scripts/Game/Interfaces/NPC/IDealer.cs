@@ -11,6 +11,6 @@ public interface IDealer : IStaff
     public event Action<IDealer> OnClick;
 
     //Message
-    void SetMessage(string message, SpeechTurnEnum turn);
-    void SetMessage(string message);
+    void SetMessage(string message, SpeechTurnEnum turn, bool isSound = false);
+    void SetMessage(string message, bool isSound = false);
 }

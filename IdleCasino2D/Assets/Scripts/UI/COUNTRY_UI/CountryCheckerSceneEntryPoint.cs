@@ -13,6 +13,7 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     private GeoLocationPresenter geoLocationPresenter;
     private InternetPresenter internetPresenter;
     private SoundPresenter soundPresenter;
+    private DatabasePresenter databasePresenter;
 
     private BankPresenter bankPresenter;
 
@@ -30,6 +31,8 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
         soundPresenter = new SoundPresenter(new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC), viewContainer.GetView<SoundView>());
         soundPresenter.Initialize();
+
+        databasePresenter = new DatabasePresenter(new DatabaseModel());
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         bankPresenter.Initialize();
@@ -57,14 +60,11 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         internetPresenter.OnInternetUnavailable += TransitionToMainMenu;
         internetPresenter.OnInternetAvailable += OnInternetAvailable;
 
-        //firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace += TransitionToMainMenu;
-        //firebaseDatabaseRealtimePresenter.OnGetUserFromPlace += CheckUser;
-
         geoLocationPresenter.OnErrorGetCountry += TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry += ActivateSceneInCountry;
 
-        //firebaseDatabaseRealtimePresenter.OnErrorGetCountries += TransitionToMainMenu;
-        //firebaseDatabaseRealtimePresenter.OnGetCountries += CheckCountry;
+        databasePresenter.OnErrorGetCountries += TransitionToMainMenu;
+        databasePresenter.OnGetCountries += CheckCountry;
     }
 
     private void DeactivateActions()
@@ -72,43 +72,26 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         internetPresenter.OnInternetUnavailable -= TransitionToMainMenu;
         internetPresenter.OnInternetAvailable -= OnInternetAvailable;
 
-        //firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace -= TransitionToMainMenu;
-        //firebaseDatabaseRealtimePresenter.OnGetUserFromPlace -= CheckUser;
-
         geoLocationPresenter.OnErrorGetCountry -= TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry -= ActivateSceneInCountry;
 
-        //firebaseDatabaseRealtimePresenter.OnErrorGetCountries -= TransitionToMainMenu;
-        //firebaseDatabaseRealtimePresenter.OnGetCountries -= CheckCountry;
+        databasePresenter.OnErrorGetCountries -= TransitionToMainMenu;
+        databasePresenter.OnGetCountries -= CheckCountry;
     }
 
     private void OnInternetAvailable()
     {
         Debug.Log("INTERNET CONNECTION = TRUE");
-        //firebaseDatabaseRealtimePresenter.GetUserFromPlace(1);
+        geoLocationPresenter.GetUserCountry();
     }
-
-    //private void CheckUser(UserData userData)
-    //{
-    //    Debug.Log(userData.Nickname + "//" + userData.Record);
-
-    //    if (userData.Nickname == "topper")
-    //    {
-    //        Debug.Log("ADMIN IN FIRST");
-    //        geoLocationPresenter.GetUserCountry();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("ADMIN NOT FIRST");
-    //        TransitionToMainMenu();
-    //    }
-    //}
 
     private void ActivateSceneInCountry(string country)
     {
         currentCountry = country;
 
-        //firebaseDatabaseRealtimePresenter.GetCountries();
+        Debug.Log($"Country: {country}");
+
+        databasePresenter.GetCountries();
     }
 
     private void CheckCountry(List<string> countries)
@@ -127,14 +110,14 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
     #region Input
 
-    public event Action GoToMainMenu;
+    public event Action GoToGame;
     public event Action GoToOther;
 
     private void TransitionToMainMenu()
     {
         Dispose();
         Debug.Log("NO GOOD");
-        GoToMainMenu?.Invoke();
+        GoToGame?.Invoke();
     }
 
     private void TransitionToOther()

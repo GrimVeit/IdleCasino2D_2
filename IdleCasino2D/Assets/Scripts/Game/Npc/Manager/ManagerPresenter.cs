@@ -90,13 +90,13 @@ public class ManagerPresenter : IManager
 
     #region MESSAGE
 
-    public void SetMessage(string message, SpeechTurnEnum turn) => _model.SetMessage(message, turn);
+    public void SetMessage(string message, SpeechTurnEnum turn, bool isSound = false) => _model.SetMessage(message, turn, isSound);
 
-    public void SetMessage(string message)
+    public void SetMessage(string message, bool isSound = false)
     {
         SpeechTurnEnum turnEnum = (SpeechTurnEnum)UnityEngine.Random.Range(0, 2);
 
-        _model.SetMessage(message, turnEnum);
+        _model.SetMessage(message, turnEnum, isSound);
     }
 
     #endregion

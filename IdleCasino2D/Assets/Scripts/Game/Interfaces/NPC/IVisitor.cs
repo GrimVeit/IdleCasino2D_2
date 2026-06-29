@@ -26,6 +26,6 @@ public interface IVisitor : INpc
     void Destroy();
 
     //Message
-    void SetMessage(string message, SpeechTurnEnum turn);
-    void SetMessage(string message);
+    void SetMessage(string message, SpeechTurnEnum turn, bool isSound = false);
+    void SetMessage(string message, bool isSound = false);
 }

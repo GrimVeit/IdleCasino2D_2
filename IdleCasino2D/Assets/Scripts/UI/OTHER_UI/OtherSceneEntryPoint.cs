@@ -10,7 +10,9 @@ public class OtherSceneEntryPoint : MonoBehaviour
     private UIOtherSceneRoot sceneRoot;
     private BankPresenter bankPresenter;
     private ViewContainer viewContainer;
-    //private WebViewPresenter webViewPresenter;
+    private WebViewPresenter webViewPresenter;
+
+    private DatabasePresenter databasePresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -20,38 +22,40 @@ public class OtherSceneEntryPoint : MonoBehaviour
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
+        databasePresenter = new DatabasePresenter(new DatabaseModel());
+
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         bankPresenter.Initialize();
 
-        //webViewPresenter = new WebViewPresenter(new WebViewModel(), viewContainer.GetView<WebViewView>());
-        //webViewPresenter.Initialize();
+        webViewPresenter = new WebViewPresenter(new WebViewModel(), viewContainer.GetView<WebViewView>());
+        webViewPresenter.Initialize();
 
         ActivateActions();
 
-        //firebaseDatabasePresenter.GetLink();
+        databasePresenter.GetLink();
     }
 
     private void ActivateActions()
     {
-        //firebaseDatabasePresenter.OnGetLink += GetURLBd;
-        //firebaseDatabasePresenter.OnErrorGetLink += GoToMainMenu;
+        databasePresenter.OnGetLink += GetURLBd;
+        databasePresenter.OnErrorGetLink += GoToMainMenu;
 
-        //webViewPresenter.OnGetLinkFromTitle += GetUrl;
-        //webViewPresenter.OnFail += GoToMainMenu;
+        webViewPresenter.OnGetLinkFromTitle += GetUrl;
+        webViewPresenter.OnFail += GoToMainMenu;
     }
 
     private void DeactivateActions()
     {
-        //firebaseDatabasePresenter.OnGetLink -= GetURLBd;
-        //firebaseDatabasePresenter.OnErrorGetLink -= GoToMainMenu;
+        databasePresenter.OnGetLink -= GetURLBd;
+        databasePresenter.OnErrorGetLink -= GoToMainMenu;
 
-        //webViewPresenter.OnGetLinkFromTitle -= GetUrl;
-        //webViewPresenter.OnFail -= GoToMainMenu;
+        webViewPresenter.OnGetLinkFromTitle -= GetUrl;
+        webViewPresenter.OnFail -= GoToMainMenu;
     }
 
     private void GetURLBd(string link)
     {
-        //webViewPresenter.GetLinkInTitleFromURL(link);
+        webViewPresenter.GetLinkInTitleFromURL(link);
     }
 
     private void GetUrl(string URL)
@@ -62,26 +66,26 @@ public class OtherSceneEntryPoint : MonoBehaviour
             return;
         }
 
-        //webViewPresenter.SetURL(URL);
-        //webViewPresenter.Load();
+        webViewPresenter.SetURL(URL);
+        webViewPresenter.Load();
     }
 
     private void GoToMainMenu()
     {
-        //Debug.Log("NO GOOD, OPEN MAIN MENU");
-        OnGoToMainMenu?.Invoke();
+        Debug.Log("NO GOOD, OPEN MAIN MENU");
+        OnGoToGame?.Invoke();
     }
 
     private void OnDestroy()
     {
         DeactivateActions();
 
-        //webViewPresenter.Dispose();
+        webViewPresenter.Dispose();
     }
 
     #region Input
 
-    public event Action OnGoToMainMenu;
+    public event Action OnGoToGame;
 
     #endregion
 }

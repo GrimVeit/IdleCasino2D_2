@@ -263,7 +263,7 @@ public class PokerEntityModel
 
     private void VisitorClick(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessage(visitor, true);
     }
 
     #endregion
@@ -284,14 +284,14 @@ public class PokerEntityModel
 
             if (Random.value <= 0.7f)
             {
-                SetMessage(visitor);
+                SetMessage(visitor, false);
             }
 
             yield return new WaitForSeconds(Random.Range(3f, 7f));
         }
     }
 
-    private void SetMessage(IVisitor visitor)
+    private void SetMessage(IVisitor visitor, bool isSound = false)
     {
         if (!visitors.TryGetValue(visitor, out var state))
             return;
@@ -299,10 +299,10 @@ public class PokerEntityModel
         switch (state)
         {
             case VisitorState.GoTo:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToPoker));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.GoToPoker), isSound);
                 break;
             case VisitorState.At:
-                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingPoker));
+                visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.PlayingPoker), isSound);
                 break;
         }
     }
@@ -313,7 +313,7 @@ public class PokerEntityModel
 
     private void DealerClick(IDealer dealer)
     {
-        SetMessageDealer(dealer);
+        SetMessageDealer(dealer, true);
     }
 
     #endregion
@@ -332,18 +332,18 @@ public class PokerEntityModel
 
             if (Random.value <= 0.6f)
             {
-                SetMessageDealer(_dealerData.dealer);
+                SetMessageDealer(_dealerData.dealer, false);
             }
 
             yield return new WaitForSeconds(Random.Range(4f, 9f));
         }
     }
 
-    private void SetMessageDealer(IDealer dealer)
+    private void SetMessageDealer(IDealer dealer, bool isSound = false)
     {
         if (dealer == null) return;
 
-        dealer.SetMessage(MessagesDealer.GetRandomQuote(_dealerData.messagesType));
+        dealer.SetMessage(MessagesDealer.GetRandomQuote(_dealerData.messagesType), isSound);
     }
 
     #endregion

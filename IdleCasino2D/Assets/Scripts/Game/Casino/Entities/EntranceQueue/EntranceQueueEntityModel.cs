@@ -105,7 +105,7 @@ public class EntranceQueueEntityModel
 
     private void ClickVisitor(IVisitor visitor)
     {
-        SetMessage(visitor);
+        SetMessage(visitor, true);
 
         OnClickVisitor?.Invoke(visitor);
     }
@@ -136,7 +136,7 @@ public class EntranceQueueEntityModel
 
                 if (Random.value <= 0.7f)
                 {
-                    SetMessage(visitor);
+                    SetMessage(visitor, false);
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.2f, 0.9f));
@@ -147,9 +147,9 @@ public class EntranceQueueEntityModel
         }
     }
 
-    private void SetMessage(IVisitor visitor)
+    private void SetMessage(IVisitor visitor, bool isSound)
     {
-        visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.Waiting));
+        visitor.SetMessage(MessagesVisitor.GetRandomQuote(MessagesVisitorType.Waiting), isSound);
     }
 
     #endregion

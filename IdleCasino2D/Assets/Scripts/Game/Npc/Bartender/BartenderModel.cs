@@ -22,9 +22,10 @@ public class BartenderModel : IStaffModel
         _soundProvider = soundProvider;
     }
 
-    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    public void SetMessage(string message, SpeechTurnEnum turnEnum, bool isSound = false)
     {
-        _soundProvider?.PlayOneShot("Message");
+        if(isSound)
+          _soundProvider?.PlayOneShot("Message");
 
         OnSetMessage?.Invoke(message, turnEnum);
     }

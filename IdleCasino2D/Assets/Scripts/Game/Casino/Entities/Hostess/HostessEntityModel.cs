@@ -120,7 +120,7 @@ public class HostessEntityModel
             _hostessData.hostess.ActivateAnimation(HostessAnimationEnum.WaveHand);
             hostess.ActivateNpcRotation(node.RotationEnum);
             _hostessData.messageType = MessagesHostessType.CallingVisitor;
-            SetMessageRandomTurn(_hostessData.hostess);
+            SetMessageRandomTurn(_hostessData.hostess, false);
 
             Coroutines.Start(ReturnToMainNode());
         }
@@ -158,7 +158,7 @@ public class HostessEntityModel
             _currentVisitor = (null, null);
 
             _hostessData.messageType = MessagesHostessType.NoFreePlaces;
-            SetMessageTurn(_hostessData.hostess, SpeechTurnEnum.Right);
+            SetMessageTurn(_hostessData.hostess, SpeechTurnEnum.Right, false);
             return;
         }
 
@@ -181,7 +181,7 @@ public class HostessEntityModel
         Debug.Log("??????????????????????????????????????????????????????");
 
         _hostessData.hostess.MoveTo(targetNode, false);
-        SetMessageTurn(_hostessData.hostess, SpeechTurnEnum.Right);
+        SetMessageTurn(_hostessData.hostess, SpeechTurnEnum.Right, false);
         _hostessData.messageType = MessagesHostessType.Walking;
 
         isHostessInBase = false;
@@ -328,7 +328,7 @@ public class HostessEntityModel
 
     private void HostessClick(IHostess hostess)
     {
-        SetMessageRandomTurn(hostess);
+        SetMessageRandomTurn(hostess, true);
     }
 
     #endregion
@@ -347,25 +347,25 @@ public class HostessEntityModel
 
             if (Random.value <= 0.6f)
             {
-                SetMessageRandomTurn(_hostessData.hostess);
+                SetMessageRandomTurn(_hostessData.hostess, false);
             }
 
             yield return new WaitForSeconds(Random.Range(4f, 9f));
         }
     }
 
-    private void SetMessageRandomTurn(IHostess hostess)
+    private void SetMessageRandomTurn(IHostess hostess, bool isSound = false)
     {
         if (hostess == null) return;
 
-        hostess.SetMessage(MessagesHostess.GetRandomQuote(_hostessData.messageType));
+        hostess.SetMessage(MessagesHostess.GetRandomQuote(_hostessData.messageType), isSound);
     }
 
-    private void SetMessageTurn(IHostess hostess, SpeechTurnEnum speechTurnEnum)
+    private void SetMessageTurn(IHostess hostess, SpeechTurnEnum speechTurnEnum, bool isSound = false)
     {
         if (hostess == null) return;
 
-        hostess.SetMessage(MessagesHostess.GetRandomQuote(_hostessData.messageType), speechTurnEnum);
+        hostess.SetMessage(MessagesHostess.GetRandomQuote(_hostessData.messageType), speechTurnEnum, isSound);
     }
 
     #endregion
