@@ -23,6 +23,10 @@ public class UIGameRoot : UIRoot
     [SerializeField] private ChooseAvailableSpotPanel_Game chooseAvailableSpotPanel;
     [SerializeField] private LeavePanel_Game leavePanel;
 
+    [Header("Registration")]
+    [SerializeField] private RegistrationPanel_Game registrationPanel;
+    [SerializeField] private LoadingPanel_Game loadingPanel;
+
     private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -49,6 +53,10 @@ public class UIGameRoot : UIRoot
 
         chooseAvailableSpotPanel.Initialize();
         leavePanel.Initialize();
+
+
+        registrationPanel.Initialize();
+        loadingPanel.Initialize();
     }
 
     public void Activate()
@@ -66,6 +74,8 @@ public class UIGameRoot : UIRoot
         shopSpotPanel.OnClickToBack += ClickToBack_SHOP_SPOT;
         chooseAvailableStaffPanel.OnClickToExit += ClickToBack_CHOOSE_AVAILABLE_SPOT;
         chooseAvailableSpotPanel.OnClickToExit += ClickToBack_CHOOSE_AVAILABLE_ENTITY;
+
+        registrationPanel.OnClickToRegistrate += ClickToRegistrate_Registration;
     }
 
     public void Deactivate()
@@ -83,6 +93,8 @@ public class UIGameRoot : UIRoot
         shopSpotPanel.OnClickToBack -= ClickToBack_SHOP_SPOT;
         chooseAvailableStaffPanel.OnClickToExit -= ClickToBack_CHOOSE_AVAILABLE_SPOT;
         chooseAvailableSpotPanel.OnClickToExit -= ClickToBack_CHOOSE_AVAILABLE_ENTITY;
+
+        registrationPanel.OnClickToRegistrate -= ClickToRegistrate_Registration;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -107,6 +119,11 @@ public class UIGameRoot : UIRoot
 
         chooseAvailableSpotPanel.Dispose();
         leavePanel.Dispose();
+
+
+
+        registrationPanel.Dispose();
+        loadingPanel.Dispose();
     }
 
     #region Input
@@ -325,10 +342,57 @@ public class UIGameRoot : UIRoot
         CloseOtherPanel(leavePanel);
     }
 
+
+
+
+
+    public void OpenRegistrationPanel()
+    {
+        if(registrationPanel.IsActive) return;
+
+        OpenOtherPanel(registrationPanel);
+    }
+
+    public void CloseRegistrationPanel()
+    {
+        if(!registrationPanel.IsActive) return;
+
+        CloseOtherPanel(registrationPanel);
+    }
+
+
+
+    public void OpenLoadingRegistrationPanel()
+    {
+        if (loadingPanel.IsActive) return;
+
+        OpenOtherPanel(loadingPanel);
+    }
+
+    public void CloseLoadingRegistrationPanel()
+    {
+        if (!loadingPanel.IsActive) return;
+
+        CloseOtherPanel(loadingPanel);
+    }
+
     #endregion
 
 
     #region Output
+
+    #region REGISTR
+
+    public event Action OnClickToRegistrate_Registration;
+
+    private void ClickToRegistrate_Registration()
+    {
+        _soundProvider.PlayOneShot("PanelOpen");
+
+        OnClickToRegistrate_Registration?.Invoke();
+    }
+
+    #endregion
 
     #region START
 

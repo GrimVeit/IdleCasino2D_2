@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Firebase.Auth;
+using Firebase.Database;
 using UnityEngine;
 
 public class OtherSceneEntryPoint : MonoBehaviour
@@ -10,19 +12,20 @@ public class OtherSceneEntryPoint : MonoBehaviour
     private UIOtherSceneRoot sceneRoot;
     private BankPresenter bankPresenter;
     private ViewContainer viewContainer;
+    private FirebaseDatabasePresenter firebaseDatabasePresenter;
     private WebViewPresenter webViewPresenter;
-
-    private DatabasePresenter databasePresenter;
 
     public void Run(UIRootView uIRootView)
     {
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+        FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+        DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
         sceneRoot = Instantiate(sceneRootPrefab);
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
-
-        databasePresenter = new DatabasePresenter(new DatabaseModel());
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         bankPresenter.Initialize();
@@ -30,27 +33,30 @@ public class OtherSceneEntryPoint : MonoBehaviour
         webViewPresenter = new WebViewPresenter(new WebViewModel(), viewContainer.GetView<WebViewView>());
         webViewPresenter.Initialize();
 
+        firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference, bankPresenter));
+        firebaseDatabasePresenter.Initialize();
+
         ActivateActions();
 
-        databasePresenter.GetLink();
+        firebaseDatabasePresenter.GetLink();
     }
 
     private void ActivateActions()
     {
-        databasePresenter.OnGetLink += GetURLBd;
-        databasePresenter.OnErrorGetLink += GoToMainMenu;
+        firebaseDatabasePresenter.OnGetLink += GetURLBd;
+        firebaseDatabasePresenter.OnErrorGetLink += GoToGame;
 
         webViewPresenter.OnGetLinkFromTitle += GetUrl;
-        webViewPresenter.OnFail += GoToMainMenu;
+        webViewPresenter.OnFail += GoToGame;
     }
 
     private void DeactivateActions()
     {
-        databasePresenter.OnGetLink -= GetURLBd;
-        databasePresenter.OnErrorGetLink -= GoToMainMenu;
+        firebaseDatabasePresenter.OnGetLink -= GetURLBd;
+        firebaseDatabasePresenter.OnErrorGetLink -= GoToGame;
 
         webViewPresenter.OnGetLinkFromTitle -= GetUrl;
-        webViewPresenter.OnFail -= GoToMainMenu;
+        webViewPresenter.OnFail -= GoToGame;
     }
 
     private void GetURLBd(string link)
@@ -62,7 +68,7 @@ public class OtherSceneEntryPoint : MonoBehaviour
     {
         if (URL == null)
         {
-            GoToMainMenu();
+            GoToGame();
             return;
         }
 
@@ -70,9 +76,9 @@ public class OtherSceneEntryPoint : MonoBehaviour
         webViewPresenter.Load();
     }
 
-    private void GoToMainMenu()
+    private void GoToGame()
     {
-        Debug.Log("NO GOOD, OPEN MAIN MENU");
+        //Debug.Log("NO GOOD, OPEN MAIN MENU");
         OnGoToGame?.Invoke();
     }
 

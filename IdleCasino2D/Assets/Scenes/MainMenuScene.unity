@@ -1286,8 +1286,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Your name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
-  m_sharedMaterial: {fileID: -2239127058258818506, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3976,8 +3976,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
-  m_sharedMaterial: {fileID: -2239127058258818506, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7530,8 +7530,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
-  m_sharedMaterial: {fileID: -2239127058258818506, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14484,7 +14484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &930363143
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14525,7 +14525,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930363142}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -25765,8 +25765,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Save
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
-  m_sharedMaterial: {fileID: -2239127058258818506, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -30508,8 +30508,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Profile
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
-  m_sharedMaterial: {fileID: -2239127058258818506, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31629,8 +31629,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
-  m_sharedMaterial: {fileID: -2239127058258818506, guid: d0b26329c8972594eaf9ebe1eca1580b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33426,19 +33426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59370386231afc040aa4f4fc618c4091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPanel: {fileID: 994824048}
-  rulesPanel: {fileID: 507949184}
-  profilePanel: {fileID: 972181749}
-  balancePanel: {fileID: 1489018033}
-  settingsPanel: {fileID: 197471740}
-  leaderboardPanel: {fileID: 1325876394}
-  resetGlobalPanel: {fileID: 538811941}
-  newGamePanel: {fileID: 1040692226}
-  shopPanel: {fileID: 1818516065}
-  shopBackgroundPanel: {fileID: 1282855207}
-  shopCardsPanel: {fileID: 1665861506}
-  registrationPanel: {fileID: 930363147}
-  loadRegistrationPanel: {fileID: 1681883477}
 --- !u!223 &8508999539158046859
 Canvas:
   m_ObjectHideFlags: 0

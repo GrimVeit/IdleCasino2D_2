@@ -1,0 +1,32 @@
+{
+  "project_info": {
+    "project_number": "1058868895863",
+    "firebase_url": "https://idlecasino-ef8af-default-rtdb.firebaseio.com",
+    "project_id": "idlecasino-ef8af",
+    "storage_bucket": "idlecasino-ef8af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058868895863:ios:cf4489cdbeb739bdb36672",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.IdleCasino2D"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCVzzXsTsKVhpBL0jf6kQ45d7ihOofqSk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

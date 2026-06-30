@@ -26,9 +26,19 @@ public class StateMachine_Game : IStateMachineProvider
         IAdministratorVisualProvider administratorVisualProvider,
         IProfitOfflineInfo profitOfflineInfo,
         IProfitOfflineListener profitOfflineListener,
-        ISoundProvider soundProvider
+        ISoundProvider soundProvider,
+        FirebaseAuthenticationPresenter firebaseAuthenticationPresenter,
+        FirebaseDatabasePresenter firebaseDatabasePresenter,
+        NicknamePresenter nicknamePresenter
         )
     {
+        states[typeof(CheckAuthorizationState_Game)] = new CheckAuthorizationState_Game(this, firebaseAuthenticationPresenter);
+        states[typeof(NameAndAvatarInputState_Game)] = new NameAndAvatarInputState_Game(this, sceneRoot, nicknamePresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
+        states[typeof(RegistrationState_Game)] = new RegistrationState_Game(this, sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
+
+
+
+
         states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot);
         states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
@@ -48,7 +58,7 @@ public class StateMachine_Game : IStateMachineProvider
 
     public void Initialize()
     {
-        EnterState(GetState<StartState_Game>());
+        EnterState(GetState<CheckAuthorizationState_Game>());
     }
 
     public void Dispose()

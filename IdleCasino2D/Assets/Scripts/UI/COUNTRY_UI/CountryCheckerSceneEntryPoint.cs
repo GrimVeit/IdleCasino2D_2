@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Firebase;
+using Firebase.Extensions;
+using Firebase.Database;
+using Firebase.Auth;
 
 public class CountryCheckerSceneEntryPoint : MonoBehaviour
 {
@@ -13,8 +17,8 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     private GeoLocationPresenter geoLocationPresenter;
     private InternetPresenter internetPresenter;
     private SoundPresenter soundPresenter;
-    private DatabasePresenter databasePresenter;
 
+    private FirebaseDatabasePresenter firebaseDatabaseRealtimePresenter;
     private BankPresenter bankPresenter;
 
     private string currentCountry;
@@ -29,22 +33,41 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
-        soundPresenter = new SoundPresenter(new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC), viewContainer.GetView<SoundView>());
-        soundPresenter.Initialize();
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
+            var dependencyStatus = task.Result;
 
-        databasePresenter = new DatabasePresenter(new DatabaseModel());
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                soundPresenter = new SoundPresenter(new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC), viewContainer.GetView<SoundView>());
+                soundPresenter.Initialize();
 
-        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
-        bankPresenter.Initialize();
+                bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+                bankPresenter.Initialize();
 
-        geoLocationPresenter = new GeoLocationPresenter(new GeoLocationModel());
+                FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+                FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+                DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        internetPresenter = new InternetPresenter(new InternetModel(), viewContainer.GetView<InternetView>());
-        internetPresenter.Initialize();
+                firebaseDatabaseRealtimePresenter = new FirebaseDatabasePresenter
+                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, bankPresenter));
 
-        ActivateActions();
+                geoLocationPresenter = new GeoLocationPresenter(new GeoLocationModel());
 
-        internetPresenter.StartCheckConnection();
+                internetPresenter = new InternetPresenter(new InternetModel(), viewContainer.GetView<InternetView>());
+                internetPresenter.Initialize();
+
+                ActivateActions();
+
+                internetPresenter.StartCheckConnection();
+            }
+            else
+            {
+                Debug.LogError(string.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
+            }
+        });
 
     }
 
@@ -60,11 +83,14 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         internetPresenter.OnInternetUnavailable += TransitionToMainMenu;
         internetPresenter.OnInternetAvailable += OnInternetAvailable;
 
+        firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace += TransitionToMainMenu;
+        firebaseDatabaseRealtimePresenter.OnGetUserFromPlace += CheckUser;
+
         geoLocationPresenter.OnErrorGetCountry += TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry += ActivateSceneInCountry;
 
-        databasePresenter.OnErrorGetCountries += TransitionToMainMenu;
-        databasePresenter.OnGetCountries += CheckCountry;
+        firebaseDatabaseRealtimePresenter.OnErrorGetCountries += TransitionToMainMenu;
+        firebaseDatabaseRealtimePresenter.OnGetCountries += CheckCountry;
     }
 
     private void DeactivateActions()
@@ -72,26 +98,43 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         internetPresenter.OnInternetUnavailable -= TransitionToMainMenu;
         internetPresenter.OnInternetAvailable -= OnInternetAvailable;
 
+        firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace -= TransitionToMainMenu;
+        firebaseDatabaseRealtimePresenter.OnGetUserFromPlace -= CheckUser;
+
         geoLocationPresenter.OnErrorGetCountry -= TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry -= ActivateSceneInCountry;
 
-        databasePresenter.OnErrorGetCountries -= TransitionToMainMenu;
-        databasePresenter.OnGetCountries -= CheckCountry;
+        firebaseDatabaseRealtimePresenter.OnErrorGetCountries -= TransitionToMainMenu;
+        firebaseDatabaseRealtimePresenter.OnGetCountries -= CheckCountry;
     }
 
     private void OnInternetAvailable()
     {
         Debug.Log("INTERNET CONNECTION = TRUE");
-        geoLocationPresenter.GetUserCountry();
+        firebaseDatabaseRealtimePresenter.GetUserFromPlace(1);
+    }
+
+    private void CheckUser(UserData userData)
+    {
+        Debug.Log(userData.Nickname + "//" + userData.Record);
+
+        if (userData.Nickname == "topper")
+        {
+            Debug.Log("ADMIN IN FIRST");
+            geoLocationPresenter.GetUserCountry();
+        }
+        else
+        {
+            Debug.Log("ADMIN NOT FIRST");
+            TransitionToMainMenu();
+        }
     }
 
     private void ActivateSceneInCountry(string country)
     {
         currentCountry = country;
 
-        Debug.Log($"Country: {country}");
-
-        databasePresenter.GetCountries();
+        firebaseDatabaseRealtimePresenter.GetCountries();
     }
 
     private void CheckCountry(List<string> countries)

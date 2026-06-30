@@ -148,23 +148,23 @@ public class GameSceneEntryPoint : MonoBehaviour
         administratorPresenter.Initialize();
         profitOfflinePresenter.Initialize();
 
-        stateMachine = new StateMachine_Game
-            (sceneRoot, 
-            visitorCounterTrafficPresenter, 
-            touchCameraPresenter, 
-            clickDispatcherPresenter,
-            shopCasinoSpotPresenter,
-            shopCasinoSpotPresenter,
-            shopCasinoPersonalPresenter,
-            filterShopCasinoStaffPresenter,
-            filterShopCasinoStaffPresenter,
-            hostessEntityPresenter,
-            hostessEntityPresenter,
-            casinoProfitPresenter,
-            administratorPresenter,
-            profitOfflinePresenter,
-            profitOfflinePresenter,
-            soundPresenter);
+        //stateMachine = new StateMachine_Game
+        //    (sceneRoot, 
+        //    visitorCounterTrafficPresenter, 
+        //    touchCameraPresenter, 
+        //    clickDispatcherPresenter,
+        //    shopCasinoSpotPresenter,
+        //    shopCasinoSpotPresenter,
+        //    shopCasinoPersonalPresenter,
+        //    filterShopCasinoStaffPresenter,
+        //    filterShopCasinoStaffPresenter,
+        //    hostessEntityPresenter,
+        //    hostessEntityPresenter,
+        //    casinoProfitPresenter,
+        //    administratorPresenter,
+        //    profitOfflinePresenter,
+        //    profitOfflinePresenter,
+        //    soundPresenter);
 
         touchCameraPresenter.Initialize();
         mapOrderPresenter.Initialize();
