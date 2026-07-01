@@ -223,6 +223,13 @@ public class FirebaseDatabaseModel
 
         DataSnapshot data = task.Result;
 
+        Debug.Log(data.ChildrenCount);
+
+        if(data.ChildrenCount == 0)
+        {
+            OnErrorGetUserFromPlace?.Invoke();
+        }
+
         foreach (var user in data.Children)
         {
             string name = user.Child("Nickname").Value.ToString();

@@ -19,6 +19,8 @@ public class FirebaseAuthenticationView : View
 
     public void SetDescription(string description)
     {
+        Debug.Log(description);
+
         textDescription.text = description;
     }
 }

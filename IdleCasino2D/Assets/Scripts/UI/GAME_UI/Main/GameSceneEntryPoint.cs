@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Firebase.Auth;
+using Firebase.Database;
 using UnityEngine;
 
 public class GameSceneEntryPoint : MonoBehaviour
@@ -38,6 +40,10 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
+
+    private NicknamePresenter nicknamePresenter;
+    private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
+    private FirebaseDatabasePresenter firebaseDatabasePresenter;
 
     private CasinoProfitStorePresenter casinoProfitStorePresenter;
     private CasinoProfitPresenter casinoProfitPresenter;
@@ -82,12 +88,20 @@ public class GameSceneEntryPoint : MonoBehaviour
         viewContainer.Initialize();
         viewContainer_World.Initialize();
 
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+        FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+        DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
         soundPresenter = new SoundPresenter
                     (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS, PlayerPrefsKeys.KEY_VOLUME_SOUND, PlayerPrefsKeys.KEY_VOLUME_MUSIC),
                     viewContainer.GetView<SoundView>());
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         bankTransactionVisualPresenter = new BankTransactionVisualPresenter(new BankTransactionVisualModel(bankPresenter), viewContainer.GetView<BankTransactionVisualView>());
+
+        nicknamePresenter = new NicknamePresenter(new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter), viewContainer.GetView<NicknameView>());
+        firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter(new FirebaseAuthenticationModel(firebaseAuth, soundPresenter), viewContainer.GetView<FirebaseAuthenticationView>());
+        firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference, bankPresenter));
 
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
         casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter, bankPresenter, soundPresenter), viewContainer.GetView<CasinoProfitView>());
@@ -148,23 +162,30 @@ public class GameSceneEntryPoint : MonoBehaviour
         administratorPresenter.Initialize();
         profitOfflinePresenter.Initialize();
 
-        //stateMachine = new StateMachine_Game
-        //    (sceneRoot, 
-        //    visitorCounterTrafficPresenter, 
-        //    touchCameraPresenter, 
-        //    clickDispatcherPresenter,
-        //    shopCasinoSpotPresenter,
-        //    shopCasinoSpotPresenter,
-        //    shopCasinoPersonalPresenter,
-        //    filterShopCasinoStaffPresenter,
-        //    filterShopCasinoStaffPresenter,
-        //    hostessEntityPresenter,
-        //    hostessEntityPresenter,
-        //    casinoProfitPresenter,
-        //    administratorPresenter,
-        //    profitOfflinePresenter,
-        //    profitOfflinePresenter,
-        //    soundPresenter);
+        stateMachine = new StateMachine_Game
+            (sceneRoot,
+            visitorCounterTrafficPresenter,
+            touchCameraPresenter,
+            clickDispatcherPresenter,
+            shopCasinoSpotPresenter,
+            shopCasinoSpotPresenter,
+            shopCasinoPersonalPresenter,
+            filterShopCasinoStaffPresenter,
+            filterShopCasinoStaffPresenter,
+            hostessEntityPresenter,
+            hostessEntityPresenter,
+            casinoProfitPresenter,
+            administratorPresenter,
+            profitOfflinePresenter,
+            profitOfflinePresenter,
+            soundPresenter,
+            firebaseAuthenticationPresenter,
+            firebaseDatabasePresenter,
+            nicknamePresenter);
+
+        nicknamePresenter.Initialize();
+        firebaseAuthenticationPresenter.Initialize();
+        firebaseDatabasePresenter.Initialize();
 
         touchCameraPresenter.Initialize();
         mapOrderPresenter.Initialize();
@@ -315,6 +336,10 @@ public class GameSceneEntryPoint : MonoBehaviour
         shopCasinoPersonalPresenter?.Dispose();
         filterShopCasinoStaffPresenter?.Dispose();
         stateMachine?.Dispose();
+
+        nicknamePresenter.Dispose();
+        firebaseAuthenticationPresenter.Dispose();
+        firebaseDatabasePresenter.Dispose();
     }
 
     private void OnDestroy()

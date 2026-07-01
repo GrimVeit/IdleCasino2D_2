@@ -33,6 +33,7 @@ public class MainState_Game : IState
 
     public void EnterState()
     {
+        _sceneRoot.OnClickToLeader_AvatarBalance += ChangeStateToLeaderboard;
         _sceneRoot.OnCLickToUpgrade_MAIN += ChangeStateToUpgrade;
         _sceneRoot.OnClickToHireStaff_MAIN += ChangeStateToHireStaff;
         _shopCasinoEntitySpotListener.OnSetData += ChangeStateToShopSpot;
@@ -51,6 +52,7 @@ public class MainState_Game : IState
 
     public void ExitState()
     {
+        _sceneRoot.OnClickToLeader_AvatarBalance -= ChangeStateToLeaderboard;
         _sceneRoot.OnCLickToUpgrade_MAIN -= ChangeStateToUpgrade;
         _sceneRoot.OnClickToHireStaff_MAIN -= ChangeStateToHireStaff;
         _shopCasinoEntitySpotListener.OnSetData -= ChangeStateToShopSpot;
@@ -63,6 +65,11 @@ public class MainState_Game : IState
         _shopCasinoEntitySpotProvider.DeactivateListener();
         _hostessEntityControllerProvider.DeactivateEntranceQueueInteractive();
         _administratorVisualProvider.Activate();
+    }
+
+    private void ChangeStateToLeaderboard()
+    {
+        _machineProvider.EnterState(_machineProvider.GetState<LeaderboardState_Game>());
     }
 
     private void ChangeStateToUpgrade()

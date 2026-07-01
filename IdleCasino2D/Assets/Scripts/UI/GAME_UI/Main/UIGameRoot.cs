@@ -9,7 +9,10 @@ public class UIGameRoot : UIRoot
     [SerializeField] private MainPanel_Game mainPanel;
     [SerializeField] private AvatarBalancePanel_Game avatarBalancePanel;
     [SerializeField] private BlackBackgroundPanel_Game blackBackgroundPanel;
+    [SerializeField] private MovePanel purpleBackgroundPanel;
     [SerializeField] private OfflineEarningsPanel_Game offlineEarningsPanel;
+
+    [SerializeField] private LeaderbaordPanel_Game leaderboardPanel;
 
     [SerializeField] private UpgradePanel_Game upgradePanel;
     [SerializeField] private ProfitUpgradePanel_Game profitUpgradePanel;
@@ -40,7 +43,10 @@ public class UIGameRoot : UIRoot
         mainPanel.Initialize();
         avatarBalancePanel.Initialize();
         blackBackgroundPanel.Initialize();
+        purpleBackgroundPanel.Initialize();
         offlineEarningsPanel.Initialize();
+
+        leaderboardPanel.Initialize();
 
         upgradePanel.Initialize();
         profitUpgradePanel.Initialize();
@@ -63,11 +69,14 @@ public class UIGameRoot : UIRoot
     {
         startPanel.OnClickToPlay += ClickToPlay_START;
 
+        avatarBalancePanel.OnClickToLeaderboard += ClickToLeader_AvatarBalance;
         mainPanel.OnClickToUpgrade += ClickToUpgrade_MAIN;
         mainPanel.OnClickToHireStaff += ClickToHireStaff_MAIN;
 
         upgradePanel.OnClickToBack += ClickToBack_UPGRADE;
         profitUpgradePanel.OnClickToExit += ClickToBack_UPGRADE_PROFIT;
+
+        leaderboardPanel.OnClickToExit += ClickToBack_LEADER;
 
         hireStaffPanel.OnClickToBack += ClickToBack_HIRE_STAFF;
         selectStaffPanel.OnClickToBack += ClickToBack_SELECT_STAFF;
@@ -82,11 +91,14 @@ public class UIGameRoot : UIRoot
     {
         startPanel.OnClickToPlay -= ClickToPlay_START;
 
+        avatarBalancePanel.OnClickToLeaderboard -= ClickToLeader_AvatarBalance;
         mainPanel.OnClickToUpgrade -= ClickToUpgrade_MAIN;
         mainPanel.OnClickToHireStaff -= ClickToHireStaff_MAIN;
 
         upgradePanel.OnClickToBack -= ClickToBack_UPGRADE;
         profitUpgradePanel.OnClickToExit -= ClickToBack_UPGRADE_PROFIT;
+
+        leaderboardPanel.OnClickToExit -= ClickToBack_LEADER;
 
         hireStaffPanel.OnClickToBack -= ClickToBack_HIRE_STAFF;
         selectStaffPanel.OnClickToBack -= ClickToBack_SELECT_STAFF;
@@ -106,7 +118,10 @@ public class UIGameRoot : UIRoot
         mainPanel.Dispose();
         avatarBalancePanel.Dispose();
         blackBackgroundPanel.Dispose();
+        purpleBackgroundPanel.Dispose();
         offlineEarningsPanel.Dispose();
+
+        leaderboardPanel.Dispose();
 
         upgradePanel.Dispose();
         profitUpgradePanel.Dispose();
@@ -194,6 +209,25 @@ public class UIGameRoot : UIRoot
 
 
 
+
+    public void OpenPurpleBackgroundPanel()
+    {
+        if (purpleBackgroundPanel.IsActive) return;
+
+        OpenOtherPanel(purpleBackgroundPanel);
+    }
+
+    public void ClosePurpleBackgroundPanel()
+    {
+        if (!purpleBackgroundPanel.IsActive) return;
+
+        CloseOtherPanel(purpleBackgroundPanel);
+    }
+
+
+
+
+
     public void OpenOfflineEarningsPanel()
     {
         if (offlineEarningsPanel.IsActive) return;
@@ -206,6 +240,23 @@ public class UIGameRoot : UIRoot
         if(!offlineEarningsPanel.IsActive) return;
 
         CloseOtherPanel(offlineEarningsPanel);
+    }
+
+
+
+
+    public void OpenLeaderboardPanel()
+    {
+        if (leaderboardPanel.IsActive) return;
+
+        OpenOtherPanel(leaderboardPanel);
+    }
+
+    public void CloseLeaderboardPanel()
+    {
+        if (!leaderboardPanel.IsActive) return;
+
+        CloseOtherPanel(leaderboardPanel);
     }
 
 
@@ -422,6 +473,32 @@ public class UIGameRoot : UIRoot
         _soundProvider.PlayOneShot("PanelOpen");
 
         OnClickToHireStaff_MAIN?.Invoke();
+    }
+
+    #endregion
+
+    #region AVATAR_BALANCE
+
+    public event Action OnClickToLeader_AvatarBalance;
+
+    private void ClickToLeader_AvatarBalance()
+    {
+        _soundProvider.PlayOneShot("PanelOpen");
+
+        OnClickToLeader_AvatarBalance?.Invoke();
+    }
+
+    #endregion
+
+    #region UPGRADE
+
+    public event Action OnClickToBack_LEADER;
+
+    private void ClickToBack_LEADER()
+    {
+        _soundProvider.PlayOneShot("PanelClose");
+
+        OnClickToBack_LEADER?.Invoke();
     }
 
     #endregion

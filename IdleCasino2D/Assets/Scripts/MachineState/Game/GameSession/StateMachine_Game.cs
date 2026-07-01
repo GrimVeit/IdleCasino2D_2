@@ -32,7 +32,7 @@ public class StateMachine_Game : IStateMachineProvider
         NicknamePresenter nicknamePresenter
         )
     {
-        states[typeof(CheckAuthorizationState_Game)] = new CheckAuthorizationState_Game(this, firebaseAuthenticationPresenter);
+        states[typeof(CheckAuthorizationState_Game)] = new CheckAuthorizationState_Game(this, firebaseAuthenticationPresenter, sceneRoot);
         states[typeof(NameAndAvatarInputState_Game)] = new NameAndAvatarInputState_Game(this, sceneRoot, nicknamePresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
         states[typeof(RegistrationState_Game)] = new RegistrationState_Game(this, sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
 
@@ -43,6 +43,8 @@ public class StateMachine_Game : IStateMachineProvider
         states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
         states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot, shopCasinoPersonalListener);
+
+        states[typeof(LeaderboardState_Game)] = new LeaderboardState_Game(this, sceneRoot);
 
         states[typeof(CheckProfitOnlineState_Game)] = new CheckProfitOnlineState_Game(this, profitOfflineInfo, soundProvider);
         states[typeof(ProfitOnlineState_Game)] = new ProfitOnlineState_Game(this, profitOfflineListener, sceneRoot);

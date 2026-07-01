@@ -15,15 +15,15 @@ public class FirebaseAuthenticationPresenter
     {
         ActivateEvents();
 
+        _view.Initialize();
         _model.Initialize();
-        _view?.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
 
-        _view?.Dispose();
+        _view.Dispose();
     }
 
     private void ActivateEvents()

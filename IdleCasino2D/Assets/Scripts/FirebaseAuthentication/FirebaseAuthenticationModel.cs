@@ -114,18 +114,19 @@ public class FirebaseAuthenticationModel
                     OnSignUpMessage_Action?.Invoke("Invalid nickname format.");
                     break;
                 default:
+                    Debug.Log("LUL");
                     OnSignUpMessage_Action?.Invoke("Unknown error or network error");
                     break;
             }
 
             Debug.Log("Не удалось создать аккаунт - " + task.Exception);
-            soundProvider.PlayOneShot("SignUpError");
+            //soundProvider.PlayOneShot("SignUpError");
             OnSignUpError_Action?.Invoke();
             yield break;
         }
 
         Debug.Log("Аккаунт создан");
-        soundProvider.PlayOneShot("SignUpSuccess");
+        //soundProvider.PlayOneShot("SignUpSuccess");
         OnSignUpMessage_Action?.Invoke("Success!");
         OnChangeUser?.Invoke(auth.CurrentUser.UserId);
         OnSignUp_Action?.Invoke();

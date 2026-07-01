@@ -28,6 +28,7 @@ public class StartState_Game : IState
 
         _sceneRoot.OnClickToPlay_START -= Timer;
 
+        _sceneRoot.ClosePurpleBackgroundPanel();
         _sceneRoot.CloseStartPanel();
     }
 
