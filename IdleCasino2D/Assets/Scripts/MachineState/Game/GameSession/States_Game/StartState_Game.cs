@@ -6,18 +6,28 @@ public class StartState_Game : IState
 {
     private readonly IStateMachineProvider _machineProvider;
     private readonly UIGameRoot _sceneRoot;
+    private readonly FirebaseAuthenticationPresenter _firebaseAuthenticationPresenter;
+    private readonly FirebaseDatabasePresenter _firebaseDatabasePresenter;
 
     private IEnumerator timer;
 
-    public StartState_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot)
+    public StartState_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, FirebaseAuthenticationPresenter firebaseAuthenticationPresenter, FirebaseDatabasePresenter firebaseDatabasePresenter)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
+        _firebaseAuthenticationPresenter = firebaseAuthenticationPresenter;
+        _firebaseDatabasePresenter = firebaseDatabasePresenter;
     }
 
     public void EnterState()
     {
         _sceneRoot.OnClickToPlay_START += Timer;
+
+        if (_firebaseAuthenticationPresenter.IsAuthorization())
+        {
+            _firebaseDatabasePresenter.SaveChangeToServer();
+            _firebaseDatabasePresenter.DisplayUsersRecords();
+        }
 
         _sceneRoot.OpenStartPanel();
     }
