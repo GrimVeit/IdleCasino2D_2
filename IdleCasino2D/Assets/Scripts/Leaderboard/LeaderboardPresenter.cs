@@ -17,6 +17,7 @@ public class LeaderboardPresenter
     {
         ActivateEvents();
 
+        _view.Initialize();
         _model.Initialize();
     }
 
@@ -24,6 +25,7 @@ public class LeaderboardPresenter
     {
         DeactivateEvents();
 
+        _view.Dispose();
         _model.Dispose();
     }
 

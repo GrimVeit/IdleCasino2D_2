@@ -44,6 +44,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private NicknamePresenter nicknamePresenter;
     private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
     private FirebaseDatabasePresenter firebaseDatabasePresenter;
+    private TimerPresenter timerPresenter_Leaderboard;
+    private LeaderboardPresenter leaderboardPresenter;
 
     private CasinoProfitStorePresenter casinoProfitStorePresenter;
     private CasinoProfitPresenter casinoProfitPresenter;
@@ -102,6 +104,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         nicknamePresenter = new NicknamePresenter(new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter), viewContainer.GetView<NicknameView>());
         firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter(new FirebaseAuthenticationModel(firebaseAuth, soundPresenter), viewContainer.GetView<FirebaseAuthenticationView>());
         firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference, bankPresenter));
+        timerPresenter_Leaderboard = new TimerPresenter(new TimerModel(), viewContainer.GetView<TimerView_Formatted>("Leaderboard"));
+        leaderboardPresenter = new LeaderboardPresenter(new LeaderboardModel(firebaseDatabasePresenter, firebaseDatabasePresenter, firebaseAuthenticationPresenter, timerPresenter_Leaderboard, timerPresenter_Leaderboard), viewContainer.GetView<LeaderboardView>());
 
         casinoProfitStorePresenter = new CasinoProfitStorePresenter(new CasinoProfitStoreModel());
         casinoProfitPresenter = new CasinoProfitPresenter(new CasinoProfitModel(casinoProfitStorePresenter, casinoProfitStorePresenter, casinoProfitStorePresenter, bankPresenter, soundPresenter), viewContainer.GetView<CasinoProfitView>());
@@ -185,6 +189,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         nicknamePresenter.Initialize();
         firebaseAuthenticationPresenter.Initialize();
+        timerPresenter_Leaderboard.Initialize();
+        leaderboardPresenter.Initialize();
         firebaseDatabasePresenter.Initialize();
 
         touchCameraPresenter.Initialize();
@@ -245,6 +251,9 @@ public class GameSceneEntryPoint : MonoBehaviour
             entity.Initialize();
 
             casinoEntities.Add(entity);
+
+            if (i == 0)
+                entity.Open();
         }
 
         for (int i = 0; i < 4; i++)
@@ -339,6 +348,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         nicknamePresenter.Dispose();
         firebaseAuthenticationPresenter.Dispose();
+        timerPresenter_Leaderboard.Dispose();
+        leaderboardPresenter.Dispose();
         firebaseDatabasePresenter.Dispose();
     }
 

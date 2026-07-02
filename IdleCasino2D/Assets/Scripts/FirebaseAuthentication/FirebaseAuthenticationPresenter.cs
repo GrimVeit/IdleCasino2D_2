@@ -1,6 +1,6 @@
 using System;
 
-public class FirebaseAuthenticationPresenter
+public class FirebaseAuthenticationPresenter : IAuthInfo
 {
     private readonly FirebaseAuthenticationModel _model;
     private readonly FirebaseAuthenticationView _view;
@@ -105,4 +105,9 @@ public class FirebaseAuthenticationPresenter
     }
 
     #endregion
+}
+
+public interface IAuthInfo
+{
+    public bool IsAuthorization();
 }

@@ -21,6 +21,11 @@ public class UIEffectCombination : MonoBehaviour
         uiEffects.ForEach(data => data.Dispose());
     }
 
+    public void ResetEffects()
+    {
+        uiEffects.ForEach(data => data.ResetEffect());
+    }
+
     public void ActivateEffect()
     {
         uiEffects.ForEach(data => data.ResetEffect());

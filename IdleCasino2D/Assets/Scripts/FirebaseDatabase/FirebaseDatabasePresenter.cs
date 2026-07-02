@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
+public class FirebaseDatabasePresenter : IDatabaseRecordsEvents, IDatabaseProvider
 {
     private readonly FirebaseDatabaseModel _model;
 
@@ -74,6 +74,11 @@ public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
 
 
 
+    public void RefreshData()
+    {
+        _model.SaveChangesToServer();
+        _model.DisplayUsersRecords();
+    }
 
     public void CreateEmptyDataToServer()
     {
@@ -111,6 +116,11 @@ public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
     }
 
     #endregion
+}
+
+public interface IDatabaseProvider
+{
+    public void RefreshData();
 }
 
 public interface IDatabaseRecordsEvents

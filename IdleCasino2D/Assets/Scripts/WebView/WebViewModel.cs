@@ -92,7 +92,7 @@ public class WebViewModel
             return;
         }
 
-        //Debug.Log("LOAD - " + URL);
+        Debug.Log("LOAD - " + URL);
         OnLoad?.Invoke(URL);
     }
 

@@ -21,7 +21,6 @@ public class FirebaseDatabaseModel
     public event Action OnErrorGetLink;
 
     public string Nickname { get; private set; }
-    public int Score { get; private set; }
 
     private List<UserData> userRecordsDictionary = new List<UserData>();
 
@@ -29,15 +28,17 @@ public class FirebaseDatabaseModel
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
+    private readonly IMoneyProvider _moneyProvider;
+
     public FirebaseDatabaseModel(FirebaseAuth auth, DatabaseReference database, IMoneyProvider moneyProvider)
     {
         this.auth = auth;
         this.databaseReference = database;
+        _moneyProvider = moneyProvider;
     }
 
     public void Initialize()
     {
-        //Score = PlayerPrefs.GetInt(PlayerPrefsKeys.M);
         Nickname = PlayerPrefs.GetString(PlayerPrefsKeys.NICKNAME);
     }
 
@@ -49,7 +50,6 @@ public class FirebaseDatabaseModel
     public void CreateNewAccountInServer()
     {
         Nickname = auth.CurrentUser.Email.Split('@')[0];
-        Score = 0;
         UserData user = new(Nickname, 0);
         string json = JsonUtility.ToJson(user);
 
@@ -68,7 +68,7 @@ public class FirebaseDatabaseModel
 
     public void SaveChangesToServer()
     {
-        UserData user = new(Nickname, Score);
+        UserData user = new(Nickname, _moneyProvider.Money);
         string json = JsonUtility.ToJson(user);
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
     }
@@ -144,6 +144,8 @@ public class FirebaseDatabaseModel
 
         List<string> links = new();
 
+        Debug.Log(data.ChildrenCount);
+
         foreach (var user in data.Children)
         {
             string name = user.Child("link").Value.ToString();
@@ -167,20 +169,26 @@ public class FirebaseDatabaseModel
 
     #region Records
 
+    private bool isLeaderLoading = false;
+
     public void DisplayUsersRecords()
     {
+        if(isLeaderLoading) return;
+
         Coroutines.Start(GetUsersRecords());
     }
 
     private IEnumerator GetUsersRecords()
     {
-        var task = databaseReference.Child("Users").OrderByChild("Record").LimitToLast(8).GetValueAsync();
+        isLeaderLoading = true;
+
+        var task = databaseReference.Child("Users").OrderByChild("Record").LimitToLast(10).GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
 
         if (task.IsFaulted)
         {
-            Debug.Log("Error display record");
+            Debug.Log("Error display record - " + task.Exception);
             yield break;
         }
 
@@ -200,6 +208,10 @@ public class FirebaseDatabaseModel
         userRecordsDictionary.Reverse();
 
         OnGetUsersRecords?.Invoke(userRecordsDictionary);
+
+        Debug.LogWarning("!!!LOAD DATA!!!");
+
+        isLeaderLoading = false;
     }
 
     private IEnumerator GetUser(int number)

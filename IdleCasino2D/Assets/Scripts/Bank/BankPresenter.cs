@@ -13,7 +13,6 @@ public class BankPresenter : IMoneyProvider, IMoneyEventsProvider
 
     public void Initialize()
     {
-        _model.Initialize();
         _view.Initialize();
 
         _model.OnAddMoney += _view.AddMoney;
