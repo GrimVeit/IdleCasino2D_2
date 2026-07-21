@@ -1,0 +1,48 @@
+
+main menu.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eyelid
+  rotate: false
+  xy: 502, 656
+  size: 31, 24
+  orig: 31, 24
+  offset: 0, 0
+  index: -1
+glow
+  rotate: false
+  xy: 264, 52
+  size: 159, 159
+  orig: 159, 159
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 2, 2
+  size: 209, 260
+  orig: 209, 260
+  offset: 0, 0
+  index: -1
+head2
+  rotate: false
+  xy: 471, 651
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+head3
+  rotate: true
+  xy: 425, 72
+  size: 139, 142
+  orig: 139, 142
+  offset: 0, 0
+  index: -1
+roulette 1
+  rotate: false
+  xy: 2, 213
+  size: 467, 467
+  orig: 467, 467
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,83 @@
+
+main menu.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chip1
+  rotate: true
+  xy: 156, 1211
+  size: 84, 85
+  orig: 84, 85
+  offset: 0, 0
+  index: -1
+chip2
+  rotate: true
+  xy: 243, 1204
+  size: 91, 95
+  orig: 91, 95
+  offset: 0, 0
+  index: -1
+chip3
+  rotate: false
+  xy: 66, 1222
+  size: 88, 73
+  orig: 88, 73
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 645, 1126
+  size: 796, 169
+  orig: 796, 169
+  offset: 0, 0
+  index: -1
+eyelid
+  rotate: false
+  xy: 2, 1271
+  size: 31, 24
+  orig: 31, 24
+  offset: 0, 0
+  index: -1
+glow
+  rotate: false
+  xy: 484, 1136
+  size: 159, 159
+  orig: 159, 159
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 1443, 1086
+  size: 209, 260
+  orig: 209, 260
+  offset: 0, 0
+  index: -1
+head2
+  rotate: false
+  xy: 35, 1266
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+head3
+  rotate: true
+  xy: 340, 1156
+  size: 139, 142
+  orig: 139, 142
+  offset: 0, 0
+  index: -1
+radiance background
+  rotate: true
+  xy: 471, 2
+  size: 1082, 1123
+  orig: 1082, 1123
+  offset: 0, 0
+  index: -1
+roulette 1
+  rotate: false
+  xy: 2, 687
+  size: 467, 467
+  orig: 467, 467
+  offset: 0, 0
+  index: -1

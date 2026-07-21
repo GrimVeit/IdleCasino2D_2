@@ -22,11 +22,7 @@ public class VisitorCounterTrafficModel
 
     public void Initialize()
     {
-        if (trafficRoutine != null)
-            Coroutines.Stop(trafficRoutine);
 
-        trafficRoutine = TrafficCoroutine();
-        Coroutines.Start(trafficRoutine);
     }
 
     public void Dispose()

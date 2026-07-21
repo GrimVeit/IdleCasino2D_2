@@ -18,7 +18,7 @@ public class MessageVisualModul : MonoBehaviour
     private MessageVisual _currentVisual;
     private Coroutine timerCoroutine;
 
-    public void SetMessage(string message, SpeechTurnEnum turnEnum)
+    public void SetMessage(string message, SpeechTurnEnum turnEnum, float duration = .7f)
     {
         if (_currentVisual != null)
         {

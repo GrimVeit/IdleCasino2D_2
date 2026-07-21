@@ -76,6 +76,9 @@ public class GameSceneEntryPoint : MonoBehaviour
     private GameProgressPresenter gameProgressPresenter;
     private AdministratorPresenter administratorPresenter;
 
+    private TutorialMaskotPresenter tutorialMaskotPresenter;
+    private TutorialDialoguePresenter tutorialDialoguePresenter;
+
     private StateMachine_Game stateMachine;
 
     private readonly List<ICasinoEntityInfo> casinoEntities = new();
@@ -143,6 +146,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         gameProgressPresenter = new GameProgressPresenter(new GameProgressModel(bankPresenter), viewContainer.GetView<GameProgressView>());
         administratorPresenter = new AdministratorPresenter(viewContainer.GetView<AdministratorView>());
 
+        tutorialMaskotPresenter = new TutorialMaskotPresenter(viewContainer.GetView<TutorialMaskotView>());
+        tutorialDialoguePresenter = new TutorialDialoguePresenter(new TutorialDialogueModel(), viewContainer.GetView<TutorialDialogueView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -165,6 +171,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         gameProgressPresenter.Initialize();
         administratorPresenter.Initialize();
         profitOfflinePresenter.Initialize();
+        tutorialDialoguePresenter.Initialize();
 
         stateMachine = new StateMachine_Game
             (sceneRoot,
@@ -238,8 +245,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
             casinoEntities.Add(entity);
 
-            if(i == 0)
-                entity.Open();
+            //if(i == 0)
+            //    entity.Open();
         }
 
         for (int i = 0; i < 6; i++)
@@ -252,8 +259,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
             casinoEntities.Add(entity);
 
-            if (i == 0)
-                entity.Open();
+            //if (i == 0)
+            //    entity.Open();
         }
 
         for (int i = 0; i < 4; i++)
@@ -278,6 +285,24 @@ public class GameSceneEntryPoint : MonoBehaviour
         var entityRoulette_2 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_2, nodesRoulette_2[1], nodeRouletteStaff_2));
         entityRoulette_2.Initialize();
         casinoEntities.Add(entityRoulette_2);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            tutorialMaskotPresenter.Activate();
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            tutorialMaskotPresenter.Deactivate();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            tutorialDialoguePresenter.SetMessage(UnityEngine.Random.Range(0, 999f).ToString(), UnityEngine.Random.Range(1, 3));
+        }
     }
 
     private void ActivateEvents()
@@ -331,6 +356,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         gameProgressPresenter?.Dispose();
         administratorPresenter?.Dispose();
         profitOfflinePresenter?.Dispose();
+        tutorialDialoguePresenter?.Dispose();
 
         touchCameraPresenter?.Dispose();
         mapOrderPresenter?.Dispose();

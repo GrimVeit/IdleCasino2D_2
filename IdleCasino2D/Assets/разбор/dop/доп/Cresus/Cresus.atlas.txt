@@ -1,0 +1,160 @@
+
+Cresus.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_arm 01
+  rotate: false
+  xy: 281, 10
+  size: 102, 149
+  orig: 102, 149
+  offset: 0, 0
+  index: -1
+L_arm 01_1
+  rotate: false
+  xy: 459, 162
+  size: 92, 82
+  orig: 92, 82
+  offset: 0, 0
+  index: -1
+L_arm 02
+  rotate: false
+  xy: 204, 7
+  size: 75, 152
+  orig: 75, 152
+  offset: 0, 0
+  index: -1
+L_foot
+  rotate: true
+  xy: 781, 192
+  size: 93, 78
+  orig: 93, 78
+  offset: 0, 0
+  index: -1
+L_leg
+  rotate: false
+  xy: 385, 10
+  size: 77, 149
+  orig: 77, 149
+  offset: 0, 0
+  index: -1
+L_palm
+  rotate: false
+  xy: 371, 161
+  size: 86, 83
+  orig: 86, 83
+  offset: 0, 0
+  index: -1
+R_arm 01
+  rotate: true
+  xy: 869, 196
+  size: 92, 134
+  orig: 92, 134
+  offset: 0, 0
+  index: -1
+R_arm 02
+  rotate: true
+  xy: 861, 103
+  size: 91, 133
+  orig: 91, 133
+  offset: 0, 0
+  index: -1
+R_arm 03
+  rotate: false
+  xy: 464, 86
+  size: 85, 74
+  orig: 85, 74
+  offset: 0, 0
+  index: -1
+R_foot
+  rotate: true
+  xy: 781, 61
+  size: 129, 72
+  orig: 129, 72
+  offset: 0, 0
+  index: -1
+R_leg
+  rotate: true
+  xy: 869, 413
+  size: 73, 143
+  orig: 73, 143
+  offset: 0, 0
+  index: -1
+R_palm
+  rotate: true
+  xy: 464, 5
+  size: 79, 80
+  orig: 79, 80
+  offset: 0, 0
+  index: -1
+beard  02
+  rotate: false
+  xy: 781, 17
+  size: 41, 42
+  orig: 41, 42
+  offset: 0, 0
+  index: -1
+beard 01
+  rotate: false
+  xy: 673, 287
+  size: 194, 199
+  orig: 194, 199
+  offset: 0, 0
+  index: -1
+body 01
+  rotate: true
+  xy: 371, 246
+  size: 240, 214
+  orig: 240, 214
+  offset: 0, 0
+  index: -1
+body 02
+  rotate: true
+  xy: 553, 15
+  size: 229, 226
+  orig: 229, 226
+  offset: 0, 0
+  index: -1
+body 03
+  rotate: true
+  xy: 587, 260
+  size: 226, 84
+  orig: 226, 84
+  offset: 0, 0
+  index: -1
+eyelid
+  rotate: false
+  xy: 673, 249
+  size: 45, 36
+  orig: 45, 36
+  offset: 0, 0
+  index: -1
+head 01
+  rotate: false
+  xy: 2, 161
+  size: 292, 325
+  orig: 292, 325
+  offset: 0, 0
+  index: -1
+head 02
+  rotate: true
+  xy: 869, 290
+  size: 121, 135
+  orig: 121, 135
+  offset: 0, 0
+  index: -1
+neck
+  rotate: true
+  xy: 2, 2
+  size: 157, 200
+  orig: 157, 200
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: true
+  xy: 296, 170
+  size: 316, 73
+  orig: 316, 73
+  offset: 0, 0
+  index: -1
