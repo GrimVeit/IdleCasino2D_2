@@ -30,14 +30,14 @@ public class GeoLocationModel
 
         if (request.result != UnityWebRequest.Result.Success || !operation.isDone)
         {
-            Debug.LogError("Error: " + request.result);
+            //Debug.LogError("Error: " + request.result);
             OnErrorGetCountry?.Invoke();
         }
         else if (request.result == UnityWebRequest.Result.Success)
         {
             var jsonResult = request.downloadHandler.text;
             IPInfo ipInfo = JsonUtility.FromJson<IPInfo>(jsonResult);
-            Debug.Log($"Country: {ipInfo.country}");
+            //Debug.Log($"Country: {ipInfo.country}");
             OnGetCountry?.Invoke(ipInfo.country);
         }
     }

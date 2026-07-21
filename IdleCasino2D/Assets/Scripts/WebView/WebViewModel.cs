@@ -44,7 +44,7 @@ public class WebViewModel
 
         if (request.result != UnityWebRequest.Result.Success || !operation.isDone)
         {
-            Debug.Log(request.result);
+            //Debug.Log(request.result);
             OnFail?.Invoke();
             yield break;
         }
@@ -92,7 +92,7 @@ public class WebViewModel
             return;
         }
 
-        Debug.Log("LOAD - " + URL);
+        //Debug.Log("LOAD - " + URL);
         OnLoad?.Invoke(URL);
     }
 

@@ -28,7 +28,7 @@ public class AvatarBalancePanel_Game : MovePanel
 
     private void ClickLeaderboard()
     {
-        Debug.Log("ClickLeader");
+        //Debug.Log("ClickLeader");
 
         OnClickToLeaderboard?.Invoke();
     }

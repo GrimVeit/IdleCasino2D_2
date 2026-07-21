@@ -7,7 +7,7 @@ public class ClickItem : MonoBehaviour, IClick
 {
     public void Click()
     {
-        Debug.Log("Click to - " + gameObject.name);
+        //Debug.Log("Click to - " + gameObject.name);
 
         OnClick?.Invoke();
     }

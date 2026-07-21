@@ -67,7 +67,7 @@ public class WebViewPresenter : IWebViewProvider
 
     public void SetURL(string URL)
     {
-        Debug.Log(URL);
+        //Debug.Log(URL);
 
         webViewModel.SetURL(URL);
     }

@@ -34,7 +34,7 @@ public class CasinoProfitStoreModel
         {
             var element = _profits.ElementAt(i);
             OnChangeProfitValue?.Invoke(element.Key, element.Value);
-            Debug.Log($"CASINO TYPE - {element.Key}, PROFIT VALUE - {element.Value}");
+            //Debug.Log($"CASINO TYPE - {element.Key}, PROFIT VALUE - {element.Value}");
         }
     }
 

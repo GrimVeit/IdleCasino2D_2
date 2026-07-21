@@ -278,8 +278,6 @@ public class GameSceneEntryPoint : MonoBehaviour
         var entityRoulette_2 = new RouletteEntityPresenter(new RouletteEntityModel(casinoProfitStorePresenter, spotRoulette_2, nodesRoulette_2[1], nodeRouletteStaff_2));
         entityRoulette_2.Initialize();
         casinoEntities.Add(entityRoulette_2);
-
-        Debug.Log("5");
     }
 
     private void ActivateEvents()

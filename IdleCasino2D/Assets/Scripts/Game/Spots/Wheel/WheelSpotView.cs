@@ -41,7 +41,7 @@ public class WheelSpotView : View, IIdentify
 
     public void SetAnimation(string name)
     {
-        Debug.Log(name);
+        //Debug.Log(name);
 
         switch (name)
         {

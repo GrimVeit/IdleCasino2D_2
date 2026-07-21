@@ -104,7 +104,7 @@ public class MapOrderModel
 
     private void AddVisitor(IVisitor visitor)
     {
-        Debug.Log("ADD ORDER VISITOR");
+        //Debug.Log("ADD ORDER VISITOR");
 
         _peoples.Add(visitor);
     }

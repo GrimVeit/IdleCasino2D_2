@@ -14,7 +14,7 @@ public class ProfitOfflineView : View
 
     public void Initialize()
     {
-        Debug.Log("AUTHOR");
+        //Debug.Log("AUTHOR");
 
         buttonEarn.onClick.AddListener(ClickToCollect);
     }

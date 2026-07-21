@@ -82,7 +82,7 @@ public class HostessEntityModel
                 _nodesTarget.Add(nodesTarget[i]);
         }
 
-        Debug.Log(_nodesTarget.Count);
+        //Debug.Log(_nodesTarget.Count);
     }
 
     public void Initialize()
