@@ -190,6 +190,7 @@ public class GameSceneEntryPoint : MonoBehaviour
             hostessEntityPresenter,
             hostessEntityPresenter,
             casinoProfitPresenter,
+            casinoProfitPresenter,
             administratorPresenter,
             profitOfflinePresenter,
             profitOfflinePresenter,
@@ -200,7 +201,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             tutorialDialoguePresenter,
             tutorialMaskotPresenter,
             storeFirstLaunchPresenter,
-            casinoEntities);
+            casinoEntities,
+            casinoProfitStorePresenter);
 
         nicknamePresenter.Initialize();
         firebaseAuthenticationPresenter.Initialize();

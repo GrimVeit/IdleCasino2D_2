@@ -40,3 +40,7 @@ MonoBehaviour:
     message: Upgraded tables attract more guests and increase your income.
   - id: tutorial.upgrade.04
     message: Upgrade your first table now!
+  - id: tutorial.upgrade.05
+    message: Great job!
+  - id: tutorial.upgrade.06
+    message: Your slot machine is now upgraded and ready to earn more!

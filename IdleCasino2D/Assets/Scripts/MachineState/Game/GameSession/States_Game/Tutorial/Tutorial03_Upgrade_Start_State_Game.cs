@@ -1,18 +1,87 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Tutorial03_Upgrade_Start_State_Game : MonoBehaviour
+public class Tutorial03_Upgrade_Start_State_Game : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly IStateMachineProvider _machineProvider;
+    private readonly ITutorialDialogueProvider _tutorialDialogueProvider;
+    private readonly ITutorialMaskotProvider _tutorialMaskotProvider;
+    private readonly UIGameRoot _sceneRoot;
+    private bool isOpenUpgrade = false;
+
+    private IEnumerator timer;
+
+    public Tutorial03_Upgrade_Start_State_Game(IStateMachineProvider machineProvider, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, UIGameRoot sceneRoot)
     {
-        
+        _machineProvider = machineProvider;
+        _tutorialDialogueProvider = tutorialDialogueProvider;
+        _tutorialMaskotProvider = tutorialMaskotProvider;
+        _sceneRoot = sceneRoot;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnterState()
     {
-        
+        Debug.Log("<color=red>ACTIVATE STATE - TUTORIAL 02 FIRST TABLES / GAME</color>");
+
+        isOpenUpgrade = false;
+        _sceneRoot.OnCLickToUpgrade_MAIN += OpenUpgrade;
+
+        if (timer != null) Coroutines.Stop(timer);
+
+        timer = Timer();
+        Coroutines.Start(timer);
+    }
+
+    public void ExitState()
+    {
+        _sceneRoot.OnCLickToUpgrade_MAIN -= OpenUpgrade;
+
+        if (timer != null) Coroutines.Stop(timer);
+
+        _sceneRoot.CloseMainPanel();
+    }
+
+    private IEnumerator Timer()
+    {
+        _tutorialDialogueProvider.SetMessage("tutorial.interface.01", 3.8f);
+
+        yield return new WaitForSeconds(5.3f);
+
+        _tutorialDialogueProvider.SetMessage("tutorial.upgrade.01", 3f);
+
+        yield return new WaitForSeconds(3.5f);
+
+        _tutorialDialogueProvider.SetMessage("tutorial.upgrade.02", 3f);
+
+        yield return new WaitForSeconds(3.5f);
+
+        _tutorialDialogueProvider.SetMessage("tutorial.upgrade.03", 3.5f);
+
+        yield return new WaitForSeconds(4f);
+
+        _tutorialDialogueProvider.SetMessage("tutorial.upgrade.04", 3f);
+
+        yield return new WaitForSeconds(3.5f);
+
+        _tutorialMaskotProvider.Deactivate();
+        _sceneRoot.CloseBlackBackgroundPanel();
+        _sceneRoot.OpenMainPanel();
+        _sceneRoot.OpenAvatarBalancePanel();
+
+        yield return new WaitUntil(() => isOpenUpgrade == true);
+
+        ChangeStateToTutorial3_ChooseUpgradeTable();
+    }
+
+    private void OpenUpgrade()
+    {
+        isOpenUpgrade = true;
+    }
+
+    private void ChangeStateToTutorial3_ChooseUpgradeTable()
+    {
+        _machineProvider.EnterState(_machineProvider.GetState<Tutorial03_Upgrade_ChooseUpgradeType_State_Game>());
     }
 }

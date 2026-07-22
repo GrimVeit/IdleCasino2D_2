@@ -33,7 +33,7 @@ public class CasinoProfitStoreModel
         for (int i = 0; i < _profits.Count; i++)
         {
             var element = _profits.ElementAt(i);
-            OnChangeProfitValue?.Invoke(element.Key, element.Value);
+            OnChangeProfitValue?.Invoke(element.Key, element.Value, true);
             //Debug.Log($"CASINO TYPE - {element.Key}, PROFIT VALUE - {element.Value}");
         }
     }
@@ -55,7 +55,7 @@ public class CasinoProfitStoreModel
     {
         _profits[type] = value;
 
-        OnChangeProfitValue?.Invoke(type, value);
+        OnChangeProfitValue?.Invoke(type, value, false);
     }
 
     public int GetProfit(CasinoEntityType type)
@@ -78,7 +78,7 @@ public class CasinoProfitStoreModel
 
     #region Output
 
-    public event Action<CasinoEntityType, int> OnChangeProfitValue;
+    public event Action<CasinoEntityType, int, bool> OnChangeProfitValue;
 
     #endregion
 }

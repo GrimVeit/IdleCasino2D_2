@@ -23,6 +23,7 @@ public class StateMachine_Game : IStateMachineProvider
         IHostessEntityControllerListener hostessEntityControllerListener,
         IHostessEntityControllerProvider hostessEntityControllerProvider,
         ICasinoProfitListener casinoProfitListener,
+        ICasinoProfitProvider casinoProfitProvider,
         IAdministratorVisualProvider administratorVisualProvider,
         IProfitOfflineInfo profitOfflineInfo,
         IProfitOfflineListener profitOfflineListener,
@@ -33,7 +34,8 @@ public class StateMachine_Game : IStateMachineProvider
         ITutorialDialogueProvider tutorialDialogueProvider,
         ITutorialMaskotProvider tutorialMaskotProvider,
         IStoreFirstLaunchProvider storeFirstLaunchProvider,
-        List<ICasinoEntityInfo> casinoEntities
+        List<ICasinoEntityInfo> casinoEntities,
+        ICasinoProfitStoreListener casinoProfitStoreListener
         )
     {
         states[typeof(CheckAuthorizationState_Game)] = new CheckAuthorizationState_Game(this, firebaseAuthenticationPresenter, sceneRoot);
@@ -44,6 +46,10 @@ public class StateMachine_Game : IStateMachineProvider
 
         states[typeof(Tutorial01_Welcome_State_Game)] = new Tutorial01_Welcome_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
         states[typeof(Tutorial02_FirstTables_State_Game)] = new Tutorial02_FirstTables_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot, touchCameraProvider, casinoEntities);
+        states[typeof(Tutorial03_Upgrade_Start_State_Game)] = new Tutorial03_Upgrade_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
+        states[typeof(Tutorial03_Upgrade_ChooseUpgradeType_State_Game)] = new Tutorial03_Upgrade_ChooseUpgradeType_State_Game(this, sceneRoot, casinoProfitListener, administratorVisualProvider);
+        states[typeof(Tutorial03_Upgrade_Finish_State_Game)] = new Tutorial03_Upgrade_Finish_State_Game(this, sceneRoot, casinoProfitStoreListener, tutorialDialogueProvider, tutorialMaskotProvider, casinoProfitProvider, administratorVisualProvider);
+        states[typeof(Tutorial04_HireStaff_Start_State_Game)] = new Tutorial04_HireStaff_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
 
         states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
@@ -55,7 +61,7 @@ public class StateMachine_Game : IStateMachineProvider
         states[typeof(ProfitOnlineState_Game)] = new ProfitOnlineState_Game(this, profitOfflineListener, sceneRoot);
 
         states[typeof(UpgradeState_Game)] = new UpgradeState_Game(this, sceneRoot, casinoProfitListener);
-        states[typeof(ProfitUpgradeState_Game)] = new ProfitUpgradeState_Game(this, sceneRoot);
+        states[typeof(ProfitUpgradeState_Game)] = new ProfitUpgradeState_Game(this, sceneRoot, casinoProfitProvider);
 
         states[typeof(ShopSpotState_Game)] = new ShopSpotState_Game(this, shopCasinoEntitySpotListener, sceneRoot);
 

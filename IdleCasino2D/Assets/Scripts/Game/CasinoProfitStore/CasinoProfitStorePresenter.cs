@@ -25,7 +25,7 @@ public class CasinoProfitStorePresenter : ICasinoProfitStoreInfo, ICasinoProfitS
 
     #region Output
 
-    public event Action<CasinoEntityType, int> OnProfitStoreChanged
+    public event Action<CasinoEntityType, int, bool> OnProfitStoreChanged
     {
         add => _model.OnChangeProfitValue += value;
         remove => _model.OnChangeProfitValue -= value;
@@ -53,5 +53,5 @@ public interface ICasinoProfitStoreProvider
 
 public interface ICasinoProfitStoreListener
 {
-    public event Action<CasinoEntityType, int> OnProfitStoreChanged;
+    public event Action<CasinoEntityType, int, bool> OnProfitStoreChanged;
 }

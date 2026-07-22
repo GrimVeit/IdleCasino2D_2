@@ -1,6 +1,6 @@
 using System;
 
-public class CasinoProfitPresenter : ICasinoProfitListener
+public class CasinoProfitPresenter : ICasinoProfitListener, ICasinoProfitProvider
 {
     private readonly CasinoProfitModel _model;
     private readonly CasinoProfitView _view;
@@ -24,6 +24,7 @@ public class CasinoProfitPresenter : ICasinoProfitListener
         DeactivateEvents();
 
         _view.Dispose();
+        _model.Dispose();
     }
 
     private void ActivateEvents()
@@ -51,17 +52,39 @@ public class CasinoProfitPresenter : ICasinoProfitListener
     {
         _view.SetCasinoType(entityType);
 
+        OnChooseCasinoTypeForProfit_Type?.Invoke(entityType);
         OnChooseCasinoTypeForProfit?.Invoke();
     }
 
     #region Output
 
+    public event Action<CasinoEntityType> OnChooseCasinoTypeForProfit_Type;
     public event Action OnChooseCasinoTypeForProfit;
+    public event Action<CasinoEntityType, int> OnUpdate
+    {
+        add => _model.OnUpdateMain += value;
+        remove => _model.OnUpdateMain -= value;
+    }
 
     #endregion
+
+    #region Input
+
+    public void ActivateUpgrade() => _model.ActivateUpgrade();
+    public void DeactivateUpgrade() => _model.DeactivateUpgrade();
+
+    #endregion
+}
+
+public interface ICasinoProfitProvider
+{
+    public void ActivateUpgrade();
+    public void DeactivateUpgrade();
 }
 
 public interface ICasinoProfitListener
 {
     public event Action OnChooseCasinoTypeForProfit;
+    public event Action<CasinoEntityType> OnChooseCasinoTypeForProfit_Type;
+    public event Action<CasinoEntityType, int> OnUpdate;
 }

@@ -15,6 +15,8 @@ public class CasinoProfitModel
 
     private CasinoEntityType _currentSelectedType;
 
+    private bool isActive = true;
+
     public CasinoProfitModel(ICasinoProfitStoreProvider casinoProfitStoreProvider, ICasinoProfitStoreListener casinoProfitStoreListener, ICasinoProfitStoreInfo casinoProfitStoreInfo, IMoneyProvider moneyProvider, ISoundProvider soundProvider)
     {
         _casinoProfitStoreProvider = casinoProfitStoreProvider;
@@ -45,10 +47,20 @@ public class CasinoProfitModel
 
     public void Dispose()
     {
-
+        _casinoProfitStoreListener.OnProfitStoreChanged -= OnProfitStoreChanged;
     }
 
-    private void OnProfitStoreChanged(CasinoEntityType type, int value)
+    public void ActivateUpgrade()
+    {
+        isActive = true;
+    }
+
+    public void DeactivateUpgrade()
+    {
+        isActive = false;
+    }
+
+    private void OnProfitStoreChanged(CasinoEntityType type, int value, bool isStartValue)
     {
         UpdateLevel(type, value);
     }
@@ -104,6 +116,8 @@ public class CasinoProfitModel
     // апгрейд текущего выбранного типа
     public void UpgradeCurrentType()
     {
+        if(!isActive) return;
+
         if (_currentSelectedType == default || !_upgrades.ContainsKey(_currentSelectedType)) return;
 
         var list = _upgrades[_currentSelectedType];

@@ -84,5 +84,11 @@ public class Tutorial02_FirstTables_State_Game : IState
 
         yield return new WaitForSeconds(3.5f);
 
+        ChangeStateToTutorial3();
+    }
+
+    private void ChangeStateToTutorial3()
+    {
+        _machineProvider.EnterState(_machineProvider.GetState<Tutorial03_Upgrade_Start_State_Game>());
     }
 }

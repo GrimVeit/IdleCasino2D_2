@@ -6,17 +6,20 @@ public class ProfitUpgradeState_Game : IState
 {
     private readonly IStateMachineProvider _machineProvider;
     private readonly UIGameRoot _sceneRoot;
+    private readonly ICasinoProfitProvider _casinoProfitProvider;
 
-    public ProfitUpgradeState_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot)
+    public ProfitUpgradeState_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, ICasinoProfitProvider casinoProfitProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
+        _casinoProfitProvider = casinoProfitProvider;
     }
 
     public void EnterState()
     {
         _sceneRoot.OnClickToBack_UPGRADE_PROFIT += ChangeStateToUpgrade;
 
+        _casinoProfitProvider.ActivateUpgrade();
         _sceneRoot.OpenProfitUpgradePanel();
     }
 
