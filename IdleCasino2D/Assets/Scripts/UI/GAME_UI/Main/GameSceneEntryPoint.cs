@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private ViewContainer viewContainer_World;
+    [SerializeField] DialogueMessagesSO dialogueMessagesSO;
     [SerializeField] private ShopCasinoEntityDatasSO shopCasinoEntityDatas;
     [SerializeField] private ShopCasinoPersonalDatasSO shopCasinoPersonalDatas;
 
@@ -76,6 +77,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private GameProgressPresenter gameProgressPresenter;
     private AdministratorPresenter administratorPresenter;
 
+    private StoreFirstLaunchPresenter storeFirstLaunchPresenter;
     private TutorialMaskotPresenter tutorialMaskotPresenter;
     private TutorialDialoguePresenter tutorialDialoguePresenter;
 
@@ -146,8 +148,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         gameProgressPresenter = new GameProgressPresenter(new GameProgressModel(bankPresenter), viewContainer.GetView<GameProgressView>());
         administratorPresenter = new AdministratorPresenter(viewContainer.GetView<AdministratorView>());
 
+        storeFirstLaunchPresenter = new StoreFirstLaunchPresenter(new StoreFirstLaunchModel(PlayerPrefsKeys.FIRST_LAUNCH));
         tutorialMaskotPresenter = new TutorialMaskotPresenter(viewContainer.GetView<TutorialMaskotView>());
-        tutorialDialoguePresenter = new TutorialDialoguePresenter(new TutorialDialogueModel(), viewContainer.GetView<TutorialDialogueView>());
+        tutorialDialoguePresenter = new TutorialDialoguePresenter(new TutorialDialogueModel(dialogueMessagesSO), viewContainer.GetView<TutorialDialogueView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -172,6 +175,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         administratorPresenter.Initialize();
         profitOfflinePresenter.Initialize();
         tutorialDialoguePresenter.Initialize();
+        storeFirstLaunchPresenter.Initialize();
 
         stateMachine = new StateMachine_Game
             (sceneRoot,
@@ -192,7 +196,11 @@ public class GameSceneEntryPoint : MonoBehaviour
             soundPresenter,
             firebaseAuthenticationPresenter,
             firebaseDatabasePresenter,
-            nicknamePresenter);
+            nicknamePresenter,
+            tutorialDialoguePresenter,
+            tutorialMaskotPresenter,
+            storeFirstLaunchPresenter,
+            casinoEntities);
 
         nicknamePresenter.Initialize();
         firebaseAuthenticationPresenter.Initialize();
@@ -357,6 +365,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         administratorPresenter?.Dispose();
         profitOfflinePresenter?.Dispose();
         tutorialDialoguePresenter?.Dispose();
+        storeFirstLaunchPresenter?.Dispose();
 
         touchCameraPresenter?.Dispose();
         mapOrderPresenter?.Dispose();

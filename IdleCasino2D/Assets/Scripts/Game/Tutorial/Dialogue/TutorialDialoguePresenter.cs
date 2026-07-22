@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialDialoguePresenter
+public class TutorialDialoguePresenter : ITutorialDialogueProvider
 {
     private readonly TutorialDialogueModel _model;
     private readonly TutorialDialogueView _view;

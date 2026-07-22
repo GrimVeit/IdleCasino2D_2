@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -14,15 +15,24 @@ public class TouchCameraView : View
     [Header("Границы")]
     [SerializeField] private Collider2D cameraBounds;
 
+    [Header("Предварительные точки")]
+    [SerializeField] private List<CameraPoint> cameraPoints = new();
+
     private Vector3 lastInputPosition;
     private bool isDragging = false;
     private CinemachineConfiner2D confiner;
     private bool isTouchDevice;
     [SerializeField] private Transform followTarget; // Добавляем target для плавного следования
     private bool isInteractive = false;
+    private readonly Dictionary<string, Transform> cameraPointsDict = new(); 
 
     public void Initialize()
     {
+        for (int i = 0; i < cameraPoints.Count; i++)
+        {
+            cameraPointsDict.Add(cameraPoints[i].Id, cameraPoints[i].TransformPoint);
+        }
+
         isTouchDevice = Input.touchSupported && Application.platform != RuntimePlatform.WebGLPlayer;
 
         if (virtualCamera != null)
@@ -202,6 +212,14 @@ public class TouchCameraView : View
         followTarget.DOMove(position, 1f);
     }
 
+    public void SetPosition(string id)
+    {
+        if(cameraPointsDict.TryGetValue(id, out var point))
+        {
+            followTarget.DOMove(point.position, 1);
+        }
+    }
+
     public void ActivateInteractive()
     {
         isInteractive = true;
@@ -209,5 +227,15 @@ public class TouchCameraView : View
     public void DeactivateInteractive()
     {
         isInteractive = false;
+    }
+
+    [Serializable]
+    private class CameraPoint
+    {
+        public string Id => id;
+        public Transform TransformPoint => transformPoint;
+
+        [SerializeField] private string id;
+        [SerializeField] private Transform transformPoint;
     }
 }

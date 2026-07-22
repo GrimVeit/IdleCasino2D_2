@@ -8,15 +8,17 @@ public class StartState_Game : IState
     private readonly UIGameRoot _sceneRoot;
     private readonly FirebaseAuthenticationPresenter _firebaseAuthenticationPresenter;
     private readonly FirebaseDatabasePresenter _firebaseDatabasePresenter;
+    private readonly IStoreFirstLaunchProvider _storeFirstLaunchProvider;
 
     private IEnumerator timer;
 
-    public StartState_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, FirebaseAuthenticationPresenter firebaseAuthenticationPresenter, FirebaseDatabasePresenter firebaseDatabasePresenter)
+    public StartState_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, FirebaseAuthenticationPresenter firebaseAuthenticationPresenter, FirebaseDatabasePresenter firebaseDatabasePresenter, IStoreFirstLaunchProvider storeFirstLaunchProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _firebaseAuthenticationPresenter = firebaseAuthenticationPresenter;
         _firebaseDatabasePresenter = firebaseDatabasePresenter;
+        _storeFirstLaunchProvider = storeFirstLaunchProvider;
     }
 
     public void EnterState()
@@ -54,11 +56,28 @@ public class StartState_Game : IState
     {
         yield return new WaitForSeconds(0.3f);
 
-        ActivateMainState();
+        CheckTutorial();
+    }
+
+    private void CheckTutorial()
+    {
+        if (!_storeFirstLaunchProvider.IsFirstLaunch)
+        {
+            ActivateMainState();
+        }
+        else
+        {
+            ActivateTutorialState();
+        }
     }
 
     private void ActivateMainState()
     {
         _machineProvider.EnterState(_machineProvider.GetState<CheckProfitOnlineState_Game>());
+    }
+
+    private void ActivateTutorialState()
+    {
+        _machineProvider.EnterState(_machineProvider.GetState<Tutorial01_Welcome_State_Game>());
     }
 }

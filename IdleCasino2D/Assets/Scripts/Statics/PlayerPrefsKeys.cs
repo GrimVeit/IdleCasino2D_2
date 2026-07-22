@@ -12,8 +12,5 @@ public static class PlayerPrefsKeys
     public const string AVATAR = "AVATAR";
     public const string NICKNAME = "NICKNAME";
 
-    public const string LANGUAGE = "LANGUAGE";
-    public const string GAME_DIFFICULTY = "GAME_DIFFICULTY";
-    public const string ROUND_COUNT = "ROUND_COUNT";
-    public const string PLAYERS_COUNT = "PLAYERS_COUNT";
+    public const string FIRST_LAUNCH = "FIRST_LAUNCH";
 }

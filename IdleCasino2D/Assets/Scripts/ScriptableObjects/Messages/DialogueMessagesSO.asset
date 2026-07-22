@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf73a14a1200f3a4496d94b1d2cdf99c, type: 3}
+  m_Name: DialogueMessagesSO
+  m_EditorClassIdentifier: 
+  messages:
+  - id: tutorial.welcome.01
+    message: Welcome to casino!
+  - id: tutorial.welcome.02
+    message: From now on, you are the owner of this place.
+  - id: tutorial.welcome.03
+    message: Your decisions will shape the future of this casino.
+  - id: tutorial.welcome.04
+    message: Build, upgrade, and create the greatest casino in the world!
+  - id: tutorial.tables.01
+    message: Every great casino starts somewhere.
+  - id: tutorial.tables.02
+    message: I've prepared your first two gaming tables.
+  - id: tutorial.tables.03
+    message: Let's take a look and prepare them for your first guests!
+  - id: tutorial.tables.04
+    message: Great!
+  - id: tutorial.interface.01
+    message: Before we start growing your casino, let's take a quick look at the
+      interface.
+  - id: tutorial.upgrade.01
+    message: A successful casino always needs improvements.
+  - id: tutorial.upgrade.02
+    message: Let's start by upgrading your tables.
+  - id: tutorial.upgrade.03
+    message: Upgraded tables attract more guests and increase your income.
+  - id: tutorial.upgrade.04
+    message: Upgrade your first table now!

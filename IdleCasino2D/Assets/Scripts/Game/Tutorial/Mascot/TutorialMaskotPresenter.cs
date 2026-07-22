@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialMaskotPresenter
+public class TutorialMaskotPresenter : ITutorialMaskotProvider
 {
     private readonly TutorialMaskotView _view;
 

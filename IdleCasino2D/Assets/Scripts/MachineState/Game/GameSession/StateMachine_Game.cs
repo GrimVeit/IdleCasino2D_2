@@ -29,17 +29,22 @@ public class StateMachine_Game : IStateMachineProvider
         ISoundProvider soundProvider,
         FirebaseAuthenticationPresenter firebaseAuthenticationPresenter,
         FirebaseDatabasePresenter firebaseDatabasePresenter,
-        NicknamePresenter nicknamePresenter
+        NicknamePresenter nicknamePresenter,
+        ITutorialDialogueProvider tutorialDialogueProvider,
+        ITutorialMaskotProvider tutorialMaskotProvider,
+        IStoreFirstLaunchProvider storeFirstLaunchProvider,
+        List<ICasinoEntityInfo> casinoEntities
         )
     {
         states[typeof(CheckAuthorizationState_Game)] = new CheckAuthorizationState_Game(this, firebaseAuthenticationPresenter, sceneRoot);
         states[typeof(NameAndAvatarInputState_Game)] = new NameAndAvatarInputState_Game(this, sceneRoot, nicknamePresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
         states[typeof(RegistrationState_Game)] = new RegistrationState_Game(this, sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
 
+        states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter, storeFirstLaunchProvider);
 
+        states[typeof(Tutorial01_Welcome_State_Game)] = new Tutorial01_Welcome_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
+        states[typeof(Tutorial02_FirstTables_State_Game)] = new Tutorial02_FirstTables_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot, touchCameraProvider, casinoEntities);
 
-
-        states[typeof(StartState_Game)] = new StartState_Game(this, sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
         states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
         states[typeof(HireStaffState_Game)] = new HireStaffState_Game(this, sceneRoot, shopCasinoPersonalListener);
