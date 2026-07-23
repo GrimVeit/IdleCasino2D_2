@@ -13,12 +13,12 @@ public class StoreFirstLaunchPresenter : IStoreFirstLaunchProvider
 
     public void Initialize()
     {
-
+        _model.Initialize();
     }
 
     public void Dispose()
     {
-
+        _model.Dispose();
     }
 
     #region Input

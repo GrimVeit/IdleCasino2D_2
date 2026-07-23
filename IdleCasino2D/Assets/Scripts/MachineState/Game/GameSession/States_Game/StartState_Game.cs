@@ -67,6 +67,8 @@ public class StartState_Game : IState
         }
         else
         {
+            _storeFirstLaunchProvider.CompleteFirstLaunch();
+
             ActivateTutorialState();
         }
     }

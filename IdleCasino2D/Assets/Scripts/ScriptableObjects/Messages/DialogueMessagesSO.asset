@@ -64,3 +64,9 @@ MonoBehaviour:
     message: Rankings update automatically every hour.
   - id: tutorial.leaderboard.05
     message: Earn as much as you can, climb the rankings, and become number one!
+  - id: tutorial.complete.01
+    message: You're ready!
+  - id: tutorial.complete.02
+    message: Your casino is now in your hands.
+  - id: tutorial.complete.03
+    message: Build the greatest casino the world has ever seen!

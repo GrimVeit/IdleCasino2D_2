@@ -53,7 +53,8 @@ public class StateMachine_Game : IStateMachineProvider
         states[typeof(Tutorial04_HireStaff_ChooseStaffType_State_Game)] = new Tutorial04_HireStaff_ChooseStaffType_State_Game(this, sceneRoot, shopCasinoPersonalListener, administratorVisualProvider);
         states[typeof(Tutorial04_HireStaff_Finish_State_Game)] = new Tutorial04_HireStaff_Finish_State_Game(this, sceneRoot, filterShopCasinoStaffActivatorProvider, filterShopCasinoStaffListener, tutorialDialogueProvider, tutorialMaskotProvider, administratorVisualProvider, touchCameraProvider);
         states[typeof(Tutorial05_Leaderboard_Start_State_Game)] = new Tutorial05_Leaderboard_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
-        states[typeof(Tutorial05_Leaderboard_Finish_State_Game)] = new Tutorial05_Leaderboard_Finish_State_Game(this, sceneRoot, administratorVisualProvider);
+        states[typeof(Tutorial05_Leaderboard_Finish_State_Game)] = new Tutorial05_Leaderboard_Finish_State_Game(this, sceneRoot, administratorVisualProvider, tutorialDialogueProvider, tutorialMaskotProvider);
+        states[typeof(Tutorial06_Complete_State_Game)] = new Tutorial06_Complete_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
 
         states[typeof(MainState_Game)] = new MainState_Game(this, visitorCounterTrafficProvider, touchCameraProvider, sceneRoot, clickDispatcherProvider, shopCasinoEntitySpotListener, shopCasinoEntitySpotProvider, hostessEntityControllerProvider, hostessEntityControllerListener, administratorVisualProvider);
         states[typeof(ChooseCasinoEntityState_Game)] = new ChooseCasinoEntityState_Game(this, sceneRoot, hostessEntityControllerListener, hostessEntityControllerProvider, touchCameraProvider, clickDispatcherProvider);
