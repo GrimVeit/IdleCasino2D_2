@@ -41,6 +41,8 @@ public class Tutorial03_Upgrade_Finish_State_Game : IState
 
     public void ExitState()
     {
+        if (timer != null) Coroutines.Stop(timer);
+
         _casinoProfitStoreListener.OnProfitStoreChanged -= ChangeStateToUpgrade;
     }
 

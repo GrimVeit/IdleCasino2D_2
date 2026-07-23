@@ -59363,6 +59363,18 @@ MonoBehaviour:
     transformPoint: {fileID: 1765278093}
   - id: First_Wheel
     transformPoint: {fileID: 1751535301}
+  - id: Manager_0
+    transformPoint: {fileID: 2016871859}
+  - id: Manager_1
+    transformPoint: {fileID: 1741099019}
+  - id: Manager_2
+    transformPoint: {fileID: 1647025492}
+  - id: Manager_3
+    transformPoint: {fileID: 238931385}
+  - id: Manager_4
+    transformPoint: {fileID: 1446379077}
+  - id: Manager_5
+    transformPoint: {fileID: 1841676989}
   followTarget: {fileID: 1240903011}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

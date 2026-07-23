@@ -212,11 +212,11 @@ public class TouchCameraView : View
         followTarget.DOMove(position, 1f);
     }
 
-    public void SetPosition(string id)
+    public void SetPosition(string id, float time = 1)
     {
         if(cameraPointsDict.TryGetValue(id, out var point))
         {
-            followTarget.DOMove(point.position, 1);
+            followTarget.DOMove(point.position, time);
         }
     }
 

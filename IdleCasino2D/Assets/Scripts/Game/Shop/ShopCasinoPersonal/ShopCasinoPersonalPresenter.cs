@@ -67,11 +67,18 @@ public class ShopCasinoPersonalPresenter : IShopCasinoPersonalListener
         remove => _model.OnChooseStaffData -= value;
     }
 
+    public event Action<ShopCasinoPersonalDataGroup> OnChooseShopPersonalGroup
+    {
+        add => _model.OnChooseShopPersonalGroup += value;
+        remove => _model.OnChooseShopPersonalGroup -= value;
+    }
+
     #endregion
 }
 
 public interface IShopCasinoPersonalListener
 {
     public event Action OnChooseStaffGroup;
+    public event Action<ShopCasinoPersonalDataGroup> OnChooseShopPersonalGroup;
     public event Action<ShopCasinoStaffData> OnChooseStaffData;
 }

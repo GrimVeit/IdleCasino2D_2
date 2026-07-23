@@ -44,3 +44,23 @@ MonoBehaviour:
     message: Great job!
   - id: tutorial.upgrade.06
     message: Your slot machine is now upgraded and ready to earn more!
+  - id: tutorial.staff.01
+    message: But a successful casino is not only about great machines.
+  - id: tutorial.staff.02
+    message: A great team is what keeps a casino running smoothly.
+  - id: tutorial.staff.03
+    message: Let's hire your first employee!
+  - id: tutorial.staff.04
+    message: Excellent!
+  - id: tutorial.staff.05
+    message: Your first employee is ready to help your casino grow.
+  - id: tutorial.leaderboard.01
+    message: One last thing before you start managing your casino.
+  - id: tutorial.leaderboard.02
+    message: Let's take a look at the leaderboard.
+  - id: tutorial.leaderboard.03
+    message: The leaderboard shows the best casino owners.
+  - id: tutorial.leaderboard.04
+    message: Rankings update automatically every hour.
+  - id: tutorial.leaderboard.05
+    message: Earn as much as you can, climb the rankings, and become number one!

@@ -28,7 +28,7 @@ public class TouchCameraPresenter : ITouchCameraProvider
     public void DeactivateInteractive() => _view.DeactivateInteractive();
 
     public void SetPosition(Vector3 position) => _view.SetPosition(position);
-    public void SetPosition(string id) => _view.SetPosition(id);
+    public void SetPosition(string id, float time = 1) => _view.SetPosition(id, time);
 
     #endregion
 }
@@ -39,5 +39,5 @@ public interface ITouchCameraProvider
     public void DeactivateInteractive();
 
     public void SetPosition(Vector3 position);
-    public void SetPosition(string id);
+    public void SetPosition(string id, float time = 1);
 }
