@@ -62,7 +62,7 @@ public class Tutorial02_FirstTables_State_Game : IState
 
         (_casinoEntities.FirstOrDefault(x => x.CasinoEntityType == CasinoEntityType.Slot) as ICasinoEntityActivator)?.Open();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         _touchCameraProvider.SetPosition("First_Wheel");
 
@@ -70,7 +70,7 @@ public class Tutorial02_FirstTables_State_Game : IState
 
         (_casinoEntities.FirstOrDefault(x => x.CasinoEntityType == CasinoEntityType.Wheel) as ICasinoEntityActivator)?.Open();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         _sceneRoot.OpenBlackBackgroundPanel();
 

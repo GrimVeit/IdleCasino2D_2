@@ -9,13 +9,15 @@ public class Tutorial04_HireStaff_ChooseStaffType_State_Game : IState
     private readonly UIGameRoot _sceneRoot;
     private readonly IShopCasinoPersonalListener _shopCasinoPersonalListener;
     private readonly IAdministratorVisualProvider _administratorVisualProvider;
+    private readonly IClickVisualProvider _clickVisualProvider;
 
-    public Tutorial04_HireStaff_ChooseStaffType_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, IShopCasinoPersonalListener shopCasinoPersonalListener, IAdministratorVisualProvider administratorVisualProvider)
+    public Tutorial04_HireStaff_ChooseStaffType_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, IShopCasinoPersonalListener shopCasinoPersonalListener, IAdministratorVisualProvider administratorVisualProvider, IClickVisualProvider clickVisualProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _shopCasinoPersonalListener = shopCasinoPersonalListener;
         _administratorVisualProvider = administratorVisualProvider;
+        _clickVisualProvider = clickVisualProvider;
     }
 
     public void EnterState()
@@ -25,6 +27,7 @@ public class Tutorial04_HireStaff_ChooseStaffType_State_Game : IState
         _administratorVisualProvider.Activate();
         _sceneRoot.OpenHireStaffPanel();
         _sceneRoot.OpenBlackBackgroundPanel();
+        _clickVisualProvider.MoveTo("MANAGER_STAFFPANEL");
     }
 
     public void ExitState()

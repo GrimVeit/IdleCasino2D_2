@@ -12,11 +12,12 @@ public class Tutorial03_Upgrade_Finish_State_Game : IState
     private readonly ITutorialMaskotProvider _tutorialMaskotProvider;
     private readonly ICasinoProfitProvider _casinoProfitProvider;
     private readonly IAdministratorVisualProvider _administratorVisualProvider;
+    private readonly IClickVisualProvider _clickVisualProvider;
 
     private bool isUpgrade = false;
     private IEnumerator timer;
 
-    public Tutorial03_Upgrade_Finish_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, ICasinoProfitStoreListener casinoProfitStoreListener, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, ICasinoProfitProvider casinoProfitProvider, IAdministratorVisualProvider administratorVisualProvider)
+    public Tutorial03_Upgrade_Finish_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, ICasinoProfitStoreListener casinoProfitStoreListener, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, ICasinoProfitProvider casinoProfitProvider, IAdministratorVisualProvider administratorVisualProvider, IClickVisualProvider clickVisualProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
@@ -25,6 +26,7 @@ public class Tutorial03_Upgrade_Finish_State_Game : IState
         _tutorialMaskotProvider = tutorialMaskotProvider;
         _casinoProfitProvider = casinoProfitProvider;
         _administratorVisualProvider = administratorVisualProvider;
+        _clickVisualProvider = clickVisualProvider;
     }
 
     public void EnterState()
@@ -37,6 +39,7 @@ public class Tutorial03_Upgrade_Finish_State_Game : IState
 
         _casinoProfitProvider.ActivateUpgrade();
         _sceneRoot.OpenProfitUpgradePanel();
+        _clickVisualProvider.MoveTo("UPGRADE_PROFITUPGRADEPANEL");
     }
 
     public void ExitState()
@@ -63,6 +66,8 @@ public class Tutorial03_Upgrade_Finish_State_Game : IState
 
     private IEnumerator Timer()
     {
+        _clickVisualProvider.Hide();
+
         yield return new WaitForSeconds(1f);
 
         _tutorialMaskotProvider.Activate();

@@ -35,7 +35,8 @@ public class StateMachine_Game : IStateMachineProvider
         ITutorialMaskotProvider tutorialMaskotProvider,
         IStoreFirstLaunchProvider storeFirstLaunchProvider,
         List<ICasinoEntityInfo> casinoEntities,
-        ICasinoProfitStoreListener casinoProfitStoreListener
+        ICasinoProfitStoreListener casinoProfitStoreListener,
+        IClickVisualProvider clickVisualProvider
         )
     {
         states[typeof(CheckAuthorizationState_Game)] = new CheckAuthorizationState_Game(this, firebaseAuthenticationPresenter, sceneRoot);
@@ -46,13 +47,13 @@ public class StateMachine_Game : IStateMachineProvider
 
         states[typeof(Tutorial01_Welcome_State_Game)] = new Tutorial01_Welcome_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
         states[typeof(Tutorial02_FirstTables_State_Game)] = new Tutorial02_FirstTables_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot, touchCameraProvider, casinoEntities);
-        states[typeof(Tutorial03_Upgrade_Start_State_Game)] = new Tutorial03_Upgrade_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
-        states[typeof(Tutorial03_Upgrade_ChooseUpgradeType_State_Game)] = new Tutorial03_Upgrade_ChooseUpgradeType_State_Game(this, sceneRoot, casinoProfitListener, administratorVisualProvider);
-        states[typeof(Tutorial03_Upgrade_Finish_State_Game)] = new Tutorial03_Upgrade_Finish_State_Game(this, sceneRoot, casinoProfitStoreListener, tutorialDialogueProvider, tutorialMaskotProvider, casinoProfitProvider, administratorVisualProvider);
-        states[typeof(Tutorial04_HireStaff_Start_State_Game)] = new Tutorial04_HireStaff_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
-        states[typeof(Tutorial04_HireStaff_ChooseStaffType_State_Game)] = new Tutorial04_HireStaff_ChooseStaffType_State_Game(this, sceneRoot, shopCasinoPersonalListener, administratorVisualProvider);
-        states[typeof(Tutorial04_HireStaff_Finish_State_Game)] = new Tutorial04_HireStaff_Finish_State_Game(this, sceneRoot, filterShopCasinoStaffActivatorProvider, filterShopCasinoStaffListener, tutorialDialogueProvider, tutorialMaskotProvider, administratorVisualProvider, touchCameraProvider);
-        states[typeof(Tutorial05_Leaderboard_Start_State_Game)] = new Tutorial05_Leaderboard_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
+        states[typeof(Tutorial03_Upgrade_Start_State_Game)] = new Tutorial03_Upgrade_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot, clickVisualProvider);
+        states[typeof(Tutorial03_Upgrade_ChooseUpgradeType_State_Game)] = new Tutorial03_Upgrade_ChooseUpgradeType_State_Game(this, sceneRoot, casinoProfitListener, administratorVisualProvider, clickVisualProvider);
+        states[typeof(Tutorial03_Upgrade_Finish_State_Game)] = new Tutorial03_Upgrade_Finish_State_Game(this, sceneRoot, casinoProfitStoreListener, tutorialDialogueProvider, tutorialMaskotProvider, casinoProfitProvider, administratorVisualProvider, clickVisualProvider);
+        states[typeof(Tutorial04_HireStaff_Start_State_Game)] = new Tutorial04_HireStaff_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot, clickVisualProvider);
+        states[typeof(Tutorial04_HireStaff_ChooseStaffType_State_Game)] = new Tutorial04_HireStaff_ChooseStaffType_State_Game(this, sceneRoot, shopCasinoPersonalListener, administratorVisualProvider, clickVisualProvider);
+        states[typeof(Tutorial04_HireStaff_Finish_State_Game)] = new Tutorial04_HireStaff_Finish_State_Game(this, sceneRoot, filterShopCasinoStaffActivatorProvider, filterShopCasinoStaffListener, tutorialDialogueProvider, tutorialMaskotProvider, administratorVisualProvider, touchCameraProvider, clickVisualProvider);
+        states[typeof(Tutorial05_Leaderboard_Start_State_Game)] = new Tutorial05_Leaderboard_Start_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot, clickVisualProvider);
         states[typeof(Tutorial05_Leaderboard_Finish_State_Game)] = new Tutorial05_Leaderboard_Finish_State_Game(this, sceneRoot, administratorVisualProvider, tutorialDialogueProvider, tutorialMaskotProvider);
         states[typeof(Tutorial06_Complete_State_Game)] = new Tutorial06_Complete_State_Game(this, tutorialDialogueProvider, tutorialMaskotProvider, sceneRoot);
 

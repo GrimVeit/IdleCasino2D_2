@@ -80,6 +80,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private StoreFirstLaunchPresenter storeFirstLaunchPresenter;
     private TutorialMaskotPresenter tutorialMaskotPresenter;
     private TutorialDialoguePresenter tutorialDialoguePresenter;
+    private ClickVisualPresenter clickVisualPresenter;
 
     private StateMachine_Game stateMachine;
 
@@ -151,6 +152,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         storeFirstLaunchPresenter = new StoreFirstLaunchPresenter(new StoreFirstLaunchModel(PlayerPrefsKeys.FIRST_LAUNCH));
         tutorialMaskotPresenter = new TutorialMaskotPresenter(viewContainer.GetView<TutorialMaskotView>());
         tutorialDialoguePresenter = new TutorialDialoguePresenter(new TutorialDialogueModel(dialogueMessagesSO), viewContainer.GetView<TutorialDialogueView>());
+        clickVisualPresenter = new ClickVisualPresenter(viewContainer.GetView<ClickVisualView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -175,6 +177,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         administratorPresenter.Initialize();
         profitOfflinePresenter.Initialize();
         tutorialDialoguePresenter.Initialize();
+        clickVisualPresenter.Initialize();
         storeFirstLaunchPresenter.Initialize();
 
         stateMachine = new StateMachine_Game
@@ -202,7 +205,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             tutorialMaskotPresenter,
             storeFirstLaunchPresenter,
             casinoEntities,
-            casinoProfitStorePresenter);
+            casinoProfitStorePresenter,
+            clickVisualPresenter);
 
         nicknamePresenter.Initialize();
         firebaseAuthenticationPresenter.Initialize();
@@ -367,6 +371,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         administratorPresenter?.Dispose();
         profitOfflinePresenter?.Dispose();
         tutorialDialoguePresenter?.Dispose();
+        clickVisualPresenter?.Dispose();
         storeFirstLaunchPresenter?.Dispose();
 
         touchCameraPresenter?.Dispose();

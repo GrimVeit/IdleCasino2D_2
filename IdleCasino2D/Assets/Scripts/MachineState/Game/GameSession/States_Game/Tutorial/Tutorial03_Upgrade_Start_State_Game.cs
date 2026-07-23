@@ -9,16 +9,18 @@ public class Tutorial03_Upgrade_Start_State_Game : IState
     private readonly ITutorialDialogueProvider _tutorialDialogueProvider;
     private readonly ITutorialMaskotProvider _tutorialMaskotProvider;
     private readonly UIGameRoot _sceneRoot;
+    private readonly IClickVisualProvider _clickVisualProvider;
     private bool isOpenUpgrade = false;
 
     private IEnumerator timer;
 
-    public Tutorial03_Upgrade_Start_State_Game(IStateMachineProvider machineProvider, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, UIGameRoot sceneRoot)
+    public Tutorial03_Upgrade_Start_State_Game(IStateMachineProvider machineProvider, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, UIGameRoot sceneRoot, IClickVisualProvider clickVisualProvider)
     {
         _machineProvider = machineProvider;
         _tutorialDialogueProvider = tutorialDialogueProvider;
         _tutorialMaskotProvider = tutorialMaskotProvider;
         _sceneRoot = sceneRoot;
+        _clickVisualProvider = clickVisualProvider;
     }
 
     public void EnterState()
@@ -69,6 +71,8 @@ public class Tutorial03_Upgrade_Start_State_Game : IState
         _sceneRoot.CloseBlackBackgroundPanel();
         _sceneRoot.OpenMainPanel();
         _sceneRoot.OpenAvatarBalancePanel();
+        _clickVisualProvider.Show();
+        _clickVisualProvider.MoveTo("UPGRADE_MAINPANEL");
 
         yield return new WaitUntil(() => isOpenUpgrade == true);
 

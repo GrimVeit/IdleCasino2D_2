@@ -9,13 +9,15 @@ public class Tutorial03_Upgrade_ChooseUpgradeType_State_Game : IState
     private readonly UIGameRoot _sceneRoot;
     private readonly ICasinoProfitListener _casinoProfitListener;
     private readonly IAdministratorVisualProvider _administratorVisualProvider;
+    private readonly IClickVisualProvider _clickVisualProvider;
 
-    public Tutorial03_Upgrade_ChooseUpgradeType_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, ICasinoProfitListener casinoProfitListener, IAdministratorVisualProvider administratorVisualProvider)
+    public Tutorial03_Upgrade_ChooseUpgradeType_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, ICasinoProfitListener casinoProfitListener, IAdministratorVisualProvider administratorVisualProvider, IClickVisualProvider clickVisualProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _casinoProfitListener = casinoProfitListener;
         _administratorVisualProvider = administratorVisualProvider;
+        _clickVisualProvider = clickVisualProvider;
     }
 
     public void EnterState()
@@ -25,6 +27,7 @@ public class Tutorial03_Upgrade_ChooseUpgradeType_State_Game : IState
         _administratorVisualProvider.Activate();
         _sceneRoot.OpenUpgradePanel();
         _sceneRoot.OpenBlackBackgroundPanel();
+        _clickVisualProvider.MoveTo("SLOTMACHINE_UPGRADEPANEL");
     }
 
     public void ExitState()

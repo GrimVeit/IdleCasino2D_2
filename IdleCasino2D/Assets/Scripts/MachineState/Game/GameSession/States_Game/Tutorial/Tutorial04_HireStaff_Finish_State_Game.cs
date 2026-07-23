@@ -12,11 +12,12 @@ public class Tutorial04_HireStaff_Finish_State_Game : IState
     private readonly ITutorialMaskotProvider _tutorialMaskotProvider;
     private readonly IAdministratorVisualProvider _administratorVisualProvider;
     private readonly ITouchCameraProvider _touchCameraProvider;
+    private readonly IClickVisualProvider _clickVisualProvider;
     private bool isStaffBuyed = false;
 
     private IEnumerator timer;
 
-    public Tutorial04_HireStaff_Finish_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, IFilterShopCasinoStaffProvider filterShopCasinoStaffActivatorProvider, IFilterShopCasinoStaffListener filterShopCasinoStaffListener, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, IAdministratorVisualProvider administratorVisualProvider, ITouchCameraProvider touchCameraProvider)
+    public Tutorial04_HireStaff_Finish_State_Game(IStateMachineProvider machineProvider, UIGameRoot sceneRoot, IFilterShopCasinoStaffProvider filterShopCasinoStaffActivatorProvider, IFilterShopCasinoStaffListener filterShopCasinoStaffListener, ITutorialDialogueProvider tutorialDialogueProvider, ITutorialMaskotProvider tutorialMaskotProvider, IAdministratorVisualProvider administratorVisualProvider, ITouchCameraProvider touchCameraProvider, IClickVisualProvider clickVisualProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
@@ -26,6 +27,7 @@ public class Tutorial04_HireStaff_Finish_State_Game : IState
         _tutorialMaskotProvider = tutorialMaskotProvider;
         _administratorVisualProvider = administratorVisualProvider;
         _touchCameraProvider = touchCameraProvider;
+        _clickVisualProvider = clickVisualProvider;
     }
 
     public void EnterState()
@@ -37,6 +39,7 @@ public class Tutorial04_HireStaff_Finish_State_Game : IState
         _filterShopCasinoStaffListener.OnStaffPurchased += ChangeStateToMainState;
 
         _sceneRoot.OpenSelectStaffPanel();
+        _clickVisualProvider.MoveTo("HIRE_SELECTSTAFFPANEL");
     }
 
     public void ExitState()
@@ -60,6 +63,7 @@ public class Tutorial04_HireStaff_Finish_State_Game : IState
 
     private IEnumerator Timer()
     {
+        _clickVisualProvider.Hide();
         _sceneRoot.CloseSelectStaffPanel();
         _sceneRoot.CloseAvatarBalancePanel();
         _sceneRoot.CloseBlackBackgroundPanel();
