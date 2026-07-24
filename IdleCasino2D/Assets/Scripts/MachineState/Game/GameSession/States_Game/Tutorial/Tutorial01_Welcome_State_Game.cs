@@ -50,6 +50,10 @@ public class Tutorial01_Welcome_State_Game : IState
 
         yield return new WaitForSeconds(2.5f);
 
+        _tutorialDialogueProvider.SetMessage("tutorial.cresus", 3f);
+
+        yield return new WaitForSeconds(3.5f);
+
         _tutorialDialogueProvider.SetMessage("tutorial.welcome.02", 3f);
 
         yield return new WaitForSeconds(3.5f);
