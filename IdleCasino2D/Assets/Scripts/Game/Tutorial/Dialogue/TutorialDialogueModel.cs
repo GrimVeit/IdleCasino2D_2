@@ -6,12 +6,16 @@ public class TutorialDialogueModel
 {
     private readonly Dictionary<string, string> words = new();
 
-    public TutorialDialogueModel(DialogueMessagesSO dialogueMessages)
+    private readonly ISoundProvider _soundProvider;
+
+    public TutorialDialogueModel(DialogueMessagesSO dialogueMessages, ISoundProvider soundProvider)
     {
         for (int i = 0; i < dialogueMessages.messages.Count; i++)
         {
             words.Add(dialogueMessages.messages[i].Id, dialogueMessages.messages[i].Message);
         }
+
+        _soundProvider = soundProvider;
     }
 
     public void SetMessage(string id, float duration)
@@ -19,6 +23,7 @@ public class TutorialDialogueModel
         if(words.TryGetValue(id, out string message))
         {
             OnSetMessage?.Invoke(message, duration);
+            _soundProvider.PlayOneShot("Message");
         }
         else
         {

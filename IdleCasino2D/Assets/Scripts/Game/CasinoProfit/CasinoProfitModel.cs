@@ -41,7 +41,7 @@ public class CasinoProfitModel
         foreach (CasinoEntityType type in Enum.GetValues(typeof(CasinoEntityType)))
         {
             int profit = _casinoProfitStoreInfo.GetProfit(type);
-            UpdateLevel(type, profit);
+            UpdateLevel(type, profit, true);
         }
     }
 
@@ -62,10 +62,10 @@ public class CasinoProfitModel
 
     private void OnProfitStoreChanged(CasinoEntityType type, int value, bool isStartValue)
     {
-        UpdateLevel(type, value);
+        UpdateLevel(type, value, false);
     }
 
-    private void UpdateLevel(CasinoEntityType type, int profitValue)
+    private void UpdateLevel(CasinoEntityType type, int profitValue, bool isStartValue)
     {
         if (!_upgrades.ContainsKey(type)) return;
 
@@ -89,11 +89,13 @@ public class CasinoProfitModel
 
             if(list.Count >= nextLevel.Item2)
             {
-                _soundProvider.PlayOneShot("UpgradeFull");
+                if(!isStartValue)
+                    _soundProvider.PlayOneShot("UpgradeFull");
             }
             else
             {
-                _soundProvider.PlayOneShot("Upgrade");
+                if (!isStartValue)
+                    _soundProvider.PlayOneShot("Upgrade");
             }
         }
 
@@ -108,7 +110,7 @@ public class CasinoProfitModel
 
         // сразу обновляем детальную панель
         int profit = _casinoProfitStoreInfo.GetProfit(casinoEntityType);
-        UpdateLevel(casinoEntityType, profit);
+        UpdateLevel(casinoEntityType, profit, true);
 
         _soundProvider.PlayOneShot("PanelOpen");
     }

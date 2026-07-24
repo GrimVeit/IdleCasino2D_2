@@ -151,7 +151,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         storeFirstLaunchPresenter = new StoreFirstLaunchPresenter(new StoreFirstLaunchModel(PlayerPrefsKeys.FIRST_LAUNCH));
         tutorialMaskotPresenter = new TutorialMaskotPresenter(viewContainer.GetView<TutorialMaskotView>());
-        tutorialDialoguePresenter = new TutorialDialoguePresenter(new TutorialDialogueModel(dialogueMessagesSO), viewContainer.GetView<TutorialDialogueView>());
+        tutorialDialoguePresenter = new TutorialDialoguePresenter(new TutorialDialogueModel(dialogueMessagesSO, soundPresenter), viewContainer.GetView<TutorialDialogueView>());
         clickVisualPresenter = new ClickVisualPresenter(viewContainer.GetView<ClickVisualView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);
