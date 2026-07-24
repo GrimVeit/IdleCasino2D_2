@@ -110,22 +110,17 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
     private void OnInternetAvailable()
     {
-        //Debug.Log("INTERNET CONNECTION = TRUE");
         firebaseDatabaseRealtimePresenter.GetUserFromPlace(1);
     }
 
     private void CheckUser(UserData userData)
     {
-        //Debug.Log(userData.Nickname + "//" + userData.Record);
-
         if (userData.Nickname == "topper")
         {
-            //Debug.Log("ADMIN IN FIRST");
             geoLocationPresenter.GetUserCountry();
         }
         else
         {
-            //Debug.Log("ADMIN NOT FIRST");
             TransitionToMainMenu();
         }
     }
@@ -141,12 +136,10 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     {
         if (countries.Contains(currentCountry))
         {
-            //Debug.Log("GOOD COUNTRY = TRUE");
             TransitionToOther();
         }
         else
         {
-            //Debug.Log("GOOD COUNTRY = FALSE");
             TransitionToMainMenu();
         }
     }
@@ -159,14 +152,12 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     private void TransitionToMainMenu()
     {
         Dispose();
-        //Debug.Log("NO GOOD");
         GoToGame?.Invoke();
     }
 
     private void TransitionToOther()
     {
         Dispose();
-        //Debug.Log("GOOD");
         GoToOther?.Invoke();
     }
 

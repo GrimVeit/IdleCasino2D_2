@@ -301,24 +301,6 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoEntities.Add(entityRoulette_2);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            tutorialMaskotPresenter.Activate();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightAlt))
-        {
-            tutorialMaskotPresenter.Deactivate();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            tutorialDialoguePresenter.SetMessage(UnityEngine.Random.Range(0, 999f).ToString(), UnityEngine.Random.Range(1, 3));
-        }
-    }
-
     private void ActivateEvents()
     {
         ActivateTransitions();
