@@ -4,7 +4,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
 
-public class GameSceneEntryPoint : MonoBehaviour
+public class GameSceneEntryPoint : MonoBehaviour, ISceneEntryPoint
 {
     [SerializeField] private ViewContainer viewContainer_World;
     [SerializeField] DialogueMessagesSO dialogueMessagesSO;
@@ -33,6 +33,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     [SerializeField] private Sounds sounds;
     [SerializeField] private UIGameRoot menuRootPrefab;
 
+    private ISceneNavigator _sceneNavigator;
     private UIGameRoot sceneRoot;
     private ViewContainer viewContainer;
 
@@ -86,8 +87,10 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private readonly List<ICasinoEntityInfo> casinoEntities = new();
 
-    public void Run(UIRootView uIRootView)
+    public void Initialize(ISceneNavigator sceneNavigator, UIRootView uIRootView)
     {
+        _sceneNavigator = sceneNavigator;
+
         sceneRoot = menuRootPrefab;
 
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
@@ -156,8 +159,6 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
-
-        ActivateEvents();
 
         soundPresenter.Initialize();
         particleEffectPresenter.Initialize();
@@ -258,9 +259,6 @@ public class GameSceneEntryPoint : MonoBehaviour
             entity.Initialize();
 
             casinoEntities.Add(entity);
-
-            //if(i == 0)
-            //    entity.Open();
         }
 
         for (int i = 0; i < 6; i++)
@@ -272,9 +270,6 @@ public class GameSceneEntryPoint : MonoBehaviour
             entity.Initialize();
 
             casinoEntities.Add(entity);
-
-            //if (i == 0)
-            //    entity.Open();
         }
 
         for (int i = 0; i < 4; i++)
@@ -301,61 +296,16 @@ public class GameSceneEntryPoint : MonoBehaviour
         casinoEntities.Add(entityRoulette_2);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            tutorialMaskotPresenter.Activate();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightAlt))
-        {
-            tutorialMaskotPresenter.Deactivate();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            tutorialDialoguePresenter.SetMessage(UnityEngine.Random.Range(0, 999f).ToString(), UnityEngine.Random.Range(1, 3));
-        }
-    }
-
-    private void ActivateEvents()
-    {
-        ActivateTransitions();
-    }
-
-    private void DeactivateEvents()
-    {
-        DeactivateTransitions();
-    }
-
-    private void ActivateTransitions()
-    {
-
-    }
-
-    private void DeactivateTransitions()
-    {
-
-    }
-
-    private void Deactivate()
+    public void Dispose()
     {
         clickDispatcherPresenter?.Deactivate();
         sceneRoot.Deactivate();
-        soundPresenter?.Dispose();
-    }
 
-    private void Dispose()
-    {
         casinoEntityStorePresenter?.Dispose();
         staffSpawnerPresenter?.Dispose();
-
-        DeactivateEvents();
-
         soundPresenter?.Dispose();
         particleEffectPresenter?.Dispose();
-        sceneRoot?.Dispose();
+        sceneRoot.Dispose();
         bankPresenter?.Dispose();
         bankTransactionVisualPresenter?.Dispose();
         casinoProfitStorePresenter?.Dispose();
@@ -426,26 +376,4 @@ public class GameSceneEntryPoint : MonoBehaviour
             bankPresenter?.Save();
         }
     }
-
-    #region Output
-
-
-    public event Action OnClickToMenu;
-    public event Action OnClickToGame;
-
-    private void HandleClickToMenu()
-    {
-        Deactivate();
-
-        OnClickToMenu?.Invoke();
-    }
-
-    private void HandleClickToGame()
-    {
-        Deactivate();
-
-        OnClickToGame?.Invoke();
-    }
-
-    #endregion
 }

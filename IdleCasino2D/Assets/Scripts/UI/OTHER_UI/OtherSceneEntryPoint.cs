@@ -5,18 +5,20 @@ using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
 
-public class OtherSceneEntryPoint : MonoBehaviour
+public class OtherSceneEntryPoint : MonoBehaviour, ISceneEntryPoint
 {
     [SerializeField] private UIOtherSceneRoot sceneRootPrefab;
 
+    private ISceneNavigator _sceneNavigator;
     private UIOtherSceneRoot sceneRoot;
     private BankPresenter bankPresenter;
     private ViewContainer viewContainer;
     private FirebaseDatabasePresenter firebaseDatabasePresenter;
     private WebViewPresenter webViewPresenter;
 
-    public void Run(UIRootView uIRootView)
+    public void Initialize(ISceneNavigator sceneNavigator, UIRootView uIRootView)
     {
+        _sceneNavigator = sceneNavigator;
         FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
         FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
         DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -39,6 +41,13 @@ public class OtherSceneEntryPoint : MonoBehaviour
         ActivateActions();
 
         firebaseDatabasePresenter.GetLink();
+    }
+
+    public void Dispose()
+    {
+        DeactivateActions();
+
+        webViewPresenter?.Dispose();
     }
 
     private void ActivateActions()
@@ -78,20 +87,6 @@ public class OtherSceneEntryPoint : MonoBehaviour
 
     private void GoToGame()
     {
-        //Debug.Log("NO GOOD, OPEN MAIN MENU");
-        OnGoToGame?.Invoke();
+        _sceneNavigator.LoadScene(Scenes.GAME);
     }
-
-    private void OnDestroy()
-    {
-        DeactivateActions();
-
-        webViewPresenter.Dispose();
-    }
-
-    #region Input
-
-    public event Action OnGoToGame;
-
-    #endregion
 }
