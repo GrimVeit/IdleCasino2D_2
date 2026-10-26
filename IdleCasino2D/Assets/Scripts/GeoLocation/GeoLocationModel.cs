@@ -30,7 +30,7 @@ public class GeoLocationModel
 
         if (request.result != UnityWebRequest.Result.Success || !operation.isDone)
         {
-            //Debug.LogError("Error: " + request.result);
+            ////Debug.LogError("Error: " + request.result
             OnErrorGetCountry?.Invoke();
         }
         else if (request.result == UnityWebRequest.Result.Success)

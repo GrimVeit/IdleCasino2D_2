@@ -295,9 +295,30 @@ public class GameSceneEntryPoint : MonoBehaviour, ISceneEntryPoint
         entityRoulette_2.Initialize();
         casinoEntities.Add(entityRoulette_2);
     }
+    private void ActivateEvents()
+    {
+        ActivateTransitions();
+    }
+
+    private void DeactivateEvents()
+    {
+        DeactivateTransitions();
+    }
+
+    private void ActivateTransitions()
+    {
+
+    }
+
+    private void DeactivateTransitions()
+    {
+
+    }
 
     public void Dispose()
     {
+        DeactivateEvents();
+
         clickDispatcherPresenter?.Deactivate();
         sceneRoot.Deactivate();
 
